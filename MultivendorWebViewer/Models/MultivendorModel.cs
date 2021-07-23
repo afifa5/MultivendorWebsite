@@ -36,6 +36,7 @@ namespace MultivendorWebViewer.Models
 
             InitializeCategory(modelBuilder);
             InitializeCategoryImage(modelBuilder);
+            InitializeCategoryNode(modelBuilder);
         }
 
         protected virtual void InitializeCategory(DbModelBuilder modelBuilder)
@@ -66,7 +67,7 @@ namespace MultivendorWebViewer.Models
         {
             modelBuilder.Entity<CategoryNode>().ToTable("CategoryNode");
             modelBuilder.Entity<CategoryNode>().HasRequired<Category>(i => i.Category);
-            modelBuilder.Entity<CategoryNode>().HasRequired<Image>(i => i.Image);
+            modelBuilder.Entity<CategoryNode>().HasRequired<Node>(i => i.Node);
 
 
             modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
