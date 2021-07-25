@@ -14,8 +14,7 @@ namespace MultivendorWebViewer.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            Orders = new HashSet<Order>();
-            PriceAvailabilities = new HashSet<PriceAvailability>();
+            
             ProductImages = new HashSet<ProductImage>();
             ProductSpecifications = new HashSet<ProductSpecification>();
         }
