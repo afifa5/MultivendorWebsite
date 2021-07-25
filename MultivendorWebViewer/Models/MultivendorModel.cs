@@ -76,7 +76,7 @@ namespace MultivendorWebViewer.Models
             modelBuilder.Entity<CategoryImage>().HasRequired<Image>(i => i.Image);
 
 
-            modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<CategoryImage>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
 
         protected virtual void InitializeCategoryNode(DbModelBuilder modelBuilder)
@@ -86,25 +86,25 @@ namespace MultivendorWebViewer.Models
             modelBuilder.Entity<CategoryNode>().HasRequired<Node>(i => i.Node);
 
 
-            modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<CategoryNode>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
 
         protected virtual void InitializeImage(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Image>().ToTable("Image");
 
-            modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<Image>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
 
       
         protected virtual void InitializeNode(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Node>().ToTable("Node");
-            modelBuilder.Entity<Node>().HasRequired<Text>(i => i.Name);
-            modelBuilder.Entity<Node>().HasRequired<Text>(i => i.Description);
+            modelBuilder.Entity<Node>().HasOptional<Text>(i => i.Name);
+            modelBuilder.Entity<Node>().HasOptional<Text>(i => i.Description);
 
 
-            modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<Node>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
 
         protected virtual void InitializeNodeImage(DbModelBuilder modelBuilder)
@@ -114,7 +114,7 @@ namespace MultivendorWebViewer.Models
             modelBuilder.Entity<NodeImage>().HasRequired<Node>(i => i.Node);
 
 
-            modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<NodeImage>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
 
         protected virtual void InitializeOrder(DbModelBuilder modelBuilder)
@@ -124,7 +124,7 @@ namespace MultivendorWebViewer.Models
             modelBuilder.Entity<Order>().HasRequired<User>(i => i.User);
 
 
-            modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<Order>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
 
         protected virtual void InitializePriceAvailability(DbModelBuilder modelBuilder)
@@ -134,18 +134,18 @@ namespace MultivendorWebViewer.Models
             modelBuilder.Entity<PriceAvailability>().HasRequired<User>(i => i.User);
 
 
-            modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<PriceAvailability>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
         }
 
         protected virtual void InitializeProduct(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>().ToTable("Product");
-            modelBuilder.Entity<Product>().HasRequired<Text>(i => i.Name);
-            modelBuilder.Entity<Product>().HasRequired<Text>(i => i.Description);
+            modelBuilder.Entity<Product>().HasOptional<Text>(i => i.Name);
+            modelBuilder.Entity<Product>().HasOptional<Text>(i => i.Description);
 
 
-            modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<Product>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
         }
 
@@ -156,7 +156,7 @@ namespace MultivendorWebViewer.Models
             modelBuilder.Entity<ProductImage>().HasRequired<Product>(i => i.Product);
 
 
-            modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<ProductImage>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
         }
 
@@ -167,7 +167,7 @@ namespace MultivendorWebViewer.Models
             modelBuilder.Entity<ProductNode>().HasRequired<Product>(i => i.Product);
 
 
-            modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<ProductNode>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
         }
 
@@ -178,7 +178,7 @@ namespace MultivendorWebViewer.Models
             modelBuilder.Entity<ProductSpecification>().HasRequired<Specification>(i => i.Specification);
 
 
-            modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<ProductSpecification>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
         }
 
@@ -186,20 +186,20 @@ namespace MultivendorWebViewer.Models
         {
             modelBuilder.Entity<Specification>().ToTable("Specification");
             modelBuilder.Entity<Specification>().HasRequired<SpecificationType>(i => i.SpecificationType);
-            modelBuilder.Entity<Specification>().HasRequired<Text>(i => i.SpecificationText);
+            modelBuilder.Entity<Specification>().HasOptional<Text>(i => i.SpecificationText);
 
 
-            modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<Specification>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
         }
 
         protected virtual void InitializeSpecificationType(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<SpecificationType>().ToTable("SpecificationType");
-            modelBuilder.Entity<SpecificationType>().HasRequired<Text>(i => i.SpecificationTypeText);
+            modelBuilder.Entity<SpecificationType>().HasOptional<Text>(i => i.SpecificationTypeText);
 
 
-            modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<SpecificationType>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
         }
 
@@ -209,15 +209,16 @@ namespace MultivendorWebViewer.Models
             modelBuilder.Entity<SubNode>().HasRequired<Node>(i => i.Node);
             modelBuilder.Entity<SubNode>().HasRequired<Node>(i => i.SubNodeItem);
 
-            modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<SubNode>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
         }
 
         protected virtual void InitializeText(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Text>().ToTable("Text");
+            modelBuilder.Entity<Text>().HasMany<TextTranslation>(i =>i.TextTranslations );
 
-            modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<Text>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
         }
 
@@ -226,7 +227,7 @@ namespace MultivendorWebViewer.Models
             modelBuilder.Entity<TextTranslation>().ToTable("TextTranslation");
             modelBuilder.Entity<TextTranslation>().HasRequired<Text>(i => i.Text);
 
-            modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<TextTranslation>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
         }
 
@@ -234,7 +235,7 @@ namespace MultivendorWebViewer.Models
         {
             modelBuilder.Entity<User>().ToTable("User");
            
-            modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<User>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
         }
 
