@@ -1,0 +1,123 @@
+input[type=search]{
+    border-radius: 8px;
+    border: solid 1px #808080 !important;
+    width: 100%;
+
+}
+.multivendor-web-toolbar{
+    display: flex;
+    overflow: hidden;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+.multivendor-web-toolbar  li > .overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    pointer-events: none;
+}
+
+.icon{
+    font-size: 15px;
+
+}
+input:focus{
+    outline:none;
+}
+/*Menu*/
+.under-foreign-flag-menu{
+    margin: 0;
+    padding: 0 10px 0 10px;
+    list-style-type: none;
+}
+.under-foreign-flag-menu li{
+    margin: 0 -20px 0 -20px;
+    padding: 2px 20px 3px 25px;
+    display: block;
+    list-style-type: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+.under-foreign-flag-menu li.selected:before{
+    position: absolute;
+    margin-top: 2px;
+    left: 5px;
+    content: "\f00c";
+    display: inline-block;
+    vertical-align: middle;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 700;
+    font-size: 14px;
+    font-size: 80%;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-top: 3px;
+    font-size: 15px;
+}
+/*End menu*/
+button{
+    background: #ab0000;
+    border: 1px solid;
+    border-color: #AB0000;
+     border-radius: 10px;
+    transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out;
+    color: #fff;
+    padding: 5px 10px 5px 10px;
+}
+button:hover{
+    background-color: #fff;
+    border-color: #AB0000 ;
+    border-width: 1px ;
+    color: #AB0000 ;
+    border-radius: 10px ;
+    font-family: Prelo-Bold ;
+    transition-property: all;
+    transition-duration: 0.4s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+    outline: none ;
+}
+button:focus{
+    outline: none;
+}
+.under-foreign-flag-menu li.help-item:before {
+    position: absolute;
+    margin-top: 2px;
+    left: 5px;
+    content: "\f05a";
+    display: inline-block;
+    vertical-align: middle;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 700;
+    font-size: 14px;
+    font-size: 80%;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-top: 3px;
+    font-size: 15px;
+}
+.under-foreign-flag-menu li.log-in-item:before {
+    position: absolute;
+    margin-top: 2px;
+    left: 5px;
+    content: "\f2f6";
+    display: inline-block;
+    vertical-align: middle;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 700;
+    font-size: 14px;
+    font-size: 80%;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-top: 3px;
+    font-size: 15px;
+}
