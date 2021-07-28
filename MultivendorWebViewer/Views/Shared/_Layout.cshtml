@@ -3,40 +3,83 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@{@Html.Raw(@ViewBag.Title??"Multivendor Web")} </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <section class="main-layout">
+        <div class="main-toolbar">
+            <div class="header-toolbar">
+                <ul class="multivendor-web-toolbar">
+                    <li class="Container multivendor-web-logo">
+                        <! -- Logo-->
+                        <div class="header-logo">
+                            <img class="img" src="~/Content/Images/uflag-logo.png">
+                        </div>
+                        <! -- #End Logo-->
+                    </li>
+                    <li class="Container search-container">
+
+                        <! -- Search box-->
+                        <div class="quick-search-input" data-min-search="2">
+                            <input class="key-text search-input" type="search" placeholder="Search" tabindex="5" autocomplete="xyz">
+                            <a class="toolbar-search-icon"><span class="icon fa fa-search content fa-2x"></span></a>
+                        </div>
+                        <! -- #End: Search box-->
+
+                    </li>
+                    <li class="container right-aligned language-container">
+                        <img class="img-icon" src="~/Content/Flag/en-GB.svg">
+                    </li>
+                    <li class="container right-aligned">
+                        <! -- order cart-->
+                        <div class="order-cart-container item-container">
+                            <span class="icon fa fa-shopping-cart content fa-2x"></span>
+                            <label class="icon-label key-text">Order</label>
+                            <div class="overlay">
+                                <span class="total-qty"></span>
+                            </div>
+                        </div>
+                        <! -- #End: order cart-->
+                    </li>
+                    <li class="container avatar-menu right-aligned">
+                        <! -- User-->
+                        <div class="item-container">
+                            <span class="icon fa fa-user content fa-2x"></span>
+                            <label class="icon-label user-label ">Menu</label>
+                        </div>
+                        <! -- #End: User-->
+                    </li>
+                </ul>
+
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <div class="items-toolbar menu-toolbar">
+                
+            </div>
+            <div class="items-toolbar">
+                <ul class="multivendor-web-toolbar">
+                    <li class=" container start-url">
+                        <label>StartPage</label>
+                    </li>
+
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+        <!-- #Render your view inside main body through controller-->
+        <main class="main-body">
+            @RenderBody()
 
-    @Scripts.Render("~/bundles/jquery")
+
+        </main>
+        <!-- #Render your view inside main body-->
+
+        <footer class="main-footer"><span>©2021 Aka Multivendor Web</span></footer>
+    </section>
+    
+
+    @*@Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @RenderSection("scripts", required: false)*@
 </body>
 </html>
