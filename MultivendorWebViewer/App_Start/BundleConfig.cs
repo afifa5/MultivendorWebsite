@@ -23,7 +23,11 @@ namespace MultivendorWebViewer
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      //"~/Content/bootstrap.css",
+                      "~/Content/Font-awesome.css",
+                      "~/Content/Controls.css",
+
+
                       "~/Content/site.css"));
         }
     }
