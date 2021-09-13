@@ -6,8 +6,8 @@ using System.Data.Entity.Spatial;
 
 namespace MultivendorWebViewer.Models
 {
-   
 
+  
     public partial class CategoryImage
     {
         public int Id { get; set; }
@@ -15,9 +15,9 @@ namespace MultivendorWebViewer.Models
         public int CategoryId { get; set; }
 
         public int ImageId { get; set; }
-
-        public virtual Category Category { get; set; }
-
-        public virtual Image Image { get; set; }
+        [ForeignKey("CategoryId")]
+        public  Category Category { get; set; }
+        [ForeignKey("ImageId")]
+        public  Image Image { get; set; }
     }
 }

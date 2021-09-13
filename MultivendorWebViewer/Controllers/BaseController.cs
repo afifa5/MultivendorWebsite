@@ -9,7 +9,7 @@ namespace MultivendorWebViewer.Controllers
 {
     public class BaseController : Controller
     {
-        public ApplicationRequestContext ApplicationRequestContext { get { return new ApplicationRequestContext(/*URLUtility.CreateHttpContext().Request.RequestContext*/);} }
+        //public ApplicationRequestContext ApplicationRequestContext { get { return new ApplicationRequestContext(HttpContext.cu);} }
         // GET: Base
         public virtual ActionResult Index()
         {            

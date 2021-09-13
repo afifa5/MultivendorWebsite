@@ -31,6 +31,8 @@ namespace MultivendorWebViewer
         public virtual DbSet<Text> Texts { get; set; }
         public virtual DbSet<TextTranslation> TextTranslations { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<OrderLine> OrderLines { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -53,6 +55,8 @@ namespace MultivendorWebViewer
             InitializeText(modelBuilder);
             InitializeTextTranslation(modelBuilder);
             InitializeText(modelBuilder);
+            InitializeOrderLine(modelBuilder);
+            InitializeCustomer(modelBuilder);
 
         }
 
@@ -121,13 +125,18 @@ namespace MultivendorWebViewer
         protected virtual void InitializeOrder(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Order>().ToTable("Order");
-            modelBuilder.Entity<Order>().HasRequired<Product>(i => i.Product);
-            modelBuilder.Entity<Order>().HasRequired<User>(i => i.User);
-
-
+            modelBuilder.Entity<Order>().HasRequired<Customer>(i => i.Customer);
             modelBuilder.Entity<Order>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
+        protected virtual void InitializeOrderLine(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OrderLine>().ToTable("OrderLine");
 
+            modelBuilder.Entity<OrderLine>().HasRequired<Product>(i => i.Product);
+            modelBuilder.Entity<OrderLine>().HasRequired<User>(i => i.User);
+
+            modelBuilder.Entity<OrderLine>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+        }
         protected virtual void InitializePriceAvailability(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PriceAvailability>().ToTable("PriceAvailability");
@@ -207,7 +216,7 @@ namespace MultivendorWebViewer
         protected virtual void InitializeSubNode(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<SubNode>().ToTable("SubNode");
-            modelBuilder.Entity<SubNode>().HasRequired<Node>(i => i.Node);
+            //modelBuilder.Entity<SubNode>().HasRequired<Node>(i => i.Node);
             modelBuilder.Entity<SubNode>().HasRequired<Node>(i => i.SubNodeItem);
 
             modelBuilder.Entity<SubNode>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
@@ -222,7 +231,12 @@ namespace MultivendorWebViewer
             modelBuilder.Entity<Text>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
         }
+        protected virtual void InitializeCustomer(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Customer>().ToTable("Customer");
+            modelBuilder.Entity<Customer>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
+        }
         protected virtual void InitializeTextTranslation(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TextTranslation>().ToTable("TextTranslation");

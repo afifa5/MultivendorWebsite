@@ -117,10 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Menu" xml:space="preserve">
+    <value>তালিকা</value>
+  </data>
   <data name="Order" xml:space="preserve">
     <value>ফরমাশ</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>অনুসন্ধান </value>
+  </data>
+  <data name="StartPage" xml:space="preserve">
+    <value>প্রথম পাতা</value>
   </data>
 </root>

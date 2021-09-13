@@ -6,13 +6,11 @@ using System.Data.Entity.Spatial;
 
 namespace MultivendorWebViewer.Models
 {
-   
     public partial class Node
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Node()
         {
-            NodeImages = new HashSet<NodeImage>();
+            NodeImages = new List<NodeImage>();
             
         }
 
@@ -25,16 +23,15 @@ namespace MultivendorWebViewer.Models
 
         public int? DescriptionId { get; set; }
 
-        
 
 
-        public virtual Text Name { get; set; }
+        [ForeignKey("NameId")]
+        public  Text Name { get; set; }
 
-        public virtual Text Description { get; set; }
-
+        [ForeignKey("DescriptionId")]
+        public  Text Description { get; set; }
        
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NodeImage> NodeImages { get; set; }
+        [ForeignKey("NodeId")]
+        public  ICollection<NodeImage> NodeImages { get; set; }
     }
 }

@@ -147,6 +147,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\OrderLine.cs" />
     <Compile Include="MultivendorModel.cs" />
     <Compile Include="Models\Node.cs" />
     <Compile Include="Models\NodeImage.cs" />
@@ -252,8 +254,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Strings.bn-BD.resx" />
-    <EmbeddedResource Include="Resources\Strings.en-GB.resx" />
     <EmbeddedResource Include="Resources\Strings.en.resx" />
+    <EmbeddedResource Include="Resources\Strings.en-GB.resx" />
+    <EmbeddedResource Include="Resources\Strings.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -273,7 +276,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59145</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44388/</IISUrl>
+          <IISUrl>http://localhost:5098/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

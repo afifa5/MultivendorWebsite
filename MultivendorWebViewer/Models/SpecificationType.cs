@@ -8,23 +8,22 @@ namespace MultivendorWebViewer.Models
 {
     
 
-    [Table("SpecificationType")]
     public partial class SpecificationType
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SpecificationType()
         {
         }
 
         public int Id { get; set; }
+        [StringLength(50)]
+        public string Identity { get; set; }
 
         [Column("SpecificationType")]
         public int? SpecificationTypeMode { get; set; }
-
+      
         public int? NameId { get; set; }
 
-        
-
-        public virtual Text SpecificationTypeText { get; set; }
+        [ForeignKey("NameId")]
+        public  Text SpecificationTypeText { get; set; }
     }
 }

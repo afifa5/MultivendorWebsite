@@ -14,19 +14,10 @@ namespace MultivendorWebViewer.Models
 
         [Required]
         public string OrderReference { get; set; }
-
-        public int ProductId { get; set; }
-
-        public int UserId { get; set; }
-
-        [Column(TypeName = "numeric")]
-        public decimal Quantity { get; set; }
-
-        [Column(TypeName = "numeric")]
-        public decimal SubTotal { get; set; }
-
-        public virtual Product Product { get; set; }
-
-        public virtual User User { get; set; }
+        //Whom bought product
+        public int CustomerId { get; set; }
+        
+        [ForeignKey("CustomerId")]
+        public Customer Customer { get; set; }
     }
 }

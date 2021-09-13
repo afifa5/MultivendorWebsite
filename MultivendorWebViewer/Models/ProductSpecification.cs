@@ -7,8 +7,6 @@ using System.Data.Entity.Spatial;
 namespace MultivendorWebViewer.Models
 {
     
-
-    [Table("ProductSpecification")]
     public partial class ProductSpecification
     {
         public int Id { get; set; }
@@ -17,8 +15,10 @@ namespace MultivendorWebViewer.Models
 
         public int SpecificationId { get; set; }
 
-        public virtual Product Product { get; set; }
-
-        public virtual Specification Specification { get; set; }
+        [ForeignKey("ProductId")]
+        public  Product Product { get; set; }
+        
+        [ForeignKey("SpecificationId")]
+        public  Specification Specification { get; set; }
     }
 }

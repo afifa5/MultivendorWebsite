@@ -20,11 +20,20 @@ namespace MultivendorWebViewer.Models
         [Column(TypeName = "numeric")]
         public decimal? Quantity { get; set; }
 
+
         [Column(TypeName = "numeric")]
-        public decimal? Price { get; set; }
+        public decimal? UnitPrice { get; set; }
 
-        public virtual Product Product { get; set; }
+        [Column(TypeName = "numeric")]
+        public decimal? TaxAmount { get; set; }
 
-        public virtual User User { get; set; }
+        [Column(TypeName = "numeric")]
+        public decimal? Discount { get; set; }
+
+        [ForeignKey("ProductId")]
+        public  Product Product { get; set; }
+       
+        [ForeignKey("UserId")]
+        public  User User { get; set; }
     }
 }

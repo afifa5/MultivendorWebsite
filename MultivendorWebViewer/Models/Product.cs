@@ -6,17 +6,14 @@ using System.Data.Entity.Spatial;
 
 namespace MultivendorWebViewer.Models
 {
-    
 
-    [Table("Product")]
     public partial class Product
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
             
-            ProductImages = new HashSet<ProductImage>();
-            ProductSpecifications = new HashSet<ProductSpecification>();
+            ProductImages = new List<ProductImage>();
+            ProductSpecifications = new List<ProductSpecification>();
         }
 
         public int Id { get; set; }
@@ -28,17 +25,16 @@ namespace MultivendorWebViewer.Models
 
         public int? DescriptionId { get; set; }
 
+        [ForeignKey("NameId")]
+        public  Text Name { get; set; }
         
-
-
-        public virtual Text Name { get; set; }
-
+        [ForeignKey("DescriptionId")]
         public virtual Text Description { get; set; }
+        
+        [ForeignKey("ProductId")]
+        public  ICollection<ProductImage> ProductImages { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductImage> ProductImages { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductSpecification> ProductSpecifications { get; set; }
+        [ForeignKey("ProductId")]
+        public  ICollection<ProductSpecification> ProductSpecifications { get; set; }
     }
 }
