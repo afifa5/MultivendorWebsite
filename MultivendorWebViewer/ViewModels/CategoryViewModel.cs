@@ -31,9 +31,9 @@ namespace MultivendorWebViewer.ViewModels
 
             Name = category.Name;
             Description = category.Description;
-            CategoryImages = category.CategoryImages;
+            CategoryImages = category.CategoryImages == null ? new List<CategoryImage>(): category.CategoryImages;
 
-            CategoryNodes = category.CategoryNodes;
+            CategoryNodes = category.CategoryNodes == null ? new List<CategoryNode>(): category.CategoryNodes;
 
 
 
