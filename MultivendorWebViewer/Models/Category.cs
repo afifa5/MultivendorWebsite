@@ -27,13 +27,13 @@ namespace MultivendorWebViewer.Models
         public string Label { get; set; }
         
         [ForeignKey("NameId")]
-        public virtual Text Name { get; set; }
+        public  Text Name { get; set; }
         
         [ForeignKey("DescriptionId")]
-        public virtual Text Description { get; set; }
+        public  Text Description { get; set; }
         [ForeignKey("CategoryId")]
-        public virtual List<CategoryImage> CategoryImages { get; set; }
+        public  List<CategoryImage> CategoryImages { get; set; }
         [ForeignKey("CategoryId")]
-        public virtual List<CategoryNode> CategoryNodes { get; set; }
+        public  List<CategoryNode> CategoryNodes { get; set; }
     }
 }

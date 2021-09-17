@@ -21,7 +21,7 @@ namespace MultivendorWebViewer.Models
 
         //Get a Image for each selection of specification
         public string SpecificationIds { get; set; }
-        public virtual Image Image { get; set; }
-        public virtual Product Product { get; set; }
+        public  Image Image { get; set; }
+        public  Product Product { get; set; }
     }
 }

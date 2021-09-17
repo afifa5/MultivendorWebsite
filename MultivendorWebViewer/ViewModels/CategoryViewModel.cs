@@ -19,16 +19,15 @@ namespace MultivendorWebViewer.ViewModels
         private Category Model { get; set; }
         //All Atributes
         public ApplicationRequestContext ApplicationRequestContext { get; set; }
-        public string FormattedName { get { return Model.Name.GetTranslation(ApplicationRequestContext.SelectedCulture); } }
-        public string FormattedNameDescription { get { return Model.Description.GetTranslation(ApplicationRequestContext.SelectedCulture); } }
+        public int Id { get { return Model.Id; } }
+        public string FormattedName { get { return Model != null && Model.Name!=null ? Model.Name.GetTranslation(ApplicationRequestContext.SelectedCulture) : string.Empty; } }
+        public string FormattedNameDescription { get { return Model!=null && Model.Description!=null ? Model.Description.GetTranslation(ApplicationRequestContext.SelectedCulture) : string.Empty; } }
+        public List<ImageViewModel> Images { get { return GetImages(); } }
         public List<NodeViewModel> Nodes { get { return GetNodes(); } }
-
-
-        //All Functions
         public List<NodeViewModel> GetNodes()
         {
             var alllist = new List<NodeViewModel>();
-            if (Model.CategoryNodes.Count() > 0)
+            if (Model!=null&& Model.CategoryNodes!=null && Model.CategoryNodes.Count() > 0)
             {
                 var ids = Model.CategoryNodes.Select(p => p.Id).ToArray();
                var categoryNodes= ApplicationRequestContext.CategoryManager.GetNodesByIds(ids);
@@ -39,7 +38,22 @@ namespace MultivendorWebViewer.ViewModels
             }
             return alllist;
         }
-        
-        
+        public List<ImageViewModel> GetImages()
+        {
+            var alllist = new List<ImageViewModel>();
+            if (Model != null && Model.CategoryImages != null && Model.CategoryImages.Count() > 0)
+            {
+                var ids = Model.CategoryImages.Select(p => p.Id).ToArray();
+                var categoryImages = ApplicationRequestContext.ImageManager.GetImagesByIds(ids);
+                
+                foreach (var item in categoryImages)
+                {
+                    alllist.Add(new ImageViewModel(item, ApplicationRequestContext));
+                }
+            }
+            return alllist;
+        }
+
+
     }
 }

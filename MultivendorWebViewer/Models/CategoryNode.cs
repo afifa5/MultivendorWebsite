@@ -17,7 +17,7 @@ namespace MultivendorWebViewer.Models
         
         [Required]
         public int NodeId { get; set; }
-        public virtual Category Category { get; set; }
-        public virtual Node Node { get; set; }
+        public  Category Category { get; set; }
+        public  Node Node { get; set; }
     }
 }

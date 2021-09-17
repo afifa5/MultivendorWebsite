@@ -23,6 +23,6 @@ namespace MultivendorWebViewer.Models
         public int? NameId { get; set; }
 
         [ForeignKey("NameId")]
-        public virtual Text SpecificationTypeText { get; set; }
+        public  Text SpecificationTypeText { get; set; }
     }
 }

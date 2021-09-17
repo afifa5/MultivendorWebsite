@@ -18,6 +18,6 @@ namespace MultivendorWebViewer.Models
         [StringLength(10)]
         public string LanguageCode { get; set; }
         public string Translation { get; set; }
-        public virtual Text Text { get; set; }
+        public  Text Text { get; set; }
     }
 }

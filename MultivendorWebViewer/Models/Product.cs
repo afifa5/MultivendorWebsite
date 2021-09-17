@@ -17,6 +17,7 @@ namespace MultivendorWebViewer.Models
         }
         [Key]
         public int Id { get; set; }
+        public int SequenceNumber { get; set; }
 
         [StringLength(50)]
         public string Identity { get; set; }
@@ -29,8 +30,8 @@ namespace MultivendorWebViewer.Models
         public virtual Text Name { get; set; }
         
         [ForeignKey("DescriptionId")]
-        public virtual Text Description { get; set; }
-        public virtual List<ProductImage> ProductImages { get; set; }
-        public virtual List<ProductSpecification> ProductSpecifications { get; set; }
+        public  Text Description { get; set; }
+        public  List<ProductImage> ProductImages { get; set; }
+        public  List<ProductSpecification> ProductSpecifications { get; set; }
     }
 }

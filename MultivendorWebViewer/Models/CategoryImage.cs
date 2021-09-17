@@ -17,7 +17,7 @@ namespace MultivendorWebViewer.Models
         [Required]
         public int ImageId { get; set; }
 
-        public virtual Image Image { get; set; }
-        public virtual Category Category { get; set; }
+        public  Image Image { get; set; }
+        public  Category Category { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace MultivendorWebViewer.Models
         public int SubNodeItemId { get; set; }
         
         [ForeignKey("SubNodeItemId")]
-        public virtual Node SubNodeItem { get; set; }
+        public  Node SubNodeItem { get; set; }
        
     }
 }

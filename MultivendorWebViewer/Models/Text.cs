@@ -22,7 +22,7 @@ namespace MultivendorWebViewer.Models
         [StringLength(50)]
         public string Identity { get; set; }
        
-        public virtual List<TextTranslation> TextTranslations { get; set; }
+        public  List<TextTranslation> TextTranslations { get; set; }
 
         public string GetTranslation(string cultureCode) {
             var translatedSelection = TextTranslations.Where(i => i.LanguageCode == cultureCode).FirstOrDefault();

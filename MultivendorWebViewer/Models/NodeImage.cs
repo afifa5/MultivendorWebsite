@@ -16,8 +16,8 @@ namespace MultivendorWebViewer.Models
         public int NodeId { get; set; }
         [Required]
         public int ImageId { get; set; }
-        public virtual Node Node { get; set; }
-        public virtual Image Image { get; set; }
+        public  Node Node { get; set; }
+        public  Image Image { get; set; }
        
     }
 }

@@ -9,28 +9,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MultivendorWebViewer.ViewModels
 {
     [NotMapped]
-    public class NodeViewModel : Node
+    public class NodeViewModel 
     {
-        public NodeViewModel(ApplicationRequestContext requestContext)
+        public NodeViewModel(Node node, ApplicationRequestContext requestContext)
         {
             ApplicationRequestContext = requestContext;
+            Model = node;
         }
-        public NodeViewModel(Node node,ApplicationRequestContext requestContext)
-        {
-            ApplicationRequestContext = requestContext;
-            Id = node.Id;
-            Identity = node.Identity;
-            NameId = node.NameId;
-            Name = node.Name;
-            Description = node.Description;
-            NodeImages = node.NodeImages;
-
-            
-
-        }
+        private Node Model { get; set; }
         //All Atributes
         public ApplicationRequestContext ApplicationRequestContext { get; set; }
-        public string TranslatedName { get { return Name.GetTranslation(ApplicationRequestContext.SelectedCulture); } }
-        public string TranslatedDescription { get { return Description.GetTranslation(ApplicationRequestContext.SelectedCulture); } }
+        public string FormattedName { get { return Model != null && Model.Name != null ? Model.Name.GetTranslation(ApplicationRequestContext.SelectedCulture) : string.Empty; } }
+        public string FormattedDescription { get { return Model != null && Model.Description != null ? Model.Description.GetTranslation(ApplicationRequestContext.SelectedCulture) :string.Empty; } }
+        public List<ProductViewModel> Products { get; }
     }
 }

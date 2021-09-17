@@ -28,6 +28,7 @@ namespace MultivendorWebViewer.Common
             return context != null && context.Handler != null ? new ApplicationRequestContext(context.Request.RequestContext) : null;
         }
         public  CategoryManager CategoryManager { get; set; }
+        public ImageManager ImageManager { get; set; }
         public  TextManager TextManager { get; set; }
         public RequestContext RequestContext { get; set; }
         public string SelectedCulture { get; set; }

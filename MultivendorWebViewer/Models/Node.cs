@@ -10,9 +10,12 @@ namespace MultivendorWebViewer.Models
     {
         public Node() {
             NodeImages = new List<NodeImage>();
+            SubNodes = new List<SubNode>();
+            ProductNodes = new List<ProductNode>();
         }
         [Key]
         public int Id { get; set; }
+        public int SequenceNumber { get; set; }
 
         [StringLength(50)]
         public string Identity { get; set; }
@@ -22,10 +25,15 @@ namespace MultivendorWebViewer.Models
         public int? DescriptionId { get; set; }
 
         [ForeignKey("NameId")]
-        public virtual Text Name { get; set; }
+        public  Text Name { get; set; }
 
         [ForeignKey("DescriptionId")]
-        public virtual Text Description { get; set; }
-        public virtual List<NodeImage> NodeImages { get; set; }
+        public  Text Description { get; set; }
+        public  List<NodeImage> NodeImages { get; set; }
+        
+        [ForeignKey("OriginalNodeId")]
+        public  List<SubNode> SubNodes { get; set; }
+        [ForeignKey("NodeId")]
+        public  List<ProductNode> ProductNodes { get; set; }
     }
 }
