@@ -9,16 +9,13 @@ namespace MultivendorWebViewer.Models
     
     public partial class ProductSpecification
     {
+        [Key]
         public int Id { get; set; }
-
+        [Required]
         public int ProductId { get; set; }
-
+        [Required]
         public int SpecificationId { get; set; }
-
-        [ForeignKey("ProductId")]
-        public  Product Product { get; set; }
-        
-        [ForeignKey("SpecificationId")]
-        public  Specification Specification { get; set; }
+        public virtual Specification Specification { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

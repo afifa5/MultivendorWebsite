@@ -9,17 +9,15 @@ namespace MultivendorWebViewer.Models
 
     public partial class SubNode
     {
+        [Key]
         public int Id { get; set; }
-      
-        public int NodeId { get; set; }
+        [Required]
+        public int OriginalNodeId { get; set; }
+        [Required]
+        public int SubNodeItemId { get; set; }
+        
+        [ForeignKey("SubNodeItemId")]
+        public virtual Node SubNodeItem { get; set; }
        
-        public int SubNodeId { get; set; }
-
-        //[ForeignKey("NodeId")]
-
-        //public Node Node { get; set; }
-
-        [ForeignKey("SubNodeId")]
-        public Node SubNodeItem { get; set; }
     }
 }

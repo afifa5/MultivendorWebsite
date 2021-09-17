@@ -9,41 +9,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MultivendorWebViewer.ViewModels
 {
     [NotMapped]
-    public class CategoryViewModel : Category
+    public class CategoryViewModel 
     {
-        public CategoryViewModel()
-        {
-            ApplicationRequestContext=null;
-        }
-        public CategoryViewModel(ApplicationRequestContext requestContext)
-        {
-            ApplicationRequestContext = requestContext;
-        }
         public CategoryViewModel(Category category, ApplicationRequestContext requestContext)
         {
             ApplicationRequestContext = requestContext;
-            Id = category.Id;
-            Identity = category.Identity;
-
-            NameId = category.NameId;
-
-            DescriptionId = category.DescriptionId;
-
-            Name = category.Name;
-            Description = category.Description;
-            CategoryImages = category.CategoryImages == null ? new List<CategoryImage>(): category.CategoryImages;
-
-            CategoryNodes = category.CategoryNodes == null ? new List<CategoryNode>(): category.CategoryNodes;
-
-
-
-
+            Model = category;
         }
+        private Category Model { get; set; }
         //All Atributes
         public ApplicationRequestContext ApplicationRequestContext { get; set; }
-        public string TranslatedName { get { return Name.GetTranslation(ApplicationRequestContext.SelectedCulture); } }
-        public string TranslatedDescription { get { return Description.GetTranslation(ApplicationRequestContext.SelectedCulture); } }
-
+        public string FormattedName { get { return Model.Name.GetTranslation(ApplicationRequestContext.SelectedCulture); } }
+        public string FormattedNameDescription { get { return Model.Description.GetTranslation(ApplicationRequestContext.SelectedCulture); } }
         public List<NodeViewModel> Nodes { get { return GetNodes(); } }
 
 
@@ -51,11 +28,13 @@ namespace MultivendorWebViewer.ViewModels
         public List<NodeViewModel> GetNodes()
         {
             var alllist = new List<NodeViewModel>();
-            if (CategoryNodes.Count() > 0)
+            if (Model.CategoryNodes.Count() > 0)
             {
-                foreach(var item in CategoryNodes)
+                var ids = Model.CategoryNodes.Select(p => p.Id).ToArray();
+               var categoryNodes= ApplicationRequestContext.CategoryManager.GetNodesByIds(ids);
+                foreach (var item in categoryNodes)
                 {
-                    alllist.Add(new NodeViewModel(item.Node, ApplicationRequestContext));
+                    alllist.Add(new NodeViewModel(item, ApplicationRequestContext));
                 }
             }
             return alllist;

@@ -14,7 +14,7 @@ namespace MultivendorWebViewer.Models
         {
            
         }
-
+        [Key]
         public int Id { get; set; }
 
         [StringLength(50)]

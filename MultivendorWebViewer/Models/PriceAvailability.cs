@@ -11,10 +11,11 @@ namespace MultivendorWebViewer.Models
     [Table("PriceAvailability")]
     public partial class PriceAvailability
     {
+        [Key]
         public int Id { get; set; }
-
+        [Required]
         public int ProductId { get; set; }
-
+       
         public int? UserId { get; set; }
 
         [Column(TypeName = "numeric")]
@@ -29,11 +30,8 @@ namespace MultivendorWebViewer.Models
 
         [Column(TypeName = "numeric")]
         public decimal? Discount { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual User User { get; set; }
 
-        [ForeignKey("ProductId")]
-        public  Product Product { get; set; }
-       
-        [ForeignKey("UserId")]
-        public  User User { get; set; }
     }
 }

@@ -10,15 +10,14 @@ namespace MultivendorWebViewer.Models
 
     public partial class NodeImage
     {
+        [Key]
         public int Id { get; set; }
-
+        [Required]
         public int NodeId { get; set; }
-
+        [Required]
         public int ImageId { get; set; }
+        public virtual Node Node { get; set; }
+        public virtual Image Image { get; set; }
        
-        [ForeignKey("ImageId")]
-        public  Image Image { get; set; }
-        [ForeignKey("NodeId")]
-        public  Node Node { get; set; }
     }
 }

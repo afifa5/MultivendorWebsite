@@ -15,7 +15,7 @@ namespace MultivendorWebViewer.Models
             ProductImages = new List<ProductImage>();
             ProductSpecifications = new List<ProductSpecification>();
         }
-
+        [Key]
         public int Id { get; set; }
 
         [StringLength(50)]
@@ -26,15 +26,11 @@ namespace MultivendorWebViewer.Models
         public int? DescriptionId { get; set; }
 
         [ForeignKey("NameId")]
-        public  Text Name { get; set; }
+        public virtual Text Name { get; set; }
         
         [ForeignKey("DescriptionId")]
         public virtual Text Description { get; set; }
-        
-        [ForeignKey("ProductId")]
-        public  ICollection<ProductImage> ProductImages { get; set; }
-
-        [ForeignKey("ProductId")]
-        public  ICollection<ProductSpecification> ProductSpecifications { get; set; }
+        public virtual List<ProductImage> ProductImages { get; set; }
+        public virtual List<ProductSpecification> ProductSpecifications { get; set; }
     }
 }

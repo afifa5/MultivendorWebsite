@@ -11,6 +11,7 @@ namespace MultivendorWebViewer
         public MultivendorModel()
             : base("name=MultivendorModelContext")
         {
+            this.Configuration.LazyLoadingEnabled =false;
         }
 
         public virtual DbSet<Category> Categories { get; set; }
@@ -36,34 +37,33 @@ namespace MultivendorWebViewer
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-
-            InitializeCategory(modelBuilder);
-            InitializeCategoryImage(modelBuilder);
-            InitializeCategoryNode(modelBuilder);
-            InitializeImage(modelBuilder);
-            InitializeNode(modelBuilder);
-            InitializeNodeImage(modelBuilder);
-            InitializeOrder(modelBuilder);
-            InitializePriceAvailability(modelBuilder);
-            InitializeProduct(modelBuilder);
-            InitializeProductImage(modelBuilder);
-            InitializeProductNode(modelBuilder);
-            InitializeProductSpecification(modelBuilder);
-            InitializeSpecification(modelBuilder);
-            InitializeSpecificationType(modelBuilder);
-            InitializeSubNode(modelBuilder);
-            InitializeText(modelBuilder);
-            InitializeTextTranslation(modelBuilder);
-            InitializeText(modelBuilder);
-            InitializeOrderLine(modelBuilder);
-            InitializeCustomer(modelBuilder);
+            base.OnModelCreating(modelBuilder);
+            //InitializeCategory(modelBuilder);
+            //InitializeCategoryImage(modelBuilder);
+            //InitializeCategoryNode(modelBuilder);
+            //InitializeImage(modelBuilder);
+            //InitializeNode(modelBuilder);
+            //InitializeNodeImage(modelBuilder);
+            //InitializeOrder(modelBuilder);
+            //InitializePriceAvailability(modelBuilder);
+            //InitializeProduct(modelBuilder);
+            //InitializeProductImage(modelBuilder);
+            //InitializeProductNode(modelBuilder);
+            //InitializeProductSpecification(modelBuilder);
+            //InitializeSpecification(modelBuilder);
+            //InitializeSpecificationType(modelBuilder);
+            //InitializeSubNode(modelBuilder);
+            //InitializeText(modelBuilder);
+            //InitializeTextTranslation(modelBuilder);
+            //InitializeOrderLine(modelBuilder);
+            //InitializeCustomer(modelBuilder);
 
         }
 
         protected virtual void InitializeCategory(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().ToTable("Category");
-            modelBuilder.Entity<Category>().HasMany<CategoryNode>(i => i.CategoryNodes);
+            modelBuilder.Entity<Category>().HasMany<CategoryNode>(i => i.CategoryNodes).WithMany();
 
             modelBuilder.Entity<Category>().HasMany<CategoryImage>(i => i.CategoryImages);
             modelBuilder.Entity<Category>().HasOptional<Text>(i => i.Name);
@@ -77,7 +77,7 @@ namespace MultivendorWebViewer
         protected virtual void InitializeCategoryImage(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CategoryImage>().ToTable("CategoryImage");
-            modelBuilder.Entity<CategoryImage>().HasRequired<Category>(i => i.Category);
+            //modelBuilder.Entity<CategoryImage>().HasRequired<Category>(i => i.Category);
             modelBuilder.Entity<CategoryImage>().HasRequired<Image>(i => i.Image);
 
 
@@ -87,7 +87,7 @@ namespace MultivendorWebViewer
         protected virtual void InitializeCategoryNode(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CategoryNode>().ToTable("CategoryNode");
-            modelBuilder.Entity<CategoryNode>().HasRequired<Category>(i => i.Category);
+            //modelBuilder.Entity<CategoryNode>().HasRequired<Category>(i => i.Category);
             modelBuilder.Entity<CategoryNode>().HasRequired<Node>(i => i.Node);
 
 
@@ -116,7 +116,7 @@ namespace MultivendorWebViewer
         {
             modelBuilder.Entity<NodeImage>().ToTable("NodeImage");
             modelBuilder.Entity<NodeImage>().HasRequired<Image>(i => i.Image);
-            modelBuilder.Entity<NodeImage>().HasRequired<Node>(i => i.Node);
+            //modelBuilder.Entity<NodeImage>().HasRequired<Node>(i => i.Node);
 
 
             modelBuilder.Entity<NodeImage>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
@@ -133,15 +133,15 @@ namespace MultivendorWebViewer
             modelBuilder.Entity<OrderLine>().ToTable("OrderLine");
 
             modelBuilder.Entity<OrderLine>().HasRequired<Product>(i => i.Product);
-            modelBuilder.Entity<OrderLine>().HasRequired<User>(i => i.User);
+            //modelBuilder.Entity<OrderLine>().HasRequired<User>(i => i.User);
 
             modelBuilder.Entity<OrderLine>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
         protected virtual void InitializePriceAvailability(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PriceAvailability>().ToTable("PriceAvailability");
-            modelBuilder.Entity<PriceAvailability>().HasRequired<Product>(i => i.Product);
-            modelBuilder.Entity<PriceAvailability>().HasRequired<User>(i => i.User);
+            //modelBuilder.Entity<PriceAvailability>().HasRequired<Product>(i => i.Product);
+            //modelBuilder.Entity<PriceAvailability>().HasRequired<User>(i => i.User);
 
 
             modelBuilder.Entity<PriceAvailability>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
@@ -153,8 +153,6 @@ namespace MultivendorWebViewer
             modelBuilder.Entity<Product>().ToTable("Product");
             modelBuilder.Entity<Product>().HasOptional<Text>(i => i.Name);
             modelBuilder.Entity<Product>().HasOptional<Text>(i => i.Description);
-
-
             modelBuilder.Entity<Product>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
         }
@@ -163,7 +161,7 @@ namespace MultivendorWebViewer
         {
             modelBuilder.Entity<ProductImage>().ToTable("ProductImage");
             modelBuilder.Entity<ProductImage>().HasRequired<Image>(i => i.Image);
-            modelBuilder.Entity<ProductImage>().HasRequired<Product>(i => i.Product);
+            //modelBuilder.Entity<ProductImage>().HasRequired<Product>(i => i.Product);
 
 
             modelBuilder.Entity<ProductImage>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
@@ -173,7 +171,7 @@ namespace MultivendorWebViewer
         protected virtual void InitializeProductNode(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductNode>().ToTable("ProductNode");
-            modelBuilder.Entity<ProductNode>().HasRequired<Node>(i => i.Node);
+            //modelBuilder.Entity<ProductNode>().HasRequired<Node>(i => i.Node);
             modelBuilder.Entity<ProductNode>().HasRequired<Product>(i => i.Product);
 
 
@@ -184,7 +182,7 @@ namespace MultivendorWebViewer
         protected virtual void InitializeProductSpecification(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductSpecification>().ToTable("ProductSpecification");
-            modelBuilder.Entity<ProductSpecification>().HasRequired<Product>(i => i.Product);
+            //modelBuilder.Entity<ProductSpecification>().HasRequired<Product>(i => i.Product);
             modelBuilder.Entity<ProductSpecification>().HasRequired<Specification>(i => i.Specification);
 
 

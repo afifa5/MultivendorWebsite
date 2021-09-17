@@ -8,12 +8,10 @@ namespace MultivendorWebViewer.Models
 {
     public partial class Node
     {
-        public Node()
-        {
+        public Node() {
             NodeImages = new List<NodeImage>();
-            
         }
-
+        [Key]
         public int Id { get; set; }
 
         [StringLength(50)]
@@ -23,15 +21,11 @@ namespace MultivendorWebViewer.Models
 
         public int? DescriptionId { get; set; }
 
-
-
         [ForeignKey("NameId")]
-        public  Text Name { get; set; }
+        public virtual Text Name { get; set; }
 
         [ForeignKey("DescriptionId")]
-        public  Text Description { get; set; }
-       
-        [ForeignKey("NodeId")]
-        public  ICollection<NodeImage> NodeImages { get; set; }
+        public virtual Text Description { get; set; }
+        public virtual List<NodeImage> NodeImages { get; set; }
     }
 }

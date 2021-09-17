@@ -10,14 +10,14 @@ namespace MultivendorWebViewer.Models
    
     public partial class CategoryNode
     {
+        [Key]
         public int Id { get; set; }
-
+        [Required]
         public int CategoryId { get; set; }
-
+        
+        [Required]
         public int NodeId { get; set; }
-        [ForeignKey("CategoryId")]
-        public  Category Category { get; set; }
-        [ForeignKey("NodeId")]
-        public  Node Node { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual Node Node { get; set; }
     }
 }

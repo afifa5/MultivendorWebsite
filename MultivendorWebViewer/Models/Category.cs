@@ -9,12 +9,11 @@ namespace MultivendorWebViewer.Models
    
     public partial class Category
     {
-        public Category()
-        {
+        public Category() {
             CategoryImages = new List<CategoryImage>();
             CategoryNodes = new List<CategoryNode>();
         }
-
+        [Key]
         public int Id { get; set; }
 
         [StringLength(50)]
@@ -26,13 +25,15 @@ namespace MultivendorWebViewer.Models
 
         [StringLength(50)]
         public string Label { get; set; }
+        
         [ForeignKey("NameId")]
-        public  Text Name { get; set; }
+        public virtual Text Name { get; set; }
+        
         [ForeignKey("DescriptionId")]
-        public  Text Description { get; set; }
+        public virtual Text Description { get; set; }
         [ForeignKey("CategoryId")]
-        public  List<CategoryImage> CategoryImages { get; set; }
+        public virtual List<CategoryImage> CategoryImages { get; set; }
         [ForeignKey("CategoryId")]
-        public  List<CategoryNode> CategoryNodes { get; set; }
+        public virtual List<CategoryNode> CategoryNodes { get; set; }
     }
 }

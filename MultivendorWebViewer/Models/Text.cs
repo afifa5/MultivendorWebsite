@@ -12,11 +12,11 @@ namespace MultivendorWebViewer.Models
 
     public partial class Text
     {
-        public Text()
-        {
+        public Text() {
             TextTranslations = new List<TextTranslation>();
         }
-
+       
+        [Key]
         public int Id { get; set; }
 
         [StringLength(50)]

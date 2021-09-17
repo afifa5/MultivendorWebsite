@@ -9,13 +9,16 @@ namespace MultivendorWebViewer.Models
 
     public partial class OrderLine
     {
+        [Key]
         public int Id { get; set; }
-        public string OrderId { get; set; }
+        [Required]
+        public int OrderId { get; set; }
 
+        [Required]
         public int ProductId { get; set; }
-        
+
         //Whose product bought
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
         //Comma seperated specifications
         public string SelectedSpecifications { get; set; }
@@ -37,12 +40,8 @@ namespace MultivendorWebViewer.Models
 
         [Column(TypeName = "numeric")]
         public decimal SubTotal { get; set; }
-        
-        [ForeignKey("ProductId")]
-        public  Product Product { get; set; }
-        
-        [ForeignKey("UserId")]
-        public  User User { get; set; }
-        
+        public virtual Product Product { get; set; }
+        public virtual User User { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

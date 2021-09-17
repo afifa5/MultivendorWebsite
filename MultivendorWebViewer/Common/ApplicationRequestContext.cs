@@ -19,12 +19,16 @@ namespace MultivendorWebViewer.Common
             CategoryManager = new CategoryManager();
             TextManager = new TextManager();
         }
-        public static ApplicationRequestContext GetContext(HttpContext context)
+        public static ApplicationRequestContext GetContext(HttpContextBase context)
         {
             return context != null && context.Handler != null ?  new ApplicationRequestContext(context.Request.RequestContext) : null;
         }
-        public CategoryManager CategoryManager { get; set; }
-        public TextManager TextManager { get; set; }
+        public static ApplicationRequestContext GetContext(HttpContext context)
+        {
+            return context != null && context.Handler != null ? new ApplicationRequestContext(context.Request.RequestContext) : null;
+        }
+        public  CategoryManager CategoryManager { get; set; }
+        public  TextManager TextManager { get; set; }
         public RequestContext RequestContext { get; set; }
         public string SelectedCulture { get; set; }
 
