@@ -129,4 +129,7 @@
   <data name="StartPage" xml:space="preserve">
     <value>Start page</value>
   </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User name</value>
+  </data>
 </root>

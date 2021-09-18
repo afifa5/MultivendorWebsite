@@ -131,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\ApplicationRequestContext.cs" />
     <Compile Include="Common\CustomStrings.cs" />
+    <Compile Include="Common\ProfileSetting.cs" />
     <Compile Include="Common\TextManager.cs" />
     <Compile Include="Common\URLUtility.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -255,7 +256,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Strings.bn-BD.resx" />
-    <EmbeddedResource Include="Resources\Strings.en.resx" />
     <EmbeddedResource Include="Resources\Strings.en-GB.resx" />
     <EmbeddedResource Include="Resources\Strings.resx" />
   </ItemGroup>

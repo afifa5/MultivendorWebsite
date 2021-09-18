@@ -11,5 +11,6 @@ namespace MultivendorWebViewer.Common
         public static string Search { get { return TextManager.Current.GetText("Search"); } }
         public static string Menu { get { return TextManager.Current.GetText("Menu"); } }
         public static string StartPage { get { return TextManager.Current.GetText("StartPage"); } }
+        public static string UserName { get { return TextManager.Current.GetText("UserName"); } }
     }
 }

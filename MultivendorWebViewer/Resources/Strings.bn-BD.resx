@@ -129,4 +129,7 @@
   <data name="StartPage" xml:space="preserve">
     <value>প্রথম পাতা</value>
   </data>
+  <data name="UserName" xml:space="preserve">
+    <value>ব্যবহারকারীর নাম</value>
+  </data>
 </root>
