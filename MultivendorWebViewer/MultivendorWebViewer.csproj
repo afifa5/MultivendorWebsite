@@ -135,6 +135,7 @@
     <Compile Include="Common\URLUtility.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Manager\ImageManager.cs" />
     <Compile Include="Manager\CategoryManager.cs" />
     <Compile Include="Manager\OrderManager.cs" />
     <Compile Include="Manager\ProductManager.cs" />

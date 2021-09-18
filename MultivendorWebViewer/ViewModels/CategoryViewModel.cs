@@ -20,6 +20,7 @@ namespace MultivendorWebViewer.ViewModels
         //All Atributes
         public ApplicationRequestContext ApplicationRequestContext { get; set; }
         public int Id { get { return Model.Id; } }
+        public string Identity { get { return Model.Identity; } }
         public string FormattedName { get { return Model != null && Model.Name!=null ? Model.Name.GetTranslation(ApplicationRequestContext.SelectedCulture) : string.Empty; } }
         public string FormattedNameDescription { get { return Model!=null && Model.Description!=null ? Model.Description.GetTranslation(ApplicationRequestContext.SelectedCulture) : string.Empty; } }
         public List<ImageViewModel> Images { get { return GetImages(); } }
