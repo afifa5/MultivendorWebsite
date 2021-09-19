@@ -1,0 +1,124 @@
+﻿
+/*remember to move*/
+.presentation-header {
+    height: 300px;
+    padding: 0;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #000;
+}
+.presentation-information-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.presentation-name {
+    font-size: 64px;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: gibsonbold;
+    /*text-shadow: 0px 0px 0.2em #ccc;*/
+    line-height: 0.9;
+    font-weight: 500;
+    position: relative;
+    text-align: center;
+}
+.presentation-description {
+    color: #fff;
+   
+    font-family: gibsonbold;
+   /* text-shadow: 0px 0px 0.2em #ccc;*/
+    line-height: 0.9;
+    font-weight: 500;
+    position: relative;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 22px;
+}
+.presentation-header img {
+    animation-name: FadeInOut;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-duration: 6s;
+    animation-direction: alternate;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    position: absolute;
+}
+.presentation-header img:nth-of-type(1) {
+    animation-delay: 16s;
+}
+.presentation-header img:nth-of-type(2) {
+    animation-delay: 12s;
+}
+.presentation-header img:nth-of-type(3) {
+    animation-delay: 8s;
+}
+.presentation-header img:nth-of-type(4) {
+    animation-delay: 4s;
+}
+.main-body-contents {
+    display: grid;
+    grid-template-columns: [start left] minmax(max-content, 1fr) [body header footer] minmax(auto, 1500px) [right hfend] minmax(max-content, 1fr) [end];
+    position: relative;
+}
+.presentation-body {
+    grid-row: body / span 1;
+    grid-column: body / span 1;
+    position: relative;
+    padding-top: 30px;
+    margin: 0 10px 0 10px;
+}
+.node-container {
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 20px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.node-view {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-flow: row;
+    background-color: #fff;
+    border-color: #ccc;
+    border-width: 2px;
+    border-style: solid;
+    padding: 10px;
+    grid-template-rows: 1fr auto auto;
+    color: #000;
+    cursor: pointer;
+    text-decoration: none;
+}
+.node-view .image-container {
+    width:inherit;
+    height:100%;
+}
+.node-view .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+       
+}
+.node-view .name-container, .node-view  .description-container {
+    display: flex;
+    justify-content: center;
+}
+.node-view .node-name {
+    font-size: 25px;
+    font-weight: 500;
+    text-align: center;
+    padding: 10px 10px 5px 10px;
+}
+    .node-view .node-description {
+        font-size: 15px;
+        font-weight: 300;
+        text-align: center;
+        padding: 0px 10px 5px 10px;
+    }
