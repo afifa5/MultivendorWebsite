@@ -14,10 +14,9 @@ namespace MultivendorWebViewer.Controllers
         [HttpGet]
         public override ActionResult Index()
         {
-            int StartCategory = 1;
-            var category= ApplicationRequestContext.CategoryManager.GetCategory(StartCategory, ApplicationRequestContext);
+            int? StartCategory = ApplicationRequestContext.Configuration!=null ? ApplicationRequestContext.Configuration.SiteProfile.StartCatalogueId : null;
+            var category= ApplicationRequestContext.CategoryManager.GetCategory(StartCategory.Value, ApplicationRequestContext);
             var categoryViewModel = new CategoryViewModel(category, ApplicationRequestContext);
-           // var categoryViewModel = ApplicationRequestContext._CategoryManager.GetCategory(StartCategory, ApplicationRequestContext);
             return View(categoryViewModel);
         }
     }

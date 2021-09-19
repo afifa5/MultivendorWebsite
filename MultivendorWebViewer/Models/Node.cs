@@ -15,7 +15,7 @@ namespace MultivendorWebViewer.Models
         }
         [Key]
         public int Id { get; set; }
-        public int SequenceNumber { get; set; }
+        public int? SequenceNumber { get; set; }
 
         [StringLength(50)]
         public string Identity { get; set; }

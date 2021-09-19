@@ -22,7 +22,7 @@ namespace MultivendorWebViewer.ViewModels
         public int Id { get { return Model.Id; } }
         public string Identity { get { return Model.Identity; } }
         public string FormattedName { get { return Model != null && Model.Name!=null ? Model.Name.GetTranslation(ApplicationRequestContext.SelectedCulture) : string.Empty; } }
-        public string FormattedNameDescription { get { return Model!=null && Model.Description!=null ? Model.Description.GetTranslation(ApplicationRequestContext.SelectedCulture) : string.Empty; } }
+        public string FormattedDescription { get { return Model!=null && Model.Description!=null ? Model.Description.GetTranslation(ApplicationRequestContext.SelectedCulture) : string.Empty; } }
         public List<ImageViewModel> Images { get { return GetImages(); } }
         public List<NodeViewModel> Nodes { get { return GetNodes(); } }
         public List<NodeViewModel> GetNodes()
@@ -47,7 +47,7 @@ namespace MultivendorWebViewer.ViewModels
                 var ids = Model.CategoryImages.Select(p => p.Id).ToArray();
                 var categoryImages = ApplicationRequestContext.ImageManager.GetImagesByIds(ids);
                 
-                foreach (var item in categoryImages)
+                foreach (var item in categoryImages.OrderBy(p=>p.SequenceNumber))
                 {
                     alllist.Add(new ImageViewModel(item, ApplicationRequestContext));
                 }

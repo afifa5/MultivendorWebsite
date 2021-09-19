@@ -429,3 +429,66 @@ li.language-container {
 .main-toolbar .items-toolbar.menu-toolbar {
     min-height: 55px;
 }
+
+/*remember to move*/
+.presentation-header {
+    height: 300px;
+    padding: 0;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #000;
+}
+.presentation-information-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.presentation-name {
+    font-size: 64px;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: gibsonbold;
+    /*text-shadow: 0px 0px 0.2em #ccc;*/
+    line-height: 0.9;
+    font-weight: 500;
+    position: relative;
+    text-align: center;
+}
+.presentation-description {
+    color: #fff;
+   
+    font-family: gibsonbold;
+   /* text-shadow: 0px 0px 0.2em #ccc;*/
+    line-height: 0.9;
+    font-weight: 500;
+    position: relative;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 22px;
+}
+.presentation-header img {
+    animation-name: FadeInOut;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-duration: 6s;
+    animation-direction: alternate;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+}
+.presentation-header img:nth-of-type(1) {
+    animation-delay: 16s;
+}
+.presentation-header img:nth-of-type(2) {
+    animation-delay: 12s;
+}
+.presentation-header img:nth-of-type(3) {
+    animation-delay: 8s;
+}
+.presentation-header img:nth-of-type(4) {
+    animation-delay: 4s;
+}
+

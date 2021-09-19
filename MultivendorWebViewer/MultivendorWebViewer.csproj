@@ -131,15 +131,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\ApplicationRequestContext.cs" />
     <Compile Include="Common\CustomStrings.cs" />
+    <Compile Include="Common\Mime.cs" />
     <Compile Include="Common\ProfileSetting.cs" />
     <Compile Include="Common\TextManager.cs" />
     <Compile Include="Common\URLUtility.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Manager\ImageManager.cs" />
     <Compile Include="Manager\CategoryManager.cs" />
     <Compile Include="Manager\OrderManager.cs" />
     <Compile Include="Manager\ProductManager.cs" />
+    <Compile Include="Manager\ConfigurationManager.cs" />
     <Compile Include="Manager\UserManager.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryImage.cs" />
@@ -167,6 +170,7 @@
     <Compile Include="Models\Text.cs" />
     <Compile Include="Models\TextTranslation.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Utility.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\ImageViewModel.cs" />
     <Compile Include="ViewModels\NodeViewModel.cs" />

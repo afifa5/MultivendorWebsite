@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Routing;
@@ -15,9 +16,11 @@ namespace MultivendorWebViewer.Common
         public ApplicationRequestContext(RequestContext requestContext)
         {
             RequestContext = requestContext;
-            SelectedCulture = "bn-BD";
+            SelectedCulture = "en-GB";
             CategoryManager = new CategoryManager();
             TextManager = new TextManager();
+            Configuration = new ConfigurationManager();
+            ImageManager = new ImageManager();
         }
         public static ApplicationRequestContext GetContext(HttpContextBase context)
         {
@@ -30,6 +33,8 @@ namespace MultivendorWebViewer.Common
         public  CategoryManager CategoryManager { get; set; }
         public ImageManager ImageManager { get; set; }
         public  TextManager TextManager { get; set; }
+
+        public ConfigurationManager Configuration { get; set; }
         public RequestContext RequestContext { get; set; }
         public string SelectedCulture { get; set; }
 
