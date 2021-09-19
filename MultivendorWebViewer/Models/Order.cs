@@ -18,6 +18,7 @@ namespace MultivendorWebViewer.Models
         //Whom bought product
         [Required]
         public int CustomerId { get; set; }
+        [ForeignKey("CustomerId")]
         public  Customer Customer { get; set; }
     }
 }

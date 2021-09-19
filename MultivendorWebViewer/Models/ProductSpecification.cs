@@ -15,7 +15,9 @@ namespace MultivendorWebViewer.Models
         public int ProductId { get; set; }
         [Required]
         public int SpecificationId { get; set; }
+        [ForeignKey("SpecificationId")]
         public  Specification Specification { get; set; }
+        [ForeignKey("ProductId")]
         public  Product Product { get; set; }
     }
 }

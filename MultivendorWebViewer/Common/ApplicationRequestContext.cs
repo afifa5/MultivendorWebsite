@@ -16,7 +16,7 @@ namespace MultivendorWebViewer.Common
         public ApplicationRequestContext(RequestContext requestContext)
         {
             RequestContext = requestContext;
-            SelectedCulture = "en-GB";
+            SelectedCulture = "bn-BD";
             CategoryManager = new CategoryManager();
             TextManager = new TextManager();
             Configuration = new ConfigurationManager();

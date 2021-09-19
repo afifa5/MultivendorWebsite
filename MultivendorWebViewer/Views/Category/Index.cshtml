@@ -5,6 +5,7 @@
 @{
     ViewBag.Title = "Multivendor Web";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    @Styles.Render("~/Content/Presentation")
 }
 
 <div class="presentation category-container">
@@ -15,7 +16,7 @@
             //Show Images
             foreach (var item in Model.Images)
             {
-            <img class="presentation-image" src="@Model.Images[0].GetUrl()">
+                <img class="presentation-image" src="@Model.Images[0].GetUrl()">
             }
         }
         <div class="presentation-information-container">
@@ -31,8 +32,35 @@
             }
         </div>
     </div>
+    <div class="main-body-contents">
+        <div class="presentation-body">
+            @if (Model != null && Model.Nodes != null && Model.Nodes.Count() > 0)
+            {
+                <div class="node-container">
+                    @foreach (var item in Model.Nodes.OrderBy(p => p.SequenceNumber))
+                    {
+                        <a class="node-view" href="@item.GetUrl()">
+                            <div class="image-container">
+                                @if (item.Images != null && item.Images.Count() > 0)
+                                {
+                                    //Show Images
+                                    foreach (var itemImage in item.Images)
+                                    {
+                                        <img class="presentation-image" src="@itemImage.GetUrl()">
+                                    }
+                                }
+                            </div>
+                            <div class="name-container">
+                                <label class="node-name">@item.FormattedName</label>
+                            </div>
+                            <div class="description-container">
+                                <span class="node-description">@item.FormattedDescription</span>
+                            </div>
+                        </a>
+                    }
+                </div>
 
-    <div class="presentation-body">
-
+            }
+        </div>
     </div>
 </div>

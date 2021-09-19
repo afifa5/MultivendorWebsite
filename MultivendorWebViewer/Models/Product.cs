@@ -31,7 +31,9 @@ namespace MultivendorWebViewer.Models
         
         [ForeignKey("DescriptionId")]
         public  Text Description { get; set; }
+        [ForeignKey("ProductId")]
         public  List<ProductImage> ProductImages { get; set; }
+        [ForeignKey("ProductId")]
         public  List<ProductSpecification> ProductSpecifications { get; set; }
     }
 }

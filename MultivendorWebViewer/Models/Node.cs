@@ -29,6 +29,8 @@ namespace MultivendorWebViewer.Models
 
         [ForeignKey("DescriptionId")]
         public  Text Description { get; set; }
+        
+        [ForeignKey("NodeId")]
         public  List<NodeImage> NodeImages { get; set; }
         
         [ForeignKey("OriginalNodeId")]

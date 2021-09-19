@@ -48,7 +48,7 @@ namespace MultivendorWebViewer.ViewModels
             var alllist = new List<ImageViewModel>();
             if (Model != null && Model.NodeImages != null && Model.NodeImages.Count() > 0)
             {
-                var ids = Model.NodeImages.Select(p => p.Id).ToArray();
+                var ids = Model.NodeImages.Select(p => p.ImageId).ToArray();
                 var categoryImages = ApplicationRequestContext.ImageManager.GetImagesByIds(ids);
 
                 foreach (var item in categoryImages)
@@ -57,6 +57,11 @@ namespace MultivendorWebViewer.ViewModels
                 }
             }
             return alllist;
+        }
+        public string GetUrl()
+        {
+            var routeValues = new { nodeId = Id } /*Dictionary<string, object>()*/;
+            return UrlUtility.Action(ApplicationRequestContext, "Node", "Category", routeValues);
         }
     }
 }

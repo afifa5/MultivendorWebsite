@@ -18,6 +18,7 @@ namespace MultivendorWebViewer.Models
         [StringLength(10)]
         public string LanguageCode { get; set; }
         public string Translation { get; set; }
+        [ForeignKey("TextId")]
         public  Text Text { get; set; }
     }
 }

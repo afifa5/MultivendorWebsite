@@ -21,7 +21,9 @@ namespace MultivendorWebViewer.Models
 
         //Get a Image for each selection of specification
         public string SpecificationIds { get; set; }
+        [ForeignKey("ImageId")]
         public  Image Image { get; set; }
+        [ForeignKey("ProductId")]
         public  Product Product { get; set; }
     }
 }

@@ -25,8 +25,6 @@ namespace MultivendorWebViewer.ViewModels
         public string GetUrl()
         {
             var routeValues = new { imageId = Id , fileName = ImageName } /*Dictionary<string, object>()*/;
-            //routeValues.Add("id", Id);
-            //routeValues.Add("fileName", ImageName);
             return UrlUtility.Action(ApplicationRequestContext, "Image", "Content", routeValues);
         }
     }

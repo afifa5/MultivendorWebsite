@@ -21,7 +21,7 @@ namespace MultivendorWebViewer.Models
 
         [StringLength(50)]
         public string Identity { get; set; }
-       
+        [ForeignKey("TextId")]
         public  List<TextTranslation> TextTranslations { get; set; }
 
         public string GetTranslation(string cultureCode) {

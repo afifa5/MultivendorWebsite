@@ -19,5 +19,13 @@ namespace MultivendorWebViewer.Controllers
             var categoryViewModel = new CategoryViewModel(category, ApplicationRequestContext);
             return View(categoryViewModel);
         }
+        [HttpGet]
+        public  ActionResult Node(int nodeId)
+        {
+            int? StartCategory = ApplicationRequestContext.Configuration != null ? ApplicationRequestContext.Configuration.SiteProfile.StartCatalogueId : null;
+            var category = ApplicationRequestContext.CategoryManager.GetCategory(StartCategory.Value, ApplicationRequestContext);
+            var categoryViewModel = new CategoryViewModel(category, ApplicationRequestContext);
+            return View("Index",categoryViewModel);
+        }
     }
 }

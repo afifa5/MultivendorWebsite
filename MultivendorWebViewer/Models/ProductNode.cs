@@ -16,7 +16,10 @@ namespace MultivendorWebViewer.Models
         public int ProductId { get; set; }
         [Required]
         public int NodeId { get; set; }
+        [ForeignKey("ProductId")]
         public  Product Product { get; set; }
+        
+        [ForeignKey("NodeId")]
         public  Node Node { get; set; }
 
     }

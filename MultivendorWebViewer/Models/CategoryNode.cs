@@ -17,7 +17,9 @@ namespace MultivendorWebViewer.Models
         
         [Required]
         public int NodeId { get; set; }
+        [ForeignKey("CategoryId")]
         public  Category Category { get; set; }
+        [ForeignKey("NodeId")]
         public  Node Node { get; set; }
     }
 }
