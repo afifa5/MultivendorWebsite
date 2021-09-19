@@ -22,7 +22,8 @@
     min-width: 100%;
     width: 100%;
     max-width: 100%;
-    min-height: 100%;
+    height: 100%;
+    max-height:inherit;
     align-items: stretch;
     display: -ms-grid;
     display: grid;
@@ -33,13 +34,16 @@
     overflow-y: hidden;
 }
 
-    .main-layout > .main-toolbar {
-        overflow: hidden;
-    }
-
-        .main-layout > .main-toolbar .header-toolbar {
-            background-color: #fff;
-        }
+.main-layout > .main-toolbar {
+    overflow: hidden;
+}
+.main-layout .main-body {
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+.main-layout > .main-toolbar .header-toolbar {
+    background-color: #fff;
+}
 
 .header-toolbar .search-container {
     flex-grow: 1;

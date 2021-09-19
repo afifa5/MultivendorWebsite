@@ -1,0 +1,37 @@
+﻿/*Tablet media*/
+@media all and (max-width: 1100px) {
+    .presentation-header .presentation-name {
+        font-size: 30px;
+    }
+    .presentation-header .presentation-description {
+        font-size: 15px;
+    }
+    .presentation-body .node-view .node-name {
+        font-size: 18px;
+    }
+}
+/*Tablet Horizontal media*/
+@media all and (max-width: 850px) {
+
+}
+/*mobile media*/
+@media all and (max-device-width: 600px) {
+    .presentation-header .presentation-name {
+        font-size: 25px;
+    }
+
+    .presentation-header .presentation-description {
+        font-size: 12px;
+        margin-top:15px;
+    }
+    .main-toolbar .icon-label {
+        display:none;
+    }
+    .header-logo .img {
+    display:none;
+    }
+}
+/*mobile horizontal media*/
+@media all and (max-height: 420px) {
+   
+}
