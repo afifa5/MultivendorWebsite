@@ -192,6 +192,7 @@
     <Content Include="Content\Flag\sv.svg" />
     <Content Include="Content\Flag\ur.svg" />
     <Content Include="Content\Font-awesome.css" />
+    <Content Include="Content\Media.css" />
     <Content Include="Content\Presentation.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fa-brands-400.svg" />
