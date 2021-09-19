@@ -5,19 +5,34 @@
 @{
     ViewBag.Title = "Multivendor Web";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
 }
 
-<div class=" category-container">
-    <div class="name-container">
-        <label>
-            @Model.Nodes.FirstOrDefault().Identity
-        </label>
+<div class="presentation category-container">
+    @*Show header*@
+    <div class="presentation-header">
+        @if (Model != null && Model.Images != null && Model.Images.Count() > 0)
+        {
+            //Show Images
+            foreach (var item in Model.Images)
+            {
+            <img class="presentation-image" src="@Model.Images[0].GetUrl()">
+            }
+        }
+        <div class="presentation-information-container">
+            @if (Model != null && !string.IsNullOrEmpty(Model.FormattedName))
+            {
+                //Show
+                <label class="presentation-name">@Model.FormattedName</label>
+            }
+            @if (Model != null && !string.IsNullOrEmpty(Model.FormattedDescription))
+            {
+                //Show
+                <span class="presentation-description">@Model.FormattedDescription</span>
+            }
+        </div>
     </div>
-    <div class="description-container">
-        <label>
-            
-        </label>
+
+    <div class="presentation-body">
 
     </div>
 </div>

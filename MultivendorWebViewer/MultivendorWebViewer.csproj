@@ -134,7 +134,6 @@
     <Compile Include="Common\Mime.cs" />
     <Compile Include="Common\ProfileSetting.cs" />
     <Compile Include="Common\TextManager.cs" />
-    <Compile Include="Common\URLUtility.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ContentController.cs" />

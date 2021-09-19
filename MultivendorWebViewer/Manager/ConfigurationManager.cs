@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Xml.Serialization;
+using MultivendorWebViewer;
 
 namespace MultivendorWebViewer.Manager
 {
@@ -12,7 +13,10 @@ namespace MultivendorWebViewer.Manager
     {
         
         public  ProfileSetting SiteProfile { get { return GetProfileSettings(Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data\\profile.config")); } }
-       
+        public virtual string GetHeaderLogoUrl(ApplicationRequestContext requsetContext)
+        {
+            return UrlUtility.Action(requsetContext, "Image", "Content", new {id = 0, fileName = SiteProfile .HeaderLogo });
+        }
         private static ProfileSetting GetProfileSettings(string xmlFilename)
         {
             if (string.IsNullOrEmpty(xmlFilename))

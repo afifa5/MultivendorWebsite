@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@{@Html.Raw(@ViewBag.Title??"Multivendor Web")} </title>
+    <title>@{@Html.Raw(@ViewBag.Title ?? "Multivendor Web")} </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -17,7 +17,11 @@
                     <li class="Container multivendor-web-logo">
                         <! -- Logo-->
                         <div class="header-logo">
-                            <img class="img" src="~/Content/Images/uflag-logo.png">
+                            @{ 
+                                var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+                                var headerLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext);
+                            }
+                            <img class="img" src="@headerLogoUrl">
                         </div>
                         <! -- #End Logo-->
                     </li>
