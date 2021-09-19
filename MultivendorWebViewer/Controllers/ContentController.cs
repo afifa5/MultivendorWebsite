@@ -74,7 +74,7 @@ namespace MultivendorWebViewer.Controllers
             {
                 if (fileName == null)
                 {
-                    fileName = ApplicationRequestContext.ImageManager.GetImagesById(id).ImageName;
+                    fileName = ApplicationRequestContext.ImageManager.GetImagesById(imageId).ImageName;
                 }
 
                 Stream contentStream = null;
