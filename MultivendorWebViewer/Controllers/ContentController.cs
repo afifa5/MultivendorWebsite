@@ -66,7 +66,7 @@ namespace MultivendorWebViewer.Controllers
     public class ContentController : BaseController
     {
         [OutputCache(Duration = 3600, Location = OutputCacheLocation.Client)]
-        public virtual async Task<FileResult> Image(int id, string fileName = null)
+        public virtual async Task<FileResult> Image(int imageId, string fileName = null)
         {
             Response.Cache.SetOmitVaryStar(true);
 

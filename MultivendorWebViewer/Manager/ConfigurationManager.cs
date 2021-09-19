@@ -15,7 +15,7 @@ namespace MultivendorWebViewer.Manager
         public  ProfileSetting SiteProfile { get { return GetProfileSettings(Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data\\profile.config")); } }
         public virtual string GetHeaderLogoUrl(ApplicationRequestContext requsetContext)
         {
-            return UrlUtility.Action(requsetContext, "Image", "Content", new {id = 0, fileName = SiteProfile .HeaderLogo });
+            return UrlUtility.Action(requsetContext, "Image", "Content", new { imageId = 0, fileName = SiteProfile .HeaderLogo });
         }
         private static ProfileSetting GetProfileSettings(string xmlFilename)
         {
