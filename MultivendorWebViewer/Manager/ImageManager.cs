@@ -45,6 +45,10 @@ namespace MultivendorWebViewer.Manager
                 {
                     return (Stream)new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536, FileOptions.Asynchronous | FileOptions.SequentialScan);
                 }
+                else if (File.Exists(Path.Combine(HttpRuntime.AppDomainAppPath,string.Format( "App_Data\\{0}", fileName))) == true) {
+
+                    return (Stream)new FileStream(Path.Combine(HttpRuntime.AppDomainAppPath, string.Format("App_Data\\{0}", fileName)), FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536, FileOptions.Asynchronous | FileOptions.SequentialScan);
+                }
                 return null;
             });
         }
