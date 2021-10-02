@@ -27,8 +27,18 @@
     .main-toolbar .icon-label {
         display:none;
     }
-    .header-logo .img {
-    display:none;
+    .header-logo .img.logo-image {
+        display: none;
+    }
+    .header-logo .img.logo-image-small {
+        width: 50px;
+        display:block;
+    }
+    .multivendor-web-toolbar li {
+        margin-right: 5px;
+    }
+    .main-toolbar .multivendor-web-toolbar .container {
+        padding: 4px;
     }
 }
 /*mobile horizontal media*/

@@ -281,10 +281,12 @@ li.language-container {
 }
 
 .header-logo .img {
-    width: 200px;
+    width: 170px;
     margin: auto 0 auto 0;
 }
-
+.logo-image-small {
+display:none;
+}
 .header-logo {
     position: relative;
     height: 100%;

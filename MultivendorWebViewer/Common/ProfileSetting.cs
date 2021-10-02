@@ -20,7 +20,9 @@ namespace MultivendorWebViewer.Common
         
         [XmlElement("HeaderLogo")]
         public string HeaderLogo { get; set; }
+        [XmlElement("HeaderLogoSmall")]
+        public string HeaderLogoSmall { get; set; }
 
-      
+
     }
 }

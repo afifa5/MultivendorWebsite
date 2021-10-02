@@ -12,13 +12,13 @@ namespace MultivendorWebViewer.Controllers
     {
         // GET: Category
         [HttpGet]
-        public override ActionResult Index()
+        public  ActionResult Index(int? id)
         {
-            int? StartCategory = ApplicationRequestContext.Configuration!=null ? ApplicationRequestContext.Configuration.SiteProfile.StartCatalogueId : null;
-            var category= ApplicationRequestContext.CategoryManager.GetCategory(StartCategory.Value, ApplicationRequestContext);
+            var category= ApplicationRequestContext.CategoryManager.GetCategory(id.Value, ApplicationRequestContext);
             var categoryViewModel = new CategoryViewModel(category, ApplicationRequestContext);
             return View(categoryViewModel);
         }
+
         [HttpGet]
         public  ActionResult Node(int nodeId)
         {
