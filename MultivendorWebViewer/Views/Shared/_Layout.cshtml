@@ -1,4 +1,5 @@
-﻿@using MultivendorWebViewer.Common;
+﻿@using MultivendorWebViewer;
+@using MultivendorWebViewer.Common;
 
 <!DOCTYPE html>
 <html>
@@ -16,13 +17,17 @@
                 <ul class="multivendor-web-toolbar">
                     <li class="Container multivendor-web-logo">
                         <! -- Logo-->
-                        <div class="header-logo">
-                            @{ 
-                                var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
-                                var headerLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext);
+                        @{
+                            var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+                            var headerLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext,false);
+                            var smallHeaderLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, true);
+                            var startCatalogueUrl = Url.Action("Index", "Category", new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId });
                             }
-                            <img class="img" src="@headerLogoUrl">
-                        </div>
+                        <a class="header-logo" href="@startCatalogueUrl">
+
+                            <img class="img logo-image" src="@headerLogoUrl">
+                            <img class="img logo-image-small" src="@smallHeaderLogoUrl">
+                        </a>
                         <! -- #End Logo-->
                     </li>
                     <li class="Container search-container">
@@ -61,7 +66,7 @@
 
             </div>
             <div class="items-toolbar menu-toolbar">
-                
+
             </div>
             <div class="items-toolbar">
                 <ul class="multivendor-web-toolbar">
@@ -82,10 +87,10 @@
 
         <footer class="main-footer"><span>©2021 Aka Multivendor Web</span></footer>
     </section>
-    
+
 
     @*@Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)*@
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)*@
 </body>
 </html>
