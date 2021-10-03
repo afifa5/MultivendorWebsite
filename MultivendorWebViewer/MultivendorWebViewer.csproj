@@ -133,8 +133,11 @@
     <Compile Include="Common\CustomStrings.cs" />
     <Compile Include="Common\Mime.cs" />
     <Compile Include="Common\ProfileSetting.cs" />
+    <Compile Include="Common\RequestItemHelper.cs" />
     <Compile Include="Common\TextManager.cs" />
+    <Compile Include="Common\UserSettings.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Manager\ImageManager.cs" />
@@ -186,7 +189,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Controls.css" />
-    <Content Include="Content\Flag\bn.svg" />
+    <Content Include="Content\Flag\bn-BD.svg" />
     <Content Include="Content\Flag\en-GB.svg" />
     <Content Include="Content\Flag\ru.svg" />
     <Content Include="Content\Flag\sv.svg" />
@@ -217,6 +220,8 @@
     <Content Include="fonts\fa-solid-900.woff" />
     <Content Include="fonts\fa-solid-900.woff2" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Main.js" />
+    <Content Include="Scripts\DHM.pop-up.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -242,6 +247,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Security\Index.cshtml" />
+    <Content Include="Views\Security\_AvailableLanguage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
