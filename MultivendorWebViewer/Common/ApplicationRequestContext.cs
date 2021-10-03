@@ -16,11 +16,11 @@ namespace MultivendorWebViewer.Common
         public ApplicationRequestContext(RequestContext requestContext)
         {
             RequestContext = requestContext;
-            SelectedCulture = "bn-BD";
             CategoryManager = new CategoryManager();
             TextManager = new TextManager();
             Configuration = new ConfigurationManager();
             ImageManager = new ImageManager();
+          
         }
         public static ApplicationRequestContext GetContext(HttpContextBase context)
         {
@@ -33,10 +33,14 @@ namespace MultivendorWebViewer.Common
         public  CategoryManager CategoryManager { get; set; }
         public ImageManager ImageManager { get; set; }
         public  TextManager TextManager { get; set; }
-
+        public CookieUserSettingProvider UserSettingProvider { get { return new CookieUserSettingProvider(); } }
         public ConfigurationManager Configuration { get; set; }
+
         public RequestContext RequestContext { get; set; }
-        public string SelectedCulture { get; set; }
+        public HttpContextBase HttpContext { get { return RequestContext != null ? RequestContext.HttpContext : null; } }
+
+        public HttpRequestBase HttpRequest { get { return RequestContext != null && RequestContext.HttpContext != null ? RequestContext.HttpContext.Request : null; } }
+        public string SelectedCulture { get { return UserSettingProvider.Load(this) !=null? UserSettingProvider.Load(this).UICulture : UserSettingProvider.DefaultUserSetting.UICulture; } }
 
     }
 }

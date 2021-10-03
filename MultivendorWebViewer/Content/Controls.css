@@ -31,12 +31,12 @@ input:focus{
     outline:none;
 }
 /*Menu*/
-.under-foreign-flag-menu{
+.multivendor-web-menu{
     margin: 0;
     padding: 0 10px 0 10px;
     list-style-type: none;
 }
-.under-foreign-flag-menu li{
+.multivendor-web-menu li{
     margin: 0 -20px 0 -20px;
     padding: 2px 20px 3px 25px;
     display: block;
@@ -44,7 +44,7 @@ input:focus{
     cursor: pointer;
     font-size: 18px;
 }
-.under-foreign-flag-menu li.selected:before{
+.multivendor-web-menu li.selected:before{
     position: absolute;
     margin-top: 2px;
     left: 5px;
@@ -87,7 +87,7 @@ button:hover{
 button:focus{
     outline: none;
 }
-.under-foreign-flag-menu li.help-item:before {
+.multivendor-web-menu li.help-item:before {
     position: absolute;
     margin-top: 2px;
     left: 5px;
@@ -104,7 +104,7 @@ button:focus{
     padding-top: 3px;
     font-size: 15px;
 }
-.under-foreign-flag-menu li.log-in-item:before {
+.multivendor-web-menu li.log-in-item:before {
     position: absolute;
     margin-top: 2px;
     left: 5px;

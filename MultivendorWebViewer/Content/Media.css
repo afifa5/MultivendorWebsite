@@ -16,7 +16,7 @@
 }
 /*mobile media*/
 @media all and (max-device-width: 600px) {
-    .presentation-header .presentation-name {
+    .presentation  .presentation-name {
         font-size: 25px;
     }
 

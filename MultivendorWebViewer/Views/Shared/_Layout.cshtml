@@ -9,6 +9,9 @@
     <title>@{@Html.Raw(@ViewBag.Title ?? "Multivendor Web")} </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/helpers")
+    @Scripts.Render("~/bundles/main")
 </head>
 <body>
     <section class="main-layout">
@@ -21,7 +24,10 @@
                             var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
                             var headerLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext,false);
                             var smallHeaderLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, true);
-                            var startCatalogueUrl = Url.Action("Index", "Category", new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId });
+                            var routeValues = new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId } ;
+                            var startCatalogueUrl = UrlUtility.Action(applicationrequestContext, "Index", "Category", routeValues);
+                            //var startCatalogueUrl = Url.Action("Index", "Category", new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId });
+                            var flagUrl = "/Content/Flag/" + applicationrequestContext.SelectedCulture + ".svg";
                             }
                         <a class="header-logo" href="@startCatalogueUrl">
 
@@ -40,8 +46,8 @@
                         <! -- #End: Search box-->
 
                     </li>
-                    <li class="container right-aligned language-container">
-                        <img class="img-icon" src="~/Content/Flag/en-GB.svg">
+                    <li class="container right-aligned language-container"  data-language-item-url="@UrlUtility.Action(applicationrequestContext, "GetLanguagePopUp", "Security")">
+                        <img class="img-icon" src="@flagUrl">
                     </li>
                     <li class="container right-aligned">
                         <! -- order cart-->

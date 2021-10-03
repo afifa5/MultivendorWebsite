@@ -301,7 +301,7 @@ display:none;
     /* z-index: 10000;*/
 }
 
-.under-foreign-flag-popup {
+.multivendow-web-popup {
     padding: 10px;
     background-color: #ffffff;
     border: 1px solid #ccc;
@@ -317,7 +317,7 @@ display:none;
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-    .popup-backdrop ~ .under-foreign-flag-popup {
+    .popup-backdrop ~ .multivendow-web-popup {
         width: 100%;
         height: 100%;
         display: grid;
