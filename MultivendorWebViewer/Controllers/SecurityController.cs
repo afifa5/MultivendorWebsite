@@ -18,6 +18,11 @@ namespace MultivendorWebViewer.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public ActionResult NotFound()
+        {
+            return View("_NotFound");
+        }
 
         [HttpGet]
         public ActionResult GetLanguagePopUp()

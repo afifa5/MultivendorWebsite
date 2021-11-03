@@ -40,6 +40,9 @@
     .main-toolbar .multivendor-web-toolbar .container {
         padding: 4px;
     }
+    .category-container .node-container {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
 }
 /*mobile horizontal media*/
 @media all and (max-height: 420px) {

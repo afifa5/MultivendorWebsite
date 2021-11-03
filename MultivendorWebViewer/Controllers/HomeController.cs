@@ -8,11 +8,17 @@ namespace MultivendorWebViewer.Controllers
 {
     public class HomeController : BaseController
     {
+        [HttpGet]
         public override ActionResult Index()
         {
-            int? StartCategory = ApplicationRequestContext.Configuration != null ? ApplicationRequestContext.Configuration.SiteProfile.StartCatalogueId : null;
 
-            return RedirectToAction("Index", "Category", new { id = StartCategory });
+            int? StartCategory = ApplicationRequestContext.Configuration != null ? ApplicationRequestContext.Configuration.SiteProfile.StartCatalogueId : null;
+            if (StartCategory == null)
+                return RedirectToAction("NotFound", "Security");
+            else {
+                return RedirectToAction("Index", "Category", new { id = StartCategory });
+            }
+          
         }
 
     }

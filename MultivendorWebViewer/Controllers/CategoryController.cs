@@ -15,6 +15,9 @@ namespace MultivendorWebViewer.Controllers
         public  ActionResult Index(int? id)
         {
             var category= ApplicationRequestContext.CategoryManager.GetCategory(id.Value, ApplicationRequestContext);
+            if (category == null) {
+                return RedirectToAction("NotFound", "Security");
+            }
             var categoryViewModel = new CategoryViewModel(category, ApplicationRequestContext);
             return View(categoryViewModel);
         }
