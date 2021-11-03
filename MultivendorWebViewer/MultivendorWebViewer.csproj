@@ -249,6 +249,7 @@
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Security\Index.cshtml" />
     <Content Include="Views\Security\_AvailableLanguage.cshtml" />
+    <Content Include="Views\Security\_NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
