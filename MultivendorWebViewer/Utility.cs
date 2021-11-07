@@ -30,6 +30,9 @@ using MultivendorWebViewer.Common;
 using System.Net;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using Microsoft.Ajax.Utilities;
+
 namespace MultivendorWebViewer
 {
     public class ValueSerializationSettings
@@ -1096,84 +1099,193 @@ namespace MultivendorWebViewer
             }
         }
     }
-
-    public static class FileVersionHashProvider
+    public static class Extensions
     {
-        private static long uniqueApplicationNumber = DateTime.UtcNow.Ticks;
 
-        public static void Reset()
+        public static Stream GetContentAsStream(this FileResult result)
         {
-            uniqueApplicationNumber = DateTime.UtcNow.Ticks;
-        }
-
-        // TODO Either create a cache and reevaluate hash less often, or have a FileWatcher (but that seems a bit complex in ASP)
-        public static string GetVersionHash(string path, Func<string> serverPathProvider = null)
-        {
-            //var timer = Stopwatch.StartNew();
-
-            string hash = null;
-            string serverPath = serverPathProvider != null ? serverPathProvider() : path;
-            var fileInfo = new FileInfo(serverPath);
-            if (fileInfo.Exists == true)
+            var fileStreamResult = result as FileStreamResult;
+            if (fileStreamResult != null)
             {
-                byte[] uniqueAppId = BitConverter.GetBytes(FileVersionHashProvider.uniqueApplicationNumber);
-                byte[] lastWrite = BitConverter.GetBytes(fileInfo.LastWriteTimeUtc.Ticks);
-                byte[] length = BitConverter.GetBytes((int)fileInfo.Length);
-                byte[] bytes = new byte[uniqueAppId.Length + lastWrite.Length + length.Length];
-                int j = 0;
-                for (int i = 0; i < uniqueAppId.Length; i++) bytes[j++] = lastWrite[i];
-                for (int i = 0; i < lastWrite.Length; i++) bytes[j++] = lastWrite[i];
-                for (int i = 0; i < length.Length; i++) bytes[j++] = length[i];
-
-                hash = HttpServerUtility.UrlTokenEncode(bytes);
-
-                //string hash = Convert.ToBase64String(bytes.ToArray());
-                //string hash = fileInfo.Exists == true ? string.Concat(FileVersionHashProvider.uniqueApplicationNumber, (uint)fileInfo.LastWriteTimeUtc.GetHashCode(), fileInfo.Length.GetHashCode()) : string.Empty;
+                return fileStreamResult.FileStream;
             }
 
-            //long time = timer.GetElapsedMicroseconds();
-            //Debug.WriteLine("GetVersionHash took time {0} ms", time / 1000.0);
-
-            return hash;
-        }
-    }
-
-    public static class LessCssHelper
-    {
-        public static string GetVersionHash(string fileName, string site)
-        {
-#if NET5
-            string serverFilePath = Server.MapWebContentPath(string.Format("css/{0}.less", fileName));
-#else
-            string serverFilePath = System.Web.Hosting.HostingEnvironment.MapPath(string.Format("~/Content/{0}.less", fileName));
+            var fileContentResult = result as FileContentResult;
+            if (fileContentResult != null)
+            {
+                return new MemoryStream(fileContentResult.FileContents);
+            }
+#if NET452
+            var filePathResult = result as FilePathResult;
+            if (filePathResult != null)
+            {
+                return File.OpenRead(filePathResult.FileName);
+            }
 #endif
-            string hash = FileVersionHashProvider.GetVersionHash(serverFilePath);
-            return hash;
+            return null;
         }
 
-    }
-
-
-
-    public static class HtmlGeneratorHelper
-    {
-        public static string GetInputTypeString(InputType inputType)
+        public static async Task<byte[]> GetContentAsBufferAsync(this FileResult result)
         {
-            switch (inputType)
+            var fileStreamResult = result as FileStreamResult;
+            if (fileStreamResult != null)
             {
-                case InputType.CheckBox:
-                    return "checkbox";
-                case InputType.Hidden:
-                    return "hidden";
-                case InputType.Password:
-                    return "password";
-                case InputType.Radio:
-                    return "radio";
-                case InputType.Text:
-                    return "text";
-                default:
-                    return "text";
+                using (var memoryStream = new MemoryStream())
+                {
+                    long currentPos = fileStreamResult.FileStream.Position;
+                    fileStreamResult.FileStream.Seek(0, SeekOrigin.Begin);
+                    await fileStreamResult.FileStream.CopyToAsync(memoryStream);
+                    fileStreamResult.FileStream.Seek(currentPos, SeekOrigin.Begin);
+
+                    return memoryStream.ToArray();
+                }
+            }
+
+            var fileContentResult = result as FileContentResult;
+            if (fileContentResult != null)
+            {
+                return fileContentResult.FileContents;
+            }
+#if NET452
+            var filePathResult = result as FilePathResult;
+            if (filePathResult != null)
+            {
+                return File.ReadAllBytes(filePathResult.FileName);
+            }
+#endif
+            return null;
+        }
+
+
+        public static IDictionary<string, object> ToDictionary(this NameValueCollection collection)
+        {
+            if (collection == null)
+            {
+                return null;
+            }
+
+            IDictionary<string, object> dictionary = new Dictionary<string, object>(collection.Count);
+#if NET5
+            foreach (string name in collection.AllKeys)
+            {
+                dictionary[name] = collection[name];
+            }
+#else
+            collection.CopyTo(dictionary);
+#endif
+            return dictionary;
+        }
+
+        public static void RemoveRange(this NameValueCollection collection, IEnumerable<string> keys)
+        {
+            foreach (string key in keys)
+            {
+                collection.Remove(key);
             }
         }
+
+#if NET5
+        public static IDictionary<string, object> GetQuery(this HttpRequest request)
+        {
+            var queryString = request.Query;
+#else
+        public static IDictionary<string, object> GetQuery(this HttpRequestBase request)
+        {
+            var queryString = request.QueryString;
+            if (queryString.Count == 1 && queryString.Keys[0] == null)
+            {
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>>(queryString[0]);
+            }
+            else
+#endif
+            {
+                var dictionary = new Dictionary<string, object>(queryString.Count + 1);
+                foreach (string key in queryString.Keys)
+                {
+                    if (key == null)
+                    {
+                        string values = queryString[null];
+                        if (values != null)
+                        {
+                            var keys = values.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                            keys.ForEach(k => dictionary[k] = null);
+                        }
+                    }
+                    else if (key == string.Empty)
+                    {
+                        string values = queryString[string.Empty];
+                        if (values != null)
+                        {
+                            var keys = values.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                            keys.ForEach(k => dictionary[k] = string.Empty);
+                        }
+                    }
+                    else
+                    {
+                        dictionary[key] = queryString[key];
+                    }
+                }
+
+                return dictionary;
+            }
+        }
+
+
+        public static T GetValue<T>(this ModelBindingContext bindingContext, string key)
+        {
+            var result = bindingContext.ValueProvider.GetValue(key);
+            return result != null ? (T)result.ConvertTo(typeof(T)) : default(T);
+
+        }
+
+        /// <summary>
+        /// Replace all invalid file name characters by an other letter
+        /// </summary>
+        /// <param name="source">Filename in string</param>
+        /// <param name="replaceWith">Default to an underscore '_' character</param>
+        /// <returns>Filename with replaced letters</returns>
+        public static string GetSafeFilename(this string source, string replaceWith = "_")
+        {
+            return string.Join(replaceWith, source.Split(Path.GetInvalidFileNameChars()));
+        }
+
+        /// <summary>
+        /// Replace html characters: \n \t \r
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static string ReplaceHtmlSpecialCharacters(this string source, string replacement = " ")
+        {
+            var newstring = System.Text.RegularExpressions.Regex.Replace(source, @"\t|\n|\r", replacement);
+            return newstring;
+        }
+
+
+        public static IOrderedQueryable<TSource> OrderByDirection<TSource, TKey>(this IQueryable<TSource> source, System.Linq.Expressions.Expression<Func<TSource, TKey>> keySelector, SortDirection direction)
+        {
+            return direction == SortDirection.Ascending ? source.OrderBy(keySelector) : source.OrderByDescending(keySelector);
+        }
+
+        public static IOrderedEnumerable<TSource> OrderByDirection<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, SortDirection direction)
+        {
+            return direction == SortDirection.Ascending ? source.OrderBy(keySelector) : source.OrderByDescending(keySelector);
+        }
+
+        public static IOrderedEnumerable<TSource> OrderByDirection<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, SortDirection direction, IComparer<TKey> comparer)
+        {
+            return direction == SortDirection.Ascending ? source.OrderBy(keySelector, comparer) : source.OrderByDescending(keySelector, comparer);
+        }
+
+        public static IOrderedEnumerable<TSource> ThenBy<TSource, TKey>(this IOrderedEnumerable<TSource> source, Func<TSource, TKey> keySelector, SortDirection direction)
+        {
+            return direction == SortDirection.Ascending ? source.ThenBy(keySelector) : source.ThenByDescending(keySelector);
+        }
+
+        public static IOrderedEnumerable<TSource> ThenBy<TSource, TKey>(this IOrderedEnumerable<TSource> source, Func<TSource, TKey> keySelector, SortDirection direction, IComparer<TKey> comparer)
+        {
+            return direction == SortDirection.Ascending ? source.ThenBy(keySelector, comparer) : source.ThenByDescending(keySelector, comparer);
+        }
+
     }
+
 }

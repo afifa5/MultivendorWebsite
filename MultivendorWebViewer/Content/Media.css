@@ -1,14 +1,12 @@
 ﻿/*Tablet media*/
 @media all and (max-width: 1100px) {
     .presentation-header .presentation-name {
-        font-size: 30px;
+        font-size: 40px;
     }
     .presentation-header .presentation-description {
-        font-size: 15px;
+        font-size: 25px;
     }
-    .presentation-body .node-view .node-name {
-        font-size: 18px;
-    }
+
 }
 /*Tablet Horizontal media*/
 @media all and (max-width: 850px) {
@@ -21,7 +19,7 @@
     }
 
     .presentation-header .presentation-description {
-        font-size: 12px;
+        font-size: 17px;
         margin-top:15px;
     }
     .main-toolbar .icon-label {

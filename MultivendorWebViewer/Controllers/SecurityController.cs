@@ -39,7 +39,7 @@ namespace MultivendorWebViewer.Controllers
         [HttpPost]
         public ActionResult SetLanguage(string languageCode)
         {
-            var userSetting = ApplicationRequestContext.UserSettingProvider.Load(ApplicationRequestContext);
+            var userSetting = ApplicationRequestContext.UserSettingProvider.Load(ApplicationRequestContext) ?? new UserSettings();
             userSetting.UICulture = languageCode;
             ApplicationRequestContext.UserSettingProvider.Store(ApplicationRequestContext, userSetting);
             return Json(new { status = true });
