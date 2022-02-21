@@ -24,6 +24,8 @@ namespace MultivendorWebViewer.Models
 
         public string ImageName { get; set; }
 
+        public int ImageMode { get; set; }
+
        
     }
 }
