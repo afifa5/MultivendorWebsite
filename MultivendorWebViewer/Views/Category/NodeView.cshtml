@@ -1,0 +1,68 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@model NodeViewModel
+
+@{
+    ViewBag.Title = "Multivendor Web";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    @Styles.Render("~/Content/Presentation")
+}
+
+<div class="presentation node-view-container">
+    @*Show header*@
+    
+
+    <div class="presentation-header">
+        @if (Model != null && Model.Images != null && Model.Images.Count() > 0)
+        {
+            //Show Images
+            foreach (var item in Model.Images)
+            {
+                <img class="presentation-image" src="@Model.Images[0].GetUrl()">
+            }
+        }
+        <div class="presentation-information-container">
+            @if (Model != null && !string.IsNullOrEmpty(Model.FormattedName))
+            {
+                //Show
+                <label class="presentation-name">@Model.FormattedName</label>
+            }
+            @if (Model != null && !string.IsNullOrEmpty(Model.FormattedDescription))
+            {
+                //Show
+                <span class="presentation-description">@Model.FormattedDescription</span>
+            }
+        </div>
+    </div>
+    <div class="main-body-contents">
+        <div class="presentation-body">
+            @if (Model != null && Model.SubNodes != null && Model.SubNodes.Count() > 0)
+            {
+                <div class="node-container">
+                    @foreach (var item in Model.SubNodes.OrderBy(p => p.SequenceNumber))
+                    {
+                        <a class="node-view" href="@item.GetUrl()">
+                            <div class="image-container">
+                                @if (item.Images != null && item.Images.Count() > 0)
+                                {
+                                    //Show Images
+                                    foreach (var itemImage in item.Images)
+                                    {
+                                        <img class="presentation-image" src="@itemImage.GetThumbnailUrl()">
+                                    }
+                                }
+                            </div>
+                            <div class="name-container">
+                                <label class="node-name">@item.FormattedName</label>
+                            </div>
+                            <div class="description-container">
+                                <span class="node-description">@item.FormattedDescription</span>
+                            </div>
+                        </a>
+                    }
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
