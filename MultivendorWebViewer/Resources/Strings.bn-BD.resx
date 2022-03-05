@@ -129,11 +129,17 @@
   <data name="Password" xml:space="preserve">
     <value>পাসওয়ার্ড</value>
   </data>
+  <data name="Products" xml:space="preserve">
+    <value>পণ্য</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>অনুসন্ধান </value>
   </data>
   <data name="StartPage" xml:space="preserve">
     <value>প্রথম পাতা</value>
+  </data>
+  <data name="SubCatagories" xml:space="preserve">
+    <value>উপশ্রেণী</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>ব্যবহারকারীর নাম</value>

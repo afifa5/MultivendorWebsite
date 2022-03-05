@@ -16,10 +16,13 @@
         @if (Model != null && Model.Images != null && Model.Images.Count() > 0)
         {
             //Show Images
-            foreach (var item in Model.Images)
+            var image = Model.Images.Where(i => i.ImageMode == ImageMode.Original).FirstOrDefault();
+            if (image!=null)
             {
-                <img class="presentation-image" src="@Model.Images[0].GetUrl()">
+                <img class="presentation-image" src="@image.GetUrl()">
+
             }
+
         }
         <div class="presentation-information-container">
             @if (Model != null && !string.IsNullOrEmpty(Model.FormattedName))
@@ -38,12 +41,13 @@
         <div class="presentation-body">
             @if (Model != null && Model.SubNodes != null && Model.SubNodes.Count() > 0)
             {
+                <div class="node-label"><label>@CustomStrings.SubCatagories</label></div>
                 <div class="node-container">
                     @foreach (var item in Model.SubNodes.OrderBy(p => p.SequenceNumber))
                     {
                         <a class="node-view" href="@item.GetUrl()">
                             <div class="image-container">
-                                @if (item.Images != null && item.Images.Count() > 0)
+                                @if (item.Images != null && item.Images.Where(p=> p.ImageMode == ImageMode.Thumbnail).Count() > 0)
                                 {
                                     //Show Images
                                     foreach (var itemImage in item.Images)
@@ -62,6 +66,9 @@
                     }
                 </div>
 
+            }
+            @if (Model != null && Model.Products != null && Model.Products.Count() > 0) { 
+            //print all product
             }
         </div>
     </div>

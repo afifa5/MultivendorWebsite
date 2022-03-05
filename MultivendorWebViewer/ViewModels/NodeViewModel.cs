@@ -28,13 +28,21 @@ namespace MultivendorWebViewer.ViewModels
         public List<ImageViewModel> Images { get { return GetImages(); } }
 
         public List<NodeViewModel> SubNodes { get { return GetNodes(); } }
-        public List<ProductViewModel> Products { get; }
+        public List<ProductViewModel> Products { get { return GetAllProducts(); } }
+        public List<ProductViewModel> GetAllProducts() {
+            var allProducts = new List<ProductViewModel>();
+            if (Model.ProductNodes != null && Model.ProductNodes.Any()) {
+                var productIds = Model.ProductNodes.Select(p => p.ProductId);
+                //var nodeProducts = ApplicationRequestContext..GetImagesByIds(ids);
+            }
+            return allProducts;
+        }
         public List<NodeViewModel> GetNodes()
         {
             var alllist = new List<NodeViewModel>();
             if (Model != null && Model.SubNodes != null && Model.SubNodes.Count() > 0)
             {
-                var ids = Model.SubNodes.Select(p => p.Id).ToArray();
+                var ids = Model.SubNodes.Select(p => p.SubNodeItemId).ToArray();
                 var categoryNodes = ApplicationRequestContext.CategoryManager.GetNodesByIds(ids);
                 foreach (var item in categoryNodes)
                 {

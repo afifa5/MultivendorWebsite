@@ -129,11 +129,17 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="Products" xml:space="preserve">
+    <value>Products</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="StartPage" xml:space="preserve">
     <value>Start page</value>
+  </data>
+  <data name="SubCatagories" xml:space="preserve">
+    <value>Sub catagories</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>User name</value>

@@ -22,6 +22,7 @@ namespace MultivendorWebViewer.ViewModels
         public int Id { get { return Model.Id; } }
         public int SequenceNumber { get { return Model.SequenceNumber.HasValue ? Model.SequenceNumber.Value : 0; } }
         public string ImageName { get { return Model.ImageName; } }
+        public ImageMode ImageMode { get { return Model.ImageMode == 0 ? ImageMode.Original : ImageMode.Thumbnail; } }
         public string GetUrl()
         {
             var routeValues = new { imageId = Id , fileName = ImageName} /*Dictionary<string, object>()*/;
@@ -32,5 +33,10 @@ namespace MultivendorWebViewer.ViewModels
             var routeValues = new { imageId = Id, fileName = ImageName, width = 300, height = 225 } /*Dictionary<string, object>()*/;
             return UrlUtility.Action(ApplicationRequestContext, "ImageThumbnail", "Content", routeValues);
         }
+    }
+    public enum ImageMode { 
+       
+        Original = 0,
+        Thumbnail = 1
     }
 }

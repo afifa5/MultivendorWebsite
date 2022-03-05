@@ -122,3 +122,8 @@ margin-top:auto;
         font-weight: 300;
         padding-top: 10px;
     }
+.node-label {
+    margin: 10px 0;
+    background-color: cadetblue;
+    padding: 10px;
+}

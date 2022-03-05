@@ -14,10 +14,12 @@
         @if (Model != null && Model.Images != null && Model.Images.Count() > 0)
         {
             //Show Images
-            foreach (var item in Model.Images)
+            var image = Model.Images.Where(i => i.ImageMode == ImageMode.Original).FirstOrDefault();
+            if (image != null)
             {
-                <img class="presentation-image" src="@Model.Images[0].GetUrl()">
+                <img class="presentation-image" src="@image.GetUrl()">
             }
+
         }
         <div class="presentation-information-container">
             @if (Model != null && !string.IsNullOrEmpty(Model.FormattedName))
@@ -44,7 +46,7 @@
                                 @if (item.Images != null && item.Images.Count() > 0)
                                 {
                                     //Show Images
-                                    foreach (var itemImage in item.Images)
+                                    foreach (var itemImage in item.Images.Where(i=> i.ImageMode == ImageMode.Thumbnail))
                                     {
                                         <img class="presentation-image" src="@itemImage.GetThumbnailUrl()">
                                     }
