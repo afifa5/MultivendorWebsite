@@ -127,3 +127,6 @@ margin-top:auto;
     background-color: cadetblue;
     padding: 10px;
 }
+.node-container.sub-node {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 170px));
+}

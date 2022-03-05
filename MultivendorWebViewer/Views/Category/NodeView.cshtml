@@ -42,10 +42,10 @@
             @if (Model != null && Model.SubNodes != null && Model.SubNodes.Count() > 0)
             {
                 <div class="node-label"><label>@CustomStrings.SubCatagories</label></div>
-                <div class="node-container">
+                <div class="node-container sub-node">
                     @foreach (var item in Model.SubNodes.OrderBy(p => p.SequenceNumber))
                     {
-                        <a class="node-view" href="@item.GetUrl()">
+                        <a class="node-view " href="@item.GetUrl()">
                             <div class="image-container">
                                 @if (item.Images != null && item.Images.Where(p=> p.ImageMode == ImageMode.Thumbnail).Count() > 0)
                                 {
