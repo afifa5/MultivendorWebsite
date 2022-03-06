@@ -125,8 +125,14 @@ margin-top:auto;
 .node-label {
     margin: 10px 0;
     background-color: cadetblue;
-    padding: 10px;
+    /*padding: 10px;*/
 }
 .node-container.sub-node {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 170px));
+    grid-template-columns: repeat(auto-fit, minmax(170px, 200px));
 }
+.sub-node.presentation-header img {
+    object-fit: cover;
+}
+/*.presentation-body.node {
+padding-top:0px;
+}*/

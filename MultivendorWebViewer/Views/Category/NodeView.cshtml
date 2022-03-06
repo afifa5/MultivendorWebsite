@@ -12,7 +12,7 @@
     @*Show header*@
     
 
-    <div class="presentation-header">
+    <div class="presentation-header sub-node">
         @if (Model != null && Model.Images != null && Model.Images.Count() > 0)
         {
             //Show Images
@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="main-body-contents">
-        <div class="presentation-body">
+        <div class="presentation-body node">
             @if (Model != null && Model.SubNodes != null && Model.SubNodes.Count() > 0)
             {
                 <div class="node-label"><label>@CustomStrings.SubCatagories</label></div>
