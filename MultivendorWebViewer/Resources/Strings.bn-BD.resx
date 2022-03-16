@@ -132,6 +132,9 @@
   <data name="Order" xml:space="preserve">
     <value>ফরমাশ</value>
   </data>
+  <data name="OutOfStock" xml:space="preserve">
+    <value>স্টক শেষ</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>পাসওয়ার্ড</value>
   </data>

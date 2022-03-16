@@ -318,16 +318,21 @@ font-weight:200;
 .product-body .left .images {
     width:100%;
     max-width:100%;
+
 }
-.product-body .left .images img{
-    width: 100%;
-    max-width: 100%;
-}
+    .product-body .left .images img {
+        width: 100%;
+        max-width: 100%;
+        max-height: 700px;
+    }
 .stock-information {
     padding-top: 5px;
 }
 .stock-information .icon {
     color: #00b140 ;
+}
+.stock-information .icon.fa-times {
+    color: #ab0000;
 }
 .stock-information .description {
     color: #999;

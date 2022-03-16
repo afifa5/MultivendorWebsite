@@ -7,20 +7,20 @@
 {
     if (!string.IsNullOrEmpty(item.FormattedPriceInclVat))
     {
-    <div class="price">
-    <div class="price-incl-vat">
-        <label>@CustomStrings.PriceIclVat</label>
-        <span>@item.FormattedPriceInclVat</span>
-    </div>
-    @if (!string.IsNullOrEmpty(item.FormattedDiscount))
-    {
-        <div class="discount">
-            <label>@CustomStrings.Discount</label>
-            <span>@item.FormattedDiscount</span>
-        </div>
-    }
+        <div class="price">
+            <div class="price-incl-vat">
+                <label>@CustomStrings.PriceIclVat</label>
+                <span>@item.FormattedPriceInclVat</span>
+            </div>
+            @if (!string.IsNullOrEmpty(item.FormattedDiscount))
+            {
+                <div class="discount">
+                    <label>@CustomStrings.Discount</label>
+                    <span>@item.FormattedDiscount</span>
+                </div>
+            }
 
-    </div>
+        </div>
     }
 
     <div class="add-to-order">
@@ -30,11 +30,18 @@
         </div>
         <button class="add-to-order-button" data-text="Add to order" data-short-text="Add"></button>
     </div>
-    if (item.Quantity.HasValue)
+    if (item.Quantity.HasValue && item.Quantity.Value > 0)
     {
         <div class="stock-information">
             <span class="icon fa fa-check content fa-2x"></span>
             <span class="description">@string.Format(CustomStrings.StockInformation, Math.Round(item.Quantity.Value, 0).ToString(CultureInfo.InvariantCulture))</span>
+        </div>
+    }
+    else
+    {
+        <div class="stock-information">
+            <span class="icon fa fa-times content fa-2x"></span>
+            <span class="description">@CustomStrings.OutOfStock</span>
         </div>
     }
 

@@ -50,5 +50,23 @@
     .node-container.sub-node {
         grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
     }
+    .node-container.product-nodes .node-view {
+    max-width:100%;
+    }
+    .node-container.product-nodes {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    .product-body {
+        grid-template-columns: [start left right footer header body] auto [end] !important;
+/*        grid-template-rows: auto !important;
+        grid-auto-flow: column;
+        align-items: center;
+        grid-template-columns: [start footer header left]  [body] 50% [end];*/
+    }
+.product-body > * {
+    grid-column: 1 / span 1 !important;
+    grid-row-start: unset !important;
+    grid-row-end: unset !important;
+}
 }
 
