@@ -128,7 +128,7 @@ margin-top:auto;
     /*padding: 10px;*/
 }
 .node-container.sub-node {
-    grid-template-columns: repeat(auto-fit, minmax(170px, 200px));
+    grid-template-columns: repeat(auto-fit, minmax(170px, 170px));
 }
 .sub-node.presentation-header img {
     object-fit: cover;
@@ -136,3 +136,272 @@ margin-top:auto;
 /*.presentation-body.node {
 padding-top:0px;
 }*/
+.sub-node .node-view .node-name {
+font-size: 15px;
+}
+.add-to-order {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: 5px;
+    align-items: center;
+    padding-top: 10px;
+}
+.multivendor-quantity {
+    position: relative;
+    display: block;
+    width: 5em;
+    min-width: 5em;
+    display: -ms-grid;
+    -ms-grid-rows: 50% 50%;
+    -ms-grid-columns: 1fr 1.5em;
+    display: grid;
+    grid-template-columns: 1fr 1.5em;
+    grid-template-rows: 50% 50%;
+    overflow: hidden;
+}
+.multivendor-quantity > input {
+    text-align: center;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 2;
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 2;
+    min-width: 0 !important;
+    border: 1px solid #ddd;
+    padding-right: 1.5em !important;
+    font-size: inherit !important;
+    font-weight: 400;
+    padding: 5px 5px 5px 5px;
+}
+.multivendor-quantity > .increase {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
+    grid-row: 1;
+}
+    .multivendor-quantity > .increase:after {
+        bottom: calc(1.5em / 12);
+        border-bottom-color: #999;
+    }
+.multivendor-quantity > span:after {
+    content: ' ';
+    position: absolute;
+    width: 0.5px;
+    height: 0;
+    display: block;
+    border-radius: 2px;
+    border-color: transparent;
+    border-style: solid;
+    border-width: calc(1.5em / 4);
+    left: calc(50% - 1.5em / 4);
+    cursor: pointer;
+}
+.multivendor-quantity > span {
+    grid-column: 2 / span 1;
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 1;
+    overflow: hidden;
+    position: relative;
+}
+.multivendor-quantity > .decrease {
+    -ms-grid-row: 2;
+    -ms-grid-row-span: 1;
+    grid-row: 2;
+}
+.multivendor-quantity > .decrease:after {
+    top: calc(1.5em / 12);
+    border-top-color: #999;
+}
+.add-to-order-button {
+    padding: 5px 5px 5px 5px;
+    font-size: 18px;
+    max-width: 260px;
+}
+.add-to-order-button {
+    padding: 5px 5px 5px 5px;
+    font-size: 18px;
+    max-width: 260px;
+}
+.add-to-order-button:after {
+    content: attr(data-text);
+}
+.product-nodes a {
+    color: #000;
+    cursor: pointer;
+    text-decoration: none;
+}
+.node-view > .name-container {
+    margin-top:0px;
+}
+.node-container.product-nodes .node-name,
+.node-container.product-nodes .node-description {
+font-size:15px;
+}
+.node-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.specifications {
+    padding: 10px 0 10px 0;
+}
+.specifications .sp {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: 5px;
+    align-items: center;
+}
+.specifications .sp label {
+    letter-spacing: 0em;
+    font-weight: 300;
+    color: #999;
+    font-size: 15px;
+}
+.specifications .sp span {
+    letter-spacing: 0em;
+    font-weight: 300;
+    color: #000;
+    font-size: 15px;
+}
+.product-body {
+    grid-template-columns: [start footer header left] 50% [body] 50% [end];
+    display: grid;
+    position: relative;
+    grid-row: body / span 1;
+    grid-column: body / span 1;
+    /*grid-column-gap:10px;*/
+}
+.product-body .left {
+    grid-column: left / span 1;
+    grid-row: left / span 1;
+    float: left;
+}
+.product-body footer {
+    grid-column: footer / end;
+    grid-row: footer / span 1;
+}
+.product-body .body-content {
+    grid-row: body / span 1;
+    grid-column: body / span 1;
+}
+.product-name {
+    font-family: gibsonbold;
+    text-transform: uppercase;
+    font-size: 44px;
+    color: rgb(13, 13, 13);
+    width: 100%;
+    font-weight: 700;
+}
+.product-body {
+    padding-top:20px;
+}
+.product-description {
+width:100%;
+font-size:15px;
+font-weight:200;
+}
+.highlighted-specification .sp label, .highlighted-specification .sp span {
+    font-size: 15px;
+
+}
+.highlighted-specification .sp span {
+/*    border: 1px solid #adadad;
+    border-radius: 4px;
+    background: white;
+    padding: 1px 3px 0 3px;
+    line-height: 1.5;
+    width: fit-content;*/
+}
+    .product-information-container {
+        display: grid;
+        grid-template-rows: auto auto;
+       /* grid-row-gap: 10px;*/
+    }
+.product-body .left .images {
+    width:100%;
+    max-width:100%;
+}
+.product-body .left .images img{
+    width: 100%;
+    max-width: 100%;
+}
+.stock-information {
+    padding-top: 5px;
+}
+.stock-information .icon {
+    color: #00b140 ;
+}
+.stock-information .description {
+    color: #999;
+    font-size:15px;
+}
+.price span {
+    font-size: 22px;
+    font-weight: 700;
+    float: right;
+}
+.price label {
+    /*font-size: 15px;*/
+}
+.price > *{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    grid-column-gap: 5px;
+}
+.node-container.product-nodes {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
+}
+.node-container.product-nodes .node-view {
+    max-width: 250px;
+}
+.node-container.product-nodes .node-view > *:last-child {
+    margin-top: 0;
+}
+.node-container.product-nodes .node-view > .price {
+    margin-top: auto;
+}
+.specification-container {
+    margin: 20px 0 0 0;
+}
+.specifications-label {
+    font-family: gibsonbold;
+    text-transform: uppercase;
+    font-size: 25px;
+    color: rgb(13, 13, 13);
+   margin:0;
+    font-weight: 900;
+}
+.product-body .body-content > * {
+    padding-left:10px;
+}
+.product-body .body-content > .specification-container {
+    padding-left: 0px;
+}
+.product-body .body-content > .specification-container >* {
+    padding-left: 10px;
+}
+.product-body .body-content > .specification-container > .specifications-label {
+    background-color: #f1f0f0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.product-body .body-content > .specification-container > .specifications {
+    background-color: #fff;
+}
+.product-body .body-content > .price {
+padding-top:10px;
+padding-bottom:10px;
+}
+.specification-container .specifications {
+display:grid;
+grid-template-columns:auto 1fr;
+grid-column-gap:10px;
+grid-row-gap:5px;
+}
+.specification-container .specifications > * {
+font-size:15px;
+}
+.specification-container .specifications label {
+    letter-spacing: 0em;
+    font-weight: 300;
+    color: #999;
+}

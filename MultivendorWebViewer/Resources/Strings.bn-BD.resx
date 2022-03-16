@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BDT" xml:space="preserve">
+    <value>টা</value>
+  </data>
+  <data name="Discount" xml:space="preserve">
+    <value>ছাড়</value>
+  </data>
   <data name="InformationNotFound" xml:space="preserve">
     <value>তথ্য পাওয়া যায়নি</value>
   </data>
@@ -129,14 +135,23 @@
   <data name="Password" xml:space="preserve">
     <value>পাসওয়ার্ড</value>
   </data>
+  <data name="PriceIclVat" xml:space="preserve">
+    <value>কর সহ মূল্য</value>
+  </data>
   <data name="Products" xml:space="preserve">
     <value>পণ্য</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>অনুসন্ধান </value>
   </data>
+  <data name="Specification" xml:space="preserve">
+    <value>স্পেসিফিকেশন</value>
+  </data>
   <data name="StartPage" xml:space="preserve">
     <value>প্রথম পাতা</value>
+  </data>
+  <data name="StockInformation" xml:space="preserve">
+    <value>{0} স্টকে আছে</value>
   </data>
   <data name="SubCatagories" xml:space="preserve">
     <value>উপশ্রেণী</value>

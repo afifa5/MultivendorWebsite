@@ -9,8 +9,8 @@ namespace MultivendorWebViewer.Common
 {
     public class ProfileSetting
     {
-       public ProfileSetting() { 
-        
+       public ProfileSetting() {
+            PriceCurrency = "BDT";
         }
         [XmlElement("StartCatalogueId")]
         public int? StartCatalogueId { get; set; }
@@ -25,6 +25,9 @@ namespace MultivendorWebViewer.Common
        
         [XmlElement("AvailableLanguage")]
         public string AvailableLanguage { get; set; }
+
+        [XmlElement("PriceCurrency")]
+        public string PriceCurrency { get; set; }
 
 
     }

@@ -46,7 +46,9 @@ namespace MultivendorWebViewer.Models
         [StringLength(50)]
         public string CompanyName { get; set; }
         public bool IsActive { get; set; }
+        [StringLength(50)]
+        public string UserRole { get; set; }
 
-        
+
     }
 }

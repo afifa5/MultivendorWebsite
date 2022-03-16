@@ -46,3 +46,9 @@
 @media all and (max-height: 420px) {
    
 }
+@media all and (max-width: 575.98px) {
+    .node-container.sub-node {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
+    }
+}
+

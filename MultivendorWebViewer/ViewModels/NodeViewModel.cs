@@ -29,10 +29,15 @@ namespace MultivendorWebViewer.ViewModels
 
         public List<NodeViewModel> SubNodes { get { return GetNodes(); } }
         public List<ProductViewModel> Products { get { return GetAllProducts(); } }
-        public List<ProductViewModel> GetAllProducts() {
+        private List<ProductViewModel> GetAllProducts() {
             var allProducts = new List<ProductViewModel>();
             if (Model.ProductNodes != null && Model.ProductNodes.Any()) {
-                var productIds = Model.ProductNodes.Select(p => p.ProductId);
+                var productIds = Model.ProductNodes.Select(p => p.ProductId).ToArray();
+                var products = ApplicationRequestContext.ProductManager.GetProductByIds(productIds);
+                foreach (var item in products)
+                {
+                    allProducts.Add(new ProductViewModel(item, ApplicationRequestContext));
+                }
                 //var nodeProducts = ApplicationRequestContext..GetImagesByIds(ids);
             }
             return allProducts;

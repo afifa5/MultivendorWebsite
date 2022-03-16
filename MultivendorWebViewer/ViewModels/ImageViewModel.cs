@@ -22,21 +22,23 @@ namespace MultivendorWebViewer.ViewModels
         public int Id { get { return Model.Id; } }
         public int SequenceNumber { get { return Model.SequenceNumber.HasValue ? Model.SequenceNumber.Value : 0; } }
         public string ImageName { get { return Model.ImageName; } }
-        public ImageMode ImageMode { get { return Model.ImageMode == 0 ? ImageMode.Original : ImageMode.Thumbnail; } }
+        public ImageMode ImageMode { get { return Model.ImageMode == 0 ? ImageMode.Original : /*Model.ImageMode == 1 ?*/ ImageMode.Thumbnail/*:ImageMode.Product*/; } }
         public string GetUrl()
         {
             var routeValues = new { imageId = Id , fileName = ImageName} /*Dictionary<string, object>()*/;
             return UrlUtility.Action(ApplicationRequestContext, "Image", "Content", routeValues);
         }
-        public string GetThumbnailUrl()
+        public string GetThumbnailUrl(int? width= null, int? height =null)
         {
-            var routeValues = new { imageId = Id, fileName = ImageName, width = 300, height = 225 } /*Dictionary<string, object>()*/;
+            var routeValues = new { imageId = Id, fileName = ImageName, width = width.HasValue?width.Value:300, height = height.HasValue? height.Value: 225 } /*Dictionary<string, object>()*/;
             return UrlUtility.Action(ApplicationRequestContext, "ImageThumbnail", "Content", routeValues);
         }
     }
     public enum ImageMode { 
        
         Original = 0,
-        Thumbnail = 1
+        Thumbnail = 1,
+        //Product = 2,
+
     }
 }

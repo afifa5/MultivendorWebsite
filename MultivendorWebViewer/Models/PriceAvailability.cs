@@ -27,6 +27,9 @@ namespace MultivendorWebViewer.Models
 
         [Column(TypeName = "numeric")]
         public decimal? TaxAmount { get; set; }
+        //Store as 21 May 2022
+        [StringLength(50)]
+        public string ExpectedShippingDate { get; set; }
 
         [Column(TypeName = "numeric")]
         public decimal? Discount { get; set; }

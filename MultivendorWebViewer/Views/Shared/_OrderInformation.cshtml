@@ -1,0 +1,41 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@using System.Globalization;
+@model List<PriceAvailailityViewModel>
+
+@foreach (var item in Model)
+{
+    if (!string.IsNullOrEmpty(item.FormattedPriceInclVat))
+    {
+    <div class="price">
+    <div class="price-incl-vat">
+        <label>@CustomStrings.PriceIclVat</label>
+        <span>@item.FormattedPriceInclVat</span>
+    </div>
+    @if (!string.IsNullOrEmpty(item.FormattedDiscount))
+    {
+        <div class="discount">
+            <label>@CustomStrings.Discount</label>
+            <span>@item.FormattedDiscount</span>
+        </div>
+    }
+
+    </div>
+    }
+
+    <div class="add-to-order">
+        <div class="multivendor-quantity">
+            <input class="add-qty" max="1000" min="1" type="text" value="1">
+            <span class="increase"></span><span class="decrease"></span>
+        </div>
+        <button class="add-to-order-button" data-text="Add to order" data-short-text="Add"></button>
+    </div>
+    if (item.Quantity.HasValue)
+    {
+        <div class="stock-information">
+            <span class="icon fa fa-check content fa-2x"></span>
+            <span class="description">@string.Format(CustomStrings.StockInformation, Math.Round(item.Quantity.Value, 0).ToString(CultureInfo.InvariantCulture))</span>
+        </div>
+    }
+
+}

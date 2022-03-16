@@ -1,0 +1,88 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@model ProductViewModel
+
+@{
+    ViewBag.Title = "Multivendor Web";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="presentation product-view-container">
+    <div class="main-body-contents">
+        <div class="product-body">
+            <div class="left">
+                <div class="images">
+                    @if (Model != null && Model.Images != null && Model.Images.Count() > 0)
+                    {
+                        //Show Images
+                        var image = Model.Images/*.Where(i => i.ImageMode == ImageMode.Original)*/.FirstOrDefault();
+                        if (image != null)
+                        {
+                            <img class="presentation-image" src="@image.GetUrl()">
+                        }
+
+                    }
+                </div>
+            </div>
+            <footer></footer>
+            <div class="body-content">
+                <div class="product-information-container">
+                    @if (Model != null && !string.IsNullOrEmpty(Model.FormattedDescription))
+                    {
+                        //Show
+                        <span class="product-description">@Model.FormattedDescription</span>
+                    }
+                    @if (Model != null && !string.IsNullOrEmpty(Model.FormattedName))
+                    {
+                        //Show
+                        <label class="product-name">@Model.FormattedName</label>
+                    }
+
+                </div>
+                @if (Model.Specifications != null)
+                {
+                    var highlightedSpecification = Model.Specifications.Where(p => p.SpecificationMode == SpecificationMode.Highlighted);
+                    if (highlightedSpecification != null && highlightedSpecification.Any())
+                    {
+                        <div class="highlighted-specification specifications">
+                            @foreach (var specification in highlightedSpecification)
+                            {
+
+                                <div class="sp">
+                                    <label>@specification.SpecificationType.FormattedName</label>
+                                    <span>@specification.FormattedName</span>
+                                </div>
+
+                            }
+                        </div>
+                    }
+
+                }
+                @Html.Action("GetOrderInformation", "Product", routeValues: new { productId = Model.Id })
+                @if (Model.Specifications != null)
+                {
+                    var specifications = Model.Specifications.Where(p => p.SpecificationMode == SpecificationMode.Description);
+                    if (specifications != null && specifications.Any())
+                    {
+            <div class="specification-container">
+                <h3 class="specifications-label">@CustomStrings.Specification</h3>
+                <div class="specifications">
+                    @foreach (var specification in specifications)
+                    {
+
+                        @*<div class="sp">*@
+                            <label>@specification.SpecificationType.FormattedName</label>
+                            <span>@specification.FormattedName</span>
+                        @*</div>*@
+
+                    }
+                </div>
+            </div>
+          
+                    }
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
