@@ -143,6 +143,7 @@
     <Compile Include="Common\TextManager.cs" />
     <Compile Include="Common\UserSettings.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
@@ -257,6 +258,8 @@
     <Content Include="Views\Security\_AvailableLanguage.cshtml" />
     <Content Include="Views\Security\_NotFound.cshtml" />
     <Content Include="Views\Category\NodeView.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Shared\_OrderInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
