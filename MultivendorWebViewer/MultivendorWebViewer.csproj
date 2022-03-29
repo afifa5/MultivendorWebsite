@@ -259,7 +259,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Security\Index.cshtml" />
-    <Content Include="Views\Security\_AvailableLanguage.cshtml" />
+    <Content Include="Views\Home\_AvailableLanguage.cshtml" />
     <Content Include="Views\Security\_NotFound.cshtml" />
     <Content Include="Views\Category\NodeView.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
