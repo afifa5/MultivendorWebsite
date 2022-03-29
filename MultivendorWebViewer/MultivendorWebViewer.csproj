@@ -140,6 +140,8 @@
     <Compile Include="Common\Mime.cs" />
     <Compile Include="Common\ProfileSetting.cs" />
     <Compile Include="Common\RequestItemHelper.cs" />
+    <Compile Include="Common\SessionData.cs" />
+    <Compile Include="Common\SessionItemHelper.cs" />
     <Compile Include="Common\TextManager.cs" />
     <Compile Include="Common\UserSettings.cs" />
     <Compile Include="Controllers\BaseController.cs" />

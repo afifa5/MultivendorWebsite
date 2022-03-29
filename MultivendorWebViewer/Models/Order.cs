@@ -10,6 +10,9 @@ namespace MultivendorWebViewer.Models
 
     public partial class Order
     {
+        public Order() {
+            OrderLines = new List<OrderLine>();
+        }
         [Key]
         public int Id { get; set; }
 
@@ -20,5 +23,7 @@ namespace MultivendorWebViewer.Models
         public int CustomerId { get; set; }
         [ForeignKey("CustomerId")]
         public  Customer Customer { get; set; }
+        [ForeignKey("OrderId")]
+        public List<OrderLine> OrderLines { get; set; }
     }
 }

@@ -45,5 +45,19 @@ namespace MultivendorWebViewer.Common
         public HttpRequestBase HttpRequest { get { return RequestContext != null && RequestContext.HttpContext != null ? RequestContext.HttpContext.Request : null; } }
         public string SelectedCulture { get { return UserSettingProvider.Load(this) !=null? UserSettingProvider.Load(this).UICulture : UserSettingProvider.DefaultUserSetting.UICulture; } }
 
+        private SessionData sessionData;
+        public SessionData SessionData
+        {
+            get
+            {
+                if (sessionData == null)
+                {
+                    if (HttpRequest == null) return null;
+                    sessionData = SessionData.GetSessionData(HttpRequest.RequestContext.HttpContext);
+                }
+                return sessionData;
+            }
+            set { sessionData = value; }
+        }
     }
 }
