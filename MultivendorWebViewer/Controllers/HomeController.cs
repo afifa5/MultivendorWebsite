@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -20,6 +21,26 @@ namespace MultivendorWebViewer.Controllers
             }
           
         }
-
+        [HttpGet]
+        public ActionResult GetLanguagePopUp()
+        {
+            List<CultureInfo> cultureInfo = new List<CultureInfo>();
+            var availableLanguage = ApplicationRequestContext.Configuration.SiteProfile.AvailableLanguage.Split(',').ToList();
+            if (availableLanguage.Count() > 0)
+            {
+                availableLanguage.ForEach(i => {
+                    cultureInfo.Add(new CultureInfo(i));
+                });
+            }
+            return PartialView("_AvailableLanguage", cultureInfo);
+        }
+        [HttpPost]
+        public ActionResult SetLanguage(string languageCode)
+        {
+            var userSetting = ApplicationRequestContext.UserSettingProvider.Load(ApplicationRequestContext) ?? new UserSettings();
+            userSetting.UICulture = languageCode;
+            ApplicationRequestContext.UserSettingProvider.Store(ApplicationRequestContext, userSetting);
+            return Json(new { status = true });
+        }
     }
 }
