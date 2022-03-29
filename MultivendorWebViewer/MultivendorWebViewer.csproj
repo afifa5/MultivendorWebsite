@@ -149,6 +149,7 @@
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Manager\ImageManager.cs" />
     <Compile Include="Manager\CategoryManager.cs" />
     <Compile Include="Manager\OrderManager.cs" />
