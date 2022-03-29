@@ -21,7 +21,21 @@
         });
         /*end call */
     });
+    $(document).on("click", ".user-menu", function (e) {
+        var userMenuhtml = $(this);
+        var url = userMenuhtml.data("user-menu-url")
+        $.ajax({
+            url: url,
+            datatype: "html",
+            type: "GET",
+            cache: false,
+            success: function (data) {
+                var html = $(data)
+                multivendorWeb.PopUp.Show(html, userMenuhtml, null)
+            }
 
+        })
+    })
     //Setting language in dropdown list.
     $(document).on("click", ".language-item", function (e) {
 
@@ -31,11 +45,11 @@
         $.ajax({
             url: actionUrl,
             data: { languageCode: languageCode /*, page: 0, pageSize: pagesize */ },
-            dataType: "html",
+            dataType: "json",
             type: "POST",
             cache: false,
             success: function (data) {
-                var $data = $.parseJSON(data)
+                var $data =data
                 if ($data.status == true) {
                     window.location.reload();
                 }

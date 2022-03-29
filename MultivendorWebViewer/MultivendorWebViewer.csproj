@@ -149,6 +149,7 @@
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Manager\ImageManager.cs" />
     <Compile Include="Manager\CategoryManager.cs" />
@@ -188,6 +189,7 @@
     <Compile Include="ViewModels\NodeViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\PriceAvailailityViewModel.cs" />
+    <Compile Include="ViewModels\OrderLineViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\SpecificationTypeViewModel.cs" />
     <Compile Include="ViewModels\SpecificationViewModel.cs" />
@@ -206,6 +208,7 @@
     <Content Include="Content\Flag\ur.svg" />
     <Content Include="Content\Font-awesome.css" />
     <Content Include="Content\Media.css" />
+    <Content Include="Content\Order.css" />
     <Content Include="Content\Presentation.css" />
     <Content Include="Content\User.css" />
     <Content Include="favicon.ico" />
@@ -231,6 +234,7 @@
     <Content Include="fonts\fa-solid-900.woff" />
     <Content Include="fonts\fa-solid-900.woff2" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Orders.js" />
     <Content Include="Scripts\Main.js" />
     <Content Include="Scripts\DHM.pop-up.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -265,6 +269,7 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Shared\_OrderInformation.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

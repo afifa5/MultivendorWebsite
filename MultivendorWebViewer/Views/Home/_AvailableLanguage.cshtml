@@ -6,7 +6,7 @@
     var applicationRequestContext = ApplicationRequestContext.GetContext(Context);
     var selectedLanguage = applicationRequestContext.SelectedCulture;
 }
-<ul class="multivendor-web-menu available-language-menu" data-set-language-url="@UrlUtility.Action(applicationRequestContext, "SetLanguage", "Security")">
+<ul class="multivendor-web-menu available-language-menu" data-set-language-url="@UrlUtility.Action(applicationRequestContext, "SetLanguage", "Home")">
     @foreach (var language in Model)
     {
         var className = selectedLanguage == language.Name ? "language-item selected" : "language-item";

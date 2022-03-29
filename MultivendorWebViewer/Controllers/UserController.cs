@@ -12,7 +12,9 @@ namespace MultivendorWebViewer.Controllers
     {
         [HttpGet]
         public ActionResult Login() {
+            
             return View("Login");
         }
     }
+    
 }

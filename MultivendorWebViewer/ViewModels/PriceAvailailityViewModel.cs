@@ -25,6 +25,7 @@ namespace MultivendorWebViewer.ViewModels
         public string FormattedDiscount { get { return GetPriceText(Discount); } }
         public string ExpectedShippingDate { get { return Model.ExpectedShippingDate; } }
         public decimal? Discount { get {return Model.Discount; } }
+        public int ProductId { get { return Model.ProductId; } }
         private string GetPriceText(decimal? price) {
             if (price.HasValue) {
                 var priceText = price.Value.ToString("n", CultureInfo.GetCultureInfo(ApplicationRequestContext.SelectedCulture));

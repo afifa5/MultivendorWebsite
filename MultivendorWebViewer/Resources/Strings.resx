@@ -129,6 +129,9 @@
   <data name="Menu" xml:space="preserve">
     <value>Menu</value>
   </data>
+  <data name="NumberOfItems" xml:space="preserve">
+    <value>Number of items</value>
+  </data>
   <data name="Order" xml:space="preserve">
     <value>Order</value>
   </data>
@@ -141,8 +144,14 @@
   <data name="PriceIclVat" xml:space="preserve">
     <value>Price icl. vat</value>
   </data>
+  <data name="ProductDetail" xml:space="preserve">
+    <value>Product detail</value>
+  </data>
   <data name="Products" xml:space="preserve">
     <value>Products</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Quantity</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
@@ -158,6 +167,12 @@
   </data>
   <data name="SubCatagories" xml:space="preserve">
     <value>Sub catagories</value>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="TotalPriceInclVat" xml:space="preserve">
+    <value>Total price incl VAT</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>User name</value>

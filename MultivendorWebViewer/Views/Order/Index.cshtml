@@ -1,0 +1,111 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@model OrderViewModel
+
+@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="presentation">
+    @*Show header*@
+    
+
+    <div class="order-header">
+        <div class="order-name-container">
+                <label class="order-name">@CustomStrings.Order</label>
+        </div>
+    </div>
+    <div class="main-body-contents">
+        <div class="order-body presentation-body">
+            <div class="order-cart-body-container">
+                @if (Model!= null && Model.OrderLines.Any())
+                {
+                    <div class="order-items-container">
+                        <div class="order-table-item">
+                            <div class="order-detail"><h4>@CustomStrings.ProductDetail</h4></div>
+                            <div class="order-unit-price"><h4>@CustomStrings.PriceIclVat</h4></div>
+                            <div class="order-quantity"><h4>@CustomStrings.Quantity</h4></div>
+                            <div class="delete-icon"><h4></h4></div>
+                        </div>
+
+                        <div class="order-table-items-container">
+                            @foreach (var item in Model.OrderLines)
+                            {
+                                var product = item.Product;
+                                var highlightedSpecification = product.Specifications.Where(p => p.SpecificationMode == SpecificationMode.Highlighted);
+                            <div class="order-table-item" data-product-id="@product.Id">
+                                <div class="details-container order-item">
+                                    <div class="order-information-container">
+                                        <div class="image-container">
+                                            @if (product.Images != null && product.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).Count() > 0)
+                                            {
+                                                //Show Images
+                                                var itemImage = product.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).FirstOrDefault();
+                                                <img class="order-image" src="@itemImage.GetThumbnailUrl()">
+                                            }
+                                        </div>
+                                        <div class="information">
+                                            <div class="name"><h4>@product.FormattedName</h4></div>
+                                            @if (highlightedSpecification.Any())
+                                            {
+                                                <div class="specifications">
+                                                    @foreach (var specification in highlightedSpecification)
+                                                    {
+                                                        <div class="sp">
+                                                            <label>@specification.SpecificationType.FormattedName</label>
+                                                            <span>@specification.FormattedName</span>
+                                                        </div>
+                                                    }
+
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                @if (item.PriceAvailability != null)
+                                {
+                                    var price = item.PriceAvailability;
+                                    <div class="unit-price-container">
+                                        <div class="price-incl-vat">
+                                            <span>@price.FormattedPriceInclVat</span>
+                                        </div>
+                                    </div>
+                                }
+                                <div class="multivendor-quantity">
+                                    <input class="order-cart-quantity add-qty" max="1000" min="1" type="text" value="@item.Quantity">
+                                    <span class="increase"></span><span class="decrease"></span>
+                                </div>
+                                <div class="delete-order order-item">
+                                    <span class="icon fa delete-icon fa-trash  fa-2x"></span>
+                                </div>
+                            </div>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="order-cost-container">
+                    <div class="order-total-cost-items">
+                        <div class="order-total-cost-header"><h4>@CustomStrings.Summary</h4></div>
+                        <div class="number-of-items">
+                            <label>@CustomStrings.NumberOfItems</label>
+                            <span>@Math.Round(Model.OrderLines.Sum(p => p.Quantity), 0).ToString(new System.Globalization.CultureInfo(Model.ApplicationRequestContext.SelectedCulture))</span>
+                         </div>
+                        <div class="total-price">
+                        <label>@CustomStrings.TotalPriceInclVat</label>
+                        <span>£97.00</span>
+                            </div>
+                        <div class="button-container">
+                        <button class="clear-order">Clear orders</button>
+                        <button class="check-out">Check out</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

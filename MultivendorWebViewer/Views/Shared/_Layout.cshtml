@@ -8,13 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@{@Html.Raw(@ViewBag.Title ?? "Multivendor Web")} </title>
     @Styles.Render("~/Content/Presentation")
+    @Styles.Render("~/Content/Order")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/helpers")
     @Scripts.Render("~/bundles/main")
+    @Scripts.Render("~/bundles/order")
 </head>
-<body>
+@{ 
+    var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+}
+<body data-order-total-counter="@UrlUtility.Action(applicationrequestContext, "GetTotalQuantity", "Order")">
     <section class="main-layout">
         <div class="main-toolbar">
             <div class="header-toolbar">
@@ -22,7 +27,6 @@
                     <li class="Container multivendor-web-logo">
                         <! -- Logo-->
                         @{
-                            var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
                             var headerLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext,false);
                             var smallHeaderLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, true);
                             var routeValues = new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId } ;
@@ -52,16 +56,16 @@
                     </li>
                     <li class="container right-aligned">
                         <! -- order cart-->
-                        <div class="order-cart-container item-container">
+                        <a class="order-cart-container item-container" href="@UrlUtility.Action(applicationrequestContext, "Index", "Order")">
                             <span class="icon fa fa-shopping-cart content fa-2x"></span>
-                            <label class="icon-label key-text">@CustomStrings.Order</label>
+                            <label class="icon-label">@CustomStrings.Order</label>
                             <div class="overlay">
                                 <span class="total-qty"></span>
                             </div>
-                        </div>
+                        </a>
                         <! -- #End: order cart-->
                     </li>
-                    <li class="container avatar-menu right-aligned">
+                    <li class="container avatar-menu right-aligned user-menu" data-user-menu-url="@UrlUtility.Action(applicationrequestContext, "GetLanguagePopUp", "Home")">
                         <! -- User-->
                         <div class="item-container">
                             <span class="icon fa fa-user content fa-2x"></span>

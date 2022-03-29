@@ -129,6 +129,9 @@
   <data name="Menu" xml:space="preserve">
     <value>তালিকা</value>
   </data>
+  <data name="NumberOfItems" xml:space="preserve">
+    <value>আইটেমের সংখ্যা</value>
+  </data>
   <data name="Order" xml:space="preserve">
     <value>ফরমাশ</value>
   </data>
@@ -141,8 +144,14 @@
   <data name="PriceIclVat" xml:space="preserve">
     <value>কর সহ মূল্য</value>
   </data>
+  <data name="ProductDetail" xml:space="preserve">
+    <value>পণ্য বিবরণী</value>
+  </data>
   <data name="Products" xml:space="preserve">
     <value>পণ্য</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>পরিমাণ</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>অনুসন্ধান </value>
@@ -158,6 +167,12 @@
   </data>
   <data name="SubCatagories" xml:space="preserve">
     <value>উপশ্রেণী</value>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>সারসংক্ষেপ</value>
+  </data>
+  <data name="TotalPriceInclVat" xml:space="preserve">
+    <value>ভ্যাট সহ মোট মূল্য</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>ব্যবহারকারীর নাম</value>
