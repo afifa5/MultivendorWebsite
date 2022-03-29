@@ -25,7 +25,9 @@ namespace MultivendorWebViewer.Common
         public static string OutOfStock { get { return TextManager.Current.GetText("OutOfStock"); } }
         public static string Discount { get { return TextManager.Current.GetText("Discount"); } }
         public static string Specification { get { return TextManager.Current.GetText("Specification"); } }
+        public static string UnitPrice { get { return TextManager.Current.GetText("UnitPrice"); } }
         public static string PriceIclVat { get { return TextManager.Current.GetText("PriceIclVat"); }
+
         }
     }
 }
