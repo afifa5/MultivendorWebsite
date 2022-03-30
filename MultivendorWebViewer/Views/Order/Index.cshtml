@@ -29,7 +29,7 @@
     </div>
     <div class="main-body-contents">
         <div class="order-body presentation-body">
-            <div class="order-cart-body-container">
+            <div class="order-cart-body-container" data-add-to-order-url="@UrlUtility.Action(applicationrequestContext, "OrderItem", "Order")" data-delete-all-order-url="@UrlUtility.Action(applicationrequestContext, "DeleteAllOrder", "Order")">
                 @if (Model != null && Model.OrderLines.Any())
                 {
                     <div class="order-items-container">
@@ -133,7 +133,9 @@
                         </div>
                     </div>
                 }
-
+                else { 
+                
+                }
             </div>
         </div>
     </div>

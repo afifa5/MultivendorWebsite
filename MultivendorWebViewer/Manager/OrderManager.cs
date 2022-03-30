@@ -32,7 +32,7 @@ namespace MultivendorWebViewer.Manager
         public virtual void SetCurrentOrder(ApplicationRequestContext applicationRequestContext, Order order)
         {
             var sessionOrders = applicationRequestContext.SessionData.Orders;
-            if (order != null)
+            if (order != null && order.OrderLines!=null && order.OrderLines.Any())
             {
                 sessionOrders["MultivendorWeb"] = order;
             }

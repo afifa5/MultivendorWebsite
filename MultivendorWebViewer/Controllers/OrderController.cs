@@ -39,17 +39,28 @@ namespace MultivendorWebViewer.Controllers
                 {
                     order = new Order();
                 }
-                if ((order.OrderLines.Any())) {
+                if ((order.OrderLines.Any()))
+                {
                     var existProduct = order.OrderLines.Where(p => p.ProductId == productId).FirstOrDefault();
-                    if (existProduct != null) {
-                        if(availableQuantity > existProduct.Quantity + quantity)
-                            existProduct.Quantity += quantity;
+                    if (quantity >= 0)
+                    {
+                        if (existProduct != null)
+                        {
+                            //if(availableQuantity > existProduct.Quantity + quantity)
+                            existProduct.Quantity = quantity;
+                        }
+                        else
+                            order.OrderLines.Add(orderLine);
                     }
-                    else
-                        order.OrderLines.Add(orderLine);
+
                 }
                 else
-                order.OrderLines.Add(orderLine);
+                {
+                    order.OrderLines.Add(orderLine);
+                }
+                if (quantity <= 0 && order.OrderLines!=null && order.OrderLines.Any()) {
+                    order.OrderLines.RemoveAll(p => p.ProductId == productId);
+                }
                 ApplicationRequestContext.OrderManager.SetCurrentOrder(ApplicationRequestContext,order);
                 return Json(new { status = true });
             }
@@ -66,6 +77,14 @@ namespace MultivendorWebViewer.Controllers
                 return Json(new { status = true,totalCount = countString });
             }
             return Json(new { status = false });
+        }
+        
+        [HttpPost]
+        public ActionResult DeleteAllOrder()
+        {
+            //Check availability
+             ApplicationRequestContext.OrderManager.SetCurrentOrder(ApplicationRequestContext,null);
+            return Json(new { status = true });
         }
 
     }

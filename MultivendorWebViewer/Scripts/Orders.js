@@ -52,6 +52,81 @@
         });
         /*end call */
     });
+    $(document).on("change", ".order-cart-quantity", function (e) {
+
+        var orderCart = $(document).find(".order-cart-body-container");
+        var orderId = $(this).closest(".order-table-item").data("product-id");
+        var quantity = $(this).val()
+        /*call to the controller function */
+        let actionUrl = orderCart.data("add-to-order-url");
+        $.ajax({
+            url: actionUrl,
+            data: { productId: orderId, quantity: quantity /*, page: 0, pageSize: pagesize */ },
+            dataType: "json",
+            // contentType: 'application/json',
+            type: "POST",
+            cache: false,
+            success: function (data) {
+                var $data = data
+                if ($data.status == true) {
+                    //multivendorWeb.Order.GetTotalCounter();
+                    window.location.reload();
+                }
+
+            }, error: function (ex) {
+
+            }
+        });
+        /*end call */
+    });
+    $(document).on("click", ".delete-order", function (e) {
+
+        var orderCart = $(document).find(".order-cart-body-container");
+        var orderId = $(this).closest(".order-table-item").data("product-id");
+        var quantity = 0
+        /*call to the controller function */
+        let actionUrl = orderCart.data("add-to-order-url");
+        $.ajax({
+            url: actionUrl,
+            data: { productId: orderId, quantity: quantity /*, page: 0, pageSize: pagesize */ },
+            dataType: "json",
+            // contentType: 'application/json',
+            type: "POST",
+            cache: false,
+            success: function (data) {
+                var $data = data
+                if ($data.status == true) {
+                    //multivendorWeb.Order.GetTotalCounter();
+                    window.location.reload();
+                }
+
+            }, error: function (ex) {
+
+            }
+        });
+        /*end call */
+    });
+    $(document).on("click", ".clear-order", function (e) {
+        var orderCart = $(document).find(".order-cart-body-container");
+        /*call to the controller function */
+        let actionUrl = orderCart.data("delete-all-order-url");
+        $.ajax({
+            url: actionUrl,
+            dataType: "json",
+            type: "POST",
+            cache: false,
+            success: function (data) {
+                var $data = data
+                if ($data.status == true) {
+                    window.location.reload();
+                }
+
+            }, error: function (ex) {
+
+            }
+        });
+        /*end call */
+    });
     $(document).ready(function () {
         multivendorWeb.Order.GetTotalCounter();
     });

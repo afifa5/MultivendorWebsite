@@ -60,4 +60,26 @@
         });
         /*end call */
     });
+    /*Input increment number. Order quantity increment*/
+    $(document).on("click", ".increase", function (e) {
+        //Get quantity value
+        let quantityElement = $(this).closest(".multivendor-quantity").find(".add-qty");
+        let quantity = quantityElement.val() ? parseInt(quantityElement.val()) + 1 : 1;
+        if (quantity > parseInt($(quantityElement).attr("max"))) {
+            quantity = $(quantityElement).attr("max");
+        }
+        quantityElement.val(quantity);
+        quantityElement.trigger("change");
+    });
+    //input decrement number. Order quantity decrement
+    $(document).on("click", ".decrease", function (e) {
+        //Get quantity value
+        let quantityElement = $(this).closest(".multivendor-quantity").find(".add-qty");
+        let quantity = quantityElement.val() ? parseInt(quantityElement.val()) - 1 : 1;
+        if (quantity < parseInt($(quantityElement).attr("min"))) {
+            quantity = $(quantityElement).attr("min");
+        }
+        quantityElement.val(quantity)
+        quantityElement.trigger("change");
+    });
 }(window.digitalHalalMarket = window.digitalHalalMarket || {}, window.multivendorWeb = window.multivendorWeb || {}, window.jQuery, document));
