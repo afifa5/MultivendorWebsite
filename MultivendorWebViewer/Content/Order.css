@@ -303,3 +303,9 @@ align-items:center;
     .order-information-container .order-image {
         max-width: 50px;
     }
+.order-information-container  {
+    text-decoration:none;
+}
+.order-information-container  h4 {
+        color: #000;
+}

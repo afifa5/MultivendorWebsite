@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@{@Html.Raw(@ViewBag.Title ?? "Multivendor Web")} </title>
     @Styles.Render("~/Content/Presentation")
-
-    @Styles.Render("~/Content/css")
+   
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/helpers")
@@ -27,13 +26,13 @@
                     <li class="Container multivendor-web-logo">
                         <! -- Logo-->
                         @{
-                            var headerLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext,false);
+                            var headerLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, false);
                             var smallHeaderLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, true);
-                            var routeValues = new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId } ;
+                            var routeValues = new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId };
                             var startCatalogueUrl = UrlUtility.Action(applicationrequestContext, "Index", "Category", routeValues);
                             //var startCatalogueUrl = Url.Action("Index", "Category", new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId });
                             var flagUrl = "/Content/Flag/" + applicationrequestContext.SelectedCulture + ".svg";
-                            }
+                        }
                         <a class="header-logo" href="@startCatalogueUrl">
 
                             <img class="img logo-image" src="@headerLogoUrl">
@@ -51,7 +50,7 @@
                         <! -- #End: Search box-->
 
                     </li>
-                    <li class="container right-aligned language-container"  data-language-item-url="@UrlUtility.Action(applicationrequestContext, "GetLanguagePopUp", "Home")">
+                    <li class="container right-aligned language-container" data-language-item-url="@UrlUtility.Action(applicationrequestContext, "GetLanguagePopUp", "Home")">
                         <img class="img-icon" src="@flagUrl">
                     </li>
                     <li class="container right-aligned">
@@ -99,7 +98,7 @@
         <footer class="main-footer"><span>©2021 Aka Multivendor Web</span></footer>
     </section>
 
-
+    @Styles.Render("~/Content/css")
     @*@Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)*@

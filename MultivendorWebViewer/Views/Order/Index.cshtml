@@ -9,10 +9,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
-    var totalPrice = Model.OrderLines.Sum(p => p.PriceAvailability == null ? 0 : p.PriceAvailability.PriceInclVat.Value *p.Quantity);
+    var totalPrice = Model.OrderLines.Sum(p => p.PriceAvailability == null ? 0 : p.PriceAvailability.PriceInclVat.Value * p.Quantity);
     var priceAvailability = new PriceAvailailityViewModel(new PriceAvailability(), applicationrequestContext);
-    var formattedTotal= priceAvailability.GetPriceText(totalPrice);
-    var totalDiscount = Model.OrderLines.Sum(p => p.PriceAvailability == null ? 0 : p.PriceAvailability.Discount.Value*p.Quantity);
+    var formattedTotal = priceAvailability.GetPriceText(totalPrice);
+    var totalDiscount = Model.OrderLines.Sum(p => p.PriceAvailability == null ? 0 : p.PriceAvailability.Discount.Value * p.Quantity);
     var formattedDiscount = priceAvailability.GetPriceText(totalDiscount);
     var amountToPay = totalPrice - totalDiscount;
     var formattedAmountToPay = priceAvailability.GetPriceText(amountToPay);
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="main-body-contents">
-        <div class="order-body presentation-body">
+        <div class="order-body">
             <div class="order-cart-body-container" data-add-to-order-url="@UrlUtility.Action(applicationrequestContext, "OrderItem", "Order")" data-delete-all-order-url="@UrlUtility.Action(applicationrequestContext, "DeleteAllOrder", "Order")">
                 @if (Model != null && Model.OrderLines.Any())
                 {
@@ -47,7 +47,7 @@
                                 var highlightedSpecification = product.Specifications.Where(p => p.SpecificationMode == SpecificationMode.Highlighted);
                                 <div class="order-table-item" data-product-id="@product.Id">
                                     <div class="details-container order-item">
-                                        <div class="order-information-container">
+                                        <a class="order-information-container" href="@product.GetUrl()">
                                             <div class="image-container">
                                                 @if (product.Images != null && product.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).Count() > 0)
                                                 {
@@ -72,7 +72,7 @@
                                                     </div>
                                                 }
                                             </div>
-                                        </div>
+                                        </a>
 
 
                                     </div>
