@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@{@Html.Raw(@ViewBag.Title ?? "Multivendor Web")} </title>
     @Styles.Render("~/Content/Presentation")
-   
+    @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/helpers")
@@ -98,7 +98,7 @@
         <footer class="main-footer"><span>©2021 Aka Multivendor Web</span></footer>
     </section>
 
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Media")
     @*@Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)*@

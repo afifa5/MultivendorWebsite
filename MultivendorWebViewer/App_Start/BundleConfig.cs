@@ -31,13 +31,15 @@ namespace MultivendorWebViewer
                       //"~/Content/bootstrap.css",
                       "~/Content/Font-awesome.css",
                       "~/Content/Controls.css",
-                      "~/Content/site.css",
-                       "~/Content/Media.css"
+                      "~/Content/site.css"
+                       
                       ));
             bundles.Add(new StyleBundle("~/Content/Presentation").Include(
                  "~/Content/Presentation.css"));
             bundles.Add(new StyleBundle("~/Content/Order").Include(
                     "~/Content/Order.css"));
+            bundles.Add(new StyleBundle("~/Content/Media").Include(
+                "~/Content/Media.css"));
         }
    
         
