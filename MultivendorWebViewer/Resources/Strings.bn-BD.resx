@@ -120,6 +120,9 @@
   <data name="BDT" xml:space="preserve">
     <value>টা</value>
   </data>
+  <data name="ClearOrder" xml:space="preserve">
+    <value>অর্ডার মুছুন</value>
+  </data>
   <data name="Discount" xml:space="preserve">
     <value>ছাড়</value>
   </data>
@@ -129,11 +132,17 @@
   <data name="Menu" xml:space="preserve">
     <value>তালিকা</value>
   </data>
+  <data name="Next" xml:space="preserve">
+    <value>পরবর্তী পদক্ষেপ</value>
+  </data>
   <data name="NumberOfItems" xml:space="preserve">
     <value>আইটেমের সংখ্যা</value>
   </data>
   <data name="Order" xml:space="preserve">
     <value>ফরমাশ</value>
+  </data>
+  <data name="OrdersPrice" xml:space="preserve">
+    <value>প্রদেয় মূল্য</value>
   </data>
   <data name="OutOfStock" xml:space="preserve">
     <value>স্টক শেষ</value>
@@ -170,6 +179,9 @@
   </data>
   <data name="Summary" xml:space="preserve">
     <value>সারসংক্ষেপ</value>
+  </data>
+  <data name="TotalDiscount" xml:space="preserve">
+    <value>মোট ছাড়</value>
   </data>
   <data name="TotalPriceInclVat" xml:space="preserve">
     <value>ভ্যাট সহ মোট মূল্য</value>

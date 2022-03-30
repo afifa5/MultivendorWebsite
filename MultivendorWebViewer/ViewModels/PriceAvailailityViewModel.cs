@@ -10,6 +10,7 @@ namespace MultivendorWebViewer.ViewModels
 {
     public class PriceAvailailityViewModel
     {
+
         public PriceAvailailityViewModel(PriceAvailability price, ApplicationRequestContext requestContext)
         {
             ApplicationRequestContext = requestContext;
@@ -26,8 +27,8 @@ namespace MultivendorWebViewer.ViewModels
         public string ExpectedShippingDate { get { return Model.ExpectedShippingDate; } }
         public decimal? Discount { get {return Model.Discount; } }
         public int ProductId { get { return Model.ProductId; } }
-        private string GetPriceText(decimal? price) {
-            if (price.HasValue) {
+        public string GetPriceText(decimal? price) {
+            if (price.HasValue && price.Value > 0) {
                 var priceText = price.Value.ToString("n", CultureInfo.GetCultureInfo(ApplicationRequestContext.SelectedCulture));
                 return string.Format("{0} {1}", priceText, TextManager.Current.GetText(ApplicationRequestContext.Configuration != null ? ApplicationRequestContext.Configuration.SiteProfile.PriceCurrency : "BDT"));
             }

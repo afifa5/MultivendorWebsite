@@ -14,12 +14,16 @@ namespace MultivendorWebViewer.Common
         public static string Menu { get { return TextManager.Current.GetText("Menu"); } }
         public static string StartPage { get { return TextManager.Current.GetText("StartPage"); } }
         public static string UserName { get { return TextManager.Current.GetText("UserName"); } }
+        public static string ClearOrder { get { return TextManager.Current.GetText("ClearOrder"); } }
+        public static string Next { get { return TextManager.Current.GetText("Next"); } }
         public static string Password { get { return TextManager.Current.GetText("Password"); } }
         public static string InformationNotFound { get { return TextManager.Current.GetText("InformationNotFound"); } }
         public static string SubCatagories { get { return TextManager.Current.GetText("SubCatagories"); } }
         public static string Summary { get { return TextManager.Current.GetText("Summary"); } }
         public static string NumberOfItems { get { return TextManager.Current.GetText("NumberOfItems"); } }
         public static string TotalPriceInclVat { get { return TextManager.Current.GetText("TotalPriceInclVat"); } }
+        public static string OrdersPrice { get { return TextManager.Current.GetText("OrdersPrice"); } }
+        public static string TotalDiscount { get { return TextManager.Current.GetText("TotalDiscount"); } }
         public static string Products { get { return TextManager.Current.GetText("Products"); } }
         public static string StockInformation { get { return TextManager.Current.GetText("StockInformation"); } }
         public static string OutOfStock { get { return TextManager.Current.GetText("OutOfStock"); } }

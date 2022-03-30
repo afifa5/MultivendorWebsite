@@ -1,25 +1,36 @@
 ﻿@using MultivendorWebViewer.ViewModels;
 @using MultivendorWebViewer.Common;
+@using MultivendorWebViewer.Models;
 @model OrderViewModel
 
 @{
+    @Styles.Render("~/Content/Order")
     ViewBag.Title = "Orders";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+    var totalPrice = Model.OrderLines.Sum(p => p.PriceAvailability == null ? 0 : p.PriceAvailability.PriceInclVat.Value);
+    var priceAvailability = new PriceAvailailityViewModel(new PriceAvailability(), applicationrequestContext);
+    var formattedTotal= priceAvailability.GetPriceText(totalPrice);
+    var totalDiscount = Model.OrderLines.Sum(p => p.PriceAvailability == null ? 0 : p.PriceAvailability.Discount.Value);
+    var formattedDiscount = priceAvailability.GetPriceText(totalDiscount);
+    var amountToPay = totalPrice - totalDiscount;
+    var formattedAmountToPay = priceAvailability.GetPriceText(amountToPay);
 }
 
 <div class="presentation">
     @*Show header*@
-    
+
 
     <div class="order-header">
         <div class="order-name-container">
-                <label class="order-name">@CustomStrings.Order</label>
+            <label class="order-name">@CustomStrings.Order</label>
         </div>
     </div>
     <div class="main-body-contents">
         <div class="order-body presentation-body">
             <div class="order-cart-body-container">
-                @if (Model!= null && Model.OrderLines.Any())
+                @if (Model != null && Model.OrderLines.Any())
                 {
                     <div class="order-items-container">
                         <div class="order-table-item header-column">
@@ -34,72 +45,90 @@
                             {
                                 var product = item.Product;
                                 var highlightedSpecification = product.Specifications.Where(p => p.SpecificationMode == SpecificationMode.Highlighted);
-                            <div class="order-table-item" data-product-id="@product.Id">
-                                <div class="details-container order-item">
-                                    <div class="order-information-container">
-                                        <div class="image-container">
-                                            @if (product.Images != null && product.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).Count() > 0)
-                                            {
-                                                //Show Images
-                                                var itemImage = product.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).FirstOrDefault();
-                                                <img class="order-image" src="@itemImage.GetThumbnailUrl()">
-                                            }
-                                        </div>
-                                        <div class="information">
-                                            <div class="name"><h4>@product.FormattedName</h4></div>
-                                            @if (highlightedSpecification.Any())
-                                            {
-                                                <div class="specifications">
-                                                    @foreach (var specification in highlightedSpecification)
-                                                    {
-                                                        <div class="sp">
-                                                            <label>@specification.SpecificationType.FormattedName</label>
-                                                            <span>@specification.FormattedName</span>
-                                                        </div>
-                                                    }
+                                <div class="order-table-item" data-product-id="@product.Id">
+                                    <div class="details-container order-item">
+                                        <div class="order-information-container">
+                                            <div class="image-container">
+                                                @if (product.Images != null && product.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).Count() > 0)
+                                                {
+                                                    //Show Images
+                                                    var itemImage = product.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).FirstOrDefault();
+                                                    <img class="order-image" src="@itemImage.GetThumbnailUrl()">
+                                                }
+                                            </div>
+                                            <div class="information">
+                                                <div class="name"><h4>@product.FormattedName</h4></div>
+                                                @if (highlightedSpecification.Any())
+                                                {
+                                                    <div class="specifications">
+                                                        @foreach (var specification in highlightedSpecification)
+                                                        {
+                                                            <div class="sp">
+                                                                <label>@specification.SpecificationType.FormattedName</label>
+                                                                <span>@specification.FormattedName</span>
+                                                            </div>
+                                                        }
 
-                                                </div>
-                                            }
+                                                    </div>
+                                                }
+                                            </div>
                                         </div>
+
+
                                     </div>
-
-
-                                </div>
-                                @if (item.PriceAvailability != null)
-                                {
-                                    var price = item.PriceAvailability;
-                                    <div class="unit-price-container">
-                                        <div class="price-incl-vat">
-                                            <span>@price.FormattedPriceInclVat</span>
+                                    @if (item.PriceAvailability != null)
+                                    {
+                                        var price = item.PriceAvailability;
+                                        <div class="unit-price-container">
+                                            <div class="price-incl-vat">
+                                                <span>@price.FormattedPriceInclVat</span>
+                                            </div>
                                         </div>
+                                    }
+                                    <div class="multivendor-quantity">
+                                        <input class="order-cart-quantity add-qty" max="1000" min="1" type="text" value="@item.Quantity">
+                                        <span class="increase"></span><span class="decrease"></span>
                                     </div>
-                                }
-                                <div class="multivendor-quantity">
-                                    <input class="order-cart-quantity add-qty" max="1000" min="1" type="text" value="@item.Quantity">
-                                    <span class="increase"></span><span class="decrease"></span>
+                                    <div class="delete-order order-item">
+                                        <span class="icon fa delete-icon fa-trash  fa-2x"></span>
+                                    </div>
                                 </div>
-                                <div class="delete-order order-item">
-                                    <span class="icon fa delete-icon fa-trash  fa-2x"></span>
-                                </div>
-                            </div>
                             }
 
                         </div>
                     </div>
                     <div class="order-cost-container">
-                    <div class="order-total-cost-items">
-                        <div class="order-total-cost-header"><h4>@CustomStrings.Summary</h4></div>
-                        <div class="number-of-items">
-                            <label>@CustomStrings.NumberOfItems</label>
-                            <span>@Math.Round(Model.OrderLines.Sum(p => p.Quantity), 0).ToString(new System.Globalization.CultureInfo(Model.ApplicationRequestContext.SelectedCulture))</span>
-                         </div>
-                        <div class="total-price">
-                        <label>@CustomStrings.TotalPriceInclVat</label>
-                        <span>£97.00</span>
+                        <div class="order-total-cost-items">
+                            <div class="order-total-cost-header"><h4>@CustomStrings.Summary</h4></div>
+                            <div class="number-of-items">
+                                <label>@CustomStrings.NumberOfItems</label>
+                                <span>@Math.Round(Model.OrderLines.Sum(p => p.Quantity), 0).ToString(new System.Globalization.CultureInfo(applicationrequestContext.SelectedCulture))</span>
                             </div>
-                        <div class="button-container">
-                        <button class="clear-order">Clear orders</button>
-                        <button class="check-out">Check out</button>
+                            @if (!string.IsNullOrEmpty(formattedTotal))
+                            {
+                                <div class="total-price">
+                                    <label>@CustomStrings.TotalPriceInclVat</label>
+                                    <span>@formattedTotal</span>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(formattedDiscount))
+                            {
+                                <div class="total-discount">
+                                    <label>@CustomStrings.TotalDiscount</label>
+                                    <span>@formattedDiscount</span>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(formattedAmountToPay))
+                            {
+                                <div class="total-price-to-pay">
+                                    <label>@CustomStrings.OrdersPrice</label>
+                                    <span>@formattedAmountToPay</span>
+                                </div>
+                            }
+
+                            <div class="button-container">
+                                <button class="clear-order">@CustomStrings.ClearOrder</button>
+                                <button class="next-order-page">@CustomStrings.Next</button>
                             </div>
                         </div>
                     </div>
