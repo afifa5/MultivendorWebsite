@@ -1,0 +1,52 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@using MultivendorWebViewer.Models;
+@model OrderViewModel
+
+@{
+    var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+    var totalPrice = Model.OrderLines.Sum(p => p.PriceAvailability == null ? 0 : p.PriceAvailability.PriceInclVat.Value * p.Quantity);
+    var priceAvailability = new PriceAvailailityViewModel(new PriceAvailability(), applicationrequestContext);
+    var formattedTotal = priceAvailability.GetPriceText(totalPrice);
+    var totalDiscount = Model.OrderLines.Sum(p => p.PriceAvailability == null ? 0 : p.PriceAvailability.Discount.Value * p.Quantity);
+    var formattedDiscount = priceAvailability.GetPriceText(totalDiscount);
+    var amountToPay = totalPrice - totalDiscount;
+    var formattedAmountToPay = priceAvailability.GetPriceText(amountToPay);
+    var orderProcess = applicationrequestContext.Configuration.SiteProfile.OrderProcess;
+}
+@if (Model != null && Model.OrderLines.Any())
+{
+    <div class="order-total-cost-items">
+        <div class="order-total-cost-header"><h4>@CustomStrings.Summary</h4></div>
+        <div class="number-of-items">
+            <label>@CustomStrings.NumberOfItems</label>
+            <span>@Math.Round(Model.OrderLines.Sum(p => p.Quantity), 0).ToString(new System.Globalization.CultureInfo(applicationrequestContext.SelectedCulture))</span>
+        </div>
+        @if (!string.IsNullOrEmpty(formattedTotal))
+        {
+            <div class="total-price">
+                <label>@CustomStrings.TotalPriceInclVat</label>
+                <span>@formattedTotal</span>
+            </div>
+        }
+        @if (!string.IsNullOrEmpty(formattedDiscount))
+        {
+            <div class="total-discount">
+                <label>@CustomStrings.TotalDiscount</label>
+                <span>@formattedDiscount</span>
+            </div>
+        }
+        @if (!string.IsNullOrEmpty(formattedAmountToPay))
+        {
+            <div class="total-price-to-pay">
+                <label>@CustomStrings.OrdersPrice</label>
+                <span>@formattedAmountToPay</span>
+            </div>
+        }
+
+        <div class="button-container">
+            <button class="clear-order">@CustomStrings.ClearOrder</button>
+            <button class="next-order-page">@CustomStrings.Next</button>
+        </div>
+    </div>
+}
