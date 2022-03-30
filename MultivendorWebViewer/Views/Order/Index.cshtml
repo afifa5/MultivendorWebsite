@@ -9,10 +9,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
-    var totalPrice = Model.OrderLines.Sum(p => p.PriceAvailability == null ? 0 : p.PriceAvailability.PriceInclVat.Value);
+    var totalPrice = Model.OrderLines.Sum(p => p.PriceAvailability == null ? 0 : p.PriceAvailability.PriceInclVat.Value *p.Quantity);
     var priceAvailability = new PriceAvailailityViewModel(new PriceAvailability(), applicationrequestContext);
     var formattedTotal= priceAvailability.GetPriceText(totalPrice);
-    var totalDiscount = Model.OrderLines.Sum(p => p.PriceAvailability == null ? 0 : p.PriceAvailability.Discount.Value);
+    var totalDiscount = Model.OrderLines.Sum(p => p.PriceAvailability == null ? 0 : p.PriceAvailability.Discount.Value*p.Quantity);
     var formattedDiscount = priceAvailability.GetPriceText(totalDiscount);
     var amountToPay = totalPrice - totalDiscount;
     var formattedAmountToPay = priceAvailability.GetPriceText(amountToPay);
