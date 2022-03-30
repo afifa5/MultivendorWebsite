@@ -6,6 +6,10 @@
     .presentation-header .presentation-description {
         font-size: 25px;
     }
+    .order-cart-body-container {
+        grid-template-rows:1fr auto;
+        grid-template-columns: 1fr !important;
+    }
 
 }
 /*Tablet Horizontal media*/
