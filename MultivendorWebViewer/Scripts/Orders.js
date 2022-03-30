@@ -23,9 +23,68 @@
                 }
             });
         /*end call */
-            return Number(percentStr.slice(0, -1));
         },
+        getCurrentTab: function () {
+            var tab = "";
+            var currentUrl = window.location.href;
+            var urlTab = location.hash;
+            if (urlTab != undefined && urlTab.length > 0) {
+                tab = urlTab
+            }
+            else {
+                var $context = $(".order-cart-body-container");
+                tab = $context.attr("data-tab");
+            }
+           
+            return tab;
+        },
+        LoadOrderCostView: function () {
 
+
+        },
+        LoadOrderAddressView: function () {
+            var $context = $(document).find(".order-cart-body-container");
+            
+            var orderCostView = $context.find(".order-cost-container")
+            var orderCartView = $context.find(".order-items-container")
+            if (!orderCartView.hasClass("hidden")) orderCartView.addClass("hidden")
+            var orderAddressView = $context.find(".order-shipping-billing-container")
+            if (orderAddressView.hasClass("hidden")) orderAddressView.removeClass("hidden")
+            var orderPaymentView = $context.find(".order-payment-container")
+            if (!orderPaymentView.hasClass("hidden")) orderPaymentView.addClass("hidden")
+            //Get the tab selected
+            var tabMenu = $(".order-cart-ul");
+            tabMenu.children().removeClass("selected")
+            tabMenu.find(".additional").addClass("selected")
+        },
+        LoadCartView: function () {
+            var $context = $(document).find(".order-cart-body-container");
+
+            var orderCostView = $context.find(".order-cost-container")
+            var orderCartView = $context.find(".order-items-container")
+            if (orderCartView.hasClass("hidden")) orderCartView.removeClass("hidden")
+            var orderAddressView = $context.find(".order-shipping-billing-container")
+            if (!orderAddressView.hasClass("hidden")) orderAddressView.addClass("hidden")
+            var orderPaymentView = $context.find(".order-payment-container")
+            if (!orderPaymentView.hasClass("hidden")) orderPaymentView.addClass("hidden")
+            //Get the tab selected
+            var tabMenu = $(".order-cart-ul");
+            tabMenu.children().removeClass("selected")
+            tabMenu.find(".shoppingcart").addClass("selected")
+            
+        },
+        UpdateCurrentTab: function (tab) {
+            var $context = $(".order-cart-body-container");
+            $context.attr("data-tab", tab);
+            switch (tab) {
+                case "#tab=cart":
+                    multivendorWeb.Order.LoadCartView();
+                    break;
+                case "#tab=address":
+                    multivendorWeb.Order.LoadOrderAddressView();
+                    break;
+            }
+        }
     };
     $(document).on("click", ".add-to-order-button", function (e) {
         var addToOrder = $(this).closest(".add-to-order");
@@ -127,7 +186,16 @@
         });
         /*end call */
     });
+
+
     $(document).ready(function () {
         multivendorWeb.Order.GetTotalCounter();
+        var tab = multivendorWeb.Order.getCurrentTab();
+        multivendorWeb.Order.UpdateCurrentTab(tab);
+        window.addEventListener('hashchange', function () {
+            //update hash
+            var currentHash = multivendorWeb.Order.getCurrentTab();
+            multivendorWeb.Order.UpdateCurrentTab(currentHash);
+        }, false);
     });
 }(window.digitalHalalMarket = window.digitalHalalMarket || {}, window.multivendorWeb = window.multivendorWeb || {}, window.jQuery, document));

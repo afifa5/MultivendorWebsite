@@ -150,6 +150,9 @@
   <data name="Password" xml:space="preserve">
     <value>পাসওয়ার্ড</value>
   </data>
+  <data name="Payment" xml:space="preserve">
+    <value>অর্থপ্রদান</value>
+  </data>
   <data name="PriceIclVat" xml:space="preserve">
     <value>কর সহ মূল্য</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="Search" xml:space="preserve">
     <value>অনুসন্ধান </value>
+  </data>
+  <data name="ShippingAndBilling" xml:space="preserve">
+    <value>শিপিং এবং বিলিং</value>
   </data>
   <data name="Specification" xml:space="preserve">
     <value>স্পেসিফিকেশন</value>

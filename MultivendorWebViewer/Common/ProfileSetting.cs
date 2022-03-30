@@ -11,6 +11,7 @@ namespace MultivendorWebViewer.Common
     {
        public ProfileSetting() {
             PriceCurrency = "BDT";
+            OrderProcess = "Product,ShippingBilling,Payment";
         }
         [XmlElement("StartCatalogueId")]
         public int? StartCatalogueId { get; set; }
@@ -28,7 +29,8 @@ namespace MultivendorWebViewer.Common
 
         [XmlElement("PriceCurrency")]
         public string PriceCurrency { get; set; }
-
+        [XmlElement("OrderProcess")]
+        public string OrderProcess { get; set; }
 
     }
 }

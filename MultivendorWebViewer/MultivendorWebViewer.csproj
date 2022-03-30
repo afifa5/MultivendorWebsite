@@ -270,6 +270,8 @@
     <Content Include="Views\Shared\_OrderInformation.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\OrderCart.cshtml" />
+    <Content Include="Views\Order\OrderCartCostViewContainer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

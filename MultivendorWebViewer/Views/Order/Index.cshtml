@@ -16,6 +16,7 @@
     var formattedDiscount = priceAvailability.GetPriceText(totalDiscount);
     var amountToPay = totalPrice - totalDiscount;
     var formattedAmountToPay = priceAvailability.GetPriceText(amountToPay);
+    var orderProcess = applicationrequestContext.Configuration.SiteProfile.OrderProcess;
 }
 
 <div class="order-cart-view">
@@ -27,111 +28,31 @@
             <label class="order-name">@CustomStrings.Order</label>
         </div>
     </div>
+  
+
     <div class="main-body-contents">
         <div class="order-body">
-            <div class="order-cart-body-container" data-add-to-order-url="@UrlUtility.Action(applicationrequestContext, "OrderItem", "Order")" data-delete-all-order-url="@UrlUtility.Action(applicationrequestContext, "DeleteAllOrder", "Order")">
+            <div class="order-cart-menu">
+                <ul class="order-cart-ul" style="">
+                    <li class="shoppingcart selected" data-tab="cart"><a href="#tab=cart" class="lnkshoppingcart">@CustomStrings.Products</a></li>
+                    <li class="additional" data-tab="address"><a href="#tab=address" class="lnkadditional">@CustomStrings.ShippingAndBilling</a></li>
+                    <li class="order-cart-payment" data-tab="payment"><a class="lnkPayment">@CustomStrings.Payment</a></li>
+                </ul>
+            </div>
+            <div class="order-cart-body-container" data-tab="#tab=cart" data-add-to-order-url="@UrlUtility.Action(applicationrequestContext, "OrderItem", "Order")" data-delete-all-order-url="@UrlUtility.Action(applicationrequestContext, "DeleteAllOrder", "Order")">
                 @if (Model != null && Model.OrderLines.Any())
                 {
-                    <div class="order-items-container">
-                        <div class="order-table-item header-column">
-                            <div class="order-detail"><h4>@CustomStrings.ProductDetail</h4></div>
-                            <div class="order-unit-price"><h4>@CustomStrings.UnitPrice</h4></div>
-                            <div class="order-quantity"><h4>@CustomStrings.Quantity</h4></div>
-                            <div class="delete-icon"><h4></h4></div>
-                        </div>
+                <div class="order-items-container">
+                    @Html.Partial("OrderCart", Model)
+                </div>
+                    <div class="order-shipping-billing-container hidden">
 
-                        <div class="order-table-items-container">
-                            @foreach (var item in Model.OrderLines)
-                            {
-                                var product = item.Product;
-                                var highlightedSpecification = product.Specifications.Where(p => p.SpecificationMode == SpecificationMode.Highlighted);
-                                <div class="order-table-item" data-product-id="@product.Id">
-                                    <div class="details-container order-item">
-                                        <a class="order-information-container" href="@product.GetUrl()">
-                                            <div class="image-container">
-                                                @if (product.Images != null && product.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).Count() > 0)
-                                                {
-                                                    //Show Images
-                                                    var itemImage = product.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).FirstOrDefault();
-                                                    <img class="order-image" src="@itemImage.GetThumbnailUrl()">
-                                                }
-                                            </div>
-                                            <div class="information">
-                                                <div class="name"><h4>@product.FormattedName</h4></div>
-                                                @if (highlightedSpecification.Any())
-                                                {
-                                                    <div class="specifications">
-                                                        @foreach (var specification in highlightedSpecification)
-                                                        {
-                                                            <div class="sp">
-                                                                <label>@specification.SpecificationType.FormattedName</label>
-                                                                <span>@specification.FormattedName</span>
-                                                            </div>
-                                                        }
-
-                                                    </div>
-                                                }
-                                            </div>
-                                        </a>
-
-
-                                    </div>
-                                    @if (item.PriceAvailability != null)
-                                    {
-                                        var price = item.PriceAvailability;
-                                        <div class="unit-price-container">
-                                            <div class="price-incl-vat">
-                                                <span>@price.FormattedPriceInclVat</span>
-                                            </div>
-                                        </div>
-                                    }
-                                    <div class="multivendor-quantity">
-                                        <input class="order-cart-quantity add-qty" max="1000" min="1" type="text" value="@item.Quantity">
-                                        <span class="increase"></span><span class="decrease"></span>
-                                    </div>
-                                    <div class="delete-order order-item">
-                                        <span class="icon fa delete-icon fa-trash  fa-2x"></span>
-                                    </div>
-                                </div>
-                            }
-
-                        </div>
                     </div>
+                    <div class="order-payment-container hidden">
 
+                    </div>
                     <div class="order-cost-container">
-                        <div class="order-total-cost-items">
-                            <div class="order-total-cost-header"><h4>@CustomStrings.Summary</h4></div>
-                            <div class="number-of-items">
-                                <label>@CustomStrings.NumberOfItems</label>
-                                <span>@Math.Round(Model.OrderLines.Sum(p => p.Quantity), 0).ToString(new System.Globalization.CultureInfo(applicationrequestContext.SelectedCulture))</span>
-                            </div>
-                            @if (!string.IsNullOrEmpty(formattedTotal))
-                            {
-                                <div class="total-price">
-                                    <label>@CustomStrings.TotalPriceInclVat</label>
-                                    <span>@formattedTotal</span>
-                                </div>
-                            }
-                            @if (!string.IsNullOrEmpty(formattedDiscount))
-                            {
-                                <div class="total-discount">
-                                    <label>@CustomStrings.TotalDiscount</label>
-                                    <span>@formattedDiscount</span>
-                                </div>
-                            }
-                            @if (!string.IsNullOrEmpty(formattedAmountToPay))
-                            {
-                                <div class="total-price-to-pay">
-                                    <label>@CustomStrings.OrdersPrice</label>
-                                    <span>@formattedAmountToPay</span>
-                                </div>
-                            }
-
-                            <div class="button-container">
-                                <button class="clear-order">@CustomStrings.ClearOrder</button>
-                                <button class="next-order-page">@CustomStrings.Next</button>
-                            </div>
-                        </div>
+                       @Html.Partial("OrderCartCostViewContainer", Model)
                     </div>
                 }
             </div>

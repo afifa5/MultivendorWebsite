@@ -309,3 +309,29 @@ align-items:center;
 .order-information-container  h4 {
         color: #000;
 }
+.order-cart-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    padding:10px 0 10px 0;
+}
+.order-cart-menu ul li {
+    float: left;
+    width: 20%;
+}
+.order-cart-menu li.selected > a {
+    background-color: #ab0000;
+    color: white;
+}
+.order-cart-menu ul li a {
+    display: block;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+    color: black;
+}
+.order-cart-body-container > div.hidden {
+    display:none;
+    overflow:hidden;
+}

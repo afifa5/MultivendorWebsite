@@ -150,6 +150,9 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="Payment" xml:space="preserve">
+    <value>Payment</value>
+  </data>
   <data name="PriceIclVat" xml:space="preserve">
     <value>Price icl. vat</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="ShippingAndBilling" xml:space="preserve">
+    <value>Shipping and billing</value>
   </data>
   <data name="Specification" xml:space="preserve">
     <value>Specification</value>

@@ -23,6 +23,30 @@ namespace MultivendorWebViewer.Controllers
             return View(new OrderViewModel(null,ApplicationRequestContext));
 
         }
+        [HttpGet]
+        public  ActionResult OrderCostView()
+        {
+            var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
+            if (order != null && order.OrderLines.Any())
+            {
+                var orderViewModel = new OrderViewModel(order, ApplicationRequestContext);
+                return PartialView("OrderCartCostViewContainer",orderViewModel);
+            }
+            return PartialView("OrderCartCostViewContainer",new OrderViewModel(null, ApplicationRequestContext));
+
+        }
+        [HttpGet]
+        public ActionResult OrderCartView()
+        {
+            var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
+            if (order != null && order.OrderLines.Any())
+            {
+                var orderViewModel = new OrderViewModel(order, ApplicationRequestContext);
+                return PartialView("OrderCart", orderViewModel);
+            }
+            return PartialView("OrderCart", new OrderViewModel(null, ApplicationRequestContext));
+
+        }
         [HttpPost]
         public ActionResult OrderItem(int productId, decimal quantity = 1) {
             //Check availability
