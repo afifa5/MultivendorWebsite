@@ -7,6 +7,29 @@ namespace MultivendorWebViewer.Common
 {
     public class CustomStrings
     {
+        public static string FirstName { get { return TextManager.Current.GetText("FirstName"); } }
+        public static string LastName { get { return TextManager.Current.GetText("LastName"); } }
+        public static string CareOf { get { return TextManager.Current.GetText("CareOf"); } }
+        public static string Address { get { return TextManager.Current.GetText("Address"); } }
+        public static string ShippingAddress { get { return TextManager.Current.GetText("ShippingAddress"); } }
+        public static string PostCode { get { return TextManager.Current.GetText("PostCode"); } }
+        public static string City { get { return TextManager.Current.GetText("City"); } }
+        public static string Email { get { return TextManager.Current.GetText("Email"); } }
+        public static string Phone { get { return TextManager.Current.GetText("Phone"); } }
+        public static string PostOffice { get { return TextManager.Current.GetText("PostOffice"); } }
+        public static string DHL { get { return TextManager.Current.GetText("DHL"); } }
+
+        public static string SundarbanExpress { get { return TextManager.Current.GetText("SundarbanExpress"); } }
+
+        public static string HomeDelivery { get { return TextManager.Current.GetText("HomeDelivery"); } }
+
+        public static string PaymentMethod { get { return TextManager.Current.GetText("PaymentMethod"); } }
+        public static string BankTransfer { get { return TextManager.Current.GetText("BankTransfer"); } }
+        public static string CreditCard { get { return TextManager.Current.GetText("CreditCard"); } }
+        public static string Bkash { get { return TextManager.Current.GetText("Bkash"); } }
+        public static string Rocket { get { return TextManager.Current.GetText("Rocket"); } }
+        public static string CashOnDelivery { get { return TextManager.Current.GetText("CashOnDelivery"); } }
+        public static string DeliveryMethod { get { return TextManager.Current.GetText("DeliveryMethod"); } }
         public static string Order { get { return TextManager.Current.GetText("Order"); } }
         public static string ProductDetail { get { return TextManager.Current.GetText("ProductDetail"); } }
         public static string Quantity { get { return TextManager.Current.GetText("Quantity"); } }

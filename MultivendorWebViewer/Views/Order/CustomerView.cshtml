@@ -1,0 +1,72 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@using MultivendorWebViewer.Models;
+@model OrderViewModel
+
+@{
+
+
+}
+@if (Model != null) { 
+    <div class="delivery-container">
+        <div class="shipping-container">
+            <div class="shipping-header">
+                <h3>@CustomStrings.ShippingAddress</h3>
+            </div>
+            <div class="shipping-address">
+                <div class="first-name-label"><label>@CustomStrings.FirstName</label></div>
+                <div class="first-name-input"><input class="standardtextbox referenceperson" maxlength="9999" type="text" value=""></div>
+                <div class="last-name-label"><label>@CustomStrings.LastName</label></div>
+                <div class="last-name-input"><input class="standardtextbox referenceperson" maxlength="9999" type="text" value=""></div>
+
+                <div class="care-of-label"><label>@CustomStrings.CareOf</label></div>
+                <div class="care-of-input"><input class="standardtextbox referenceperson" maxlength="9999" type="text" value=""></div>
+
+                <div class="address-label"><label>@CustomStrings.Address</label></div>
+                <div class="address-input"><input class="standardtextbox referenceperson" maxlength="9999" type="text" value=""></div>
+
+                <div class="post-code-label"><label>@CustomStrings.PostCode</label></div>
+                <div class="post-code-input"><input class="standardtextbox referenceperson" maxlength="9999" type="text" value=""></div>
+
+                <div class="City-name-label"><label>@CustomStrings.City</label></div>
+                <div class="City-name-input"><input class="standardtextbox referenceperson" maxlength="9999" type="text" value=""></div>
+
+                <div class="email-label"><label>@CustomStrings.Email</label></div>
+                <div class="email-input"><input class="standardtextbox referenceperson" maxlength="9999" type="text" value=""></div>
+
+                <div class="phone-label"><label>@CustomStrings.Phone</label></div>
+                <div class="phone-input"><input class="standardtextbox referenceperson" maxlength="9999" type="text" value=""></div>
+
+            </div>
+        </div>
+        <div class="delivery-method">
+            <div class="shipping-header">
+                <h3>@CustomStrings.DeliveryMethod</h3>
+            </div>
+            <div class="delivery-method-container">
+                <div class="post-office-container">
+                    <input type="radio" id="postoffice" name="postoffice" value="postoffice" class="postoffice-button">
+                    <label for="postoffice">@CustomStrings.PostOffice</label>
+                </div>
+                <div class="dhl-container">
+                    <input type="radio" id="dhl" name="dhl" value="dhl" class="dhl-button">
+                    <label for="dhl">@CustomStrings.DHL</label>
+                </div>
+                <div class="sundarban-express-container">
+                    <input type="radio" id="sundarbanexpress" name="sundarbanexpress" value="sundarbanexpress" class="sundarbanexpress-button">
+                    <label for="sundarbanexpress">@CustomStrings.SundarbanExpress</label>
+                </div>
+                <div class="home-delivery-container">
+                    <input type="radio" id="homedelivery" name="homedelivery" value="homedelivery" class="homedelivery-button">
+                    <label for="homedelivery">@CustomStrings.HomeDelivery</label>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+}
+

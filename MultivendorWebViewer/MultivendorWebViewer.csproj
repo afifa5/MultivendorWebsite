@@ -187,6 +187,7 @@
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\ImageViewModel.cs" />
     <Compile Include="ViewModels\NodeViewModel.cs" />
+    <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\PriceAvailailityViewModel.cs" />
     <Compile Include="ViewModels\OrderLineViewModel.cs" />
@@ -272,6 +273,8 @@
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Order\OrderCart.cshtml" />
     <Content Include="Views\Order\OrderCartCostViewContainer.cshtml" />
+    <Content Include="Views\Order\CustomerView.cshtml" />
+    <Content Include="Views\Order\PaymentView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

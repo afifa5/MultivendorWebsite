@@ -1,8 +1,11 @@
 ﻿/*Tablet media*/
 @media all and (max-width: 1100px) {
+    .delivery-container {
+    grid-template-columns:1fr;
+    }
     .order-cart-menu ul li:not(.selected) {
-        display:none;
-        overflow:hidden;
+        display: none;
+        overflow: hidden;
     }
     .order-cart-menu ul li.selected {
        width:100%;
@@ -90,8 +93,11 @@
    
 }
 @media all and (max-width: 575.98px) {
+    .shipping-address {
+        grid-template-columns: 1fr;
+    }
     .order-information-container .specifications {
-    padding:0;
+        padding: 0;
     }
     .order-information-container {
         grid-template-columns: 1fr;

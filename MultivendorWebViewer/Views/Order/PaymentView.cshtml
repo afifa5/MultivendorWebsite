@@ -1,0 +1,77 @@
+﻿@using MultivendorWebViewer.Common;
+<div class="payment-view">
+    <div class="shipping-header">
+        <h3>@CustomStrings.PaymentMethod</h3>
+    </div>
+    <div class="payment-method-container">
+        <div class="card-container">
+            <div class="item-container">
+                <input type="radio" id="card" name="card" value="card" checked="checked" class="card-button">
+                <label for="card">@CustomStrings.CreditCard</label>
+            </div>
+            <div class="item-content-container">
+                <div class="card-payment-view">
+
+                    <div class="email"><label>@CustomStrings.Email</label></div>
+                    <div class="email-input"><input class="standardtextbox referenceperson" placeholder="Reciept email " type="text" value=""></div>
+
+                    <div class="name-label"><label>Name on card</label></div>
+                    <div class="name-input"><input class="standardtextbox referenceperson" placeholder="J. Smith" type="text" value=""></div>
+
+                    <div class="number-label"><label>Card number</label></div>
+                    <div class="number-input">
+                        <input type="text" inputmode="numeric" maxlength="24" autocomplete="cc-number" placeholder="1234 5678 9012 3456" aria-label="Card number field" aria-invalid="true" aria-required="true" aria-describedby="ariaErrorField" class="js-iframe-input input-field" data-type="gsf">
+                    </div>
+                    <div class="expiry-container">
+                        <div class="date-container">
+                            <div class="expire-label"><label>Expiry date</label></div>
+                            <div class="expire-input"><input class="standardtextbox referenceperson" placeholder="MM/YY" type="text" value=""></div>
+
+                        </div>
+                        <div>
+                            <div class="ccv-label"><label>CCV</label></div>
+                            <div class="ccv-input"><input class="standardtextbox referenceperson" placeholder="3 digit" type="text" value=""></div>
+                        </div>
+                               </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="bank-transfer-container">
+            <div class="item-container">
+                <input type="radio" id="banktransfer" name="banktransfer" value="banktransfer" class="banktransfer-button">
+                <label for="banktransfer">@CustomStrings.BankTransfer</label>
+            </div>
+            <div class="item-content-container"></div>
+
+        </div>
+        <div class="bkash-container">
+            <div class="item-container">
+                <input type="radio" id="bkash" name="bkash" value="bkash" class="bkash-button">
+                <label for="bkash">@CustomStrings.Bkash</label>
+            </div>
+            <div class="item-content-container"></div>
+
+        </div>
+        <div class="rocket-container">
+            <div class="item-container">
+                <input type="radio" id="rocket" name="rocket" value="rocket" class="rocket-button">
+                <label for="rocket">@CustomStrings.Rocket</label>
+            </div>
+            <div class="item-content-container"></div>
+
+        </div>
+        <div class="cash-container">
+            <div class="item-container">
+                <input type="radio" id="cash" name="cash" value="cash" class="cash-button">
+                <label for="cash">@CustomStrings.CashOnDelivery</label>
+            </div>
+            <div class="item-content-container"></div>
+
+        </div>
+    </div>
+</div>
+
+

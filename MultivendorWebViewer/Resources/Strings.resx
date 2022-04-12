@@ -117,17 +117,56 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="BankTransfer" xml:space="preserve">
+    <value>Bank transfer</value>
+  </data>
   <data name="BDT" xml:space="preserve">
     <value>BDT</value>
+  </data>
+  <data name="Bkash" xml:space="preserve">
+    <value>Bkash</value>
+  </data>
+  <data name="CareOf" xml:space="preserve">
+    <value>Care of (optional)</value>
+  </data>
+  <data name="CashOnDelivery" xml:space="preserve">
+    <value>Cash on delivery</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
   </data>
   <data name="ClearOrder" xml:space="preserve">
     <value>Clear order</value>
   </data>
+  <data name="CreditCard" xml:space="preserve">
+    <value>Credit card</value>
+  </data>
+  <data name="DeliveryMethod" xml:space="preserve">
+    <value>Delivery method</value>
+  </data>
+  <data name="DHL" xml:space="preserve">
+    <value>DHL</value>
+  </data>
   <data name="Discount" xml:space="preserve">
     <value>Discount</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="HomeDelivery" xml:space="preserve">
+    <value>Home delivery</value>
+  </data>
   <data name="InformationNotFound" xml:space="preserve">
     <value>Information not found</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last name</value>
   </data>
   <data name="Menu" xml:space="preserve">
     <value>Menu</value>
@@ -153,6 +192,18 @@
   <data name="Payment" xml:space="preserve">
     <value>Payment</value>
   </data>
+  <data name="PaymentMethod" xml:space="preserve">
+    <value>Payment methods</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="PostCode" xml:space="preserve">
+    <value>Post code</value>
+  </data>
+  <data name="PostOffice" xml:space="preserve">
+    <value>Post office</value>
+  </data>
   <data name="PriceIclVat" xml:space="preserve">
     <value>Price icl. vat</value>
   </data>
@@ -165,8 +216,14 @@
   <data name="Quantity" xml:space="preserve">
     <value>Quantity</value>
   </data>
+  <data name="Rocket" xml:space="preserve">
+    <value>Rocket</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="ShippingAddress" xml:space="preserve">
+    <value>Shipping address</value>
   </data>
   <data name="ShippingAndBilling" xml:space="preserve">
     <value>Shipping and billing</value>
@@ -185,6 +242,9 @@
   </data>
   <data name="Summary" xml:space="preserve">
     <value>Summary</value>
+  </data>
+  <data name="SundarbanExpress" xml:space="preserve">
+    <value>Sundarban express</value>
   </data>
   <data name="TotalDiscount" xml:space="preserve">
     <value>Total discount</value>

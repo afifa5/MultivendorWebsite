@@ -36,21 +36,21 @@
                 <ul class="order-cart-ul" style="">
                     <li class="shoppingcart selected" data-tab="cart"><a href="#tab=cart" class="lnkshoppingcart">@CustomStrings.Products</a></li>
                     <li class="additional" data-tab="address"><a href="#tab=address" class="lnkadditional">@CustomStrings.ShippingAndBilling</a></li>
-                    <li class="order-cart-payment" data-tab="payment"><a class="lnkPayment">@CustomStrings.Payment</a></li>
+                    <li class="order-cart-payment" data-tab="payment"><a  href="#tab=payment" class="lnkPayment">@CustomStrings.Payment</a></li>
                 </ul>
             </div>
-            <div class="order-cart-body-container" data-tab="#tab=cart" data-add-to-order-url="@UrlUtility.Action(applicationrequestContext, "OrderItem", "Order")" data-delete-all-order-url="@UrlUtility.Action(applicationrequestContext, "DeleteAllOrder", "Order")">
+            <div class="order-cart-body-container" data-tab="#tab=cart" data-order-address-url="@UrlUtility.Action(applicationrequestContext, "OrderCustomerView", "Order")" data-add-to-order-url="@UrlUtility.Action(applicationrequestContext, "OrderItem", "Order")" data-delete-all-order-url="@UrlUtility.Action(applicationrequestContext, "DeleteAllOrder", "Order")">
                 @if (Model != null && Model.OrderLines.Any())
                 {
                 <div class="order-items-container">
                     @Html.Partial("OrderCart", Model)
                 </div>
-                    <div class="order-shipping-billing-container hidden">
-
-                    </div>
-                    <div class="order-payment-container hidden">
-
-                    </div>
+                <div class="order-shipping-billing-container hidden">
+                    @Html.Partial("CustomerView", Model)
+                </div>
+                <div class="order-payment-container hidden">
+                    @Html.Partial("PaymentView")
+                </div>
                     <div class="order-cost-container">
                        @Html.Partial("OrderCartCostViewContainer", Model)
                     </div>
