@@ -93,6 +93,14 @@
    
 }
 @media all and (max-width: 575.98px) {
+    .card-payment-view input {
+    max-width:370px;
+
+    }
+    .expiry-container {
+        grid-template-columns: 1fr;
+        grid-row-gap:5px;
+    }
     .shipping-address {
         grid-template-columns: 1fr;
     }
