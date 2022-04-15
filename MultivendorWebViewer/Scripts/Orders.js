@@ -113,7 +113,8 @@
             var orderAddressView = $context.find(".order-shipping-billing-container")
             /*call to the controller function */
             let actionUrl = $context.data("order-address-url");
-            var selectedDeliveryMethod = "";
+           
+            var selectedDeliveryMethod = $("input[name='deliverymethod']:checked").val();
             var information = {
                 "FirstName": $(".first-name-input").val(),
                 "LastName": $(".last-name-input").val(),
@@ -130,6 +131,7 @@
                 datatype: "json",
                 type: "POST",
                 cache: false,
+                data
                 success: function (data) {
                     var html = $(data)
                     orderAddressView.empty();
