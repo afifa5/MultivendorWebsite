@@ -112,35 +112,37 @@
             var $context = $(document).find(".order-cart-body-container");
             var orderAddressView = $context.find(".order-shipping-billing-container")
             /*call to the controller function */
-            let actionUrl = $context.data("order-address-url");
-           
-            var selectedDeliveryMethod = $("input[name='deliverymethod']:checked").val();
-            var information = {
-                "FirstName": $(".first-name-input").val(),
-                "LastName": $(".last-name-input").val(),
-                "CareOf": $(".care-of-input").val(),
-                "Email": $(".customer-email-input").val(),
-                "PhoneNumber": $(".customer-phone-input").val(),
-                "Address": $(".address-input").val(),
-                "PostCode": $(".post-code-input").val(),
-                "City": $(".city-input").val(),
-                "Country": $(".country-input").val(),
-            }
-            $.ajax({
-                url: actionUrl,
-                datatype: "json",
-                type: "POST",
-                cache: false,
-                data
-                success: function (data) {
-                    var html = $(data)
-                    orderAddressView.empty();
-                    orderAddressView.append(html)
+            let actionUrl = $context.data("save-customer-url");
+            if (orderAddressView.find(".delivery-container").length > 0) {
+                var selectedDeliveryMethod = $("input[name='deliverymethod']:checked").val();
+                var information = {
+                    "FirstName": $(".first-name-input").val(),
+                    "LastName": $(".last-name-input").val(),
+                    "CareOf": $(".care-of-input").val(),
+                    "Email": $(".customer-email-input").val(),
+                    "PhoneNumber": $(".customer-phone-input").val(),
+                    "Address": $(".address-input").val(),
+                    "PostCode": $(".post-code-input").val(),
+                    "City": $(".city-input").val(),
+                    "Country": $(".country-input").val(),
                 }
+                $.ajax({
+                    url: actionUrl,
+                    datatype: "json",
+                    type: "POST",
+                    cache: false,
+                    data: { selectedDeliveryMethod: selectedDeliveryMethod, information: information },
+                    success: function (data) {
 
-            })
+                    }
+
+                })
+            }
+           
         },
         LoadpaymentView: function () {
+            //Always save shipping address
+            multivendorWeb.Order.SaveShippingAddress()
             var $context = $(document).find(".order-cart-body-container");
 
             var orderCostView = $context.find(".order-cost-container")
@@ -171,6 +173,7 @@
             })
         },
         LoadCartView: function () {
+            multivendorWeb.Order.SaveShippingAddress()
             var $context = $(document).find(".order-cart-body-container");
           
             var orderCartView = $context.find(".order-items-container")

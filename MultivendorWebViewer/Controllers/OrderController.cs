@@ -19,7 +19,7 @@ namespace MultivendorWebViewer.Controllers
 
         }
         [HttpGet]
-        public  ActionResult OrderCostView(string selectedDeliveryMethod = null)
+        public  ActionResult OrderCostView()
         {
             var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
             if (order != null && order.OrderLines.Any())
@@ -39,7 +39,14 @@ namespace MultivendorWebViewer.Controllers
         [HttpPost]
         public ActionResult SaveAddress(string selectedDeliveryMethod, Customer information)
         {
-            return PartialView("PaymentView");
+            var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
+            if (order != null && order.OrderLines.Any())
+            {
+                order.DeliveryMethodName = selectedDeliveryMethod;
+                order.Customer = information;
+            }
+            ApplicationRequestContext.OrderManager.SetCurrentOrder(ApplicationRequestContext, order);
+            return Json(new { status = false });
 
         }
         [HttpGet]
@@ -54,7 +61,7 @@ namespace MultivendorWebViewer.Controllers
             return PartialView("OrderCart", new OrderViewModel(null, ApplicationRequestContext));
 
         }
-        public ActionResult OrderCustomerView(string selectedDeliveryMethod = null, Customer customerData= null)
+        public ActionResult OrderCustomerView()
         {
             var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
             if (order != null && order.Customer!=null)
