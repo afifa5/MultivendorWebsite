@@ -36,6 +36,12 @@ namespace MultivendorWebViewer.Controllers
             return PartialView("PaymentView");
 
         }
+        [HttpPost]
+        public ActionResult SaveAddress(string selectedDeliveryMethod, Customer information)
+        {
+            return PartialView("PaymentView");
+
+        }
         [HttpGet]
         public ActionResult OrderCartView()
         {

@@ -108,6 +108,36 @@
 
             })
         },
+        SaveShippingAddress: function () {
+            var $context = $(document).find(".order-cart-body-container");
+            var orderAddressView = $context.find(".order-shipping-billing-container")
+            /*call to the controller function */
+            let actionUrl = $context.data("order-address-url");
+            var selectedDeliveryMethod = "";
+            var information = {
+                "FirstName": $(".first-name-input").val(),
+                "LastName": $(".last-name-input").val(),
+                "CareOf": $(".care-of-input").val(),
+                "Email": $(".customer-email-input").val(),
+                "PhoneNumber": $(".customer-phone-input").val(),
+                "Address": $(".address-input").val(),
+                "PostCode": $(".post-code-input").val(),
+                "City": $(".city-input").val(),
+                "Country": $(".country-input").val(),
+            }
+            $.ajax({
+                url: actionUrl,
+                datatype: "json",
+                type: "POST",
+                cache: false,
+                success: function (data) {
+                    var html = $(data)
+                    orderAddressView.empty();
+                    orderAddressView.append(html)
+                }
+
+            })
+        },
         LoadpaymentView: function () {
             var $context = $(document).find(".order-cart-body-container");
 
@@ -168,6 +198,7 @@
         },
         UpdateCurrentTab: function (tab) {
             var $context = $(".order-cart-body-container");
+
             $context.attr("data-tab", tab);
             multivendorWeb.Order.LoadOrderCostView();
 
@@ -186,6 +217,7 @@
                     multivendorWeb.Order.LoadpaymentView();
                     break;
             }
+
         }
     };
     $(document).on("click", ".next-order-page", function (e) {

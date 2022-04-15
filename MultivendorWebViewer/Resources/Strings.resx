@@ -141,6 +141,9 @@
   <data name="ClearOrder" xml:space="preserve">
     <value>Clear order</value>
   </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
   <data name="CreditCard" xml:space="preserve">
     <value>Credit card</value>
   </data>

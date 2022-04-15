@@ -38,7 +38,10 @@ namespace MultivendorWebViewer.Models
         public string PostCode { get; set; }
        
         [StringLength(50)]
-        public string City { get; set; }
+        public string CareOf { get; set; }
+       
+        [StringLength(50)]
+        public string Country { get; set; }
 
 
     }

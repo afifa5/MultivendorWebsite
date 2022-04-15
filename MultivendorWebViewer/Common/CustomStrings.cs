@@ -14,6 +14,7 @@ namespace MultivendorWebViewer.Common
         public static string ShippingAddress { get { return TextManager.Current.GetText("ShippingAddress"); } }
         public static string PostCode { get { return TextManager.Current.GetText("PostCode"); } }
         public static string City { get { return TextManager.Current.GetText("City"); } }
+        public static string Country { get { return TextManager.Current.GetText("Country"); } }
         public static string Email { get { return TextManager.Current.GetText("Email"); } }
         public static string Phone { get { return TextManager.Current.GetText("Phone"); } }
         public static string PostOffice { get { return TextManager.Current.GetText("PostOffice"); } }

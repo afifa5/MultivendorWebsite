@@ -141,6 +141,9 @@
   <data name="ClearOrder" xml:space="preserve">
     <value>অর্ডার মুছুন</value>
   </data>
+  <data name="Country" xml:space="preserve">
+    <value>দেশ</value>
+  </data>
   <data name="CreditCard" xml:space="preserve">
     <value>ক্রেডিট কার্ড</value>
   </data>

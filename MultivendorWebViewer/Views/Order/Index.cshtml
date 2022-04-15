@@ -35,6 +35,7 @@
             <div class="order-cart-body-container" 
                  data-tab="#tab=cart"
                  data-order-process="#tab=cart,#tab=address,#tab=payment"
+                 data-save-customer-url="@UrlUtility.Action(applicationrequestContext, "SaveAddress", "Order")"
                  data-order-cart-url="@UrlUtility.Action(applicationrequestContext, "OrderCartView", "Order")"
                  data-order-address-url="@UrlUtility.Action(applicationrequestContext, "OrderCustomerView", "Order")"
                  data-order-payment-url="@UrlUtility.Action(applicationrequestContext, "OrderPaymentView", "Order")"

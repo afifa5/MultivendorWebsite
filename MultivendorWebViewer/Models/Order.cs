@@ -21,6 +21,11 @@ namespace MultivendorWebViewer.Models
         //Whom bought product
         [Required]
         public int CustomerId { get; set; }
+        public string DeliveryMethodName { get; set; }
+        
+        [Column(TypeName = "numeric")]
+        public decimal DeliveryCost { get; set; }
+
         [ForeignKey("CustomerId")]
         public  Customer Customer { get; set; }
         [ForeignKey("OrderId")]
