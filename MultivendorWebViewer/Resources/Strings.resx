@@ -120,6 +120,9 @@
   <data name="Address" xml:space="preserve">
     <value>Address</value>
   </data>
+  <data name="Agent" xml:space="preserve">
+    <value>Agent</value>
+  </data>
   <data name="BankTransfer" xml:space="preserve">
     <value>Bank transfer</value>
   </data>
@@ -156,6 +159,9 @@
   <data name="Discount" xml:space="preserve">
     <value>Discount</value>
   </data>
+  <data name="DownloadInvoice" xml:space="preserve">
+    <value>Download invoice</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
@@ -173,6 +179,9 @@
   </data>
   <data name="Menu" xml:space="preserve">
     <value>Menu</value>
+  </data>
+  <data name="MyOrder" xml:space="preserve">
+    <value>My order</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>Next</value>
@@ -198,8 +207,17 @@
   <data name="PaymentMethod" xml:space="preserve">
     <value>Payment methods</value>
   </data>
+  <data name="PaymentReferenceMessage" xml:space="preserve">
+    <value>Note: Once you place an order then you will get an order reference. If you want to pay you must have to include the order reference in your payment reference.</value>
+  </data>
   <data name="Phone" xml:space="preserve">
     <value>Phone</value>
+  </data>
+  <data name="PlaceOrder" xml:space="preserve">
+    <value>Place order</value>
+  </data>
+  <data name="PlaceOrderSuccess" xml:space="preserve">
+    <value>Your order have been placed successfully. Your order reference is </value>
   </data>
   <data name="PostCode" xml:space="preserve">
     <value>Post code</value>
@@ -245,6 +263,9 @@
   </data>
   <data name="SubCatagories" xml:space="preserve">
     <value>Sub catagories</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
   </data>
   <data name="Summary" xml:space="preserve">
     <value>Summary</value>

@@ -33,4 +33,16 @@ namespace MultivendorWebViewer.Common
         public string OrderProcess { get; set; }
 
     }
+    public static class KnownPropertyCodes
+    {
+        public const string AutoOrderNumberIterator = "_AUTOORDERNUMBERITERATOR";
+
+    }
+    public class AutoOrderNumberSettings
+    {
+
+        public bool AutoOrderNumberEnabled { get; set; } = true;
+        public string Pattern { get; set; } = "{0:D8}";
+        public int StartSequnceNumber { get; set; } = 1;
+    }
 }

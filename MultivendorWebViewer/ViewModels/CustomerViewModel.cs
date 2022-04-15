@@ -29,5 +29,6 @@ namespace MultivendorWebViewer.ViewModels
         public string PostCode { get { return Model?.PostCode; } }
         public string City { get { return Model?.City; } }
 
+
     }
 }

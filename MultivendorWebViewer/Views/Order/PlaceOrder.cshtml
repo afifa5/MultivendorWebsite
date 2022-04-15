@@ -1,0 +1,37 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@using MultivendorWebViewer.Models;
+@model OrderViewModel
+
+@{
+   
+}
+
+<div class="place-order-success-container">
+    <div class="content-container">
+        <div class="header-container">
+            <span class="icon fa fa-check content fa-2x"></span>
+            <h3>@CustomStrings.Success</h3>
+        </div>
+        <div class="place-order-success-message">@CustomStrings.PlaceOrderSuccess <a href="#">@Model.OrderReference</a></div>
+        @if (Model.OrderLines != null && Model.OrderLines.Any())
+        {
+    <div class="order-lines-summary">
+        <div class="product-name">@CustomStrings.Products</div>
+        <div class="product-name">@CustomStrings.Quantity</div>
+        @foreach (var item in Model.OrderLines)
+        {
+            <div class="item-name"><label>@item.Product.FormattedName</label></div>
+            <div class="quantity"><span>@item.Quantity</span></div>
+        }
+    </div>
+          }
+    <div class="button-containers">
+        <button class="my-orders">@CustomStrings.MyOrder</button>
+        <button class="download-invoice">@CustomStrings.DownloadInvoice</button>
+    </div>
+
+    </div>
+   
+</div>
+

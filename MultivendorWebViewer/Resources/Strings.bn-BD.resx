@@ -120,6 +120,9 @@
   <data name="Address" xml:space="preserve">
     <value>ঠিকানা</value>
   </data>
+  <data name="Agent" xml:space="preserve">
+    <value>প্রতিনিধি</value>
+  </data>
   <data name="BankTransfer" xml:space="preserve">
     <value>ব্যাংক লেনদেন</value>
   </data>
@@ -156,6 +159,9 @@
   <data name="Discount" xml:space="preserve">
     <value>ছাড়</value>
   </data>
+  <data name="DownloadInvoice" xml:space="preserve">
+    <value>ইনভয়েস ডাউনলোড</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>ইমেইল</value>
   </data>
@@ -173,6 +179,9 @@
   </data>
   <data name="Menu" xml:space="preserve">
     <value>তালিকা</value>
+  </data>
+  <data name="MyOrder" xml:space="preserve">
+    <value>আমার অর্ডার</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>পরবর্তী পদক্ষেপ</value>
@@ -198,8 +207,17 @@
   <data name="PaymentMethod" xml:space="preserve">
     <value>মূল্যপরিশোধ পদ্ধতি</value>
   </data>
+  <data name="PaymentReferenceMessage" xml:space="preserve">
+    <value>দ্রষ্টব্য: আপনি একবার অর্ডার দিলে আপনি একটি অর্ডার রেফারেন্স পাবেন। আপনি যদি অর্থপ্রদান করতে চান তবে আপনাকে অবশ্যই আপনার অর্থপ্রদানের রেফারেন্সে অর্ডার রেফারেন্স অন্তর্ভুক্ত করতে হবে।</value>
+  </data>
   <data name="Phone" xml:space="preserve">
     <value>মোবাইল নাম্বার</value>
+  </data>
+  <data name="PlaceOrder" xml:space="preserve">
+    <value>অর্ডার করুন</value>
+  </data>
+  <data name="PlaceOrderSuccess" xml:space="preserve">
+    <value>আপনার অর্ডার সফলভাবে স্থাপন করা হয়েছে. আপনার অর্ডার রেফারেন্স হল </value>
   </data>
   <data name="PostCode" xml:space="preserve">
     <value>পোস্টকোড</value>
@@ -245,6 +263,9 @@
   </data>
   <data name="SubCatagories" xml:space="preserve">
     <value>উপশ্রেণী</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>সফল</value>
   </data>
   <data name="Summary" xml:space="preserve">
     <value>সারসংক্ষেপ</value>

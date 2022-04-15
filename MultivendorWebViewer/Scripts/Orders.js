@@ -236,6 +236,72 @@
         }
 
     });
+    $(document).on("click", ".place-order", function (e) {
+        var orderCart = $(document).find(".order-cart-body-container");
+        let actionUrl = orderCart.data("place-order-url");
+        $.ajax({
+            url: actionUrl,
+            dataType: "json",
+            type: "POST",
+            cache: false,
+            success: function (data) {
+                if (data.status == true) {
+                    let actionUrl = orderCart.data("order-success-url");
+                    $.ajax({
+                        url: actionUrl,
+                        datatype: "html",
+                        datatype: "html",
+                        type: "GET",
+                        data: { orderReference: data.orderReference},
+                        cache: false,
+                        success: function (data) {
+                            //Push data inside the order body
+                            
+                            var html = $(data)
+                            var orderView = $(document).find(".order-cart-view");
+                            orderView.empty();
+                            orderView.append(html)
+                            location.hash = "#tab=success"
+                        }
+
+                    })
+                }
+            }, error: function (ex) {
+
+            }
+        });
+        /*end call */
+
+    });
+    $(document).on("change", ".payment-method-container input", function (e) {
+        var selectedMethod = $(this).val();
+        var paymentContent = $(document).find(".payment-view .item-content-container");
+        paymentContent.addClass("hidden")
+        switch (selectedMethod) {
+            case "card":
+                var cardView = $(".card-container");
+                cardView.find(".item-content-container").removeClass("hidden");
+                break;
+            case "banktransfer":
+                var cardView = $(".bank-transfer-container");
+                cardView.find(".item-content-container").removeClass("hidden");
+                break;
+            case "bkash":
+                var cardView = $(".bkash-container");
+                cardView.find(".item-content-container").removeClass("hidden");
+                break;
+            case "rocket":
+                var cardView = $(".rocket-container");
+                cardView.find(".item-content-container").removeClass("hidden");
+                break;
+            case "cash":
+                var cardView = $(".cash-container");
+                cardView.find(".item-content-container").removeClass("hidden");
+                break;
+            
+        }
+
+    });
     $(document).on("click", ".previous-order-page", function (e) {
         var orderCart = $(document).find(".order-cart-body-container");
         var orderprocess = orderCart.data("order-process").split(',')
@@ -247,6 +313,7 @@
         }
 
     });
+  
     $(document).on("click", ".add-to-order-button", function (e) {
         var addToOrder = $(this).closest(".add-to-order");
         var orderId = addToOrder.data("product-id");

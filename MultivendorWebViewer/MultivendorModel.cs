@@ -34,6 +34,8 @@ namespace MultivendorWebViewer
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<OrderLine> OrderLines { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<KnownProperty> KnownProperties { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -60,6 +62,12 @@ namespace MultivendorWebViewer
 
         }
 
+        protected virtual void InitializeKnownProperty(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<KnownProperty>().ToTable("KnownProperty");
+           
+        }
+
         protected virtual void InitializeCategory(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().ToTable("Category");
@@ -72,8 +80,6 @@ namespace MultivendorWebViewer
 
             modelBuilder.Entity<Category>().HasKey<int>(i => i.Id).Property(i => i.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
-
-
         protected virtual void InitializeCategoryImage(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CategoryImage>().ToTable("CategoryImage");

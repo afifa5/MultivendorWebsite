@@ -409,7 +409,89 @@ grid-column-gap:20px;
     display: grid;
     grid-row-gap: 5px;
 }
-.order-cost-container .hidden {
+.hidden {
 display:none;
 overflow:hidden;
 }
+.place-order-container {
+    margin-top: 10px;
+}
+.place-order-container .place-order {
+   width:100%;
+   font-size:20px;
+}
+.item-content-container .information-container {
+    border: 1px solid;
+    border-color: #AB0000;
+    border-radius: 10px;
+    transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+}
+.agent-info {
+padding-top:5px;
+display:grid;
+grid-template-columns:auto 1fr;
+grid-column-gap:5px;
+}
+.place-order-success-container {
+    max-width: 500px;
+    margin: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+}
+.place-order-success-container .header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.place-order-success-container .icon {
+  font-size:25px;
+  color:green;
+  padding:0 10px 0 0;
+}
+
+.place-order-success-container .content-container {
+    border: solid 1px #ddd;
+}
+.place-order-success-container .content-container > * {
+  padding:0 10px;  
+}
+.place-order-success-container .content-container > *:first-child {
+    padding-top:10px;
+}
+    .place-order-success-container .content-container > *:last-child {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .place-order-success-container .content-container .order-lines-summary {
+        border-top: solid 1px #ddd;
+        border-bottom: solid 1px #ddd;
+        margin: 10px 0;
+        padding: 10px;
+    }
+    .place-order-success-container .button-containers {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 10px;
+    }
+        .place-order-success-container .button-containers button {
+        font-size:20px;
+        }
+        .place-order-success-container .order-lines-summary .product-name {
+            font-size: 15px;
+        }
+    .place-order-success-container .order-lines-summary {
+       display:grid;
+       grid-template-columns:1fr auto;
+       grid-column-gap:5px;
+
+    }
+    .place-order-success-container .quantity {
+        float: right;
+        text-align: right;
+    }

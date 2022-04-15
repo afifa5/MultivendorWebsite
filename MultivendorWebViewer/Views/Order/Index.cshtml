@@ -35,6 +35,8 @@
             <div class="order-cart-body-container" 
                  data-tab="#tab=cart"
                  data-order-process="#tab=cart,#tab=address,#tab=payment"
+                 data-order-success-url="@UrlUtility.Action(applicationrequestContext, "SuccessOrderView", "Order")"
+                 data-place-order-url="@UrlUtility.Action(applicationrequestContext, "PlaceOrder", "Order")"
                  data-save-customer-url="@UrlUtility.Action(applicationrequestContext, "SaveAddress", "Order")"
                  data-order-cart-url="@UrlUtility.Action(applicationrequestContext, "OrderCartView", "Order")"
                  data-order-address-url="@UrlUtility.Action(applicationrequestContext, "OrderCustomerView", "Order")"
@@ -44,16 +46,12 @@
                  data-delete-all-order-url="@UrlUtility.Action(applicationrequestContext, "DeleteAllOrder", "Order")">
 
                 <div class="order-items-container">
-                    @*@Html.Partial("OrderCart", Model)*@
                 </div>
                 <div class="order-shipping-billing-container hidden">
-                    @*@Html.Partial("CustomerView", Model)*@
                 </div>
                 <div class="order-payment-container hidden">
-                    @*@Html.Partial("PaymentView")*@
                 </div>
                     <div class="order-cost-container">
-                       @*@Html.Partial("OrderCartCostViewContainer", Model)*@
                     </div>
              
             </div>

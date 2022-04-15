@@ -6,10 +6,10 @@
     <div class="payment-method-container">
         <div class="card-container">
             <div class="item-container">
-                <input type="radio" id="card" name="paymentoption" value="card" checked="checked" class="card-button">
+                <input type="radio" id="card" name="paymentoption" value="card"  class="card-button">
                 <label for="card">@CustomStrings.CreditCard</label>
             </div>
-            <div class="item-content-container">
+            <div class="item-content-container hidden">
                 <div class="card-payment-view">
 
                     <div class="email"><label>@CustomStrings.Email</label></div>
@@ -32,7 +32,10 @@
                             <div class="ccv-label"><label>CCV</label></div>
                             <div class="ccv-input"><input class="standardtextbox referenceperson" placeholder="3 digit" type="text" value=""></div>
                         </div>
-                               </div>
+                    </div>
+                    <div class="place-order-container">
+                        <button class="place-order button">@CustomStrings.PlaceOrder</button>
+                    </div>
 
                 </div>
 
@@ -44,15 +47,30 @@
                 <input type="radio" id="banktransfer" name="paymentoption" value="banktransfer" class="banktransfer-button">
                 <label for="banktransfer">@CustomStrings.BankTransfer</label>
             </div>
-            <div class="item-content-container"></div>
+            <div class="item-content-container hidden">
+                <div class="place-order-container">
+                    <button class="place-order button">@CustomStrings.PlaceOrder</button>
+                </div>
+            </div>
 
         </div>
         <div class="bkash-container">
-            <div class="item-container">
+            <div class="item-container ">
                 <input type="radio" id="bkash" name="paymentoption" value="bkash" class="bkash-button">
                 <label for="bkash">@CustomStrings.Bkash</label>
             </div>
-            <div class="item-content-container"></div>
+            <div class="item-content-container hidden">
+                <div class="information-container">
+                    <label class="payment-information-text">@CustomStrings.PaymentReferenceMessage</label>
+                    <div class="bkash-agent agent-info">
+                        <span>@CustomStrings.Agent</span>
+                        <h4 class="bkash-agent-no">+8801770948778</h4>
+                    </div>
+                </div>
+                <div class="place-order-container">
+                    <button class="place-order button">@CustomStrings.PlaceOrder</button>
+                </div>
+            </div>
 
         </div>
         <div class="rocket-container">
@@ -60,7 +78,18 @@
                 <input type="radio" id="rocket" name="paymentoption" value="rocket" class="rocket-button">
                 <label for="rocket">@CustomStrings.Rocket</label>
             </div>
-            <div class="item-content-container"></div>
+            <div class="item-content-container hidden">
+                <div class="information-container">
+                    <label class="payment-information-text">@CustomStrings.PaymentReferenceMessage</label>
+                    <div class="bkash-agent agent-info">
+                        <span>@CustomStrings.Agent</span>
+                        <h4 class="bkash-agent-no">+8801770948778</h4>
+                    </div>
+                </div>
+                <div class="place-order-container">
+                    <button class="place-order button">@CustomStrings.PlaceOrder</button>
+                </div>
+            </div>
 
         </div>
         <div class="cash-container">
@@ -68,7 +97,14 @@
                 <input type="radio" id="cash" name="paymentoption" value="cash" class="cash-button">
                 <label for="cash">@CustomStrings.CashOnDelivery</label>
             </div>
-            <div class="item-content-container"></div>
+            <div class="item-content-container hidden">
+                <div class="information-container">
+                    <label class="payment-information-text">@CustomStrings.PaymentReferenceMessage</label>
+                </div>
+                <div class="place-order-container">
+                    <button class="place-order button">@CustomStrings.PlaceOrder</button>
+                </div>
+            </div>
 
         </div>
     </div>

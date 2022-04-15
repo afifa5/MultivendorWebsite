@@ -22,7 +22,7 @@ namespace MultivendorWebViewer.Controllers
         public  ActionResult OrderCostView()
         {
             var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
-            if (order != null && order.OrderLines.Any())
+            if (order != null && order.OrderLines != null && order.OrderLines.Any())
             {
                 var orderViewModel = new OrderViewModel(order, ApplicationRequestContext);
                 return PartialView("OrderCartCostViewContainer",orderViewModel);
@@ -40,7 +40,7 @@ namespace MultivendorWebViewer.Controllers
         public ActionResult SaveAddress(string selectedDeliveryMethod, Customer information)
         {
             var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
-            if (order != null && order.OrderLines.Any())
+            if (order != null && order.OrderLines != null && order.OrderLines.Any())
             {
                 order.DeliveryMethodName = selectedDeliveryMethod;
                 order.Customer = information;
@@ -49,16 +49,38 @@ namespace MultivendorWebViewer.Controllers
             return Json(new { status = false });
 
         }
+        [HttpPost]
+        public ActionResult PlaceOrder()
+        {
+          var orderReference =   ApplicationRequestContext.OrderManager.PlaceOrder(ApplicationRequestContext);
+            return Json(new { status = true,orderReference = orderReference });
+
+        }
         [HttpGet]
         public ActionResult OrderCartView()
         {
             var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
-            if (order != null && order.OrderLines.Any())
+            if (order != null && order.OrderLines != null && order.OrderLines.Any())
             {
                 var orderViewModel = new OrderViewModel(order, ApplicationRequestContext);
                 return PartialView("OrderCart", orderViewModel);
             }
             return PartialView("OrderCart", new OrderViewModel(null, ApplicationRequestContext));
+
+        }
+        [HttpGet]
+        public ActionResult SuccessOrderView(string orderReference)
+        {
+            var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
+            ApplicationRequestContext.OrderManager.SetCurrentOrder(ApplicationRequestContext, null);
+
+            if (order != null && order.OrderLines != null && order.OrderLines.Any())
+            {
+                var orderViewModel = new OrderViewModel(order, ApplicationRequestContext);
+                orderViewModel.OrderReference = orderReference;
+                return View("PlaceOrder", orderViewModel);
+            }
+            return View("PlaceOrder", new OrderViewModel(null, ApplicationRequestContext));
 
         }
         public ActionResult OrderCustomerView()
@@ -88,7 +110,7 @@ namespace MultivendorWebViewer.Controllers
                 {
                     order = new Order();
                 }
-                if ((order.OrderLines.Any()))
+                if (order.OrderLines != null && (order.OrderLines.Any()))
                 {
                     var existProduct = order.OrderLines.Where(p => p.ProductId == productId).FirstOrDefault();
                     if (quantity >= 0)
@@ -120,7 +142,7 @@ namespace MultivendorWebViewer.Controllers
         {
             //Check availability
             var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
-            if (order != null && order.OrderLines.Any()) {
+            if (order != null && order.OrderLines !=null&& order.OrderLines.Any()) {
                 var totalCount = order.OrderLines.Sum(p => p.Quantity);
                 var countString = Math.Round(totalCount, 0).ToString(new CultureInfo(ApplicationRequestContext.SelectedCulture));
                 return Json(new { status = true,totalCount = countString });
