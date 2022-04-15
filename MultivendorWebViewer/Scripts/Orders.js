@@ -174,6 +174,7 @@
             switch (tab) {
                 case "#tab=cart":
                     location.hash = "#tab=cart"
+                    //chacke
                     multivendorWeb.Order.LoadCartView();
                     break;
                 case "#tab=address":
