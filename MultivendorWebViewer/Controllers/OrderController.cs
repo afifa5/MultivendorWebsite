@@ -33,6 +33,10 @@ namespace MultivendorWebViewer.Controllers
         [HttpGet]
         public ActionResult OrderPaymentView()
         {
+            var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
+            if (order == null || order.OrderLines == null || !order.OrderLines.Any()) {
+                return new EmptyResult();
+            }
             return PartialView("PaymentView");
 
         }
@@ -86,7 +90,7 @@ namespace MultivendorWebViewer.Controllers
         public ActionResult OrderCustomerView()
         {
             var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
-            if (order != null && order.Customer!=null)
+            if (order != null && order.OrderLines!=null && order.OrderLines.Any())
             {
                 var orderViewModel = new OrderViewModel(order, ApplicationRequestContext);
                 return PartialView("CustomerView", orderViewModel);

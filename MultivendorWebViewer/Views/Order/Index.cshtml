@@ -9,6 +9,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+    var order = applicationrequestContext.OrderManager.GetCurrentOrder(applicationrequestContext);
     var orderProcess = applicationrequestContext.Configuration.SiteProfile.OrderProcess;
 }
 
@@ -25,36 +26,40 @@
 
     <div class="main-body-contents">
         <div class="order-body">
-            <div class="order-cart-menu">
-                <ul class="order-cart-ul" style="">
-                    <li class="shoppingcart selected" data-tab="cart"><a href="#tab=cart" class="lnkshoppingcart">@CustomStrings.Products</a></li>
-                    <li class="additional" data-tab="address"><a href="#tab=address" class="lnkadditional">@CustomStrings.ShippingAndBilling</a></li>
-                    <li class="order-cart-payment" data-tab="payment"><a  href="#tab=payment" class="lnkPayment">@CustomStrings.Payment</a></li>
-                </ul>
-            </div>
-            <div class="order-cart-body-container" 
-                 data-tab="#tab=cart"
-                 data-order-process="#tab=cart,#tab=address,#tab=payment"
-                 data-order-success-url="@UrlUtility.Action(applicationrequestContext, "SuccessOrderView", "Order")"
-                 data-place-order-url="@UrlUtility.Action(applicationrequestContext, "PlaceOrder", "Order")"
-                 data-save-customer-url="@UrlUtility.Action(applicationrequestContext, "SaveAddress", "Order")"
-                 data-order-cart-url="@UrlUtility.Action(applicationrequestContext, "OrderCartView", "Order")"
-                 data-order-address-url="@UrlUtility.Action(applicationrequestContext, "OrderCustomerView", "Order")"
-                 data-order-payment-url="@UrlUtility.Action(applicationrequestContext, "OrderPaymentView", "Order")"
-                 data-order-cost-url="@UrlUtility.Action(applicationrequestContext, "OrderCostView", "Order")"
-                 data-add-to-order-url="@UrlUtility.Action(applicationrequestContext, "OrderItem", "Order")" 
-                 data-delete-all-order-url="@UrlUtility.Action(applicationrequestContext, "DeleteAllOrder", "Order")">
+            @if (order != null && order.OrderLines != null && order.OrderLines.Any())
+            {
+                <div class="order-cart-menu">
+                    <ul class="order-cart-ul" style="">
+                        <li class="shoppingcart selected" data-tab="cart"><a href="#tab=cart" class="lnkshoppingcart">@CustomStrings.Products</a></li>
+                        <li class="additional" data-tab="address"><a href="#tab=address" class="lnkadditional">@CustomStrings.ShippingAndBilling</a></li>
+                        <li class="order-cart-payment" data-tab="payment"><a href="#tab=payment" class="lnkPayment">@CustomStrings.Payment</a></li>
+                    </ul>
+                </div>
+                <div class="order-cart-body-container"
+                     data-tab="#tab=cart"
+                     data-order-process="#tab=cart,#tab=address,#tab=payment"
+                     data-order-success-url="@UrlUtility.Action(applicationrequestContext, "SuccessOrderView", "Order")"
+                     data-place-order-url="@UrlUtility.Action(applicationrequestContext, "PlaceOrder", "Order")"
+                     data-save-customer-url="@UrlUtility.Action(applicationrequestContext, "SaveAddress", "Order")"
+                     data-order-cart-url="@UrlUtility.Action(applicationrequestContext, "OrderCartView", "Order")"
+                     data-order-address-url="@UrlUtility.Action(applicationrequestContext, "OrderCustomerView", "Order")"
+                     data-order-payment-url="@UrlUtility.Action(applicationrequestContext, "OrderPaymentView", "Order")"
+                     data-order-cost-url="@UrlUtility.Action(applicationrequestContext, "OrderCostView", "Order")"
+                     data-add-to-order-url="@UrlUtility.Action(applicationrequestContext, "OrderItem", "Order")"
+                     data-delete-all-order-url="@UrlUtility.Action(applicationrequestContext, "DeleteAllOrder", "Order")">
 
-                <div class="order-items-container">
-                </div>
-                <div class="order-shipping-billing-container hidden">
-                </div>
-                <div class="order-payment-container hidden">
-                </div>
+                    <div class="order-items-container">
+                    </div>
+                    <div class="order-shipping-billing-container hidden">
+                    </div>
+                    <div class="order-payment-container hidden">
+                    </div>
                     <div class="order-cost-container">
                     </div>
-             
-            </div>
+
+                </div>
+            }
+
         </div>
     </div>
 </div>

@@ -7,7 +7,7 @@
     var customer = Model != null && Model.Customer != null ? Model.Customer : new CustomerViewModel(new Customer(), ApplicationRequestContext.GetContext(Context));
 
 }
-@if (Model != null)
+@if (Model != null && Model.OrderLines != null && Model.OrderLines.Any())
 {
     <div class="delivery-container">
         <div class="shipping-container">
@@ -83,4 +83,7 @@
 
 
 }
+@*else { 
+<div class="empty-order">@CustomStrings.OrderEmptyMessage</div>
+}*@
 

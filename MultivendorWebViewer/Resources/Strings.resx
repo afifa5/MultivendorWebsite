@@ -192,6 +192,9 @@
   <data name="Order" xml:space="preserve">
     <value>Order</value>
   </data>
+  <data name="OrderEmptyMessage" xml:space="preserve">
+    <value>No items currently on order cart</value>
+  </data>
   <data name="OrdersPrice" xml:space="preserve">
     <value>Payable price</value>
   </data>
