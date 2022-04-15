@@ -23,6 +23,8 @@ namespace MultivendorWebViewer.ViewModels
         public ApplicationRequestContext ApplicationRequestContext { get; set; }
         public List<OrderLineViewModel>  OrderLines { get { return GetOrderLines(); } }
         public CustomerViewModel Customer { get { return GetOrderCustomer(); } }
+
+        public string SelectedDeliveryOption { get; set; } = "dhl";
         private List<OrderLineViewModel> GetOrderLines()
         {
             return Model!=null && Model.OrderLines.Any() ? Model.OrderLines.Select(p => new OrderLineViewModel(p, ApplicationRequestContext)).ToList() : new List<OrderLineViewModel>();

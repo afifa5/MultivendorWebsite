@@ -71,7 +71,7 @@ button{
     color: #fff;
     padding: 5px 10px 5px 10px;
 }
-button:hover{
+button:hover,.button:hover{
     background-color: #fff;
     border-color: #AB0000 ;
     border-width: 1px ;
@@ -185,7 +185,7 @@ button:focus{
     padding-left:10px;
 }
 /*end */
-button,input[type=button] {
+button,input[type=button],.button {
     background: #ab0000;
     border: 1px solid;
     border-color: #AB0000;
@@ -193,4 +193,5 @@ button,input[type=button] {
     transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out;
     color: #fff;
     padding: 5px 10px 5px 10px;
+    text-decoration:none;
 }

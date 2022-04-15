@@ -26,20 +26,55 @@
         },
         getCurrentTab: function () {
             var tab = "";
+            var $context = $(".order-cart-body-container");
             var currentUrl = window.location.href;
             var urlTab = location.hash;
             if (urlTab != undefined && urlTab.length > 0) {
                 tab = urlTab
+                //$context.attr("data-tab", urlTab);
             }
             else {
-                var $context = $(".order-cart-body-container");
                 tab = $context.attr("data-tab");
             }
            
             return tab;
         },
         LoadOrderCostView: function () {
+            var $context = $(document).find(".order-cart-body-container");
+            var orderCostView = $context.find(".order-cost-container")
+            let actionUrl = $context.data("order-cost-url");
+            $.ajax({
+                url: actionUrl,
+                datatype: "html",
+                type: "GET",
+                cache: false,
+                success: function (data) {
+                    var html = $(data)
+                    orderCostView.empty();
+                    orderCostView.append(html)
+                    if (orderCostView != undefined && orderCostView.length > 0) {
+                        var tab = multivendorWeb.Order.getCurrentTab();
+                        var previousButton = orderCostView.find(".previous-order-page")
+                        var nextButton = orderCostView.find(".next-order-page")
+                        switch (tab) {
+                            case "#tab=cart":
+                                if (!previousButton.hasClass("hidden")) previousButton.addClass("hidden")
+                                if (nextButton.hasClass("hidden")) nextButton.removeClass("hidden")
+                                break;
+                            case "#tab=address":
+                                if (previousButton.hasClass("hidden")) previousButton.removeClass("hidden")
+                                if (nextButton.hasClass("hidden")) nextButton.removeClass("hidden")
+                                break;
+                            case "#tab=payment":
+                                if (previousButton.hasClass("hidden")) previousButton.removeClass("hidden")
+                                if (!nextButton.hasClass("hidden")) nextButton.addClass("hidden")
+                                break;
+                        }
+                    }
 
+                }
+
+            })
 
         },
         LoadOrderAddressView: function () {
@@ -56,22 +91,22 @@
             var tabMenu = $(".order-cart-ul");
             tabMenu.children().removeClass("selected")
             tabMenu.find(".additional").addClass("selected")
-
+            var customerData = null
+            var selectedDeliveryMethod = null
             /*call to the controller function */
-            //let actionUrl = $context.data("order-address-url");
-            //$.ajax({
-            //    url: actionUrl,
-            //    datatype: "html",
-            //    type: "GET",
-            //    cache: false,
-            //    success: function (data) {
-            //        var html = $(data)
-            //        orderAddressView.empty();
-            //        orderAddressView.append(html)
-            //        //multivendorWeb.PopUp.Show(html, userMenuhtml, null)
-            //    }
+            let actionUrl = $context.data("order-address-url");
+            $.ajax({
+                url: actionUrl,
+                datatype: "html",
+                type: "GET",
+                cache: false,
+                success: function (data) {
+                    var html = $(data)
+                    orderAddressView.empty();
+                    orderAddressView.append(html)
+                }
 
-            //})
+            })
         },
         LoadpaymentView: function () {
             var $context = $(document).find(".order-cart-body-container");
@@ -89,25 +124,23 @@
             tabMenu.find(".order-cart-payment").addClass("selected")
 
             /*call to the controller function */
-            //let actionUrl = $context.data("order-address-url");
-            //$.ajax({
-            //    url: actionUrl,
-            //    datatype: "html",
-            //    type: "GET",
-            //    cache: false,
-            //    success: function (data) {
-            //        var html = $(data)
-            //        orderAddressView.empty();
-            //        orderAddressView.append(html)
-            //        //multivendorWeb.PopUp.Show(html, userMenuhtml, null)
-            //    }
+            let actionUrl = $context.data("order-payment-url");
+            $.ajax({
+                url: actionUrl,
+                datatype: "html",
+                type: "GET",
+                cache: false,
+                success: function (data) {
+                    var html = $(data)
+                    orderPaymentView.empty();
+                    orderPaymentView.append(html)
+                }
 
-            //})
+            })
         },
         LoadCartView: function () {
             var $context = $(document).find(".order-cart-body-container");
-
-            var orderCostView = $context.find(".order-cost-container")
+          
             var orderCartView = $context.find(".order-items-container")
             if (orderCartView.hasClass("hidden")) orderCartView.removeClass("hidden")
             var orderAddressView = $context.find(".order-shipping-billing-container")
@@ -118,24 +151,64 @@
             var tabMenu = $(".order-cart-ul");
             tabMenu.children().removeClass("selected")
             tabMenu.find(".shoppingcart").addClass("selected")
-            
+
+            let actionUrl = $context.data("order-cart-url");
+            $.ajax({
+                url: actionUrl,
+                datatype: "html",
+                type: "GET",
+                cache: false,
+                success: function (data) {
+                    var html = $(data)
+                    orderCartView.empty();
+                    orderCartView.append(html)
+                }
+
+            })
         },
         UpdateCurrentTab: function (tab) {
             var $context = $(".order-cart-body-container");
             $context.attr("data-tab", tab);
+            multivendorWeb.Order.LoadOrderCostView();
+
             switch (tab) {
                 case "#tab=cart":
+                    location.hash = "#tab=cart"
                     multivendorWeb.Order.LoadCartView();
                     break;
                 case "#tab=address":
+                    location.hash = "#tab=address"
                     multivendorWeb.Order.LoadOrderAddressView();
                     break;
                 case "#tab=payment":
+                    location.hash = "#tab=payment"
                     multivendorWeb.Order.LoadpaymentView();
                     break;
             }
         }
     };
+    $(document).on("click", ".next-order-page", function (e) {
+        var orderCart = $(document).find(".order-cart-body-container");
+        var orderprocess = orderCart.data("order-process").split(',')
+        var tab = multivendorWeb.Order.getCurrentTab();
+        //find next tab
+        var index = orderprocess.findIndex(x => x == tab);
+        if (index + 1 <= orderprocess.length - 1) {
+            multivendorWeb.Order.UpdateCurrentTab(orderprocess[index + 1]);
+        }
+
+    });
+    $(document).on("click", ".previous-order-page", function (e) {
+        var orderCart = $(document).find(".order-cart-body-container");
+        var orderprocess = orderCart.data("order-process").split(',')
+        var tab = multivendorWeb.Order.getCurrentTab();
+        //find next tab
+        var index = orderprocess.findIndex(x => x == tab);
+        if (index - 1 >= 0) {
+            multivendorWeb.Order.UpdateCurrentTab(orderprocess[index - 1]);
+        }
+
+    });
     $(document).on("click", ".add-to-order-button", function (e) {
         var addToOrder = $(this).closest(".add-to-order");
         var orderId = addToOrder.data("product-id");
@@ -242,6 +315,7 @@
         multivendorWeb.Order.GetTotalCounter();
         var tab = multivendorWeb.Order.getCurrentTab();
         multivendorWeb.Order.UpdateCurrentTab(tab);
+
         window.addEventListener('hashchange', function () {
             //update hash
             var currentHash = multivendorWeb.Order.getCurrentTab();

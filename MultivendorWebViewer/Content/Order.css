@@ -148,10 +148,11 @@ padding-right:10px;
     grid-template-columns: 1fr;
     grid-row-gap: 5px;
 }
-.order-cost-container .button-container button{
-    font-size: 20px;
-    width: 100%;
-}
+    .order-cost-container .button-container button, .order-cost-container .button-container .button {
+        font-size: 20px;
+        width: 100%;
+      /*  text-align:center;*/
+    }
 .delete-icon{
     padding: 0 10px;
 }
@@ -407,4 +408,8 @@ grid-column-gap:20px;
 .expiry-container > * {
     display: grid;
     grid-row-gap: 5px;
+}
+.order-cost-container .hidden {
+display:none;
+overflow:hidden;
 }

@@ -204,6 +204,9 @@
   <data name="PostOffice" xml:space="preserve">
     <value>Post office</value>
   </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
   <data name="PriceIclVat" xml:space="preserve">
     <value>Price icl. vat</value>
   </data>

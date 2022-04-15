@@ -1,7 +1,7 @@
 ﻿@using MultivendorWebViewer.ViewModels;
 @using MultivendorWebViewer.Common;
 @using MultivendorWebViewer.Models;
-@model OrderViewModel
+@*@model OrderViewModel*@
 
 @{
     @Styles.Render("~/Content/Order")
@@ -9,13 +9,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
-    var totalPrice = Model.OrderLines.Sum(p => p.PriceAvailability == null ? 0 : p.PriceAvailability.PriceInclVat.Value * p.Quantity);
-    var priceAvailability = new PriceAvailailityViewModel(new PriceAvailability(), applicationrequestContext);
-    var formattedTotal = priceAvailability.GetPriceText(totalPrice);
-    var totalDiscount = Model.OrderLines.Sum(p => p.PriceAvailability == null ? 0 : p.PriceAvailability.Discount.Value * p.Quantity);
-    var formattedDiscount = priceAvailability.GetPriceText(totalDiscount);
-    var amountToPay = totalPrice - totalDiscount;
-    var formattedAmountToPay = priceAvailability.GetPriceText(amountToPay);
     var orderProcess = applicationrequestContext.Configuration.SiteProfile.OrderProcess;
 }
 
@@ -39,22 +32,29 @@
                     <li class="order-cart-payment" data-tab="payment"><a  href="#tab=payment" class="lnkPayment">@CustomStrings.Payment</a></li>
                 </ul>
             </div>
-            <div class="order-cart-body-container" data-tab="#tab=cart" data-order-address-url="@UrlUtility.Action(applicationrequestContext, "OrderCustomerView", "Order")" data-add-to-order-url="@UrlUtility.Action(applicationrequestContext, "OrderItem", "Order")" data-delete-all-order-url="@UrlUtility.Action(applicationrequestContext, "DeleteAllOrder", "Order")">
-                @if (Model != null && Model.OrderLines.Any())
-                {
+            <div class="order-cart-body-container" 
+                 data-tab="#tab=cart"
+                 data-order-process="#tab=cart,#tab=address,#tab=payment"
+                 data-order-cart-url="@UrlUtility.Action(applicationrequestContext, "OrderCartView", "Order")"
+                 data-order-address-url="@UrlUtility.Action(applicationrequestContext, "OrderCustomerView", "Order")"
+                 data-order-payment-url="@UrlUtility.Action(applicationrequestContext, "OrderPaymentView", "Order")"
+                 data-order-cost-url="@UrlUtility.Action(applicationrequestContext, "OrderCostView", "Order")"
+                 data-add-to-order-url="@UrlUtility.Action(applicationrequestContext, "OrderItem", "Order")" 
+                 data-delete-all-order-url="@UrlUtility.Action(applicationrequestContext, "DeleteAllOrder", "Order")">
+
                 <div class="order-items-container">
-                    @Html.Partial("OrderCart", Model)
+                    @*@Html.Partial("OrderCart", Model)*@
                 </div>
                 <div class="order-shipping-billing-container hidden">
-                    @Html.Partial("CustomerView", Model)
+                    @*@Html.Partial("CustomerView", Model)*@
                 </div>
                 <div class="order-payment-container hidden">
-                    @Html.Partial("PaymentView")
+                    @*@Html.Partial("PaymentView")*@
                 </div>
                     <div class="order-cost-container">
-                       @Html.Partial("OrderCartCostViewContainer", Model)
+                       @*@Html.Partial("OrderCartCostViewContainer", Model)*@
                     </div>
-                }
+             
             </div>
         </div>
     </div>

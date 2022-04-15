@@ -39,6 +39,7 @@ namespace MultivendorWebViewer.Common
         public static string UserName { get { return TextManager.Current.GetText("UserName"); } }
         public static string ClearOrder { get { return TextManager.Current.GetText("ClearOrder"); } }
         public static string Next { get { return TextManager.Current.GetText("Next"); } }
+        public static string Previous { get { return TextManager.Current.GetText("Previous"); } }
         public static string Password { get { return TextManager.Current.GetText("Password"); } }
         public static string InformationNotFound { get { return TextManager.Current.GetText("InformationNotFound"); } }
         public static string SubCatagories { get { return TextManager.Current.GetText("SubCatagories"); } }

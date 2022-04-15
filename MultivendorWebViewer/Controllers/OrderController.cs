@@ -15,16 +15,11 @@ namespace MultivendorWebViewer.Controllers
         [HttpGet]
         public override ActionResult Index()
         {
-            var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
-            if (order != null && order.OrderLines.Any()) {
-                var orderViewModel = new OrderViewModel(order, ApplicationRequestContext);
-                return View(orderViewModel);
-            }
-            return View(new OrderViewModel(null,ApplicationRequestContext));
+            return View();
 
         }
         [HttpGet]
-        public  ActionResult OrderCostView()
+        public  ActionResult OrderCostView(string selectedDeliveryMethod = null)
         {
             var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
             if (order != null && order.OrderLines.Any())
@@ -33,6 +28,12 @@ namespace MultivendorWebViewer.Controllers
                 return PartialView("OrderCartCostViewContainer",orderViewModel);
             }
             return PartialView("OrderCartCostViewContainer",new OrderViewModel(null, ApplicationRequestContext));
+
+        }
+        [HttpGet]
+        public ActionResult OrderPaymentView()
+        {
+            return PartialView("PaymentView");
 
         }
         [HttpGet]
@@ -47,7 +48,7 @@ namespace MultivendorWebViewer.Controllers
             return PartialView("OrderCart", new OrderViewModel(null, ApplicationRequestContext));
 
         }
-        public ActionResult OrderCustomerView()
+        public ActionResult OrderCustomerView(string selectedDeliveryMethod = null, Customer customerData= null)
         {
             var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
             if (order != null && order.Customer!=null)

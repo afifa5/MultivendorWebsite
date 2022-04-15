@@ -204,6 +204,9 @@
   <data name="PostOffice" xml:space="preserve">
     <value>ডাক ঘর</value>
   </data>
+  <data name="Previous" xml:space="preserve">
+    <value>পূর্ববর্তী ধাপ</value>
+  </data>
   <data name="PriceIclVat" xml:space="preserve">
     <value>কর সহ মূল্য</value>
   </data>

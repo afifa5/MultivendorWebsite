@@ -7,7 +7,8 @@
 
 
 }
-@if (Model != null) { 
+@if (Model != null)
+{
     <div class="delivery-container">
         <div class="shipping-container">
             <div class="shipping-header">
@@ -44,20 +45,28 @@
                 <h3>@CustomStrings.DeliveryMethod</h3>
             </div>
             <div class="delivery-method-container">
+                @{ 
+                    string postStatus = Model.SelectedDeliveryOption == "postoffice" ? "checked=\"checked\"" : string.Empty;
+                    string dhlStatus = Model.SelectedDeliveryOption == "dhl" ? "checked=\"checked\"" : string.Empty;
+                    string sundarbanStatus = Model.SelectedDeliveryOption == "sundarbanexpress" ? "checked=\"checked\"" : string.Empty;
+                    string homeStatus = Model.SelectedDeliveryOption == "homedelivery" ? "checked=\"checked\"" : string.Empty;
+
+                }
                 <div class="post-office-container">
-                    <input type="radio" id="postoffice" name="postoffice" value="postoffice" class="postoffice-button">
+
+                    <input type="radio" id="postoffice" name="deliverymethod" @postStatus value="postoffice"  class="postoffice-button">
                     <label for="postoffice">@CustomStrings.PostOffice</label>
                 </div>
                 <div class="dhl-container">
-                    <input type="radio" id="dhl" name="dhl" value="dhl" class="dhl-button">
+                    <input type="radio" id="dhl" name="deliverymethod" @dhlStatus value="dhl" class="dhl-button">
                     <label for="dhl">@CustomStrings.DHL</label>
                 </div>
                 <div class="sundarban-express-container">
-                    <input type="radio" id="sundarbanexpress" name="sundarbanexpress" value="sundarbanexpress" class="sundarbanexpress-button">
+                    <input type="radio" id="sundarbanexpress" name="deliverymethod" @sundarbanStatus value="sundarbanexpress" class="sundarbanexpress-button">
                     <label for="sundarbanexpress">@CustomStrings.SundarbanExpress</label>
                 </div>
                 <div class="home-delivery-container">
-                    <input type="radio" id="homedelivery" name="homedelivery" value="homedelivery" class="homedelivery-button">
+                    <input type="radio" id="homedelivery" name="deliverymethod" value="homedelivery" @homeStatus class="homedelivery-button">
                     <label for="homedelivery">@CustomStrings.HomeDelivery</label>
                 </div>
             </div>
