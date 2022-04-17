@@ -42,7 +42,7 @@ namespace MultivendorWebViewer.Common
     {
 
         public bool AutoOrderNumberEnabled { get; set; } = true;
-        public string Pattern { get; set; } = "{0:D8}";
-        public int StartSequnceNumber { get; set; } = 1;
+        public string Pattern { get; set; } = "DHM-{0:D18}";
+        public int StartSequnceNumber { get; set; } = 1790;
     }
 }
