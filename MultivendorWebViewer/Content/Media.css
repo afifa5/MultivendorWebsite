@@ -96,9 +96,31 @@
    
 }
 @media all and (max-width: 575.98px) {
-    .card-payment-view input {
-    max-width:340px;
+/*    .data-view-tools-container .multivendor-toolbar {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-row-gap:10px;
+    }
+        .data-view-tools-container .multivendor-toolbar .view-tool {
+        width:fit-content;
+        }*/
+    .data-view-tools-container .multivendor-toolbar .view-tool {
+    display:none;
+    }
+    .footer-container > * {
+        margin: 5px 0 5px 0;
+    }
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
+    .multivendor-web-toolbar.footer-toolbar {
+    justify-content:center;
+    }
+    .card-payment-view input {
+        max-width: 340px;
     }
     .expiry-container {
         grid-template-columns: 1fr;

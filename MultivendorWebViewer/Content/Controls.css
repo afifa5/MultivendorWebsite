@@ -154,6 +154,8 @@ button:focus{
     min-width: 100px;
     -webkit-appearance: none;
     font-size: 15px;
+    border-radius:0px !important;
+    margin:0px !important;
 }
 .sort-icon-container, .filter-icon-container {
     padding-left: 8px;
@@ -193,5 +195,29 @@ button,input[type=button],.button {
     transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out;
     color: #fff;
     padding: 5px 10px 5px 10px;
+    text-decoration:none;
+}
+.footer-container {
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+}
+.footer-container > * {
+margin:10px;
+}
+.multivendor-web-toolbar.footer-toolbar {
+width: auto;
+margin: 5px 10px;
+}
+    .multivendor-web-toolbar.footer-toolbar > * {
+        
+        padding: 5px;
+      /*  border: 1px solid;
+        border-color: #ddd;*/
+        border-radius: 10px;
+        transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out;
+    }
+.footer-toolbar a{
+    color:#fff;
     text-decoration:none;
 }
