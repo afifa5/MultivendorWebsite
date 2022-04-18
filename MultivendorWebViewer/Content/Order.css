@@ -435,7 +435,7 @@ grid-template-columns:auto 1fr;
 grid-column-gap:5px;
 }
 .place-order-success-container {
-    max-width: 500px;
+    max-width: 850px;
     margin: auto;
     height: 100%;
     display: flex;
@@ -450,14 +450,17 @@ grid-column-gap:5px;
     align-items: center;
 }
 .place-order-success-container .icon {
-  font-size:25px;
+  font-size:30px;
   color:green;
   padding:0 10px 0 0;
 }
+    .place-order-success-container h3 {
+        font-size: 35px;
+    }
 
-.place-order-success-container .content-container {
-    border: solid 1px #ddd;
-}
+    .place-order-success-container .content-container {
+        border: solid 1px #ddd;
+    }
 .place-order-success-container .content-container > * {
   padding:0 10px;  
 }
