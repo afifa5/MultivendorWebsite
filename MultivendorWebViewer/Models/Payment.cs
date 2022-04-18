@@ -23,6 +23,8 @@ namespace MultivendorWebViewer.Models
         public string PaymentMethod { get; set; }
         
         public string PaymentReference { get; set; }
+        [StringLength(50)]
+        public string PaymentStatus { get; set; }
 
         [Column(TypeName = "numeric")]
         public decimal PaidAmount { get; set; }

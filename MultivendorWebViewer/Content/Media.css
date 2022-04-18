@@ -60,7 +60,10 @@
 }
 /*mobile media*/
 @media all and (max-device-width: 600px) {
-    .presentation  .presentation-name {
+    .category-view-container .node-view {
+    max-width:100%;
+    }
+    .presentation .presentation-name {
         font-size: 25px;
     }
 
