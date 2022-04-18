@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Xml.Serialization;
 using MultivendorWebViewer;
+using System.Globalization;
 
 namespace MultivendorWebViewer.Manager
 {
@@ -16,6 +17,13 @@ namespace MultivendorWebViewer.Manager
         public virtual string GetHeaderLogoUrl(ApplicationRequestContext requsetContext,bool isSmall)
         {
             return UrlUtility.Action(requsetContext, "Image", "Content", new { imageId = 0, fileName = isSmall? SiteProfile.HeaderLogoSmall : SiteProfile.HeaderLogo });
+        }
+        public virtual string GetCountryFlagUrlByCulture(string culturename)
+        {
+            string flagPath = "~/Content/Flag/";
+            return string.Format("{0}{1}.svg", flagPath, culturename);
+
+
         }
         private static ProfileSetting GetProfileSettings(string xmlFilename)
         {

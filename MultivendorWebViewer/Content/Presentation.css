@@ -220,7 +220,7 @@ font-size: 15px;
 .add-to-order-button {
     padding: 5px 5px 5px 5px;
     font-size: 18px;
-    max-width: 260px;
+    max-width: 170px;
 }
 .add-to-order-button:after {
     content: attr(data-text);

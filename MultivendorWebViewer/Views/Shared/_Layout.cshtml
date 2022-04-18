@@ -31,8 +31,9 @@
                             var routeValues = new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId };
                             var startCatalogueUrl = UrlUtility.Action(applicationrequestContext, "Index", "Category", routeValues);
                             //var startCatalogueUrl = Url.Action("Index", "Category", new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId });
-                            var flagUrl = "/Content/Flag/" + applicationrequestContext.SelectedCulture + ".svg";
-                        }
+                            var flagUrl = applicationrequestContext.Configuration.GetCountryFlagUrlByCulture(applicationrequestContext.SelectedCulture);
+                            var contentUrl = @Url.Content(flagUrl);
+                            }
                         <a class="header-logo" href="@startCatalogueUrl">
 
                             <img class="img logo-image" src="@headerLogoUrl">
@@ -51,7 +52,7 @@
 
                     </li>
                     <li class="container right-aligned language-container" data-language-item-url="@UrlUtility.Action(applicationrequestContext, "GetLanguagePopUp", "Home")">
-                        <img class="img-icon" src="@flagUrl">
+                        <img class="img-icon" src="@contentUrl">
                     </li>
                     <li class="container right-aligned">
                         <! -- order cart-->
