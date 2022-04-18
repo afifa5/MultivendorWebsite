@@ -358,7 +358,7 @@ align-items:center;
     -webkit-appearance: none;
     color: black;
     border: 1px solid grey;
-    min-width: 320px;
+    min-width: 340px;
     max-width:500px;
 }
 .delivery-container {

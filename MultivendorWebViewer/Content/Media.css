@@ -97,7 +97,7 @@
 }
 @media all and (max-width: 575.98px) {
     .card-payment-view input {
-    max-width:370px;
+    max-width:340px;
 
     }
     .expiry-container {
@@ -120,7 +120,7 @@
         grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
     }
     .node-container.product-nodes .node-view {
-    max-width:100%;
+    max-width:320px;
     }
     .node-container.product-nodes {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
