@@ -34,6 +34,12 @@ namespace MultivendorWebViewer.Controllers
             }
             return PartialView("_AvailableLanguage", cultureInfo);
         }
+        [HttpGet]
+        public ActionResult GetUserMenuPopUp()
+        {
+
+            return PartialView("UserMenu");
+        }
         [HttpPost]
         public ActionResult SetLanguage(string languageCode)
         {

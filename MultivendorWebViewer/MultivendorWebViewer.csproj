@@ -281,6 +281,7 @@
     <Content Include="Views\Order\CustomerView.cshtml" />
     <Content Include="Views\Order\PaymentView.cshtml" />
     <Content Include="Views\Order\PlaceOrder.cshtml" />
+    <Content Include="Views\User\UserMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -321,7 +322,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59145</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:5097/</IISUrl>
+          <IISUrl>http://localhost:5970/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
