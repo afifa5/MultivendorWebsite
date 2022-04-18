@@ -281,7 +281,7 @@
     <Content Include="Views\Order\CustomerView.cshtml" />
     <Content Include="Views\Order\PaymentView.cshtml" />
     <Content Include="Views\Order\PlaceOrder.cshtml" />
-    <Content Include="Views\User\UserMenu.cshtml" />
+    <Content Include="Views\Home\UserMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
