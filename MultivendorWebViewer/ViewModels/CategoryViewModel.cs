@@ -44,7 +44,7 @@ namespace MultivendorWebViewer.ViewModels
             var alllist = new List<ImageViewModel>();
             if (Model != null && Model.CategoryImages != null && Model.CategoryImages.Count() > 0)
             {
-                var ids = Model.CategoryImages.Select(p => p.Id).ToArray();
+                var ids = Model.CategoryImages.Select(p => p.ImageId).ToArray();
                 var categoryImages = ApplicationRequestContext.ImageManager.GetImagesByIds(ids);
                 
                 foreach (var item in categoryImages.OrderBy(p=>p.SequenceNumber))
