@@ -190,6 +190,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\NavigationPathViewModel.cs" />
     <Compile Include="ViewModels\ImageViewModel.cs" />
     <Compile Include="ViewModels\NodeViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
