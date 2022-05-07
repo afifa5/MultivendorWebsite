@@ -148,6 +148,7 @@
     <Compile Include="Common\TextManager.cs" />
     <Compile Include="Common\UserSettings.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\NavigationPathController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
