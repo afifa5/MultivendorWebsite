@@ -18,7 +18,8 @@
 @{ 
     var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
 }
-<body data-order-total-counter="@UrlUtility.Action(applicationrequestContext, "GetTotalQuantity", "Order")">
+<body data-order-total-counter="@UrlUtility.Action(applicationrequestContext, "GetTotalQuantity", "Order")"
+      data-quick-search-url="@UrlUtility.Action(applicationrequestContext, "Search", "Search")">
     <section class="main-layout">
         <div class="main-toolbar">
             <div class="header-toolbar">
@@ -80,6 +81,11 @@
 
             </div>
            
+        </div>
+        <div class="main-search-pane">
+            @*<div class="search-result">
+                My Name is shafi miah
+            </div>*@
         </div>
         <!-- #Render your view inside main body through controller-->
         <main class="main-body">

@@ -21,6 +21,7 @@ namespace MultivendorWebViewer.ViewModels
         public string Identity { get { return Model.Identity; } }
         public SpecificationMode SpecificationMode { get { return Model.SpecificationMode== 0 ? SpecificationMode.Description:(Model.SpecificationMode == 1?SpecificationMode.Highlighted:SpecificationMode.Selection); } }
         public SpecificationTypeViewModel SpecificationType { get { return GetSpecificationType(); } }
+        public Text SpecificationName => Model.SpecificationText;
         public string FormattedName { get { return Model != null && Model.SpecificationText != null ? Model.SpecificationText.GetTranslation(ApplicationRequestContext.SelectedCulture) : string.Empty; } }
 
         private SpecificationTypeViewModel GetSpecificationType() {
@@ -33,5 +34,6 @@ namespace MultivendorWebViewer.ViewModels
         Description = 0,
         Highlighted = 1,
         Selection = 2,
+        Search = 2,
     }
 }

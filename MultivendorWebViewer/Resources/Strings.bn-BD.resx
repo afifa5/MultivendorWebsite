@@ -288,4 +288,7 @@
   <data name="UserName" xml:space="preserve">
     <value>ব্যবহারকারীর নাম</value>
   </data>
+  <data name="ViewAll" xml:space="preserve">
+    <value>সমস্ত আইটেম দেখুন</value>
+  </data>
 </root>

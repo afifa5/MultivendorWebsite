@@ -19,6 +19,7 @@ namespace MultivendorWebViewer.ViewModels
         public ApplicationRequestContext ApplicationRequestContext { get; set; }
         public int Id { get { return Model.Id; } }
         public string Identity { get { return Model.Identity; } }
+        public Text SpecificationType => Model.SpecificationTypeText;
         public int? Mode { get { return Model.SpecificationTypeMode; } }
         public string FormattedName { get { return Model != null && Model.SpecificationTypeText != null ? Model.SpecificationTypeText.GetTranslation(ApplicationRequestContext.SelectedCulture) : string.Empty; } }
     }

@@ -11,25 +11,24 @@ using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Threading.Tasks;
 using System.IO;
+using Microsoft.Ajax.Utilities;
+
 namespace MultivendorWebViewer.Manager
 {
     public class ProductManager:SingletonBase<ProductManager>
     {
         public List<Product> GetProductByIds(int[] ids)
         {
+            var allProduct = GetAllProduct();
+            var products = new List<Product>();
+            ids.ForEach(i => {
+                products.Add(allProduct[i].FirstOrDefault());
+            });
+            return products;
 
-            using (var context = new MultivendorModel())
-            {
-                var product = context.Products.Where(i => ids.Contains(i.Id))
-                    .Include(p=>p.ProductImages)
-                    .Include(p => p.Name.TextTranslations)
-                    .Include(p => p.Description.TextTranslations)
-                    .Include(p=> p.ProductSpecifications);
-                return product.ToList();
-            }
         }
-        public void GetAllProduct() {
-            var Products =  CacheManager.Default.Get<ILookup<int,Product>>(string.Concat("AllPrduct@", "MultivendorWeb"), CacheLocation.Application, () =>
+        public ILookup<int, Product> GetAllProduct() {
+           return CacheManager.Default.Get<ILookup<int,Product>>(string.Concat("AllPrduct@", "MultivendorWeb"), CacheLocation.Application, () =>
             {
                 using (var context = new MultivendorModel())
                 {
@@ -44,16 +43,17 @@ namespace MultivendorWebViewer.Manager
         }
         public Product GetProductById(int id)
         {
-
-            using (var context = new MultivendorModel())
-            {
-                var product = context.Products.Where(i =>i.Id== id)
-                    .Include(p => p.ProductImages)
-                    .Include(p => p.Name.TextTranslations)
-                    .Include(p => p.Description.TextTranslations)
-                    .Include(p => p.ProductSpecifications).FirstOrDefault();
-                return product;
-            }
+            var allProduct = GetAllProduct();
+           return allProduct[id].FirstOrDefault();
+            //using (var context = new MultivendorModel())
+            //{
+            //    var product = context.Products.Where(i =>i.Id== id)
+            //        .Include(p => p.ProductImages)
+            //        .Include(p => p.Name.TextTranslations)
+            //        .Include(p => p.Description.TextTranslations)
+            //        .Include(p => p.ProductSpecifications).FirstOrDefault();
+            //    return product;
+            //}
         }
         public List<PriceAvailability> GetpriceByproductId(int id)
         {
@@ -64,19 +64,48 @@ namespace MultivendorWebViewer.Manager
             }
         }
         public SpecificationType GetSpecificationType(int id) {
-            using (var context = new MultivendorModel())
-            {
-                var specificationType = context.SpecificationTypes.Where(i =>i.Id == id).Include(p => p.SpecificationTypeText.TextTranslations).FirstOrDefault();
-                return specificationType;
-            }
+            var allSpecificationsType = GetAllSpecificationsType();
+           return allSpecificationsType[id].FirstOrDefault();
+            //using (var context = new MultivendorModel())
+            //{
+            //    var specificationType = context.SpecificationTypes.Where(i =>i.Id == id).Include(p => p.SpecificationTypeText.TextTranslations).FirstOrDefault();
+            //    return specificationType;
+            //}
         }
         public List<Specification> GetSpecifications(int[] ids)
         {
-            using (var context = new MultivendorModel())
-            {
-                var specificationType = context.Specifications.Where(i => ids.Contains(i.Id)).Include(p => p.SpecificationText.TextTranslations);
-                return specificationType.ToList();
-            }
+            var allSpecifications = GetAllSpecifications();
+            var specifications = new List<Specification>();
+            ids.ForEach(p => specifications.Add(allSpecifications[p].FirstOrDefault()));
+            return specifications;
+            //using (var context = new MultivendorModel())
+            //{
+            //    var specificationType = context.Specifications.Where(i => ids.Contains(i.Id)).Include(p => p.SpecificationText.TextTranslations);
+            //    return specificationType.ToList();
+            //}
         }
+        public ILookup<int, Specification> GetAllSpecifications()
+        {
+            return CacheManager.Default.Get<ILookup<int,Specification>>(string.Concat("AllSpecification@", "MultivendorWeb"), CacheLocation.Application, () =>
+            {
+                using (var context = new MultivendorModel())
+                {
+                    var specifications = context.Specifications.Include(p => p.SpecificationText.TextTranslations).ToLookup(l => l.Id);
+                    return specifications;
+                }
+            });
+        }
+        public ILookup<int, SpecificationType> GetAllSpecificationsType()
+        {
+            return CacheManager.Default.Get<ILookup<int, SpecificationType>>(string.Concat("AllSpecificationType@", "MultivendorWeb"), CacheLocation.Application, () =>
+            {
+                using (var context = new MultivendorModel())
+                {
+                    var specificationsType = context.SpecificationTypes.Include(p => p.SpecificationTypeText.TextTranslations).ToLookup(l => l.Id);
+                    return specificationsType;
+                }
+            });
+        }
+
     }
 }

@@ -15,14 +15,16 @@
 
 <div class="order-cart-view">
     @*Show header*@
-
+    <div class="navigation-bar">
+        @Html.Action("NavigationBar", "NavigationPath")
+    </div>
 
     <div class="order-header">
         <div class="order-name-container">
             <label class="order-name">@CustomStrings.Order</label>
         </div>
     </div>
-  
+
 
     <div class="main-body-contents">
         <div class="order-body">

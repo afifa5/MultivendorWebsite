@@ -1,4 +1,89 @@
-﻿(function ( digitalHalalMarket,multivendorWeb, $, document) {
+﻿(function (digitalHalalMarket, multivendorWeb, $, document) {
+    multivendorWeb.Search = {
+        SearchProduct: function (searchTerm) {
+            /*call to the controller function */
+
+            let actionUrl = $(document.body).data("quick-search-url");
+            $.ajax({
+                url: actionUrl,
+                data: { term: searchTerm, displayCount : 20 },
+                dataType: "html",
+                type: "GET",
+                cache: false,
+                success: function (data) {
+                    setTimeout(function () {
+                        $("div").remove(".search-spinner");
+                    }, 500);
+                    $html = $(data);
+                    multivendorWeb.Search.SearchOpen($html)
+
+                }, error: function (ex) {
+
+                }
+            });
+        },
+        SearchOpen: function ($html) {
+            var mainToolbarHeight = $(document.body).find(".main-toolbar");
+            var mainSearchPane = $(document.body).find(".main-search-pane");
+            mainSearchPane.empty()
+            mainSearchPane.append($html)
+            mainSearchPane.addClass("open")
+            mainSearchPane.css("top", mainToolbarHeight.outerHeight())
+            var $body = $(document.body);
+            $body.off("click", quickSearchPanelGlobalClick);
+            $body.on("click", quickSearchPanelGlobalClick);
+
+            $body.off("keydown", quickSearchPanelGlobalKeydown);
+            $body.on("keydown", quickSearchPanelGlobalKeydown);
+        },
+        close: function (panel, keepInputOpen) {
+            keepInputOpen = keepInputOpen || false;
+            if (!panel) panel = $(document).findByClass("main-search-pane");
+            if (panel) {
+                panel.removeClass("open");
+                //sign.core.airspaceNeeded(panel, false);
+                //$('.search-backdrop').remove();
+                var $body = $(document.body);
+                $body.off("click", quickSearchPanelGlobalClick);
+                $body.off("keydown", quickSearchPanelGlobalKeydown);
+                //layout.removeClass("search-dropdown-maximized");
+            }
+        },
+    };
+    $(document).on("input propertychange keyup", ".search-input", function (e) {
+        var inputTerm = $(this).val();
+        var mainSearchPane = $(document.body).find(".main-search-pane");
+        mainSearchPane.removeClass("open")
+        if (inputTerm != "" && inputTerm.length > 3) {
+            $("<div class=\"search-spinner\"></div>").insertAfter($(".quick-search-input input[type=search]"));
+            multivendorWeb.Search.SearchProduct(inputTerm);
+        }
+        else {
+            mainSearchPane.empty()
+        }
+    });
+    $(document).on("click", ".search-input", function (e) {
+        var searchResult = $(document.body).find(".search-result");
+        if (searchResult.length > 0) {
+            multivendorWeb.Search.SearchOpen(searchResult)
+        }
+    });
+    function quickSearchPanelGlobalClick(e) {
+        var $document = $(document);
+        var panel = $document.find(".main-search-pane");
+        if ($.contains(panel[0], e.target) == false && $.contains($document.find(".quick-search-input")[0], e.target) == false) {
+            multivendorWeb.Search.close(panel);
+            $(document.body).off(e);
+        }
+    };
+    function quickSearchPanelGlobalKeydown(e) {
+        if (e.keyCode == 27) {
+            e.preventDefault();
+            var $document = $(document);
+            var panel = $document.find(".main-search-pane");
+            multivendorWeb.Search.close(panel); // close on esc
+        }
+    };
     //Showing the availabe laguage in the toolbar in a dropdown list.
     $(document).on("click", ".language-container", function (e) {
 
@@ -82,4 +167,5 @@
         quantityElement.val(quantity)
         quantityElement.trigger("change");
     });
+
 }(window.digitalHalalMarket = window.digitalHalalMarket || {}, window.multivendorWeb = window.multivendorWeb || {}, window.jQuery, document));

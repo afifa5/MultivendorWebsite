@@ -288,4 +288,7 @@
   <data name="UserName" xml:space="preserve">
     <value>User name</value>
   </data>
+  <data name="ViewAll" xml:space="preserve">
+    <value>View all</value>
+  </data>
 </root>

@@ -167,6 +167,7 @@
     <Compile Include="Common\TextManager.cs" />
     <Compile Include="Common\UserSettings.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\NavigationPathController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="SingletonBase.cs" />
     <Compile Include="Utility.cs" />
+    <Compile Include="ViewModels\SearchHitViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\NavigationPathViewModel.cs" />
     <Compile Include="ViewModels\ImageViewModel.cs" />
@@ -236,6 +238,7 @@
     <Content Include="Content\Flag\sv.svg" />
     <Content Include="Content\Flag\ur.svg" />
     <Content Include="Content\Font-awesome.css" />
+    <Content Include="Content\images\spinner.gif" />
     <Content Include="Content\Media.css" />
     <Content Include="Content\Order.css" />
     <Content Include="Content\Presentation.css" />
@@ -306,6 +309,7 @@
     <Content Include="Views\Order\PlaceOrder.cshtml" />
     <Content Include="Views\Home\UserMenu.cshtml" />
     <Content Include="Views\NavigationPath\NavigationBar.cshtml" />
+    <Content Include="Views\Search\SearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

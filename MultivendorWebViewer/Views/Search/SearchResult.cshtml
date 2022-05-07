@@ -1,0 +1,67 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@model SearchHitViewModel
+    @{ 
+        var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+        var searchUrl = UrlUtility.Action(applicationrequestContext, "Search", "Search", new { term = Model.SearchTerm});
+    }
+<div class="search-result">
+    <div class="search-header">
+        <h3 class="heading">
+           @CustomStrings.Products
+            <span class="hit-count"></span>
+            <span class="more"><a href="@searchUrl">@string.Format("{0} / {1} ({2})",Model.DisplayCount.HasValue? Model.DisplayCount.Value.ToString():string.Empty, Model.TotalCount.HasValue ? Model.TotalCount.Value.ToString() : string.Empty,CustomStrings.ViewAll)  </a></span>
+        </h3>
+    </div>
+    <div class=" node-container product-nodes">
+        @foreach (var item in Model.Products)
+        {
+            <div class="node-view ">
+                <a class="image-container" href="@item.GetUrl()">
+                    @if (item.Images != null && item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).Count() > 0)
+                    {
+                        //Show Images
+                        var itemImage = item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).FirstOrDefault();
+                        <img class="presentation-image" src="@itemImage.GetThumbnailUrl(80,80)">
+                    }
+                </a>
+                <div class="search-information-container">
+                    @if (!string.IsNullOrEmpty(item.FormattedName))
+                    {
+                        <a class="name-container" href="@item.GetUrl()">
+                            <label class="node-name">@item.FormattedName</label>
+                        </a>
+                    }
+
+                    @if (!string.IsNullOrEmpty(item.FormattedDescription))
+                    {
+                        <a class="description-container" href="@item.GetUrl()">
+                            <span class="node-description">@item.FormattedDescription</span>
+                        </a>
+                    }
+                </div>
+                
+                @if (item.Specifications != null)
+                {
+                    var highlightedSpecification = item.Specifications.Where(p => p.SpecificationMode == SpecificationMode.Highlighted);
+                    if (highlightedSpecification != null && highlightedSpecification.Any())
+                    {
+                        <a class="highlighted-specification specifications" href="@item.GetUrl()">
+                            @foreach (var specification in highlightedSpecification)
+                            {
+
+                                <div class="sp">
+                                    <label>@specification.SpecificationType.FormattedName</label>
+                                    <span>@specification.FormattedName</span>
+                                </div>
+
+                            }
+                        </a>
+                    }
+
+                }
+                @*@Html.Action("GetOrderInformation", "Product", routeValues: new { productId = item.Id })*@
+            </div>
+        }
+    </div>
+</div>
