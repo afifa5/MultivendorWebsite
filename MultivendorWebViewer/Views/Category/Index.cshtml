@@ -8,6 +8,9 @@
 }
 
 <div class="presentation category-view-container">
+    <div class="navigation-bar">
+       @Html.Action("NavigationBar", "NavigationPath")
+    </div>
     @*Show header*@
     <div class="presentation-header">
         @if (Model != null && Model.Images != null && Model.Images.Count() > 0)
@@ -45,7 +48,7 @@
                                 @if (item.Images != null && item.Images.Count() > 0)
                                 {
                                     //Show Images
-                                    foreach (var itemImage in item.Images.Where(i=> i.ImageMode == ImageMode.Thumbnail))
+                                    foreach (var itemImage in item.Images.Where(i => i.ImageMode == ImageMode.Thumbnail))
                                     {
                                         <img class="presentation-image" src="@itemImage.GetThumbnailUrl()">
                                     }

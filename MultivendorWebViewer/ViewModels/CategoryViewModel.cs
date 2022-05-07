@@ -54,7 +54,11 @@ namespace MultivendorWebViewer.ViewModels
             }
             return alllist;
         }
-
+        public string GetUrl()
+        {
+            var routeValues = new { id = Id } /*Dictionary<string, object>()*/;
+            return UrlUtility.Action(ApplicationRequestContext, "Index", "Category", routeValues);
+        }
 
     }
 }

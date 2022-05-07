@@ -1,0 +1,13 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@model IEnumerable<NavigationPathViewModel>
+<ul class="multivendor-web-toolbar navigation-path-toolbar">
+    @foreach (var item in Model)
+    {
+        <li class=" container start-url">
+            <a href="@item.Url">@item.DisplayText</a>
+        </li>
+    }
+
+
+</ul>

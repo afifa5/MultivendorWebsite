@@ -45,6 +45,15 @@ namespace MultivendorWebViewer.Manager
                 return nodes.ToList();
             }
         }
+        public SubNode GetSubnode(int id)
+        {
+
+            using (var context = new MultivendorModel())
+            {
+                var nodes = context.SubNodes.Where(i => i.SubNodeItemId == id);
+                return nodes.FirstOrDefault();
+            }
+        }
         public Node GetNodeById(int id)
         {
 

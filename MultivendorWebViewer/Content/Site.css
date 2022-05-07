@@ -437,3 +437,13 @@ display:none;
 .main-toolbar .items-toolbar.menu-toolbar {
     min-height: 55px;
 }
+.navigation-path-toolbar {
+padding:5px;
+}
+.navigation-path-toolbar a {
+    color: #000;
+    text-decoration: none;
+}
+.navigation-path-toolbar li:not(:last-child):after {
+   content:"/";
+}

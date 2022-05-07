@@ -8,15 +8,18 @@
 }
 
 <div class="presentation node-view-container">
+    <div class="navigation-bar">
+        @Html.Action("NavigationBar", "NavigationPath",new { nodeId= Model.Id })
+    </div>
     @*Show header*@
-    
+
 
     <div class="presentation-header sub-node">
         @if (Model != null && Model.Images != null && Model.Images.Count() > 0)
         {
             //Show Images
             var image = Model.Images.Where(i => i.ImageMode == ImageMode.Original).FirstOrDefault();
-            if (image!=null)
+            if (image != null)
             {
                 <img class="presentation-image" src="@image.GetUrl()">
 
@@ -44,112 +47,113 @@
                 <div class="node-container sub-node">
                     @foreach (var item in Model.SubNodes.OrderBy(p => p.SequenceNumber))
                     {
-                    <a class="node-view " href="@item.GetUrl()">
-                        <div class="image-container">
-                            @if (item.Images != null && item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).Count() > 0)
+                        <a class="node-view " href="@item.GetUrl()">
+                            <div class="image-container">
+                                @if (item.Images != null && item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).Count() > 0)
+                                {
+                                    //Show Images
+                                    var itemImage = item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).FirstOrDefault();
+                                    <img class="presentation-image" src="@itemImage.GetThumbnailUrl()">
+                                }
+                            </div>
+                            @if (!string.IsNullOrEmpty(item.FormattedName))
                             {
-                                //Show Images
-                                var itemImage = item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).FirstOrDefault();
-                                <img class="presentation-image" src="@itemImage.GetThumbnailUrl()">
+                                <div class="name-container">
+                                    <label class="node-name">@item.FormattedName</label>
+                                </div>
                             }
-                        </div>
-                        @if (!string.IsNullOrEmpty(item.FormattedName))
-                        {
-                            <div class="name-container">
-                                <label class="node-name">@item.FormattedName</label>
-                            </div>
-                        }
 
-                        @if (!string.IsNullOrEmpty(item.FormattedDescription))
-                        {
-                            <div class="description-container">
-                                <span class="node-description">@item.FormattedDescription</span>
-                            </div>
-                        }
+                            @if (!string.IsNullOrEmpty(item.FormattedDescription))
+                            {
+                                <div class="description-container">
+                                    <span class="node-description">@item.FormattedDescription</span>
+                                </div>
+                            }
 
-                    </a>
+                        </a>
                     }
                 </div>
 
             }
-            @if (Model != null && Model.Products != null && Model.Products.Count() > 0) { 
-            @*//print all product*@
-        <div class="multivendor-data-view">
-            <div class="data-view-tools-container">
-                <ul class="multivendor-toolbar tools">
-                    <li class="filter-tool">
-                        <div class="filter-selector-container">
-                            <input placeholder="Filter on all" class="filter-text">
-                            <div class="filter-icon-container">
-                                <span class="icon fa fa-caret-down content fa-2x"></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="sort-tool">
-                        <div class="sort-selector-container">
-                            <input placeholder="Sort by default" class="sort-text">
-                            <div class="sort-icon-container">
-                                <span class="icon fa fa-signal content fa-2x"></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="view-tool " data-name="Table"><span class=" icon fa fa-list-ul content fa-2x" ></span></li>
-                    <li class="view-tool" data-name="Gallery"><span class="icon fa fa-th-large content fa-2x" ></span></li>
-                </ul>
-            </div>
-            <div class="data-view-content-container">
-                <div class="node-container product-nodes">
-                    @foreach (var item in Model.Products.OrderBy(p => p.SequenceNumber))
-                    {
-                    <div class="node-view ">
-                        <a class="image-container" href="@item.GetUrl()">
-                            @if (item.Images != null && item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).Count() > 0)
+            @if (Model != null && Model.Products != null && Model.Products.Count() > 0)
+            {
+                @*//print all product*@
+                <div class="multivendor-data-view">
+                    <div class="data-view-tools-container">
+                        <ul class="multivendor-toolbar tools">
+                            <li class="filter-tool">
+                                <div class="filter-selector-container">
+                                    <input placeholder="Filter on all" class="filter-text">
+                                    <div class="filter-icon-container">
+                                        <span class="icon fa fa-caret-down content fa-2x"></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="sort-tool">
+                                <div class="sort-selector-container">
+                                    <input placeholder="Sort by default" class="sort-text">
+                                    <div class="sort-icon-container">
+                                        <span class="icon fa fa-signal content fa-2x"></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="view-tool " data-name="Table"><span class=" icon fa fa-list-ul content fa-2x"></span></li>
+                            <li class="view-tool" data-name="Gallery"><span class="icon fa fa-th-large content fa-2x"></span></li>
+                        </ul>
+                    </div>
+                    <div class="data-view-content-container">
+                        <div class="node-container product-nodes">
+                            @foreach (var item in Model.Products.OrderBy(p => p.SequenceNumber))
                             {
-                                //Show Images
-                                var itemImage = item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).FirstOrDefault();
-                                <img class="presentation-image" src="@itemImage.GetThumbnailUrl()">
-                            }
-                        </a>
-                        @if (!string.IsNullOrEmpty(item.FormattedName))
-                        {
-                            <a class="name-container" href="@item.GetUrl()">
-                                <label class="node-name">@item.FormattedName</label>
-                            </a>
-                        }
-
-                        @if (!string.IsNullOrEmpty(item.FormattedDescription))
-                        {
-                            <a class="description-container" href="@item.GetUrl()">
-                                <span class="node-description">@item.FormattedDescription</span>
-                            </a>
-                        }
-                        @if (item.Specifications != null)
-                        {
-                            var highlightedSpecification = item.Specifications.Where(p => p.SpecificationMode == SpecificationMode.Highlighted);
-                            if (highlightedSpecification != null && highlightedSpecification.Any())
-                            {
-                                <a class="highlighted-specification specifications" href="@item.GetUrl()">
-                                    @foreach (var specification in highlightedSpecification)
+                                <div class="node-view ">
+                                    <a class="image-container" href="@item.GetUrl()">
+                                        @if (item.Images != null && item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).Count() > 0)
+                                        {
+                                            //Show Images
+                                            var itemImage = item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).FirstOrDefault();
+                                            <img class="presentation-image" src="@itemImage.GetThumbnailUrl()">
+                                        }
+                                    </a>
+                                    @if (!string.IsNullOrEmpty(item.FormattedName))
                                     {
+                                        <a class="name-container" href="@item.GetUrl()">
+                                            <label class="node-name">@item.FormattedName</label>
+                                        </a>
+                                    }
 
-                                        <div class="sp">
-                                            <label>@specification.SpecificationType.FormattedName</label>
-                                            <span>@specification.FormattedName</span>
-                                        </div>
+                                    @if (!string.IsNullOrEmpty(item.FormattedDescription))
+                                    {
+                                        <a class="description-container" href="@item.GetUrl()">
+                                            <span class="node-description">@item.FormattedDescription</span>
+                                        </a>
+                                    }
+                                    @if (item.Specifications != null)
+                                    {
+                                        var highlightedSpecification = item.Specifications.Where(p => p.SpecificationMode == SpecificationMode.Highlighted);
+                                        if (highlightedSpecification != null && highlightedSpecification.Any())
+                                        {
+                                            <a class="highlighted-specification specifications" href="@item.GetUrl()">
+                                                @foreach (var specification in highlightedSpecification)
+                                                {
+
+                                                    <div class="sp">
+                                                        <label>@specification.SpecificationType.FormattedName</label>
+                                                        <span>@specification.FormattedName</span>
+                                                    </div>
+
+                                                }
+                                            </a>
+                                        }
 
                                     }
-                                </a>
+                                    @Html.Action("GetOrderInformation", "Product", routeValues: new { productId = item.Id })
+                                </div>
                             }
-
-                        }
-                        @Html.Action("GetOrderInformation", "Product", routeValues: new { productId = item.Id })
+                        </div>
                     </div>
-                    }
+                    <div class="data-view-content-footer"></div>
                 </div>
-            </div>
-            <div class="data-view-content-footer"></div>
-        </div>
-               }
+            }
         </div>
     </div>
 </div>
