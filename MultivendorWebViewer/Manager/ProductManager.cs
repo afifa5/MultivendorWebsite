@@ -28,6 +28,20 @@ namespace MultivendorWebViewer.Manager
                 return product.ToList();
             }
         }
+        public void GetAllProduct() {
+            var Products =  CacheManager.Default.Get<ILookup<int,Product>>(string.Concat("AllPrduct@", "MultivendorWeb"), CacheLocation.Application, () =>
+            {
+                using (var context = new MultivendorModel())
+                {
+                    var product = context.Products
+                        .Include(p => p.ProductImages)
+                        .Include(p => p.Name.TextTranslations)
+                        .Include(p => p.Description.TextTranslations)
+                        .Include(p => p.ProductSpecifications).ToLookup(t=>t.Id);
+                    return product;
+                }
+            });
+        }
         public Product GetProductById(int id)
         {
 

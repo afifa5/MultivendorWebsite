@@ -32,6 +32,8 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.Ajax.Utilities;
+using System.Collections.Concurrent;
+using System.Reflection;
 
 namespace MultivendorWebViewer
 {
@@ -1229,8 +1231,44 @@ namespace MultivendorWebViewer
                 return dictionary;
             }
         }
+        public static T GetCustomAttribute<T>(this MemberInfo memberInfo, bool inherit = false, bool inheritAttributes = true)
+        where T : Attribute
+        {
+            return Extensions.GetCustomAttributes<T>(memberInfo, inherit, inheritAttributes).FirstOrDefault();
+        }
 
+        public static IEnumerable<T> GetCustomAttributes<T>(this MemberInfo memberInfo, bool inherit = false, bool inheritAttributes = true)
+            where T : Attribute
+        {
+            var attributes = memberInfo.GetCustomAttributes(inherit);
+            return attributes == null ? Enumerable.Empty<T>() : inheritAttributes == true ? attributes.OfType<T>() : attributes.Where(a => a.GetType() == typeof(T)).Cast<T>();
+        }
 
+        //public static bool HasCustomAttribute<T>(this MemberInfo memberInfo, bool inherit = false)
+        //{
+        //    return Extensions.GetCustomAttribute(memberInfo, typeof(T), inherit) != null;
+        //}
+
+        //public static bool HasCustomAttribute(this MemberInfo memberInfo, Type attributeTyp, bool inherit = false)
+        //{
+        //    return Extensions.GetCustomAttribute(memberInfo, attributeTyp, inherit) != null;
+        //}
+
+        public static TValue TryGetValue<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue fallbackValue = default(TValue))
+        {
+            TValue value;
+            if (dictionary != null && dictionary.TryGetValue(key, out value) == true)
+            {
+                return value;
+            }
+
+            return fallbackValue;
+        }
+        public static bool TryRemove<TKey, TValue>(this ConcurrentDictionary<TKey, TValue> source, TKey key)
+        {
+            TValue tmp;
+            return source.TryRemove(key, out tmp);
+        }
         public static T GetValue<T>(this ModelBindingContext bindingContext, string key)
         {
             var result = bindingContext.ValueProvider.GetValue(key);
