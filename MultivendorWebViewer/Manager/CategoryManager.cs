@@ -13,7 +13,7 @@ using System.Data.Entity.Core;
 
 namespace MultivendorWebViewer.Manager
 {
-    public class CategoryManager
+    public class CategoryManager: SingletonBase<CategoryManager>
     {
         public Category GetCategory(int id, ApplicationRequestContext requestContext)
         {

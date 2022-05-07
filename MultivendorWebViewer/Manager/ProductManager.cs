@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.IO;
 namespace MultivendorWebViewer.Manager
 {
-    public class ProductManager
+    public class ProductManager:SingletonBase<ProductManager>
     {
         public List<Product> GetProductByIds(int[] ids)
         {

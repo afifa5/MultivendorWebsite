@@ -16,12 +16,12 @@ namespace MultivendorWebViewer.Common
         public ApplicationRequestContext(RequestContext requestContext)
         {
             RequestContext = requestContext;
-            CategoryManager = new CategoryManager();
-            TextManager = new TextManager();
-            Configuration = new ConfigurationManager();
-            ImageManager = new ImageManager();
-            ProductManager = new ProductManager();
-            OrderManager = new OrderManager();
+            CategoryManager = CategoryManager.Default;
+            TextManager =TextManager.Default;
+            Configuration = ConfigurationManager.Default;
+            ImageManager =ImageManager.Default;
+            ProductManager = ProductManager.Default;
+            OrderManager =OrderManager.Default;
 
         }
         public static ApplicationRequestContext GetContext(HttpContextBase context)

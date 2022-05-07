@@ -14,7 +14,7 @@ using System.IO;
 
 namespace MultivendorWebViewer.Manager
 {
-    public class ImageManager
+    public class ImageManager:SingletonBase<ImageManager>
     {
 
         public List<Image> GetImagesByIds(int[] ids)

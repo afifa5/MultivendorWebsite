@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace MultivendorWebViewer.Common
 {
-    public class TextManager
+    public class TextManager:SingletonBase<TextManager>
     {
         public static ResourceManager ResourceManager { get { return new ResourceManager("MultivendorWebViewer.Resources.Strings",Assembly.GetExecutingAssembly()); } }
         public static TextManager Current

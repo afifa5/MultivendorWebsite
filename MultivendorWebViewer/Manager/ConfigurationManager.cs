@@ -10,7 +10,7 @@ using System.Globalization;
 
 namespace MultivendorWebViewer.Manager
 {
-    public class ConfigurationManager
+    public class ConfigurationManager:SingletonBase<ConfigurationManager>
     {
         
         public  ProfileSetting SiteProfile { get { return GetProfileSettings(Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data\\profile.config")); } }

@@ -15,7 +15,7 @@ using RefactorThis.GraphDiff;
 
 namespace MultivendorWebViewer.Manager
 {
-    public class OrderManager
+    public class OrderManager:SingletonBase<OrderManager>
     {
         private static object autoOrderNumberLock = new object();
         private static int? autoOrderNumberPropertyId = null;
