@@ -37,7 +37,35 @@
         </div>
     </div>
     <div class="main-body-contents">
-        <div class="presentation-body">
+        @*open pinned class add to show the advance search always*@
+        <aside class="left advance-search-container ">
+            <div class="advance-search-header">
+                <h3 class="advance-search-label" data-for="~">Advance search</h3>
+                <div class="pin-icon-container">
+                    <span class="icon fa fa-map-pin"></span>
+
+                </div>
+            </div>
+            <div class="advance-search-information">
+                <div class="search-item">
+                    <label>Product name</label>
+                    <input type="text" />
+                </div>
+                <div class="search-item">
+                    <label>Brand</label>
+                    <input type="text" />
+                </div>
+                <div class="search-item">
+                    <label>Location</label>
+                    <input type="text" />
+                </div>
+                <div class="search-item">
+                    <label>Price range</label>
+                    <input type="text" />
+                </div>
+            </div>
+        </aside>
+        <div class="presentation-body left-pane">
             @if (Model != null && Model.Nodes != null && Model.Nodes.Count() > 0)
             {
                 <div class="node-container">

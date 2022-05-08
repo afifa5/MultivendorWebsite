@@ -175,6 +175,13 @@
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Helpers\CarouselHelper.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
+    <Compile Include="Helpers\ImagesViewerHelper.cs" />
+    <Compile Include="Helpers\LayoutHelper.cs" />
+    <Compile Include="Helpers\TabHelper.cs" />
+    <Compile Include="Helpers\ToolBarHelper.cs" />
+    <Compile Include="Helpers\ViewHelpers.cs" />
     <Compile Include="Instance.cs" />
     <Compile Include="Manager\ImageManager.cs" />
     <Compile Include="Manager\CategoryManager.cs" />
@@ -241,7 +248,9 @@
     <Content Include="Content\images\spinner.gif" />
     <Content Include="Content\Media.css" />
     <Content Include="Content\Order.css" />
+    <Content Include="Content\Search.css" />
     <Content Include="Content\Presentation.css" />
+    <Content Include="Content\HelperComponent.css" />
     <Content Include="Content\User.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fa-brands-400.svg" />
@@ -279,6 +288,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\multivendor.carousel.js" />
+    <Content Include="Scripts\multivendor.helpers.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

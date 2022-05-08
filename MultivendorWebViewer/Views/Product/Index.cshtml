@@ -1,5 +1,6 @@
 ﻿@using MultivendorWebViewer.ViewModels;
 @using MultivendorWebViewer.Common;
+@using MultivendorWebViewer.Helpers;
 @model ProductViewModel
 
 @{
@@ -14,15 +15,25 @@
                 <div class="images">
                     @if (Model != null && Model.Images != null && Model.Images.Count() > 0)
                     {
-                        //Show Images
-                        var image = Model.Images/*.Where(i => i.ImageMode == ImageMode.Original)*/.FirstOrDefault();
-                        if (image != null)
+                        if (Model.Images.Count() == 1)
                         {
-                            <img class="presentation-image" src="@image.GetUrl()">
+                             @Html.Image(Model.Images.FirstOrDefault(),height:620,width:450)
+                        }
+                        else
+                        {
+                            var slides = Model.Images.Select(i => new CarouselSlide
+                            {
+                                Content = @Html.Image(i,height:620,width:450),
+                            });
+                            @Html.Carousel(slides)
                         }
 
                     }
+
+
+
                 </div>
+
             </div>
             <footer></footer>
             <div class="body-content">
@@ -64,21 +75,21 @@
                     var specifications = Model.Specifications.Where(p => p.SpecificationMode == SpecificationMode.Description);
                     if (specifications != null && specifications.Any())
                     {
-            <div class="specification-container">
-                <h3 class="specifications-label">@CustomStrings.Specification</h3>
-                <div class="specifications">
-                    @foreach (var specification in specifications)
-                    {
+                        <div class="specification-container">
+                            <h3 class="specifications-label">@CustomStrings.Specification</h3>
+                            <div class="specifications">
+                                @foreach (var specification in specifications)
+                                {
 
-                        @*<div class="sp">*@
-                            <label>@specification.SpecificationType.FormattedName</label>
-                            <span>@specification.FormattedName</span>
-                        @*</div>*@
+                                    @*<div class="sp">*@
+                                    <label>@specification.SpecificationType.FormattedName</label>
+                                    <span>@specification.FormattedName</span>
+                                    @*</div>*@
 
-                    }
-                </div>
-            </div>
-          
+                                }
+                            </div>
+                        </div>
+
                     }
 
                 }
@@ -86,3 +97,14 @@
         </div>
     </div>
 </div>
+@helper CarouselContent(IList<ImageViewModel> images)
+{
+    foreach (var img in images)
+    {
+        <div class="slide">
+          
+        @Html.Image(img,height:700,width:500)
+              
+        </div>
+    }
+}

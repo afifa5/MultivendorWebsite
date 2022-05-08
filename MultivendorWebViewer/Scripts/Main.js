@@ -62,12 +62,58 @@
             mainSearchPane.empty()
         }
     });
-    $(document).on("click", ".search-input", function (e) {
+    $(document).on("focus", ".search-input", function (e) {
         var searchResult = $(document.body).find(".search-result");
         if (searchResult.length > 0) {
             multivendorWeb.Search.SearchOpen(searchResult)
         }
+        else {
+            var inputTerm = $(this).val();
+            var mainSearchPane = $(document.body).find(".main-search-pane");
+            mainSearchPane.removeClass("open")
+            if (inputTerm != "" && inputTerm.length > 3) {
+                $("<div class=\"search-spinner\"></div>").insertAfter($(".quick-search-input input[type=search]"));
+                multivendorWeb.Search.SearchProduct(inputTerm);
+            }
+            else {
+                mainSearchPane.empty()
+            }
+        }
     });
+    $(document).on("mouseleave", ".advance-search-container", function (e) {
+        if (!$(this).hasClass("pinned"))
+        $(this).removeClass("open")
+    });
+    $(document).on("click", ".pin-icon-container", function (e) {
+        var searchContainer = $(this).closest(".advance-search-container")
+        if (!searchContainer.hasClass("pinned"))
+            searchContainer.addClass("pinned")
+        else
+            searchContainer.removeClass("pinned")
+    });
+    $(document).on("mouseenter", ".advance-search-container", function (e) {
+        $(this).addClass("open")
+    });
+    
+    $(document).on("focus", ".search-input", function (e) {
+        var searchResult = $(document.body).find(".search-result");
+        if (searchResult.length > 0) {
+            multivendorWeb.Search.SearchOpen(searchResult)
+        }
+        else {
+            var inputTerm = $(this).val();
+            var mainSearchPane = $(document.body).find(".main-search-pane");
+            mainSearchPane.removeClass("open")
+            if (inputTerm != "" && inputTerm.length > 3) {
+                $("<div class=\"search-spinner\"></div>").insertAfter($(".quick-search-input input[type=search]"));
+                multivendorWeb.Search.SearchProduct(inputTerm);
+            }
+            else {
+                mainSearchPane.empty()
+            }
+        }
+    });
+
     function quickSearchPanelGlobalClick(e) {
         var $document = $(document);
         var panel = $document.find(".main-search-pane");

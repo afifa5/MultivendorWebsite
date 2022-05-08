@@ -34,6 +34,7 @@ using System.Threading.Tasks;
 using Microsoft.Ajax.Utilities;
 using System.Collections.Concurrent;
 using System.Reflection;
+using MultivendorWebViewer.Helpers;
 
 namespace MultivendorWebViewer
 {
@@ -1185,6 +1186,57 @@ namespace MultivendorWebViewer
                 collection.Remove(key);
             }
         }
+        public static bool? ToNullableBool(this string str, bool ignoreCase = true)
+        {
+            if (str == null) return null;
+            var comparer = ignoreCase == true ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal;
+            if (comparer.Equals(str, System.Boolean.TrueString)) return true;
+            if (comparer.Equals(str, System.Boolean.FalseString)) return false;
+            return null;
+        }
+        public static decimal? ToNullableDecimal(this string str)
+        {
+            if (str == null) return null;
+
+            decimal val;
+            if (decimal.TryParse(str, out val) == true)
+            {
+                return val;
+            }
+            return null;
+        }
+        public static bool HasMinCount<TSource>(this IEnumerable<TSource> source, int minCount)
+        {
+            if (source == null) return false;
+
+            var collectiong = source as ICollection<TSource>;
+            if (collectiong != null) return collectiong.Count >= minCount;
+
+            var collection = source as ICollection;
+            if (collection != null) return collection.Count >= minCount;
+
+            int count = 0;
+            using (var e = source.GetEnumerator())
+            {
+                checked
+                {
+                    while (e.MoveNext()) if (++count >= minCount) return true;
+                }
+            }
+            return false;
+        }
+
+        public static int? ToNullableInt(this string str)
+        {
+            if (str == null) return null;
+
+            int val;
+            if (int.TryParse(str, out val) == true)
+            {
+                return val;
+            }
+            return null;
+        }
 
 #if NET5
         public static IDictionary<string, object> GetQuery(this HttpRequest request)
@@ -1242,6 +1294,33 @@ namespace MultivendorWebViewer
         {
             var attributes = memberInfo.GetCustomAttributes(inherit);
             return attributes == null ? Enumerable.Empty<T>() : inheritAttributes == true ? attributes.OfType<T>() : attributes.Where(a => a.GetType() == typeof(T)).Cast<T>();
+        }
+        public static void MergeAttributes(this TagBuilder tag, object htmlAttributes, bool replaceExisting = false)
+        {
+            if (tag != null && htmlAttributes != null)
+            {
+                var attributeBuilder = htmlAttributes as AttributeBuilder;
+                if (attributeBuilder != null)
+                {
+                    Extensions.MergeAttributes(tag, attributeBuilder, replaceExisting);
+                }
+                else
+                {
+                    tag.MergeAttributes<string, object>(htmlAttributes as IDictionary<string, object> ?? HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes), replaceExisting);
+                }
+            }
+        }
+
+        public static void MergeAttributes(this TagBuilder tag, AttributeBuilder htmlAttributes, bool replaceExisting = false)
+        {
+            if (htmlAttributes != null && tag != null)
+            {
+                foreach (var attribute in htmlAttributes)
+                {
+                    string value = attribute.Value as string ?? (attribute.Value != null ? attribute.Value.ToString() : null);
+                    tag.MergeAttribute(attribute.Key, value, replaceExisting);
+                }
+            }
         }
 
         //public static bool HasCustomAttribute<T>(this MemberInfo memberInfo, bool inherit = false)

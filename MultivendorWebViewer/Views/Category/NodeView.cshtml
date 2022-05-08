@@ -1,5 +1,6 @@
 ﻿@using MultivendorWebViewer.ViewModels;
 @using MultivendorWebViewer.Common;
+@using MultivendorWebViewer.Helpers;
 @model NodeViewModel
 
 @{
@@ -9,7 +10,7 @@
 
 <div class="presentation node-view-container">
     <div class="navigation-bar">
-        @Html.Action("NavigationBar", "NavigationPath",new { nodeId= Model.Id })
+        @Html.Action("NavigationBar", "NavigationPath", new { nodeId = Model.Id })
     </div>
     @*Show header*@
 
@@ -48,14 +49,14 @@
                     @foreach (var item in Model.SubNodes.OrderBy(p => p.SequenceNumber))
                     {
                         <a class="node-view " href="@item.GetUrl()">
-                            <div class="image-container">
-                                @if (item.Images != null && item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).Count() > 0)
-                                {
-                                    //Show Images
-                                    var itemImage = item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).FirstOrDefault();
-                                    <img class="presentation-image" src="@itemImage.GetThumbnailUrl()">
-                                }
-                            </div>
+                            @*<div class="image-container">*@
+                                    @if (item.Images != null && item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).Count() > 0)
+                                    {
+                                        var itemImage = item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).FirstOrDefault();
+                                        @Html.Image(itemImage, height: 225, width: 300);
+                                    }
+                                @*</div>*@
+
                             @if (!string.IsNullOrEmpty(item.FormattedName))
                             {
                                 <div class="name-container">
