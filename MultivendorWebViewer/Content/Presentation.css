@@ -419,3 +419,13 @@ font-size:15px;
     background-color: #f1f0f0;
     padding: 5px 0;
 }
+.node-view video {
+    position: relative;
+    width: inherit;
+    max-width: 330px;
+}
+    .node-view video source {
+        position: relative;
+        width: inherit;
+        max-width: 330px;
+    }

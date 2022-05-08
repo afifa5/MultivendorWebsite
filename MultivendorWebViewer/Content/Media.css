@@ -64,7 +64,9 @@
     margin:0 10px;
     }
     .videos-conatiner .node-view{
-       max-width:100vw;
+       max-width:350px;
+       margin-left:auto;
+       margin-right:auto;
     }
     .category-view-container .node-view {
         max-width: 100%;
