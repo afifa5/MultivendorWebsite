@@ -782,6 +782,39 @@ namespace MultivendorWebViewer.Controllers
             }
         }
 
+        [OutputCache(Duration = 3600, Location = OutputCacheLocation.Client)]
+        public virtual async Task<FileResult> Video(int videoId, string fileName = null)
+        {
+            Response.Cache.SetOmitVaryStar(true);
+
+            try
+            {
+                if (fileName == null)
+                {
+                    fileName = ApplicationRequestContext.ImageManager.GetVideoById(videoId).VideoName;
+                }
+
+                Stream contentStream = null;
+
+                if (!string.IsNullOrEmpty(fileName))
+                {
+                    contentStream = await ApplicationRequestContext.ImageManager.GetVideContentStreamByNameAsync(fileName, ApplicationRequestContext);
+                }
+
+                if (contentStream == null)
+                {
+                    return null;
+                }
+
+                //var convertedResult = await new ScaleImageConversion().GetFileResultAsync(contentStream, fileName);
+                return new FileStreamResult(contentStream, Mime.GetMimeMapping(fileName));
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+        }
 
         [OutputCache(Duration = 3600 * 4, Location = OutputCacheLocation.Any, VaryByParam = "*")]
         public virtual async Task<FileResult> ImageThumbnail(int imageId, int? width, int? height, int? sampling = null, string fileName = null, bool cover = true, int entropyCrop = 0/*, ImageConversion converter = null*/, string source = null)

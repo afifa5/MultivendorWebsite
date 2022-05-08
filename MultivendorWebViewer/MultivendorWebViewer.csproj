@@ -196,11 +196,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Video.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\OrderLine.cs" />
     <Compile Include="Models\KnownProperty.cs" />
+    <Compile Include="Models\ProductVideos.cs" />
     <Compile Include="MultivendorModel.cs" />
     <Compile Include="Models\Node.cs" />
     <Compile Include="Models\NodeImage.cs" />
@@ -219,6 +221,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="SingletonBase.cs" />
     <Compile Include="Utility.cs" />
+    <Compile Include="ViewModels\VideoViewModel.cs" />
     <Compile Include="ViewModels\SearchHitViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\NavigationPathViewModel.cs" />

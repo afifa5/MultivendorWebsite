@@ -35,7 +35,29 @@
                 </div>
 
             </div>
-            <footer></footer>
+            <footer>
+                @if (Model.Videos != null && Model.Videos.Any())
+                {
+                    <div class="videos-conatiner">
+                        <h3 class="specifications-label">@CustomStrings.Videos</h3>
+                        <div class="node-container">
+                            @foreach (var video in Model.Videos)
+                            {
+                            <div class="node-view">
+                                <video controls>
+                                    <source src="@video.GetUrl()" type="video/mp4">
+                                    <source src="@video.GetUrl()" type="video/ogg">
+                                    Your browser does not support HTML video.
+                                </video>
+                            </div>
+                                
+
+                            }
+                        </div>
+                    </div>
+                }
+
+            </footer>
             <div class="body-content">
                 <div class="product-information-container">
                     @if (Model != null && !string.IsNullOrEmpty(Model.FormattedDescription))

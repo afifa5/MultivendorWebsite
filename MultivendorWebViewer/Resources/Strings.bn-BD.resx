@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Add" xml:space="preserve">
-    <value>অর্ডার যোগ</value>
+    <value>অর্ডার </value>
   </data>
   <data name="Address" xml:space="preserve">
     <value>ঠিকানা</value>
   </data>
   <data name="AddToOrder" xml:space="preserve">
-    <value>অর্ডার যোগ করুন</value>
+    <value>অর্ডার </value>
   </data>
   <data name="Agent" xml:space="preserve">
     <value>প্রতিনিধি</value>
@@ -293,6 +293,9 @@
   </data>
   <data name="UserName" xml:space="preserve">
     <value>ব্যবহারকারীর নাম</value>
+  </data>
+  <data name="Videos" xml:space="preserve">
+    <value>Video</value>
   </data>
   <data name="ViewAll" xml:space="preserve">
     <value>সমস্ত আইটেম দেখুন</value>

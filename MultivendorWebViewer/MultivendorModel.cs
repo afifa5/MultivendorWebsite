@@ -24,6 +24,9 @@ namespace MultivendorWebViewer
         public virtual DbSet<PriceAvailability> PriceAvailabilities { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
+        public virtual DbSet<Video> Videos { get; set; }
+        public virtual DbSet<ProductVideo> ProductVideos { get; set; }
+
         public virtual DbSet<ProductNode> ProductNodes { get; set; }
         public virtual DbSet<ProductSpecification> ProductSpecifications { get; set; }
         public virtual DbSet<Specification> Specifications { get; set; }

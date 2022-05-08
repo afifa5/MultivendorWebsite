@@ -280,7 +280,7 @@ font-size:15px;
 }
 .product-body footer {
     grid-column: footer / end;
-    grid-row: footer / span 1;
+    grid-row: 3 / span 1;
 }
 .product-body .body-content {
     grid-row: body / span 1;
@@ -413,4 +413,9 @@ font-size:15px;
     letter-spacing: 0em;
     font-weight: 300;
     color: #999;
+}
+.videos-conatiner .specifications-label {
+    margin: 10px 0;
+    background-color: #f1f0f0;
+    padding: 5px 0;
 }

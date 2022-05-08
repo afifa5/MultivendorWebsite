@@ -29,7 +29,10 @@ namespace MultivendorWebViewer.Models
         
         [StringLength(50)]
         public string PostCode { get; set; }
+        public int? ImageId { get; set; }
 
+        [ForeignKey("ImageId")]
+        public Image Image { get; set; }
 
         [StringLength(50)]
         public string UserName { get; set; }
@@ -45,7 +48,7 @@ namespace MultivendorWebViewer.Models
 
         [StringLength(50)]
         public string CompanyName { get; set; }
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
         [StringLength(50)]
         public string UserRole { get; set; }
 

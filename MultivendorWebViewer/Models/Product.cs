@@ -25,6 +25,8 @@ namespace MultivendorWebViewer.Models
         public int? NameId { get; set; }
 
         public int? DescriptionId { get; set; }
+       
+        public bool? IsActive { get; set; }
 
         [ForeignKey("NameId")]
         public virtual Text Name { get; set; }
@@ -33,6 +35,10 @@ namespace MultivendorWebViewer.Models
         public  Text Description { get; set; }
         [ForeignKey("ProductId")]
         public  List<ProductImage> ProductImages { get; set; }
+        
+        [ForeignKey("ProductId")]
+        public List<ProductVideo> ProductVideos { get; set; }
+        
         [ForeignKey("ProductId")]
         public  List<ProductSpecification> ProductSpecifications { get; set; }
     }
