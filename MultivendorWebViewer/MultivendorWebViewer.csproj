@@ -194,36 +194,12 @@
     <Compile Include="Manager\ProductManager.cs" />
     <Compile Include="Manager\ConfigurationManager.cs" />
     <Compile Include="Manager\UserManager.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\CategoryImage.cs" />
-    <Compile Include="Models\CategoryNode.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Video.cs" />
-    <Compile Include="Models\Image.cs" />
-    <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\Payment.cs" />
-    <Compile Include="Models\OrderLine.cs" />
-    <Compile Include="Models\KnownProperty.cs" />
-    <Compile Include="Models\ProductVideos.cs" />
     <Compile Include="MultivendorModel.cs" />
-    <Compile Include="Models\Node.cs" />
-    <Compile Include="Models\NodeImage.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\PriceAvailability.cs" />
-    <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\ProductImage.cs" />
-    <Compile Include="Models\ProductNode.cs" />
-    <Compile Include="Models\ProductSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Specification.cs" />
-    <Compile Include="Models\SpecificationType.cs" />
-    <Compile Include="Models\SubNode.cs" />
-    <Compile Include="Models\Text.cs" />
-    <Compile Include="Models\TextTranslation.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="SingletonBase.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="ViewModels\VideoViewModel.cs" />
@@ -350,6 +326,12 @@
     <EmbeddedResource Include="Resources\Strings.bn-BD.resx" />
     <EmbeddedResource Include="Resources\Strings.en-GB.resx" />
     <EmbeddedResource Include="Resources\Strings.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Projects\Model\Model.csproj">
+      <Project>{ebcf94f0-a2d7-4449-9dd5-f9236cd9b761}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

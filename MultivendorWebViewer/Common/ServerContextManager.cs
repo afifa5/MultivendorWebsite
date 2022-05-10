@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
+
 namespace MultivendorWebViewer.Common
 {
     public class ServerContextManager : SingletonBase<ServerContextManager>
