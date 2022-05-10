@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Linq;
 using MultivendorWebViewer.Models;
@@ -8,12 +9,20 @@ namespace MultivendorWebViewer
 {
     public partial class MultivendorModel : DbContext
     {
-        public MultivendorModel()
-            : base("name=MultivendorModelContext")
+        public MultivendorModel(string connectionstring)
+            : base(connectionstring/*"name=MultivendorModelContext"*/)
         {
-            this.Configuration.LazyLoadingEnabled =false;
+            //this.Configuration.LazyLoadingEnabled =false;
+        }
+        public static MultivendorModel Create()
+        {
+            return Instance.Create<MultivendorModel>();
         }
 
+        public static MultivendorModel Create(DbConnection existingConnection)
+        {
+            return Instance.Create<DbConnection, MultivendorModel>(existingConnection);
+        }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CategoryImage> CategoryImages { get; set; }
         public virtual DbSet<CategoryNode> CategoryNodes { get; set; }

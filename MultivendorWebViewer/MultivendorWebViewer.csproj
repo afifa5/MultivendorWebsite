@@ -160,8 +160,12 @@
     <Compile Include="Common\CacheManager.cs" />
     <Compile Include="Common\CustomStrings.cs" />
     <Compile Include="Common\Mime.cs" />
+    <Compile Include="Common\MultivendorDbConfiguration.cs" />
     <Compile Include="Common\ProfileSetting.cs" />
     <Compile Include="Common\RequestItemHelper.cs" />
+    <Compile Include="Common\ServerContextManager.cs" />
+    <Compile Include="Common\ServerDatabase.cs" />
+    <Compile Include="Common\ServerSetting.cs" />
     <Compile Include="Common\SessionData.cs" />
     <Compile Include="Common\SessionItemHelper.cs" />
     <Compile Include="Common\TextManager.cs" />
@@ -175,6 +179,7 @@
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DatabaseContext.cs" />
     <Compile Include="Helpers\CarouselHelper.cs" />
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Helpers\ImagesViewerHelper.cs" />

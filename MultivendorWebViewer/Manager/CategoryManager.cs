@@ -17,7 +17,8 @@ namespace MultivendorWebViewer.Manager
     {
         public Category GetCategory(int id, ApplicationRequestContext requestContext)
         {
-            using (var context=new MultivendorModel())
+            
+            using (var context= new MultivendorModel(ServerModelDatabaseContextManager.Default.GetConnectionString()))
             {
                 var category = context.Categories.Where(i => i.Id == id)
                     .Include(p => p.CategoryNodes)
@@ -36,7 +37,7 @@ namespace MultivendorWebViewer.Manager
 
         public List<Node> GetNodesByIds(int[] ids) {
            
-            using (var context = new MultivendorModel())
+            using (var context = new MultivendorModel(ServerModelDatabaseContextManager.Default.GetConnectionString()))
             {
                 var nodes = context.Nodes.Where(i => ids.Contains(i.Id))
                     .Include(p => p.Name.TextTranslations)
@@ -48,7 +49,7 @@ namespace MultivendorWebViewer.Manager
         public SubNode GetSubnode(int id)
         {
 
-            using (var context = new MultivendorModel())
+            using (var context = new MultivendorModel(ServerModelDatabaseContextManager.Default.GetConnectionString()))
             {
                 var nodes = context.SubNodes.Where(i => i.SubNodeItemId == id);
                 return nodes.FirstOrDefault();
@@ -58,7 +59,7 @@ namespace MultivendorWebViewer.Manager
         public Node GetNodeById(int id)
         {
 
-            using (var context = new MultivendorModel())
+            using (var context = new MultivendorModel(ServerModelDatabaseContextManager.Default.GetConnectionString()))
             {
                 var node = context.Nodes.Where(i => id== i.Id)
                     .Include(p=>p.NodeImages)
