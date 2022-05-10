@@ -540,7 +540,7 @@ namespace MultivendorWebViewer
             return array != null ? array.Split(separators != null && separators.Length > 0 ? separators : new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()) : Enumerable.Empty<string>();
         }
 
-        public static void SqlDataReader(/*AssertSite site,*/string connectionString, string sql, Action<System.Data.SqlClient.SqlDataReader> action)
+        public static void SqlDataReader(string connectionString, string sql, Action<System.Data.SqlClient.SqlDataReader> action)
         {
             using (var connection = new System.Data.SqlClient.SqlConnection(connectionString))
             {
