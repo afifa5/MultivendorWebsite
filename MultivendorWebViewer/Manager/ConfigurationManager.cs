@@ -13,7 +13,7 @@ namespace MultivendorWebViewer.Manager
     public class ConfigurationManager:SingletonBase<ConfigurationManager>
     {
         
-        public static ProfileSetting SiteProfile { get { return GetProfileSettings(Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data\\profile.config")); } }
+        public  ProfileSetting SiteProfile { get { return GetProfileSettings(Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data\\profile.config")); } }
         public virtual string GetHeaderLogoUrl(ApplicationRequestContext requsetContext,bool isSmall)
         {
             return UrlUtility.Action(requsetContext, "Image", "Content", new { imageId = 0, fileName = isSmall? SiteProfile.HeaderLogoSmall : SiteProfile.HeaderLogo });
