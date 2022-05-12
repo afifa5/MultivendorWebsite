@@ -14,554 +14,6 @@ namespace MultivendorWebViewer.Common
     [Serializable]
     public class ServerConfiguration : INotifyPropertyChanged, INotifyPropertyChanging
     {
-
-
-        private SqlServerDatabaseSettings sqlServerDatabaseSettings;
-        public SqlServerDatabaseSettings SqlServerDatabaseSettings
-        {
-            get { return sqlServerDatabaseSettings; }
-            set
-            {
-                if (sqlServerDatabaseSettings != value)
-                {
-                    OnPropertyChanging("SqlServerDatabaseSettings");
-
-                    sqlServerDatabaseSettings = value;
-
-                    OnPropertyChanged("SqlServerDatabaseSettings");
-                }
-            }
-        }
-
-        private ServerDatabase serverDatabase;
-        public ServerDatabase ServerDatabase
-        {
-            get { return serverDatabase; }
-            set
-            {
-                if (serverDatabase != value)
-                {
-                    OnPropertyChanging("ServerDatabase");
-
-                    serverDatabase = value;
-
-                    OnPropertyChanged("ServerDatabase");
-                }
-            }
-        }
-
-       
-        private int logRequestTimeFilter;
-        public int LogRequestTimeFilter
-        {
-            get { return logRequestTimeFilter; }
-            set
-            {
-                if (logRequestTimeFilter != value)
-                {
-                    OnPropertyChanging("LogRequestTimeFilter");
-
-                    logRequestTimeFilter = value;
-
-                    OnPropertyChanged("LogRequestTimeFilter");
-                }
-            }
-        }
-
-        private bool logDebugWrites;
-        public bool LogDebugWrites
-        {
-            get { return logDebugWrites; }
-            set
-            {
-                if (logDebugWrites != value)
-                {
-                    OnPropertyChanging("LogDebugWrites");
-
-                    logDebugWrites = value;
-
-                    OnPropertyChanged("LogDebugWrites");
-                }
-            }
-        }
-
-        private bool? logResourceStatistics;
-        public bool? LogResourceStatistics // DOS FIX
-        {
-            get { return logDebugWrites; }
-            set
-            {
-                if (logResourceStatistics != value)
-                {
-                    OnPropertyChanging("LogResourceStatistics");
-
-                    logResourceStatistics = value;
-
-                    OnPropertyChanged("LogResourceStatistics");
-                }
-            }
-        }
-
-        private int? resourceStatisticsIntervall;
-        public int? ResourceStatisticsIntervall // DOS FIX
-        {
-            get { return resourceStatisticsIntervall; }
-            set
-            {
-                if (resourceStatisticsIntervall != value)
-                {
-                    OnPropertyChanging("ResourceStatisticsIntervall");
-
-                    resourceStatisticsIntervall = value;
-
-                    OnPropertyChanged("ResourceStatisticsIntervall");
-                }
-            }
-        }
-
-        private int? resourceStatisticsTimeIntervall;
-        public int? ResourceStatisticsTimeIntervall // DOS FIX
-        {
-            get { return resourceStatisticsTimeIntervall; }
-            set
-            {
-                if (resourceStatisticsTimeIntervall != value)
-                {
-                    OnPropertyChanging("ResourceStatisticsTimeIntervall");
-
-                    resourceStatisticsTimeIntervall = value;
-
-                    OnPropertyChanged("ResourceStatisticsTimeIntervall");
-                }
-            }
-        }
-
-        private bool useTruncation;
-        public bool UseTruncation
-        {
-            get { return useTruncation; }
-            set
-            {
-                if (useTruncation != value)
-                {
-                    OnPropertyChanging("UseTruncation");
-
-                    useTruncation = value;
-
-                    OnPropertyChanged("UseTruncation");
-                }
-            }
-        }
-        private string logFileRollOverOnMaxMBSize;
-        public string LogFileRollOverOnMaxMBSize
-        {
-            get { return logFileRollOverOnMaxMBSize; }
-            set
-            {
-                if (logFileRollOverOnMaxMBSize != value)
-                {
-                    OnPropertyChanging("LogFileRollOverOnMaxMBSize");
-
-                    logFileRollOverOnMaxMBSize = value;
-
-                    OnPropertyChanged("LogFileRollOverOnMaxMBSize");
-                }
-            }
-        }
-        private string deleteRollOverOldLogAfterNumberOfFiles;
-        public string DeleteRollOverOldLogAfterNumberOfFiles
-        {
-            get { return deleteRollOverOldLogAfterNumberOfFiles; }
-            set
-            {
-                if (deleteRollOverOldLogAfterNumberOfFiles != value)
-                {
-                    OnPropertyChanging("DeleteRollOverOldLogAfterNumberOfFiles");
-
-                    deleteRollOverOldLogAfterNumberOfFiles = value;
-
-                    OnPropertyChanged("DeleteRollOverOldLogAfterNumberOfFiles");
-                }
-            }
-        }
-
-        private SmtpClientSettings smtpClientSettings;
-        public SmtpClientSettings SmtpClientSettings
-        {
-            get { return smtpClientSettings; }
-            set
-            {
-                if (smtpClientSettings != value)
-                {
-                    OnPropertyChanging("SmtpClientSettings");
-
-                    smtpClientSettings = value;
-
-                    OnPropertyChanged("SmtpClientSettings");
-                }
-            }
-        }
-
-
-        private string clientDownloadUrl;
-        public string ClientDownloadUrl
-        {
-            get { return clientDownloadUrl; }
-            set
-            {
-                if (clientDownloadUrl != value)
-                {
-                    OnPropertyChanging("ClientDownloadUrl");
-
-                    clientDownloadUrl = value;
-
-                    OnPropertyChanged("ClientDownloadUrl");
-                }
-            }
-        }
-
-        private string remoteArea;
-        public string RemoteArea
-        {
-            get { return remoteArea; }
-            set
-            {
-                if (remoteArea != value)
-                {
-                    OnPropertyChanging("RemoteArea");
-
-                    remoteArea = value;
-
-                    OnPropertyChanged("RemoteArea");
-                }
-            }
-        }
-
-        private string feedbackMailFrom;
-        public string FeedbackMailFrom
-        {
-            get { return feedbackMailFrom; }
-            set
-            {
-                if (feedbackMailFrom != value)
-                {
-                    OnPropertyChanging("FeedbackMailFrom");
-
-                    feedbackMailFrom = value;
-
-                    OnPropertyChanged("FeedbackMailFrom");
-                }
-            }
-        }
-
-        private string feedbackMailTo;
-        public string FeedbackMailTo
-        {
-            get { return feedbackMailTo; }
-            set
-            {
-                if (feedbackMailTo != value)
-                {
-                    OnPropertyChanging("FeedbackMailTo");
-
-                    feedbackMailTo = value;
-
-                    OnPropertyChanged("FeedbackMailTo");
-                }
-            }
-        }
-
-        private string logFilePath;
-        public string LogFilePath
-        {
-            get { return logFilePath; }
-            set
-            {
-                if (logFilePath != value)
-                {
-                    OnPropertyChanging("LogFilePath");
-
-                    logFilePath = value;
-
-                    OnPropertyChanged("LogFilePath");
-                }
-            }
-        }
-
-
-        public string SQLScriptsPath { get; set; }
-
-        public string PowershellScriptsPath { get; set; }
-
-        int _repositorySearchTextBoxTypeDelayMilliSeconds = 750;
-        public int RepositorySearchTextBoxTypeDelayMilliSeconds
-        {
-            get { return _repositorySearchTextBoxTypeDelayMilliSeconds; }
-            set { _repositorySearchTextBoxTypeDelayMilliSeconds = value; }
-        }
-
-        public bool AddHashToImageFilesEnabled { get; set; }
-
-        public ServerConfiguration()
-        {
-            RaisePropertyChange = true;
-            ExpandEnvironmentVariables = true;
-
-            LogFilePath = null; // Rely on default setting for the log file 
-
-            ServerDatabase = new ServerDatabase() { Enabled = false };
-            ServerDatabase.PropertyChanged += ServerDatabase_PropertyChanged;
-
-
-            SmtpClientSettings = new SmtpClientSettings();
-            SmtpClientSettings.PropertyChanged += SmtpClientSettings_PropertyChanged;
-
-            SqlServerDatabaseSettings = new SqlServerDatabaseSettings();
-            SqlServerDatabaseSettings.PropertyChanged += SqlServerDatabaseSettings_PropertyChanged;
-
-            UseTruncation = false;
-            LogFileRollOverOnMaxMBSize = "100";
-            DeleteRollOverOldLogAfterNumberOfFiles = "90";
-            SQLScriptsPath = @"C:\MultivendorWeb";
-            AddHashToImageFilesEnabled = false;
-        }
-
-        public void Reset()
-        {
-        }
-
-        public void RaisePropertyChanged(string propertyName)
-        {
-            OnPropertyChanged(propertyName);
-        }
-
-        void PublisherSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            OnPropertyChanged("PublisherSettings");
-        }
-
-        void SqlServerDatabaseSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            OnPropertyChanged("SqlServerDatabaseSettings");
-        }
-
-        void SmtpClientSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            OnPropertyChanged("SmtpClientSettings");
-        }
-
-        void ServerDatabase_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            OnPropertyChanged("ServerDatabase");
-        }
-
-        void StaticDatabase_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            OnPropertyChanged("StaticDatabase");
-        }
-
-        void Sites_ListChanged(object sender, ListChangedEventArgs e)
-        {
-            OnPropertyChanged("Sites");
-        }
-
-        #region Change handling
-        [field: NonSerialized]
-        public event PropertyChangingEventHandler PropertyChanging;
-        [field: NonSerialized]
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [XmlIgnore]
-        [DefaultValue(true)]
-        public bool ExpandEnvironmentVariables { get; set; }
-
-        [XmlIgnore]
-        [DefaultValue(true)]
-        public bool RaisePropertyChange { get; set; }
-
-        [XmlIgnore]
-        [DefaultValue(false)]
-        public bool ChangeTracking { get; set; }
-
-        private Dictionary<string, object> oldValues = new Dictionary<string, object>();
-        private Dictionary<string, object> newValues = new Dictionary<string, object>();
-
-        private bool isRestoring = false;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            Type type = this.GetType();
-            PropertyInfo property = type.GetProperty(propertyName);
-
-            if (property != null)
-            {
-                if (isRestoring == false && ChangeTracking == true)
-                {
-                    object value = property.GetValue(this, null);
-
-                    if (newValues.ContainsKey(propertyName))
-                    {
-                        newValues.Remove(propertyName);
-                    }
-
-                    newValues.Add(propertyName, value);
-                }
-
-                if (PropertyChanged != null && RaisePropertyChange == true)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-                }
-            }
-        }
-
-        protected virtual void OnPropertyChanging(string propertyName)
-        {
-            Type type = this.GetType();
-            PropertyInfo property = type.GetProperty(propertyName);
-
-            if (property != null)
-            {
-                if (isRestoring == false && ChangeTracking == true)
-                {
-                    object value = property.GetValue(this, null);
-
-                    if (!oldValues.ContainsKey(propertyName))
-                    {
-                        oldValues.Add(propertyName, value);
-                    }
-                }
-
-                if (PropertyChanging != null && RaisePropertyChange == true)
-                {
-                    PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
-                }
-            }
-        }
-        #endregion
-    }
-
-    public class SqlServerDatabaseSettings : INotifyPropertyChanged, INotifyPropertyChanging
-    {
-        public SqlServerDatabaseSettings()
-        {
-            DetachDatabaseTimeout = 300;
-            AttachDatabaseTimeout = 60;
-            DropDatabaseTimeout = 300;
-            ShrinkDatabaseTimeout = 300;
-            PublisherCommandTimeout = 300;
-            CommandTimeout = 30;
-            MaxParallelPublisherThread = 5;
-            ChunkCount = 2000;
-
-            MountAtInstanceName = String.Format(@"{0}\SQLEXPRESS", Environment.MachineName);
-            MountAtSqlServerLogin = new SqlServerLogin();
-            MountAtSqlServerLogin.PropertyChanged += MountAtSqlServerLogin_PropertyChanged;
-
-            PublishToInstanceName = String.Format(@"{0}\SQLEXPRESS", Environment.MachineName);
-            PublishToSqlServerLogin = new SqlServerLogin();
-            PublishToSqlServerLogin.PropertyChanged += PublishToSqlServerLogin_PropertyChanged;
-        }
-
-        void PublishToSqlServerLogin_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            OnPropertyChanged("PublishToSqlServerLogin");
-        }
-
-        void MountAtSqlServerLogin_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            OnPropertyChanged("MountAtSqlServerLogin");
-        }
-
-        public static SqlServerDatabaseSettings Create()
-        {
-            return Instance.Create<SqlServerDatabaseSettings>();
-        }
-
-        private SqlServerLogin publishToSqlServerLogin;
-        public SqlServerLogin PublishToSqlServerLogin
-        {
-            get { return publishToSqlServerLogin; }
-            set
-            {
-                if (publishToSqlServerLogin != value)
-                {
-                    OnPropertyChanging("PublishToSqlServerLogin");
-
-                    publishToSqlServerLogin = value;
-
-                    OnPropertyChanged("PublishToSqlServerLogin");
-                }
-            }
-        }
-
-        private string publishToInstanceName;
-        public string PublishToInstanceName
-        {
-            get { return publishToInstanceName; }
-            set
-            {
-                if (publishToInstanceName != value)
-                {
-                    OnPropertyChanging("PublishToInstanceName");
-
-                    publishToInstanceName = value;
-
-                    OnPropertyChanged("PublishToInstanceName");
-                }
-            }
-        }
-
-        private SqlServerLogin mountAtSqlServerLogin;
-        public SqlServerLogin MountAtSqlServerLogin
-        {
-            get { return mountAtSqlServerLogin; }
-            set
-            {
-                if (mountAtSqlServerLogin != value)
-                {
-                    OnPropertyChanging("MountAtSqlServerLogin");
-
-                    mountAtSqlServerLogin = value;
-
-                    OnPropertyChanged("MountAtSqlServerLogin");
-                }
-            }
-        }
-
-        private string mountAtInstanceName;
-        public string MountAtInstanceName
-        {
-            get { return mountAtInstanceName; }
-            set
-            {
-                if (mountAtInstanceName != value)
-                {
-                    OnPropertyChanging("MountAtInstanceName");
-
-                    mountAtInstanceName = value;
-
-                    OnPropertyChanged("MountAtInstanceName");
-                }
-            }
-        }
-
-        private int detachDatabaseTimeout;
-        public int DetachDatabaseTimeout
-        {
-            get { return detachDatabaseTimeout; }
-            set
-            {
-                if (detachDatabaseTimeout != value)
-                {
-                    OnPropertyChanging("DetachDatabaseTimeout");
-
-                    detachDatabaseTimeout = value;
-
-                    OnPropertyChanged("DetachDatabaseTimeout");
-                }
-            }
-        }
-
         private int attachDatabaseTimeout;
         public int AttachDatabaseTimeout
         {
@@ -578,111 +30,104 @@ namespace MultivendorWebViewer.Common
                 }
             }
         }
-
-        private int dropDatabaseTimeout;
-        public int DropDatabaseTimeout
+        private ServerDatabase serverDatabase;
+        public ServerDatabase ServerDatabase
         {
-            get { return dropDatabaseTimeout; }
+            get { return serverDatabase; }
             set
             {
-                if (dropDatabaseTimeout != value)
+                if (serverDatabase != value)
                 {
-                    OnPropertyChanging("DropDatabaseTimeout");
+                    OnPropertyChanging("ServerDatabase");
 
-                    dropDatabaseTimeout = value;
+                    serverDatabase = value;
 
-                    OnPropertyChanged("DropDatabaseTimeout");
+                    OnPropertyChanged("ServerDatabase");
                 }
             }
         }
-
-        private int shrinkDatabaseTimeout;
-        public int ShrinkDatabaseTimeout
+        private SiteDatabase siteDatabase;
+        public SiteDatabase SiteDatabase
         {
-            get { return shrinkDatabaseTimeout; }
+            get { return siteDatabase; }
             set
             {
-                if (shrinkDatabaseTimeout != value)
+                if (siteDatabase != value)
                 {
-                    OnPropertyChanging("ShrinkDatabaseTimeout");
+                    OnPropertyChanging("SiteDatabase");
 
-                    shrinkDatabaseTimeout = value;
+                    siteDatabase = value;
 
-                    OnPropertyChanged("ShrinkDatabaseTimeout");
+                    OnPropertyChanged("SiteDatabase");
                 }
             }
         }
-
-        private int publisherCommandTimeout;
-        public int PublisherCommandTimeout
+        private SmtpClientSettings smtpClientSettings;
+        public SmtpClientSettings SmtpClientSettings
         {
-            get { return publisherCommandTimeout; }
+            get { return smtpClientSettings; }
             set
             {
-                if (publisherCommandTimeout != value)
+                if (smtpClientSettings != value)
                 {
-                    OnPropertyChanging("PublisherCommandTimeout");
+                    OnPropertyChanging("SmtpClientSettings");
 
-                    publisherCommandTimeout = value;
+                    smtpClientSettings = value;
 
-                    OnPropertyChanged("PublisherCommandTimeout");
+                    OnPropertyChanged("SmtpClientSettings");
                 }
             }
         }
-
-        private int commandTimeout;
-        public int CommandTimeout
+        public ServerConfiguration()
         {
-            get { return commandTimeout; }
-            set
-            {
-                if (commandTimeout != value)
-                {
-                    OnPropertyChanging("CommandTimeout");
+            RaisePropertyChange = true;
+            ExpandEnvironmentVariables = true;
 
-                    commandTimeout = value;
+            AttachDatabaseTimeout = 60;
 
-                    OnPropertyChanged("CommandTimeout");
-                }
-            }
+            ServerDatabase = new ServerDatabase() { Enabled = false };
+            ServerDatabase.PropertyChanged += ServerDatabase_PropertyChanged;
+            
+            SiteDatabase = new SiteDatabase() { Enabled = false };
+            SiteDatabase.PropertyChanged += SiteDatabase_PropertyChanged;
+
+
+            SmtpClientSettings = new SmtpClientSettings();
+            SmtpClientSettings.PropertyChanged += SmtpClientSettings_PropertyChanged;
+
         }
 
-        private int maxParallelPublisherThread;
-        public int MaxParallelPublisherThread
+        public void Reset()
         {
-            get { return maxParallelPublisherThread; }
-            set
-            {
-                if (maxParallelPublisherThread != value)
-                {
-                    OnPropertyChanging("MaxParallelPublisherThread");
-
-                    maxParallelPublisherThread = value;
-
-                    OnPropertyChanged("MaxParallelPublisherThread");
-                }
-            }
         }
 
-        private int chunkCount;
-        public int ChunkCount
+        public void RaisePropertyChanged(string propertyName)
         {
-            get { return chunkCount; }
-            set
-            {
-                if (chunkCount != value)
-                {
-                    OnPropertyChanging("ChunkCount");
-
-                    chunkCount = value;
-
-                    OnPropertyChanged("ChunkCount");
-                }
-            }
+            OnPropertyChanged(propertyName);
+        }
+        void AttachTimeoutSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged("AttachDatabaseTimeout");
+        }
+        void SmtpClientSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged("SmtpClientSettings");
         }
 
+        void ServerDatabase_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged("ServerDatabase");
+        }
+        void SiteDatabase_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged("SiteDatabase");
+        }
+
+      
         #region Change handling
+        [field: NonSerialized]
         public event PropertyChangingEventHandler PropertyChanging;
+        [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
         [XmlIgnore]
@@ -753,6 +198,7 @@ namespace MultivendorWebViewer.Common
         }
         #endregion
     }
+
     public class SqlServerLogin : INotifyPropertyChanged, INotifyPropertyChanging
     {
         public SqlServerLogin()

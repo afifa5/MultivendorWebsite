@@ -113,7 +113,7 @@ namespace MultivendorWebViewer.Common
         public DatabaseConfigBase()
         {
             Enabled = false;
-            DataBaseName = "MultivendorDB";
+            DataBaseName = "DHM#Server";
             DataBaseServer = String.Format(@"{0}\SQLEXPRESS", Environment.MachineName);
             SqlServerUser = "Multivendor#User";
             SqlServerPassword = "Login#123!@$";
@@ -212,7 +212,16 @@ namespace MultivendorWebViewer.Common
 
     public class ServerDatabase:DatabaseConfigBase
     {
+        public ServerDatabase()
+        {
+            DataBaseName = "DHM#Server";
+        }
     }
-
+    public class SiteDatabase : DatabaseConfigBase
+    {
+        public SiteDatabase() {
+            DataBaseName = "DHM#Web";
+        }
+    }
 
 }

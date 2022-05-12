@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MultivendorWebViewer.Models
+namespace MultivendorWebViewer.Server.Models
 {
 
     public partial class Customer

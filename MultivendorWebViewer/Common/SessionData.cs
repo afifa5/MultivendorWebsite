@@ -7,6 +7,7 @@ using System.Web;
 using System.Xml.Serialization;
 using System.Collections.Concurrent;
 using MultivendorWebViewer.Models;
+using MultivendorWebViewer.Server.Models;
 #if NET5
 using Microsoft.AspNetCore.Http;
 #endif

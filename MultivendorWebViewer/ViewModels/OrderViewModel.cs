@@ -1,5 +1,6 @@
 ﻿using MultivendorWebViewer.Common;
 using MultivendorWebViewer.Models;
+using MultivendorWebViewer.Server.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

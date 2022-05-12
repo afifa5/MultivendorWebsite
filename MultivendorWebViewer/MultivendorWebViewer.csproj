@@ -163,7 +163,7 @@
     <Compile Include="Common\MultivendorDbConfiguration.cs" />
     <Compile Include="Common\ProfileSetting.cs" />
     <Compile Include="Common\RequestItemHelper.cs" />
-    <Compile Include="Common\ServerContextManager.cs" />
+    <Compile Include="Common\ContextManager.cs" />
     <Compile Include="Common\ServerDatabase.cs" />
     <Compile Include="Common\ServerSetting.cs" />
     <Compile Include="Common\SessionData.cs" />
@@ -198,7 +198,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="MultivendorModel.cs" />
+    <Compile Include="ServerModelContext.cs" />
+    <Compile Include="MultivendorModelContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SingletonBase.cs" />
     <Compile Include="Utility.cs" />

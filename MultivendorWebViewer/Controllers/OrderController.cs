@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using MultivendorWebViewer.Common;
 using MultivendorWebViewer.Models;
+using MultivendorWebViewer.Server.Models;
 using MultivendorWebViewer.ViewModels;
 
 namespace MultivendorWebViewer.Controllers

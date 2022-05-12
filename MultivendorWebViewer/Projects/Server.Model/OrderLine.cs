@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MultivendorWebViewer.Models
+namespace MultivendorWebViewer.Server.Models
 {
 
     public partial class OrderLine
@@ -39,8 +39,7 @@ namespace MultivendorWebViewer.Models
 
         [Column(TypeName = "numeric")]
         public decimal SubTotal { get; set; }
-        [ForeignKey("ProductId")]
-        public  Product Product { get; set; }
+
         [ForeignKey("UserId")]
         public  User User { get; set; }
         [ForeignKey("OrderId")]

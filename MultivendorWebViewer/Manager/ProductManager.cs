@@ -30,7 +30,7 @@ namespace MultivendorWebViewer.Manager
         public ILookup<int, Product> GetAllProduct() {
            return CacheManager.Default.Get<ILookup<int,Product>>(string.Concat("AllPrduct@", "MultivendorWeb"), CacheLocation.Application, () =>
             {
-                using (var context = new MultivendorModel(ServerModelDatabaseContextManager.Default.GetConnectionString()))
+                using (var context = new MultivendorModelContext(SiteModelDatabaseContextManager.Default.GetConnectionString()))
                 {
                     var product = context.Products
                         .Include(p => p.ProductImages)
@@ -58,7 +58,7 @@ namespace MultivendorWebViewer.Manager
         }
         public List<PriceAvailability> GetpriceByproductId(int id)
         {
-            using (var context = new MultivendorModel(ServerModelDatabaseContextManager.Default.GetConnectionString()))
+            using (var context = new MultivendorModelContext(SiteModelDatabaseContextManager.Default.GetConnectionString()))
             {
                 var prices = context.PriceAvailabilities.Where(i => i.ProductId == id);
                 return prices.ToList();
@@ -89,7 +89,7 @@ namespace MultivendorWebViewer.Manager
         {
             return CacheManager.Default.Get<ILookup<int,Specification>>(string.Concat("AllSpecification@", "MultivendorWeb"), CacheLocation.Application, () =>
             {
-                using (var context = new MultivendorModel(ServerModelDatabaseContextManager.Default.GetConnectionString()))
+                using (var context = new MultivendorModelContext(SiteModelDatabaseContextManager.Default.GetConnectionString()))
                 {
                     var specifications = context.Specifications.Include(p => p.SpecificationText.TextTranslations).ToLookup(l => l.Id);
                     return specifications;
@@ -100,7 +100,7 @@ namespace MultivendorWebViewer.Manager
         {
             return CacheManager.Default.Get<ILookup<int, SpecificationType>>(string.Concat("AllSpecificationType@", "MultivendorWeb"), CacheLocation.Application, () =>
             {
-                using (var context = new MultivendorModel(ServerModelDatabaseContextManager.Default.GetConnectionString()))
+                using (var context = new MultivendorModelContext(SiteModelDatabaseContextManager.Default.GetConnectionString()))
                 {
                     var specificationsType = context.SpecificationTypes.Include(p => p.SpecificationTypeText.TextTranslations).ToLookup(l => l.Id);
                     return specificationsType;

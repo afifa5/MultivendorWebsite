@@ -34,8 +34,7 @@ namespace MultivendorWebViewer.Models
         public decimal? Discount { get; set; }
         [ForeignKey("ProductId")]
         public  Product Product { get; set; }
-        [ForeignKey("UserId")]
-        public  User User { get; set; }
+        
 
     }
 }

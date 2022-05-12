@@ -114,26 +114,12 @@ namespace MultivendorWebViewer.Common
 
         public void ReaderExecuted(DbCommand command, DbCommandInterceptionContext<DbDataReader> interceptionContext)
         {
-            //var modelContext = interceptionContext.DbContexts != null ? interceptionContext.DbContexts.OfType<ModelContext>().FirstOrDefault() : null;
-            //if (modelContext != null && modelContext.TempTableInjectors != null)
-            //{
-            //    foreach (var tempTableInjector in modelContext.TempTableInjectors)
-            //    {
-            //        tempTableInjector.DeinjectTempTable(interceptionContext);
-            //    }
-            //}
+
         }
 
         public void ReaderExecuting(DbCommand command, DbCommandInterceptionContext<DbDataReader> interceptionContext)
         {
-            var modelContext = interceptionContext.DbContexts != null ? interceptionContext.DbContexts.OfType<MultivendorModel>().FirstOrDefault() : null;
-            //if (modelContext != null && modelContext.TempTableInjectors != null)
-            //{
-            //    foreach (var tempTableInjector in modelContext.TempTableInjectors)
-            //    {
-            //        tempTableInjector.InjectTempTable(command);
-            //    }
-            //}
+
         }
 
         public void ScalarExecuted(DbCommand command, DbCommandInterceptionContext<object> interceptionContext)

@@ -73,14 +73,9 @@
     <Compile Include="Category.cs" />
     <Compile Include="CategoryImage.cs" />
     <Compile Include="CategoryNode.cs" />
-    <Compile Include="Customer.cs" />
     <Compile Include="Image.cs" />
-    <Compile Include="KnownProperty.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="NodeImage.cs" />
-    <Compile Include="Order.cs" />
-    <Compile Include="OrderLine.cs" />
-    <Compile Include="Payment.cs" />
     <Compile Include="PriceAvailability.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductImage.cs" />
@@ -93,7 +88,6 @@
     <Compile Include="SubNode.cs" />
     <Compile Include="Text.cs" />
     <Compile Include="TextTranslation.cs" />
-    <Compile Include="User.cs" />
     <Compile Include="Video.cs" />
   </ItemGroup>
   <ItemGroup>
