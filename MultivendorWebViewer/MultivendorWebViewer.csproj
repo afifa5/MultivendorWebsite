@@ -306,6 +306,7 @@
     <Content Include="Views\Home\UserMenu.cshtml" />
     <Content Include="Views\NavigationPath\NavigationBar.cshtml" />
     <Content Include="Views\Search\SearchResult.cshtml" />
+    <Content Include="Views\Shared\_ContactInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

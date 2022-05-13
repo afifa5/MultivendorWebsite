@@ -6,6 +6,8 @@
 @{
     ViewBag.Title = "Multivendor Web";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+    var configuration = applicationrequestContext.Configuration;
 }
 
 <div class="presentation product-view-container">
@@ -17,13 +19,13 @@
                     {
                         if (Model.Images.Count() == 1)
                         {
-                             @Html.Image(Model.Images.FirstOrDefault(),height:620,width:450)
+                             @Html.Image(Model.Images.FirstOrDefault(), height: 620, width: 450)
                         }
                         else
                         {
                             var slides = Model.Images.Select(i => new CarouselSlide
                             {
-                                Content = @Html.Image(i,height:620,width:450),
+                                Content = @Html.Image(i, height: 620, width: 450),
                             });
                             @Html.Carousel(slides)
                         }
@@ -50,7 +52,7 @@
                                     Your browser does not support HTML video.
                                 </video>
                             </div>
-                                
+
 
                             }
                         </div>
@@ -92,6 +94,8 @@
 
                 }
                 @Html.Action("GetOrderInformation", "Product", routeValues: new { productId = Model.Id })
+
+
                 @if (Model.Specifications != null)
                 {
                     var specifications = Model.Specifications.Where(p => p.SpecificationMode == SpecificationMode.Description);
@@ -115,6 +119,12 @@
                     }
 
                 }
+                @if (configuration.SiteProfile.DisplayContact)
+                {
+                    @Html.Action("GetContactInformation", "Product", routeValues: new { productId = Model.Id })
+
+                }
+
             </div>
         </div>
     </div>

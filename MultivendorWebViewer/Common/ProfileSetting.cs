@@ -31,6 +31,12 @@ namespace MultivendorWebViewer.Common
         public string PriceCurrency { get; set; }
         [XmlElement("OrderProcess")]
         public string OrderProcess { get; set; }
+        
+        [XmlElement("DisplayLocation")]
+        public bool DisplayLocation { get; set; }
+        
+        [XmlElement("DisplayContact")]
+        public bool DisplayContact { get; set; }
 
     }
     public static class KnownPropertyCodes

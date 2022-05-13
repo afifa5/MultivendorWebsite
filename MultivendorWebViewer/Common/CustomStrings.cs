@@ -18,6 +18,7 @@ namespace MultivendorWebViewer.Common
         public static string City { get { return TextManager.Current.GetText("City"); } }
         public static string Country { get { return TextManager.Current.GetText("Country"); } }
         public static string Email { get { return TextManager.Current.GetText("Email"); } }
+        
         public static string Phone { get { return TextManager.Current.GetText("Phone"); } }
         public static string PostOffice { get { return TextManager.Current.GetText("PostOffice"); } }
         public static string DHL { get { return TextManager.Current.GetText("DHL"); } }
@@ -34,6 +35,9 @@ namespace MultivendorWebViewer.Common
         public static string Agent { get { return TextManager.Current.GetText("Agent"); } }
         public static string Rocket { get { return TextManager.Current.GetText("Rocket"); } }
         public static string CashOnDelivery { get { return TextManager.Current.GetText("CashOnDelivery"); } }
+        public static string ContactInformation { get { return TextManager.Current.GetText("ContactInformation"); } }
+        public static string ViewPhone { get { return TextManager.Current.GetText("ViewPhone"); } }
+        public static string ViewEmail { get { return TextManager.Current.GetText("ViewEmail"); } }
         public static string PlaceOrder { get { return TextManager.Current.GetText("PlaceOrder"); } }
         public static string DeliveryMethod { get { return TextManager.Current.GetText("DeliveryMethod"); } }
         public static string MyOrder { get { return TextManager.Current.GetText("MyOrder"); } }
@@ -66,6 +70,7 @@ namespace MultivendorWebViewer.Common
         public static string OutOfStock { get { return TextManager.Current.GetText("OutOfStock"); } }
         public static string Discount { get { return TextManager.Current.GetText("Discount"); } }
         public static string Specification { get { return TextManager.Current.GetText("Specification"); } }
+        public static string ContactRepresentative { get { return TextManager.Current.GetText("ContactRepresentative"); } }
         public static string ViewAll { get { return TextManager.Current.GetText("ViewAll"); } }
         public static string Videos { get { return TextManager.Current.GetText("Videos"); } }
         public static string UnitPrice { get { return TextManager.Current.GetText("UnitPrice"); } }

@@ -150,6 +150,12 @@
   <data name="ClearOrder" xml:space="preserve">
     <value>অর্ডার মুছুন</value>
   </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>যোগাযোগের তথ্য</value>
+  </data>
+  <data name="ContactRepresentative" xml:space="preserve">
+    <value>প্রতিনিধির সাথে যোগাযোগ</value>
+  </data>
   <data name="Country" xml:space="preserve">
     <value>দেশ</value>
   </data>
@@ -299,5 +305,11 @@
   </data>
   <data name="ViewAll" xml:space="preserve">
     <value>সমস্ত আইটেম দেখুন</value>
+  </data>
+  <data name="ViewEmail" xml:space="preserve">
+    <value>ইমেল দেখুন</value>
+  </data>
+  <data name="ViewPhone" xml:space="preserve">
+    <value>ফোন নম্বর দেখুন</value>
   </data>
 </root>

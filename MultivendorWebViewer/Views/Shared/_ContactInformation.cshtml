@@ -1,0 +1,50 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@using System.Globalization;
+@using MultivendorWebViewer.Helpers;
+@model IEnumerable<UserViewModel>
+@{
+    var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+}
+@if (Model != null && Model.Any())
+{
+<div class="contact-container specification-container">
+    <h3 class="specifications-label">@CustomStrings.ContactRepresentative</h3>
+    @foreach (var item in Model)
+    {
+        var customer = item.Customer;
+        <div class="contact-content-container">
+            <div class="contact-information">
+                <div class="information-container">
+                    <div class="representative-name">
+                        <h3>@string.Format("{0} {1}", customer.FirstName, customer.LastName)</h3>
+                    </div>
+                    <div class="designation-name">
+                        <span>@item.CompanyName</span>
+                    </div>
+                </div>
+                @if (item.Image != null)
+                {
+                    @Html.Image(item.Image, height: 100, width: 100);
+                }
+            </div>
+            <div class="buttons-container">
+                <button class="view-contact-information">
+                    <span class="icon fa fa-phone content fa-2x"></span>
+                    @CustomStrings.ViewPhone
+                </button>
+                <button class="view-email">
+                    <span class="icon fa fa-envelope content fa-2x"></span>
+                    @CustomStrings.ViewEmail
+                </button>
+            </div>
+
+        </div>
+
+
+
+    }
+</div>
+
+}
+

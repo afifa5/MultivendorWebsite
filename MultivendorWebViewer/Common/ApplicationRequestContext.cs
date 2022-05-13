@@ -22,6 +22,7 @@ namespace MultivendorWebViewer.Common
             ImageManager =ImageManager.Default;
             ProductManager = ProductManager.Default;
             OrderManager =OrderManager.Default;
+            UserManager = UserManager.Default;
 
         }
         public static ApplicationRequestContext GetContext(HttpContextBase context)
@@ -33,6 +34,7 @@ namespace MultivendorWebViewer.Common
             return context != null && context.Handler != null ? new ApplicationRequestContext(context.Request.RequestContext) : null;
         }
         public  CategoryManager CategoryManager { get; set; }
+        public UserManager UserManager { get; set; }
         public OrderManager OrderManager { get; set; }
         public ProductManager ProductManager { get; set; }
         public ImageManager ImageManager { get; set; }

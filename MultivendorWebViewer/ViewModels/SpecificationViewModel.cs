@@ -34,6 +34,7 @@ namespace MultivendorWebViewer.ViewModels
         Description = 0,
         Highlighted = 1,
         Selection = 2,
-        Search = 2,
+        Search = 3,
+        Location = 4,
     }
 }
