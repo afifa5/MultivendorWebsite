@@ -498,3 +498,6 @@ grid-column-gap:5px;
         float: right;
         text-align: right;
     }
+.order-cart-view {
+    height: 100%;
+}

@@ -103,7 +103,11 @@
                 success: function (data) {
                     var html = $(data)
                     orderAddressView.empty();
-                    orderAddressView.append(html)
+                    orderAddressView.append(html);
+                    var $orderCartView = $(document).findByClass("order-cart-view");
+                    if ($orderCartView.length > 0) {
+                        $orderCartView.removeClass("loading")
+                    }
                 }
 
             })
@@ -167,7 +171,11 @@
                 success: function (data) {
                     var html = $(data)
                     orderPaymentView.empty();
-                    orderPaymentView.append(html)
+                    orderPaymentView.append(html);
+                    var $orderCartView = $(document).findByClass("order-cart-view");
+                    if ($orderCartView.length > 0) {
+                        $orderCartView.removeClass("loading")
+                    }
                 }
 
             })
@@ -197,11 +205,19 @@
                     var html = $(data)
                     orderCartView.empty();
                     orderCartView.append(html)
+                    var $orderCartView = $(document).findByClass("order-cart-view");
+                    if ($orderCartView.length > 0) {
+                        $orderCartView.removeClass("loading")
+                    }
                 }
 
             })
         },
         UpdateCurrentTab: function (tab) {
+            var $orderCartView = $(document).findByClass("order-cart-view");
+            if ($orderCartView.length > 0) {
+                $orderCartView.addClass("loading")
+            }
             var $context = $(".order-cart-body-container");
 
             $context.attr("data-tab", tab);
@@ -315,6 +331,9 @@
     });
   
     $(document).on("click", ".add-to-order-button", function (e) {
+        //$(this).append($("<div class=\"search-spinner\"></div>"))
+        var orderButton = $(this);
+        orderButton.addClass("loading")
         var addToOrder = $(this).closest(".add-to-order");
         var orderId = addToOrder.data("product-id");
         var quantity = addToOrder.find(".add-qty").val()
@@ -331,6 +350,8 @@
                 var $data = data
                 if ($data.status == true) {
                     multivendorWeb.Order.GetTotalCounter();
+                    orderButton.removeClass("loading")
+
                 }
 
             }, error: function (ex) {

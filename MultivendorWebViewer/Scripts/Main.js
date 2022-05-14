@@ -62,6 +62,12 @@
             mainSearchPane.empty()
         }
     });
+    $(document).on("click", ".view-contact-information", function (e) {
+        if ($(this).hasClass("visible"))
+            $(this).removeClass("visible")
+        else
+            $(this).addClass("visible")
+    });
     $(document).on("focus", ".search-input", function (e) {
         var searchResult = $(document.body).find(".search-result");
         if (searchResult.length > 0) {

@@ -22,13 +22,19 @@
                     <div class="designation-name">
                         <span>@item.CompanyName</span>
                     </div>
+                    <button class="view-contact-information" data-text="@CustomStrings.ViewPhone" data-visible-text="@(customer.PhoneNumber?? CustomStrings.InformationNotFound)">
+                        <span class="icon fa fa-phone content fa-2x"></span>
+                    </button>
+                    <button class="view-contact-information" data-text="@CustomStrings.ViewEmail" data-visible-text="@(customer.Email?? CustomStrings.InformationNotFound)">
+                        <span class="icon fa fa-envelope content fa-2x"></span>
+                    </button>
                 </div>
                 @if (item.Image != null)
                 {
                     @Html.Image(item.Image, height: 100, width: 100);
                 }
             </div>
-            <div class="buttons-container">
+            @*<div class="buttons-container">
                 <button class="view-contact-information">
                     <span class="icon fa fa-phone content fa-2x"></span>
                     @CustomStrings.ViewPhone
@@ -37,7 +43,7 @@
                     <span class="icon fa fa-envelope content fa-2x"></span>
                     @CustomStrings.ViewEmail
                 </button>
-            </div>
+            </div>*@
 
         </div>
 

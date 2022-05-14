@@ -3,6 +3,9 @@ margin:0;
 color:#000;
 font-weight:700;
 }
+label, span, div {
+font-size:15px;
+}
 input[type=search]{
     border-radius: 8px;
     border: solid 1px #808080 !important;
