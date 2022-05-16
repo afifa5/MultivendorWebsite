@@ -110,23 +110,19 @@ namespace MultivendorWebViewer.Helpers
             type = ContentType.TextWriterAction;
         }
 
-//        public static HtmlContent RenderPartial(string partialViewName, object model, ViewDataDictionary viewData = null)
-//        {
-//#if NET5
-//            return new HtmlContent((HtmlHelper htmlHelper, TextWriter w) => htmlHelper.RenderPartial(partialViewName, model: model, viewData: viewData));
-//#else
-//            return new HtmlContent((htmlHelper, writer) => htmlHelper.RenderPartial(partialViewName, writer, viewData: viewData));
-//#endif
-//        }
+        //        public static HtmlContent RenderPartial(string partialViewName, object model, ViewDataDictionary viewData = null)
+        //        {
+        //#if NET5
+        //            return new HtmlContent((HtmlHelper htmlHelper, TextWriter w) => htmlHelper.RenderPartial(partialViewName, model: model, viewData: viewData));
+        //#else
+        //            return new HtmlContent((htmlHelper, writer) => htmlHelper.RenderPartial(partialViewName, writer, viewData: viewData));
+        //#endif
+        //        }
 
-//        public static HtmlContent Partial(string partialViewName, object model, ViewDataDictionary viewData = null)
-//        {
-//#if NET5
-//            return new HtmlContent(htmlHelper => MvcHtmlString.Create(htmlHelper.Partial(partialViewName, viewData: viewData, model: model)));
-//#else
-//            return new HtmlContent(htmlHelper => MvcHtmlString.Create(htmlHelper.Partial(partialViewName, viewData: viewData, model: model)));
-//#endif
-//        }
+        public static HtmlContent Partial(string partialViewName, object model, ViewDataDictionary viewData = null)
+        {
+            return new HtmlContent(htmlHelper => MvcHtmlString.Create(htmlHelper.Partial(partialViewName, viewData: viewData, model: model)));
+        }
 
         //public static HtmlContent HelperResult(Func<object, HelperResult> content)
         //{
@@ -701,7 +697,7 @@ namespace MultivendorWebViewer.Helpers
 
             layoutTag.AddCssClass(settings.Direction == LayoutDirection.Horizontal ? "horizontal" : "vertical");
             
-            layoutTag.AddCssClass("multivendor-web-layout");
+            layoutTag.AddCssClass("multivendor-layout");
 
 
             layoutTag.Write(htmlWriter, TagRenderMode.StartTag);

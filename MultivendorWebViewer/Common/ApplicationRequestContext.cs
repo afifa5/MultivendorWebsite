@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Routing;
+using MultivendorWebViewer.Components;
+using MultivendorWebViewer.Helpers;
 using MultivendorWebViewer.Manager;
 
 namespace MultivendorWebViewer.Common
@@ -44,7 +46,36 @@ namespace MultivendorWebViewer.Common
 
         public RequestContext RequestContext { get; set; }
         public HttpContextBase HttpContext { get { return RequestContext != null ? RequestContext.HttpContext : null; } }
-
+        
+        private State state;
+        public State State
+        {
+            get
+            {
+                // The create state procedure contains autoset (eg site if wrong) logic. Must be moved.
+                // TODO Should this create the State? Not as tied to the filter as now
+                if (state == null)
+                {
+                    //state = StateRouteProvider.Default.GetState(this);
+                }
+                return state;
+            }
+            set { state = value; }
+        }
+        public HashSet<string> ViewContext { get; private set; }
+        private Dictionary<string, object> customContext;
+        protected Dictionary<string, object> CustomContext
+        {
+            get { return customContext ?? (customContext = new Dictionary<string, object>()); }
+        }
+        public bool HasCustomContext(string id)
+        {
+            return CustomContext.ContainsKey(id);
+        }
+        public IconDescriptor GetIcon(string name, string context = null)
+        {
+            return IconsManager.Default.GetIcon(name, context);
+        }
         public HttpRequestBase HttpRequest { get { return RequestContext != null && RequestContext.HttpContext != null ? RequestContext.HttpContext.Request : null; } }
         public string SelectedCulture { get { return UserSettingProvider.Load(this) !=null? UserSettingProvider.Load(this).UICulture : UserSettingProvider.DefaultUserSetting.UICulture; } }
 
@@ -61,6 +92,11 @@ namespace MultivendorWebViewer.Common
                 return sessionData;
             }
             set { sessionData = value; }
+        }
+
+        public string GetApplicationTextTranslation(string text)
+        {
+            return TextManager.Current.GetText(text);
         }
     }
 }

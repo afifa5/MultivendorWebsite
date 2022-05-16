@@ -127,7 +127,7 @@ namespace MultivendorWebViewer.Helpers
                 tabTag.AddCssClass("hottrack");
             }
 
-            tabTag.AddCssClass("multivendor-web-tab");
+            tabTag.AddCssClass("multivendor-tab");
 
 
             tabTag.Write(htmlWriter, TagRenderMode.StartTag);

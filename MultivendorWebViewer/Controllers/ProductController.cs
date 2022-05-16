@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MultivendorWebViewer.Common;
+using MultivendorWebViewer.Components;
+using MultivendorWebViewer.Configuration;
+using MultivendorWebViewer.Helpers;
 using MultivendorWebViewer.ViewModels;
 
 namespace MultivendorWebViewer.Controllers
@@ -46,6 +49,74 @@ namespace MultivendorWebViewer.Controllers
             }
             return new EmptyResult();
         }
+        public  ActionResult NodeProductsDataView(DataViewRequest request, int nodeId)
+        {
+            var node = ApplicationRequestContext.CategoryManager.GetNodeById(nodeId);
+            var allProducts = new List<ProductViewModel>();
+            if (node.ProductNodes != null && node.ProductNodes.Any())
+            {
+                var productIds = node.ProductNodes.Select(p => p.ProductId).ToArray();
+                var products = ApplicationRequestContext.ProductManager.GetProductByIds(productIds);
+                foreach (var item in products)
+                {
+                    allProducts.Add(new ProductViewModel(item, ApplicationRequestContext));
+                }
+            }
 
+            var tools = new List<ToolBarItem>();
+
+
+           
+                tools.Insert(0, new ToolBarItem
+                {
+                    Label = "New address",
+                    Icon = ApplicationRequestContext.GetIcon(Icons.Plus),
+                    Id = "CreateCompanyAddress",
+                    ClassNames = "create-new-company-address",
+                    TextAlignment = ToolBarAlignment.Left,
+                    Location = DataViewOptions.ToolLocations.AfterSortSelectors,
+                });
+           
+
+            var options = request.State.CreateOptions();
+            options.PageSizes = new PaginationPageSize[] { 25, 50, 100 };
+            options.DefaultPageSize = 25;
+            options.DefaultSortSelector = "Name";
+            options.Tools = tools;
+            options.DisplayFilter = true;
+            options.DisplayItemCountDescription = true;
+            options.SortSelectors = new DataViewSelectorCollection<DataViewSortSelector>
+                          {
+                              new DataViewSortSelector { Id = "Name", Label = "1", Sort = new Sort("Name") },
+                              new DataViewSortSelector { Id = "AddressTypeText", Label = "2", Sort = new Sort("AddressTypeText") },
+                                                        };
+
+            options.FilterSelectors = new DataViewSelectorCollection<DataViewFilterSelector>
+                          {
+                              new DataViewFilterSelector { Id = "Name", Label = "1", Property = "Name" },
+                              new DataViewFilterSelector { Id = "AddressTypeText", Label = "2", Property = "AddressTypeText" },
+
+                          };
+            var result = new DataViewResult(request, ApplicationRequestContext)
+            {
+
+                DataViewOptions = options,
+                Content = state =>
+                {
+                    var dataViewModel = new DataViewString<ProductViewModel>(ApplicationRequestContext, allProducts,state:state);
+                    return new DataViewContentResult("_NodeProducts", dataViewModel);
+                },
+                ReportColumnsProvider = cr => new[]
+               {
+                    new TableReportColumn { Id = "AddressTypeText", Header = "1", PropertyName = "AddressTypeText" },
+                    new TableReportColumn { Id = "Name", Header = "2", PropertyName = "Name" },
+                                    },
+                ReportFileNameProvider = () =>
+                {
+                    return "company addresses.csv";
+                }
+            };
+            return result;
+        }
     }
 }

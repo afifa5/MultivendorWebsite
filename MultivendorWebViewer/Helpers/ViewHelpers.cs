@@ -217,15 +217,13 @@ namespace MultivendorWebViewer.Helpers
 
         public static HtmlHelper CreateHtmlHelper(this ControllerBase controller, object model = null)
         {
-#if NET452
+
             var viewContext = new ViewContext(controller.ControllerContext, new EmpyView(), model == null ? controller.ViewData : new ViewDataDictionary(controller.ViewData) { Model = model }, controller.TempData, TextWriter.Null);
             return new HtmlHelper(viewContext, new ViewPage());
-#else
-            return null;
-#endif
+
         }
 
-#if NET452
+
         public static HtmlHelper CreateHtmlHelper<T>(this ControllerContext controllerContext, T model = null)
             where T : class
         {
@@ -244,7 +242,7 @@ namespace MultivendorWebViewer.Helpers
             var viewContext = new ViewContext(controller.ControllerContext, new EmpyView(), model == null ? controller.ViewData : new ViewDataDictionary(controller.ViewData) { Model = model }, controller.TempData, writer);
             return new HtmlHelper<T>(viewContext, new ViewPage());
         }
-#endif
+
 
         public class EmpyView : IView
         {

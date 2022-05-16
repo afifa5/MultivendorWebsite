@@ -218,6 +218,16 @@
         }
         quantityElement.val(quantity)
         quantityElement.trigger("change");
+        /*Check product view*/
+
+        /*end check product view*/
+    });
+    $(function () {
+        var $view = $(document).findByClass("node-product-data-view");
+        if ($view.length > 0) {
+            multivendorWeb.dataview.initViews($view);
+        }
+
     });
 
 }(window.digitalHalalMarket = window.digitalHalalMarket || {}, window.multivendorWeb = window.multivendorWeb || {}, window.jQuery, document));

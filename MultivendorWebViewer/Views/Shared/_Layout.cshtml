@@ -1,6 +1,7 @@
 ﻿@using MultivendorWebViewer;
 @using MultivendorWebViewer.Common;
-
+@using MultivendorWebViewer.Helpers;
+@using MultivendorWebViewer.Components;
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,7 @@
     @Scripts.Render("~/bundles/main")
     @Scripts.Render("~/bundles/order")
 </head>
-@{ 
+@{
     var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
 }
 <body data-order-total-counter="@UrlUtility.Action(applicationrequestContext, "GetTotalQuantity", "Order")"
@@ -34,7 +35,7 @@
                             //var startCatalogueUrl = Url.Action("Index", "Category", new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId });
                             var flagUrl = applicationrequestContext.Configuration.GetCountryFlagUrlByCulture(applicationrequestContext.SelectedCulture);
                             var contentUrl = @Url.Content(flagUrl);
-                            }
+                        }
                         <a class="header-logo" href="@startCatalogueUrl">
 
                             <img class="img logo-image" src="@headerLogoUrl">
@@ -47,7 +48,10 @@
                         <! -- Search box-->
                         <div class="quick-search-input" data-min-search="2">
                             <input class="key-text search-input" type="search" placeholder="@CustomStrings.Search" tabindex="5" autocomplete="xyz">
-                            <a class="toolbar-search-icon"><span class="icon fa fa-search content fa-2x"></span></a>
+                            <a class="toolbar-search-icon">
+                                @Html.Icon(Icons.Search,new { @class="content"})
+                                @*<span class="icon fa fa-search content fa-2x"></span>*@
+                            </a>
                         </div>
                         <! -- #End: Search box-->
 
@@ -58,7 +62,8 @@
                     <li class="container right-aligned">
                         <! -- order cart-->
                         <a class="order-cart-container item-container" href="@UrlUtility.Action(applicationrequestContext, "Index", "Order")">
-                            <span class="icon fa fa-shopping-cart content fa-2x"></span>
+                            @*<span class="icon fa fa-shopping-cart content fa-2x"></span>*@
+                            @Html.Icon(Icons.ShoppingCart, new { @class = "content" })
                             <label class="icon-label">@CustomStrings.Order</label>
                             <div class="overlay">
                                 <span class="total-qty"></span>
@@ -69,7 +74,8 @@
                     <li class="container avatar-menu right-aligned user-menu" data-user-menu-url="@UrlUtility.Action(applicationrequestContext, "GetUserMenuPopUp", "Home")">
                         <! -- User-->
                         <div class="item-container">
-                            <span class="icon fa fa-user content fa-2x"></span>
+                            @*<span class="icon fa fa-user content fa-2x"></span>*@
+                            @Html.Icon(Icons.User, new { @class = "content" })
                             <label class="icon-label user-label ">@CustomStrings.Menu</label>
                         </div>
                         <! -- #End: User-->
@@ -80,12 +86,12 @@
             <div class="items-toolbar menu-toolbar">
 
             </div>
-           
+
         </div>
         <div class="main-search-pane">
             @*<div class="search-result">
-                My Name is shafi miah
-            </div>*@
+                    My Name is shafi miah
+                </div>*@
         </div>
         <!-- #Render your view inside main body through controller-->
         <main class="main-body">
@@ -93,27 +99,26 @@
 
         </main>
         <!-- #Render your view inside main body-->
-
         @*<footer class="main-footer">
-            <div class="footer-container">
-                <span>©2022 Digital halal market Ltd.</span>
-                <ul class="multivendor-web-toolbar footer-toolbar">
+                <div class="footer-container">
+                    <span>©2022 Digital halal market Ltd.</span>
+                    <ul class="multivendor-web-toolbar footer-toolbar">
 
-                    <li class="container center-aligned return-policy">
-                        <label><a href="@UrlUtility.Action(applicationrequestContext, "ContactUs", "Order")">Return policy</a></label>
-                    </li>
-                    <li class=" container center-aligned contact-us">
-                        <label><a href="@UrlUtility.Action(applicationrequestContext, "ContactUs", "Order")">Contact</a></label>
-                    </li>
-                    <li class=" container center-aligned about-us">
-                        <label><a href="@UrlUtility.Action(applicationrequestContext, "AboutUs", "Order")">About us</a></label>
-                    </li>
+                        <li class="container center-aligned return-policy">
+                            <label><a href="@UrlUtility.Action(applicationrequestContext, "ContactUs", "Order")">Return policy</a></label>
+                        </li>
+                        <li class=" container center-aligned contact-us">
+                            <label><a href="@UrlUtility.Action(applicationrequestContext, "ContactUs", "Order")">Contact</a></label>
+                        </li>
+                        <li class=" container center-aligned about-us">
+                            <label><a href="@UrlUtility.Action(applicationrequestContext, "AboutUs", "Order")">About us</a></label>
+                        </li>
 
-                </ul>
-            </div>
-       
-        
-        </footer>*@
+                    </ul>
+                </div>
+
+
+            </footer>*@
     </section>
 
     @Styles.Render("~/Content/Media")

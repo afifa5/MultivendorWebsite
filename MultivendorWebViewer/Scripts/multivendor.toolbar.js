@@ -1,0 +1,141 @@
+﻿(function (digitalHalalMarket, multivendorWeb, $, document) {
+
+    multivendorWeb.toolbar =
+    {
+        selector: ".multivendor-toolbar",
+
+        getToolbar: function (item) {
+            return item.closest(multivendorWeb.toolbar.selector);
+        },
+
+        getItems: function (toolbar, name) {
+            return toolbar.children(name ? "li[data-name='" + name + "']" : "li");
+        },
+
+        setAvailibility: function (toolbar, name, available) {
+            multivendorWeb.toolbar.getItems(toolbar, name).toggleClass("available", available);
+        },
+
+        showDropDown: function (item, options) {
+
+            var dropDown = item.children(".multivendor-drop-down");
+
+            options = $.extend(options || {}, dropDown.data("options"));
+
+            if (options.direction == null) {
+                options.direction = dropDown.data("dropdown-direction") || multivendorWeb.toolbar.getToolbar(item).data("dropdown-direction") || "up";
+            }
+
+            if (dropDown.length > 0 && options.html == null) {
+                options.html = dropDown;
+            }
+
+            var opts = $.extend({ relativeElement: item, horizontalAlign: "center" }, options);
+           
+
+            if (opts.direction == "down") {
+                opts.verticalAlign = opts.verticalAlign || "bottom";
+                opts.top = opts.top || 5;
+            } else {
+                opts.verticalAlign = opts.verticalAlign || "top";
+                opts.bottom = opts.top || 5;
+            }
+
+            if (opts.horizontalAlign == "right") {
+                opts.right = 5;
+            } else if (opts.verticalAlign == "left") {
+                opts.left = 5;
+            }
+                
+            multivendorWeb.popup.show(opts);
+        }
+
+    }
+
+    $(document).on("click", multivendorWeb.toolbar.selector + " li:not(.not-clickable)", function (event) {
+        var item = $(this);
+        var name = item.data("name");
+        var toolbar = item.closest(multivendorWeb.toolbar.selector);
+        // If the item is checkable, toogle check and trigger check events
+        if (item.hasClass("checkable") == true) {
+
+            var checked = item.hasClass("checked");
+            var type = item.data("check-type");
+            if (type == "toggle") {
+                item.toggleClass("checked")
+            } else if (checked == false) {
+                if (type == "radio") {
+                    var group = item.data("check-group");
+                    toolbar.children(group ? "li[data-check-group='" + group + "'].checked" : "li[data-check-type='radio'].checked").each(function () {
+                        var other = $(this);
+                        if (other != item) {
+                            other.removeClass("checked");
+                            toolbar.trigger("itemCheck", { toolbar: toolbar, item: other, name: other.data("name"), checked: false });
+                            other.trigger("check", { checked: false });
+                        }
+                    });
+                }
+
+                item.addClass("checked");
+            } else return;
+
+            checked = item.hasClass("checked");
+            toolbar.trigger("itemCheck", { toolbar: toolbar, item: item, name: name, checked: checked });
+            item.trigger("check", { checked: checked });
+        }
+
+        // Trigger click event
+        toolbar.trigger("itemClicked", { toolbar: toolbar, item: item, name: name, checked: item.hasClass("checked"), getItems: function () { return multivendorWeb.toolbar.getItems(toolbar); } });
+
+        // If the item has a drop down, show it
+        /*var dropdown = item.children(".multivendor-drop-down");
+        if (dropdown.length > 0) {
+            multivendorWeb.toolbar.showDropDown(item);
+        }*/
+    });
+
+    /*******************************************************************************************/
+    /* TODO REMOVE, THIS IS ASSERT LOGIC. THIS IS A BASE CLASS NOT TIED TO ASSERT SPECIFICALLY */
+    /*******************************************************************************************/
+
+    $(document).on('click', multivendorWeb.toolbar.selector + ' .menu-icon', function (event) {
+        //var navbarItem = document.getElementsByClassName(multivendorWeb.toolbar.selector.substr(1) + ' main-toolbar')[0].classList.toggle('responsive');
+        //console.log(navbarItem);
+        //var CheckStartPage = $(document).findByClass('catalogue-start-view catalogue-start-mobile-view');
+        //var textSearchReposition = $(document).findByClass('vertical expand not-clickable menu-mobile');
+        //var menuItems = $(document).findByClass('multivendor-toolbar main-toolbar inverse line');
+        //if (navbarItem == true && navbarItem != undefined) {
+        //    if ($(textSearchReposition).hasClass('text-search-reposition')) {
+        //        $(textSearchReposition).removeClass('text-search-reposition');
+        //    }
+        //    if ($(menuItems).hasClass('menu-item-reposition')) {
+        //        $(menuItems).removeClass('menu-item-reposition');
+        //    }
+        //    //if ($(CheckStartPage).hasClass('catalogue-start-view-reposition')) {
+        //    //    $('.main-navigationbar').removeClass('startPage-main-navigationbar');
+        //    //}
+        //    //if ($(CheckStartPage).hasClass('catalogue-start-view-reposition')) {
+        //    //    $(CheckStartPage).removeClass('catalogue-start-view-reposition');
+        //    //}
+           
+        //}
+        //else {
+        //    if (CheckStartPage.length > 0) {
+
+        //        if (!$(textSearchReposition).hasClass('text-search-reposition')) {
+        //            $(textSearchReposition).addClass('text-search-reposition');
+        //        }
+        //        if (!$(menuItems).hasClass('menu-item-reposition')) {
+        //            $(menuItems).addClass('menu-item-reposition');
+        //        }
+        //        //if (!$(CheckStartPage).hasClass('catalogue-start-view-reposition')) {
+        //        //    $(CheckStartPage).addClass('catalogue-start-view-reposition');
+        //        //}
+        //        //if ($(CheckStartPage).hasClass('catalogue-start-view-reposition')) {
+        //        //    $('.main-navigationbar').addClass('startPage-main-navigationbar');
+        //        //}
+        //    }
+        //}
+    });
+
+}(window.digitalHalalMarket = window.digitalHalalMarket || {}, window.multivendorWeb = window.multivendorWeb || {}, window.jQuery, document));

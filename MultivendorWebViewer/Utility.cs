@@ -35,6 +35,7 @@ using Microsoft.Ajax.Utilities;
 using System.Collections.Concurrent;
 using System.Reflection;
 using MultivendorWebViewer.Helpers;
+using MultivendorWebViewer.Components;
 
 namespace MultivendorWebViewer
 {
@@ -1186,6 +1187,64 @@ namespace MultivendorWebViewer
                 collection.Remove(key);
             }
         }
+        public static IDictionary<TKey, TElement> ToDictionaryOptimized<TSource, TKey, TElement>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector, IEqualityComparer<TKey> comparer = null)
+        {
+            if (source == null) return EmptyReadOnlyDictionary<TKey, TElement>.Default;
+
+            var elementEnumerator = source.GetEnumerator();
+            var list = elementEnumerator.TakeToList(2);
+
+            if (list.Count <= 1)
+            {
+                if (list.Count == 0)
+                {
+                    return EmptyReadOnlyDictionary<TKey, TElement>.Default;
+                }
+
+                var firstEntry = list[0];
+                return new SingleReadOnlyDictionary<TKey, TElement>(keySelector(firstEntry), elementSelector(firstEntry), comparer);
+            }
+
+            var dictionary = new Dictionary<TKey, TElement>(comparer);
+
+            TSource item0Source = list[0];
+            dictionary.Add(keySelector(item0Source), elementSelector(item0Source));
+
+            TSource item1Source = list[1];
+            dictionary.Add(keySelector(item1Source), elementSelector(item1Source));
+
+            while (elementEnumerator.MoveNext() == true)
+            {
+                var itemSource = elementEnumerator.Current;
+                dictionary.Add(keySelector(itemSource), elementSelector(itemSource));
+            }
+
+            return dictionary;
+
+            //return list.Concat(elementEnumerator).ToDictionary(keySelector, elementSelector, comparer);
+        }
+
+        public static IDictionary<TKey, TElement> ToDictionaryOptimized<TElement, TKey>(this IEnumerable<TElement> elements, Func<TElement, TKey> keySelector, IEqualityComparer<TKey> comparer = null)
+        {
+            if (elements == null) return EmptyReadOnlyDictionary<TKey, TElement>.Default;
+
+            var elementEnumerator = elements.GetEnumerator();
+            var list = elementEnumerator.TakeToList(2);
+
+            if (list.Count <= 1)
+            {
+                if (list.Count == 0)
+                {
+                    return EmptyReadOnlyDictionary<TKey, TElement>.Default;
+                }
+
+                var firstEntry = list[0];
+                return new SingleReadOnlyDictionary<TKey, TElement>(keySelector(firstEntry), firstEntry, comparer);
+            }
+
+            return list.Concat(elementEnumerator).Distinct().ToDictionary(keySelector, comparer);
+        }
+
         public static bool? ToNullableBool(this string str, bool ignoreCase = true)
         {
             if (str == null) return null;
@@ -1194,6 +1253,157 @@ namespace MultivendorWebViewer
             if (comparer.Equals(str, System.Boolean.FalseString)) return false;
             return null;
         }
+        public static object FirstOrDefaultNonGeneric(this IEnumerable source)
+        {
+            if (source == null) return null;
+            var list = source as IList;
+            if (list != null)
+            {
+                if (list.Count > 0) return list[0];
+            }
+            else
+            {
+                var e = source.GetEnumerator();
+                if (e.MoveNext()) return e.Current;
+            }
+            return null;
+        }
+
+        public static void Move<T>(this IList<T> list, int fromIndex, int toIndex)
+        {
+            var listView = list as IListView<T>;
+            if (listView != null)
+            {
+                listView.Move(fromIndex, toIndex);
+            }
+            else
+            {
+                T item = list[fromIndex];
+                list.RemoveAt(fromIndex);
+                //if (fromIndex < toIndex)
+                //{
+                //    toIndex--;
+                //}
+                list.Insert(toIndex, item);
+            }
+        }
+        public static ApplicationRequestContext GetApplicationRequestContext(this ControllerContext controllerContext)
+        {
+#if NET5
+            return controllerContext != null ? ApplicationRequestContext.GetContext(controllerContext) : null;
+#else
+            return controllerContext != null ? ApplicationRequestContext.GetContext(controllerContext.RequestContext.HttpContext) : null;
+#endif
+        }
+        public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T> items)
+        {
+            foreach (T item in items)
+            {
+                collection.Add(item);
+            }
+        }
+        public static bool HasCount<TSource>(this IEnumerable<TSource> source, int count)
+        {
+            if (source == null) return false;
+
+            var collectiong = source as ICollection<TSource>;
+            if (collectiong != null) return collectiong.Count == count;
+
+            var collection = source as ICollection;
+            if (collection != null) return collection.Count == count;
+
+            int i = 0;
+            var e = source.GetEnumerator();
+            checked
+            {
+                while (e.MoveNext())
+                {
+                    i++;
+                    if (i == count)
+                    {
+                        return e.MoveNext() == false;
+                    }
+                }
+            }
+            return false;
+        }
+        public static List<T> TakeToList<T>(this IEnumerator<T> enumerator, int count)
+        {
+            var list = count < 1024 ? new List<T>(count) : new List<T>(1024);
+            while (count-- > 0 && enumerator.MoveNext() == true)
+            {
+                list.Add(enumerator.Current);
+            }
+            return list;
+        }
+        public static IEnumerable<TSource> Concat<TSource>(this IEnumerable<TSource> first, IEnumerator<TSource> enumerator)
+        {
+            foreach (TSource element in first) yield return element;
+            while (enumerator.MoveNext() == true)
+            {
+                yield return enumerator.Current;
+            }
+        }
+        public static ISet<T> ToSetOptimized<T>(this IEnumerable<T> items, IEqualityComparer<T> comparer = null, int collectionThreshold = 3)
+        {
+            if (items == null) return EmptySet<T>.Default;
+
+            var itemsEnumerator = items.GetEnumerator();
+            var list = itemsEnumerator.TakeToList(collectionThreshold + 1);
+
+            if (list.Count <= collectionThreshold)
+            {
+                if (list.Count == 0)
+                {
+                    return EmptySet<T>.Default;
+                }
+
+                if (list.Count == 1)
+                {
+                    return new SingleSet<T>(items.First(), comparer);
+                }
+
+                return new CollectionSet<T>(items, comparer);
+            }
+
+            return new HashSet<T>(list.Concat(itemsEnumerator), comparer);
+        }
+
+        public static ApplicationRequestContext GetApplicationRequestContext(this HtmlHelper htmlHelper)
+        {
+            if (htmlHelper != null)
+            {
+                if (htmlHelper.ViewData != null)
+                {
+                    var model = htmlHelper.ViewData.Model as MultivendorWebViewer.ViewModels.IViewModel;
+                    if (model != null && model.ApplicationRequestContext != null)
+                    {
+                        return (ApplicationRequestContext)model.ApplicationRequestContext;
+                    }
+                }
+#if NET5
+                return GetApplicationRequestContext(htmlHelper.ViewContext);
+#else
+                if (htmlHelper.ViewContext != null)
+                {
+                    return ApplicationRequestContext.GetContext(htmlHelper.ViewContext.HttpContext);
+                }
+#endif
+            }
+            return null;
+        }
+        public static float? ToNullableFloat(this string str)
+        {
+            if (str == null) return null;
+
+            float val;
+            if (float.TryParse(str, out val) == true)
+            {
+                return val;
+            }
+            return null;
+        }
+
         public static decimal? ToNullableDecimal(this string str)
         {
             if (str == null) return null;
@@ -1378,29 +1588,35 @@ namespace MultivendorWebViewer
         }
 
 
-        public static IOrderedQueryable<TSource> OrderByDirection<TSource, TKey>(this IQueryable<TSource> source, System.Linq.Expressions.Expression<Func<TSource, TKey>> keySelector, SortDirection direction)
+        public static IOrderedQueryable<TSource> OrderByDirection<TSource, TKey>(this IQueryable<TSource> source, System.Linq.Expressions.Expression<Func<TSource, TKey>> keySelector, Components.SortDirection direction)
         {
-            return direction == SortDirection.Ascending ? source.OrderBy(keySelector) : source.OrderByDescending(keySelector);
+            return direction == Components.SortDirection.Ascending ? source.OrderBy(keySelector) : source.OrderByDescending(keySelector);
         }
 
-        public static IOrderedEnumerable<TSource> OrderByDirection<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, SortDirection direction)
+        public static IOrderedEnumerable<TSource> OrderByDirection<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Components.SortDirection direction)
         {
-            return direction == SortDirection.Ascending ? source.OrderBy(keySelector) : source.OrderByDescending(keySelector);
+            return direction == Components.SortDirection.Ascending ? source.OrderBy(keySelector) : source.OrderByDescending(keySelector);
         }
 
-        public static IOrderedEnumerable<TSource> OrderByDirection<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, SortDirection direction, IComparer<TKey> comparer)
+        public static IOrderedEnumerable<TSource> OrderByDirection<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Components.SortDirection direction, IComparer<TKey> comparer)
         {
-            return direction == SortDirection.Ascending ? source.OrderBy(keySelector, comparer) : source.OrderByDescending(keySelector, comparer);
+            return direction == Components.SortDirection.Ascending ? source.OrderBy(keySelector, comparer) : source.OrderByDescending(keySelector, comparer);
         }
 
-        public static IOrderedEnumerable<TSource> ThenBy<TSource, TKey>(this IOrderedEnumerable<TSource> source, Func<TSource, TKey> keySelector, SortDirection direction)
+        public static IOrderedEnumerable<TSource> ThenBy<TSource, TKey>(this IOrderedEnumerable<TSource> source, Func<TSource, TKey> keySelector, Components.SortDirection direction)
         {
-            return direction == SortDirection.Ascending ? source.ThenBy(keySelector) : source.ThenByDescending(keySelector);
+            return direction == Components.SortDirection.Ascending ? source.ThenBy(keySelector) : source.ThenByDescending(keySelector);
         }
-
-        public static IOrderedEnumerable<TSource> ThenBy<TSource, TKey>(this IOrderedEnumerable<TSource> source, Func<TSource, TKey> keySelector, SortDirection direction, IComparer<TKey> comparer)
+        public static void WriteConcat(this TextWriter writer, params string[] strings)
         {
-            return direction == SortDirection.Ascending ? source.ThenBy(keySelector, comparer) : source.ThenByDescending(keySelector, comparer);
+            for (int index = 0; index < strings.Length; index++)
+            {
+                writer.Write(strings[index]);
+            }
+        }
+        public static IOrderedEnumerable<TSource> ThenBy<TSource, TKey>(this IOrderedEnumerable<TSource> source, Func<TSource, TKey> keySelector, Components.SortDirection direction, IComparer<TKey> comparer)
+        {
+            return direction == Components.SortDirection.Ascending ? source.ThenBy(keySelector, comparer) : source.ThenByDescending(keySelector, comparer);
         }
 
     }

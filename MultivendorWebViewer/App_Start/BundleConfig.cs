@@ -12,11 +12,17 @@ namespace MultivendorWebViewer
                         "~/Scripts/jquery-{version}.js"));
             bundles.Add(new ScriptBundle("~/bundles/helpers").Include(
                        "~/Scripts/DHM.pop-up.js",
-                        "~/Scripts/multivendor.helpers.js"
+                        "~/Scripts/multivendor.helpers.js",
+                        "~/Scripts/multivendor.carousel.js",
+                         "~/Scripts/multivendor.combobox.js",
+                          "~/Scripts/multivendor.pagination.js",
+                           "~/Scripts/multivendor.popup.js",
+                            "~/Scripts/multivendor.table.js",
+                             "~/Scripts/multivendor.toolbar.js"
                        ));
             bundles.Add(new ScriptBundle("~/bundles/main").Include(
-           "~/Scripts/Main.js",
-           "~/Scripts/multivendor.carousel.js"
+           "~/Scripts/Main.js"
+           
            ));
             bundles.Add(new ScriptBundle("~/bundles/order").Include(
                     "~/Scripts/Orders.js"));
@@ -37,7 +43,8 @@ namespace MultivendorWebViewer
                       "~/Content/Controls.css",
                       "~/Content/site.css",
                        "~/Content/HelperComponent.css",
-                        "~/Content/Search.css"
+                        "~/Content/Search.css",
+                         "~/Content/HelperTools.css"
 
 
                       ));
