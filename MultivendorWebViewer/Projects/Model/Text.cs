@@ -7,9 +7,9 @@ using System.Linq;
 
 namespace MultivendorWebViewer.Models
 {
-    
 
-    public partial class Text
+
+    public partial class Text : IComparable
     {
         public Text() {
             TextTranslations = new List<TextTranslation>();
@@ -22,6 +22,11 @@ namespace MultivendorWebViewer.Models
         public string Identity { get; set; }
         [ForeignKey("TextId")]
         public  List<TextTranslation> TextTranslations { get; set; }
+
+        public int CompareTo(object obj)
+        {
+            return this.Equals(obj) ? 0 : -1;
+        }
 
         public string GetTranslation(string cultureCode) {
             var translatedSelection = TextTranslations.Where(i => i.LanguageCode == cultureCode).FirstOrDefault();
