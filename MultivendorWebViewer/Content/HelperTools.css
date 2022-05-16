@@ -224,7 +224,7 @@
                     padding-right: 25px;
                     border: 1px solid;
                     border-color: #ddd;
-                    min-height:35px;
+                   /* min-height:33px;*/
 
                 }
                 .multivendor-dataview > .tools-container > .filter-container > .filter > .query-input:focus {
@@ -400,7 +400,7 @@
     }
 
     .multivendor-toolbar:not(.new) > li.horizontal {
-        padding: 5px;
+       /* padding: 5px;*/
     }
 
 .multivendor-toolbar.compact > li {
@@ -459,7 +459,7 @@
         }
 
     .multivendor-toolbar:not(.new) > li.horizontal > * > * {
-        margin: 0 5px 0 5px;
+        /*margin: 0 5px 0 5px;*/
     }
 
     .multivendor-toolbar:not(.new) > li.vertical > :first-child > .label {

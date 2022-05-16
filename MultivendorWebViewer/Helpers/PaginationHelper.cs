@@ -283,7 +283,7 @@ namespace MultivendorWebViewer.Helpers
                 filterContainerTag.Write(w, TagRenderMode.StartTag);
 
                 var filterInputTag = new TagBuilder("input");
-                filterInputTag.AddCssClass("query-input");
+                filterInputTag.AddCssClass("query-input filter-text");
                 filterInputTag.Attributes.Add("autocomplete","off");
                 if (state != null && state.FilterQuery != null)
                 {
@@ -506,12 +506,12 @@ namespace MultivendorWebViewer.Helpers
                     var selectedText = sortSelectorItem != null ? string.Format("Sort by" +" {0}{1}", requestContext.GetApplicationTextTranslation(sortSelectorItem.Label), ascDecText) : requestContext.GetApplicationTextTranslation("Sort");
                     //icon.GetHtml(htmlAttributes, classNames, size)
 
-                    //var sortsToolBarItemIcon = siteContext.GetIcon(Icons.Sorting);
+                    var sortsToolBarItemIcon = requestContext.GetIcon(Icons.Sorting);
                     var sortsToolBarItem = new ToolBarItem
                     {
-                        Label = requestContext.GetApplicationTextTranslation("Sort"),
-                        Icon = requestContext.GetIcon(Icons.Sorting),
-                        Content = new HtmlContent(MvcHtmlString.Create(string.Format("<div class=\"sort-selector-container\"><input size=\"{0}\" autocomplete=\"off\" disabled placeholder=\"{1}\" class=\"sort-text\"/><div class=\"sort-icon-container\"></div></div>", selectedText.Length, selectedText /*IconRendererProvider.GetRenderer(sortsToolBarItemIcon).GetHtml(sortsToolBarItemIcon, classNames: "sort-icon")*/))),
+                        //Label = requestContext.GetApplicationTextTranslation("Sort"),
+                        //Icon = requestContext.GetIcon(Icons.Sorting),
+                        Content = new HtmlContent(MvcHtmlString.Create(string.Format("<div class=\"sort-selector-container\"><input size=\"{0}\" autocomplete=\"off\" disabled placeholder=\"{1}\" class=\"sort-text\"/><div class=\"sort-icon-container\">{2}</div></div>", selectedText.Length, selectedText ,IconRendererProvider.GetRenderer(sortsToolBarItemIcon).GetHtml(sortsToolBarItemIcon, classNames: "sort-icon")))),
                         DropDownItems = availableSortSelector.Select(sortSelector =>
                         {
                             var sort = sortSelector.Sort;
@@ -536,7 +536,7 @@ namespace MultivendorWebViewer.Helpers
                             var menuItem = new MenuItem
                             {
                                 Name = sortSelector.Id,
-                                //Icon = siteContext.GetIcon(sortSelector.Icon),// ?? new MultiIconDescriptor(siteContext.GetIcons(Icons.SortUp, Icons.SortDown)),
+                                Icon = requestContext.GetIcon(sortSelector.Icon),// ?? new MultiIconDescriptor(siteContext.GetIcons(Icons.SortUp, Icons.SortDown)),
                                 Label = requestContext.GetApplicationTextTranslation(sortSelector.Label),
                                 Selected = selectedSortId != null ? StringComparer.OrdinalIgnoreCase.Equals(selectedSortId, sortSelector.Id) == true : state != null && state.Sort != null && state.Sort.Equals(sortSelector.Sort),
                                 CheckType = CheckType.Radio,

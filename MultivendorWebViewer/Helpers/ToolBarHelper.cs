@@ -805,7 +805,7 @@ namespace MultivendorWebViewer.Helpers
             {
                 foreach (var item in context.Items)
                 {
-                    //item.RenderHtml(context);
+                    item.RenderHtml(context);
                 }
             }
         }

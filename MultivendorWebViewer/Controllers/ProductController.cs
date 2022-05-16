@@ -67,34 +67,35 @@ namespace MultivendorWebViewer.Controllers
 
 
            
-                tools.Insert(0, new ToolBarItem
-                {
-                    Label = "New address",
-                    Icon = ApplicationRequestContext.GetIcon(Icons.Plus),
-                    Id = "CreateCompanyAddress",
-                    ClassNames = "create-new-company-address",
-                    TextAlignment = ToolBarAlignment.Left,
-                    Location = DataViewOptions.ToolLocations.AfterSortSelectors,
-                });
+                //tools.Insert(0, new ToolBarItem
+                //{
+                //    Label = "New address",
+                //    Icon = ApplicationRequestContext.GetIcon(Icons.Plus),
+                //    Id = "CreateCompanyAddress",
+                //    ClassNames = "create-new-company-address",
+                //    TextAlignment = ToolBarAlignment.Left,
+                //    Location = DataViewOptions.ToolLocations.AfterSortSelectors,
+                //});
            
 
             var options = request.State.CreateOptions();
-            options.PageSizes = new PaginationPageSize[] { 25, 50, 100 };
-            options.DefaultPageSize = 25;
+            //options.PageSizes = new PaginationPageSize[] { 25, 50, 100 };
+            //options.DefaultPageSize = 25;
             options.DefaultSortSelector = "Name";
             options.Tools = tools;
             options.DisplayFilter = true;
+            options.DownloadToolAvailable = true;
             options.DisplayItemCountDescription = true;
             options.SortSelectors = new DataViewSelectorCollection<DataViewSortSelector>
                           {
-                              new DataViewSortSelector { Id = "Name", Label = "1", Sort = new Sort("Name") },
-                              new DataViewSortSelector { Id = "AddressTypeText", Label = "2", Sort = new Sort("AddressTypeText") },
-                                                        };
+                              new DataViewSortSelector { Id = "FormattedName", Label = CustomStrings.Name, Sort = new Sort("FormattedName") },
+                              new DataViewSortSelector { Id = "FormattedDescription", Label = CustomStrings.Description, Sort = new Sort("FormattedDescription") },
+                            };
 
             options.FilterSelectors = new DataViewSelectorCollection<DataViewFilterSelector>
                           {
-                              new DataViewFilterSelector { Id = "Name", Label = "1", Property = "Name" },
-                              new DataViewFilterSelector { Id = "AddressTypeText", Label = "2", Property = "AddressTypeText" },
+                              new DataViewFilterSelector { Id = "FormattedName", Label = CustomStrings.Name, Property = "FormattedName" },
+                              new DataViewFilterSelector { Id = "FormattedDescription", Label = CustomStrings.Description, Property = "FormattedDescription" },
 
                           };
             var result = new DataViewResult(request, ApplicationRequestContext)
@@ -108,12 +109,12 @@ namespace MultivendorWebViewer.Controllers
                 },
                 ReportColumnsProvider = cr => new[]
                {
-                    new TableReportColumn { Id = "AddressTypeText", Header = "1", PropertyName = "AddressTypeText" },
-                    new TableReportColumn { Id = "Name", Header = "2", PropertyName = "Name" },
+                    new TableReportColumn { Id = "FormattedName", Header = CustomStrings.Name, PropertyName = "FormattedName" },
+                    new TableReportColumn { Id = "FormattedDescription", Header = CustomStrings.Description, PropertyName = "FormattedDescription" },
                                     },
                 ReportFileNameProvider = () =>
                 {
-                    return "company addresses.csv";
+                    return "allProducts.csv";
                 }
             };
             return result;
