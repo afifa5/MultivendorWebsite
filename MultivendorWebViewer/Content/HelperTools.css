@@ -224,6 +224,7 @@
                     padding-right: 25px;
                     border: 1px solid;
                     border-color: #ddd;
+                    min-height:35px;
 
                 }
                 .multivendor-dataview > .tools-container > .filter-container > .filter > .query-input:focus {
