@@ -273,6 +273,15 @@
   <data name="ShippingAndBilling" xml:space="preserve">
     <value>শিপিং এবং বিলিং</value>
   </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>সাইন ইন</value>
+  </data>
+  <data name="SignInMessage" xml:space="preserve">
+    <value>আমাদের পরিষেবা এবং অর্ডার অ্যাক্সেস পেতে সাইন ইন করুন.</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>সাইন আউট</value>
+  </data>
   <data name="Specification" xml:space="preserve">
     <value>স্পেসিফিকেশন</value>
   </data>

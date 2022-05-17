@@ -273,6 +273,15 @@
   <data name="ShippingAndBilling" xml:space="preserve">
     <value>Shipping and billing</value>
   </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="SignInMessage" xml:space="preserve">
+    <value>Sign in to get access  to our service and orders.</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Sign out</value>
+  </data>
   <data name="Specification" xml:space="preserve">
     <value>Specification</value>
   </data>

@@ -26,7 +26,7 @@ namespace MultivendorWebViewer.Manager
  
             if (applicationRequestContext.SessionData == null) return null;
             var sessionOrders = applicationRequestContext.SessionData.Orders;
-            var siteOrder = sessionOrders.GetOrAdd("MultivendorWeb", order =>
+            var siteOrder = sessionOrders.GetOrAdd("MultivendorWebOrder", order =>
             {
                 return new Order();
             });
@@ -38,11 +38,11 @@ namespace MultivendorWebViewer.Manager
             var sessionOrders = applicationRequestContext.SessionData.Orders;
             if (order != null && order.OrderLines!=null && order.OrderLines.Any())
             {
-                sessionOrders["MultivendorWeb"] = order;
+                sessionOrders["MultivendorWebOrder"] = order;
             }
             else
             {
-                ((System.Collections.IDictionary)sessionOrders).Remove("MultivendorWeb");
+                ((System.Collections.IDictionary)sessionOrders).Remove("MultivendorWebOrder");
             }
         }
         public virtual string PlaceOrder(ApplicationRequestContext applicationRequestContext)

@@ -237,6 +237,10 @@
                     location.hash = "#tab=payment"
                     multivendorWeb.Order.LoadpaymentView();
                     break;
+                default:
+                    if ($orderCartView.length > 0) {
+                        $orderCartView.removeClass("loading")
+                    }
             }
 
         }
@@ -278,6 +282,7 @@
                             orderView.empty();
                             orderView.append(html)
                             location.hash = "#tab=success"
+
                         }
 
                     })

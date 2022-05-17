@@ -1,19 +1,37 @@
 ﻿@using MultivendorWebViewer.ViewModels;
 @using MultivendorWebViewer.Common;
+@using MultivendorWebViewer.Helpers;
 @*@model ProductViewModel*@
 
 @{
     ViewBag.Title = "Multivendor Web";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+    var routeValues = new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId };
 
     var headerLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, false);
+    var smallHeaderLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, true);
+    var startCatalogueUrl = UrlUtility.Action(applicationrequestContext, "Index", "Category", routeValues);
 
 }
-<div class="login-container">
-    <div class="login-content-container">
-        <img class="img logo-image" src="@headerLogoUrl">
-        <input class="user-name" />
-        <input class="password" />
+<div class="log-in-view">
+    <div class="login-view-back-ground">
+        <div class="log-in-container">
+            <a class="header-logo" href="@startCatalogueUrl">
+                <img class="img logo-image" src="@headerLogoUrl">
+                <img class="img logo-image-small" src="@smallHeaderLogoUrl">
+            </a>
+            <div class="header">@CustomStrings.SignInMessage</div>
+            <div class="user-name-container">
+                <input autofocus="" class="user-name-input" placeholder="@CustomStrings.UserName" tabindex="1" type="text" value="">
+            </div>
+            <div class="password-container">
+                <input autofocus="" class="password-input" placeholder="@CustomStrings.Password" tabindex="2" type="password">
+            </div>
+            <div class="invalid-user-name-password"></div>
+            <div class="log-in-button-container">
+                <button class="sign-in-button ">@CustomStrings.SignIn</button>
+            </div>
+        </div>
     </div>
 </div>

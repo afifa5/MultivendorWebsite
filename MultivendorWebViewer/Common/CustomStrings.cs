@@ -54,6 +54,8 @@ namespace MultivendorWebViewer.Common
         public static string Next { get { return TextManager.Current.GetText("Next"); } }
         public static string Previous { get { return TextManager.Current.GetText("Previous"); } }
         public static string Password { get { return TextManager.Current.GetText("Password"); } }
+        public static string SignIn { get { return TextManager.Current.GetText("SignIn"); } }
+        public static string SignOut { get { return TextManager.Current.GetText("SignOut"); } }
         public static string InformationNotFound { get { return TextManager.Current.GetText("InformationNotFound"); } }
         public static string SubCatagories { get { return TextManager.Current.GetText("SubCatagories"); } }
         public static string Success { get { return TextManager.Current.GetText("Success"); } }
@@ -68,6 +70,8 @@ namespace MultivendorWebViewer.Common
         public static string Description { get { return TextManager.Current.GetText("Description"); } }
         public static string ShippingAndBilling { get { return TextManager.Current.GetText("ShippingAndBilling"); } }
         public static string Payment { get { return TextManager.Current.GetText("Payment"); } }
+        public static string SignInMessage { get { return TextManager.Current.GetText("SignInMessage"); } }
+
         public static string StockInformation { get { return TextManager.Current.GetText("StockInformation"); } }
         public static string OutOfStock { get { return TextManager.Current.GetText("OutOfStock"); } }
         public static string Discount { get { return TextManager.Current.GetText("Discount"); } }

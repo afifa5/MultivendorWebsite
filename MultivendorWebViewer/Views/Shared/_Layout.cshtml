@@ -2,6 +2,7 @@
 @using MultivendorWebViewer.Common;
 @using MultivendorWebViewer.Helpers;
 @using MultivendorWebViewer.Components;
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,63 +25,57 @@
     <section class="main-layout">
         <div class="main-toolbar">
             <div class="header-toolbar">
+
                 <ul class="multivendor-web-toolbar">
-                    <li class="Container multivendor-web-logo">
-                        <! -- Logo-->
-                        @{
-                            var headerLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, false);
-                            var smallHeaderLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, true);
-                            var routeValues = new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId };
-                            var startCatalogueUrl = UrlUtility.Action(applicationrequestContext, "Index", "Category", routeValues);
-                            //var startCatalogueUrl = Url.Action("Index", "Category", new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId });
-                            var flagUrl = applicationrequestContext.Configuration.GetCountryFlagUrlByCulture(applicationrequestContext.SelectedCulture);
-                            var contentUrl = @Url.Content(flagUrl);
-                        }
-                        <a class="header-logo" href="@startCatalogueUrl">
+                        <li class="Container multivendor-web-logo">
 
-                            <img class="img logo-image" src="@headerLogoUrl">
-                            <img class="img logo-image-small" src="@smallHeaderLogoUrl">
-                        </a>
-                        <! -- #End Logo-->
-                    </li>
-                    <li class="Container search-container">
+                            @{
+                                var headerLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, false);
+                                var smallHeaderLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, true);
+                                var routeValues = new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId };
+                                var startCatalogueUrl = UrlUtility.Action(applicationrequestContext, "Index", "Category", routeValues);
+                                var flagUrl = applicationrequestContext.Configuration.GetCountryFlagUrlByCulture(applicationrequestContext.SelectedCulture);
+                                var contentUrl = @Url.Content(flagUrl);
+                            }
+                            <a class="header-logo" href="@startCatalogueUrl">
 
-                        <! -- Search box-->
-                        <div class="quick-search-input" data-min-search="2">
-                            <input class="key-text search-input" type="search" placeholder="@CustomStrings.Search" tabindex="5" autocomplete="xyz">
-                            <a class="toolbar-search-icon">
-                                @Html.Icon(Icons.Search,new { @class="content"})
-                                @*<span class="icon fa fa-search content fa-2x"></span>*@
+                                <img class="img logo-image" src="@headerLogoUrl">
+                                <img class="img logo-image-small" src="@smallHeaderLogoUrl">
                             </a>
-                        </div>
-                        <! -- #End: Search box-->
 
-                    </li>
-                    <li class="container right-aligned language-container" data-language-item-url="@UrlUtility.Action(applicationrequestContext, "GetLanguagePopUp", "Home")">
-                        <img class="img-icon" src="@contentUrl">
-                    </li>
-                    <li class="container right-aligned">
-                        <! -- order cart-->
-                        <a class="order-cart-container item-container" href="@UrlUtility.Action(applicationrequestContext, "Index", "Order")">
-                            @*<span class="icon fa fa-shopping-cart content fa-2x"></span>*@
-                            @Html.Icon(Icons.ShoppingCart, new { @class = "content" })
-                            <label class="icon-label">@CustomStrings.Order</label>
-                            <div class="overlay">
-                                <span class="total-qty"></span>
+                        </li>
+                        <li class="Container search-container">
+                            <div class="quick-search-input" data-min-search="2">
+                                <input class="key-text search-input" type="search" placeholder="@CustomStrings.Search" tabindex="5" autocomplete="xyz">
+                                <a class="toolbar-search-icon">
+                                    @Html.Icon(Icons.Search,new { @class="content"})
+
+                                </a>
                             </div>
-                        </a>
-                        <! -- #End: order cart-->
-                    </li>
-                    <li class="container avatar-menu right-aligned user-menu" data-user-menu-url="@UrlUtility.Action(applicationrequestContext, "GetUserMenuPopUp", "Home")">
-                        <! -- User-->
-                        <div class="item-container">
-                            @*<span class="icon fa fa-user content fa-2x"></span>*@
-                            @Html.Icon(Icons.User, new { @class = "content" })
-                            <label class="icon-label user-label ">@CustomStrings.Menu</label>
-                        </div>
-                        <! -- #End: User-->
-                    </li>
-                </ul>
+
+
+                        </li>
+                        <li class="container right-aligned language-container" data-language-item-url="@UrlUtility.Action(applicationrequestContext, "GetLanguagePopUp", "Home")">
+                            <img class="img-icon" src="@contentUrl">
+                        </li>
+                        <li class="container right-aligned">
+
+                            <a class="order-cart-container item-container" href="@UrlUtility.Action(applicationrequestContext, "Index", "Order")">
+                                @Html.Icon(Icons.ShoppingCart, new { @class = "content" })
+                                <label class="icon-label">@CustomStrings.Order</label>
+                                <div class="overlay">
+                                    <span class="total-qty"></span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="container avatar-menu right-aligned user-menu" data-user-menu-url="@UrlUtility.Action(applicationrequestContext, "GetUserMenuPopUp", "Home")">
+                            <! -- User-->
+                            <div class="item-container">
+                                @Html.Icon(Icons.User, new { @class = "content" })
+                                <label class="icon-label user-label ">@CustomStrings.Menu</label>
+                            </div>
+                        </li>
+                    </ul>
 
             </div>
             <div class="items-toolbar menu-toolbar">
@@ -89,9 +84,7 @@
 
         </div>
         <div class="main-search-pane">
-            @*<div class="search-result">
-                    My Name is shafi miah
-                </div>*@
+
         </div>
         <!-- #Render your view inside main body through controller-->
         <main class="main-body">

@@ -142,36 +142,40 @@
     /*call to the controller function */
         let languageContainer = $(this);
         var actionUrl = $(this).data("language-item-url");
-        $.ajax({
-            url: actionUrl,
-           /* data: { searchtext: searchtext, page: 0, pageSize: pagesize },*/
-            dataType: "html",
-            type: "GET",
-            cache: false,
-            success: function (html) {
-                $html = $(html);
-                multivendorWeb.PopUp.Show($html, languageContainer, null)
+        multivendorWeb.popup.show(null, { url: actionUrl, /*urlData: { id: id },*/ relativeElement: languageContainer, top: languageContainer.height(), left: 0, verticalAlign: "top", horizontalAlign: "right" });
 
-            }, error: function (ex) {
+        //$.ajax({
+        //    url: actionUrl,
+        //   /* data: { searchtext: searchtext, page: 0, pageSize: pagesize },*/
+        //    dataType: "html",
+        //    type: "GET",
+        //    cache: false,
+        //    success: function (html) {
+        //        $html = $(html);
+        //        multivendorWeb.PopUp.Show($html, languageContainer, null)
+
+        //    }, error: function (ex) {
                
-            }
-        });
+        //    }
+        //});
         /*end call */
     });
     $(document).on("click", ".user-menu", function (e) {
         var userMenuhtml = $(this);
         var url = userMenuhtml.data("user-menu-url")
-        $.ajax({
-            url: url,
-            datatype: "html",
-            type: "GET",
-            cache: false,
-            success: function (data) {
-                var html = $(data)
-                multivendorWeb.PopUp.Show(html, userMenuhtml, null)
-            }
+        multivendorWeb.popup.show(null, { url: url, /*urlData: { id: id },*/ relativeElement: userMenuhtml, top: userMenuhtml.height(), left: 0, verticalAlign: "top", horizontalAlign: "right" });
 
-        })
+        //$.ajax({
+        //    url: url,
+        //    datatype: "html",
+        //    type: "GET",
+        //    cache: false,
+        //    success: function (data) {
+        //        var html = $(data)
+        //        multivendorWeb.PopUp.Show(html, userMenuhtml, null)
+        //    }
+
+        //})
     })
     //Setting language in dropdown list.
     $(document).on("click", ".language-item", function (e) {
