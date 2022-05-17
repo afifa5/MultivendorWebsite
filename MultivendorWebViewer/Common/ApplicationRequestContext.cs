@@ -5,10 +5,15 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Routing;
+using Microsoft.AspNet.Identity;
 using MultivendorWebViewer.Components;
 using MultivendorWebViewer.Helpers;
 using MultivendorWebViewer.Manager;
 using MultivendorWebViewer.Server.Models;
+using System.Security.Claims;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
+using Microsoft.Owin.Host.SystemWeb;
 
 
 namespace MultivendorWebViewer.Common
@@ -26,7 +31,7 @@ namespace MultivendorWebViewer.Common
             ImageManager =ImageManager.Default;
             ProductManager = ProductManager.Default;
             OrderManager =OrderManager.Default;
-            UserManager = UserManager.Default;
+            UserDBManager = UserDBManager.Default;
 
         }
         public static ApplicationRequestContext GetContext(HttpContextBase context)
@@ -38,7 +43,7 @@ namespace MultivendorWebViewer.Common
             return context != null && context.Handler != null ? new ApplicationRequestContext(context.Request.RequestContext) : null;
         }
         public  CategoryManager CategoryManager { get; set; }
-        public UserManager UserManager { get; set; }
+        public UserDBManager UserDBManager { get; set; }
         public OrderManager OrderManager { get; set; }
         public ProductManager ProductManager { get; set; }
         public ImageManager ImageManager { get; set; }
@@ -46,8 +51,17 @@ namespace MultivendorWebViewer.Common
         public CookieUserSettingProvider UserSettingProvider { get { return new CookieUserSettingProvider(); } }
         public ConfigurationManager Configuration { get; set; }
 
-        public RequestContext RequestContext { get; set; }
+        public System.Web.Routing.RequestContext RequestContext { get; set; }
         public HttpContextBase HttpContext { get { return RequestContext != null ? RequestContext.HttpContext : null; } }
+
+        public HttpRequestBase HttpRequest { get { return RequestContext != null && RequestContext.HttpContext != null ? RequestContext.HttpContext.Request : null; } }
+
+        private ApplicationUserManager userManager;
+        public ApplicationUserManager UserManager
+        {
+            get { return userManager!= null? userManager : HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            private set { userManager = value; }
+        }
         public void ClearUser()
         {
             RemoveObject("User");
@@ -71,8 +85,8 @@ namespace MultivendorWebViewer.Common
                         string id = HttpContext.User.Identity.GetUserId();
                         if (String.IsNullOrEmpty(id) == false)
                         {
-                            Models.ApplicationUser applicationUser = UserManager.FindByIdAsync(id).Result;
-                            if (applicationUser != null) multivendorUser = applicationUser.AssertUser;
+                           ApplicationUser applicationUser = UserManager.FindByIdAsync(id).Result;
+                            if (applicationUser != null) multivendorUser = applicationUser.MultivendorUser;
                         }
                     }
 
@@ -81,8 +95,8 @@ namespace MultivendorWebViewer.Common
                         string name = HttpContext.User.Identity.GetUserName();
                         if (String.IsNullOrEmpty(name) == false)
                         {
-                            Models.ApplicationUser applicationUser = UserManager.FindByNameAsync(name).Result;
-                            if (applicationUser != null) multivendorUser = applicationUser.AssertUser;
+                           ApplicationUser applicationUser = UserManager.FindByNameAsync(name).Result;
+                            if (applicationUser != null) multivendorUser = applicationUser.MultivendorUser;
                         }
                     }
 
@@ -91,7 +105,7 @@ namespace MultivendorWebViewer.Common
                     //    // Used i.e. in Offline deploy scenario
                     //    assertUser = SessionData.User;
                     //}
-                    return assertUser;
+                    return multivendorUser;
                 });
             }
         }
@@ -125,7 +139,7 @@ namespace MultivendorWebViewer.Common
         {
             return IconsManager.Default.GetIcon(name, context);
         }
-        public HttpRequestBase HttpRequest { get { return RequestContext != null && RequestContext.HttpContext != null ? RequestContext.HttpContext.Request : null; } }
+        //public HttpRequestBase HttpRequest { get { return RequestContext != null && RequestContext.HttpContext != null ? RequestContext.HttpContext.Request : null; } }
         public string SelectedCulture { get { return UserSettingProvider.Load(this) !=null? UserSettingProvider.Load(this).UICulture : UserSettingProvider.DefaultUserSetting.UICulture; } }
 
         private SessionData sessionData;

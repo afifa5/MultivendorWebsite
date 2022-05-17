@@ -26,7 +26,7 @@ namespace MultivendorWebViewer.ViewModels
 
         public string UserName => Model.UserName;
 
-        public string Password => Model.Password;
+        public string Password => Model.PassWord;
         public string CompanyName => Model.CompanyName;
         public bool? IsActive => Model.IsActive;
 
