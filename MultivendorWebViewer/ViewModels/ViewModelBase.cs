@@ -72,27 +72,26 @@ namespace MultivendorWebViewer.ViewModels
         TModel Model { get; }
     }
 
-    //public abstract class ViewModelBase<TModel> : ViewModelBase, IViewModel<TModel>, IItemSource<TModel>
-    //{
-    //    protected ViewModelBase(TModel model)
-    //    {
-    //        if (model == null) throw new ArgumentNullException("model");
+    public abstract class ViewModelBase<TModel> : ViewModelBase
+    {
+        protected ViewModelBase(TModel model)
+        {
+            if (model == null) throw new ArgumentNullException("model");
 
-    //        Model = model;
-    //    }
+            Model = model;
+        }
 
-    //    protected ViewModelBase(TModel model, ApplicationRequestContext applicationRequestContext)
-    //        : base(applicationRequestContext)
-    //    {
-    //        if (model == null) throw new ArgumentNullException("model");
+        protected ViewModelBase(TModel model, ApplicationRequestContext applicationRequestContext)
+            : base(applicationRequestContext)
+        {
+            if (model == null) throw new ArgumentNullException("model");
 
-    //        Model = model;
-    //    }
+            Model = model;
+        }
 
-    //    public TModel Model { get; private set; }
+        public TModel Model { get; private set; }
 
-    //    TModel IItemSource<TModel>.Item => Model;
-    //}
+    }
 
     public abstract class ViewModelBase<TModel, TViewModel> : ViewModelBase
     {

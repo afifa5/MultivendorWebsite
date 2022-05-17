@@ -100,10 +100,10 @@ namespace MultivendorWebViewer.Common
                         }
                     }
 
-                    //if (assertUser == null && SessionData != null && SessionData.User != null)
+                    //if (multivendorUser == null && SessionData != null && SessionData.User != null)
                     //{
                     //    // Used i.e. in Offline deploy scenario
-                    //    assertUser = SessionData.User;
+                    //    multivendorUser = SessionData.User;
                     //}
                     return multivendorUser;
                 });

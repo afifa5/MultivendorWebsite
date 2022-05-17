@@ -31,7 +31,7 @@ namespace MultivendorWebViewer.ViewModels
         public bool? IsActive => Model.IsActive;
 
         public string UserRole => Model.UserRole;
-        protected CustomerViewModel GetCustomer() => new CustomerViewModel(ApplicationRequestContext.UserManager.GetCustomerById(CustomerId), ApplicationRequestContext);
+        protected CustomerViewModel GetCustomer() => new CustomerViewModel(ApplicationRequestContext.UserDBManager.GetCustomerById(CustomerId), ApplicationRequestContext);
         protected ImageViewModel GetImage() => ImageId.HasValue? new ImageViewModel(ApplicationRequestContext.ImageManager.GetImagesById(ImageId.Value), ApplicationRequestContext): null;
 
     }
