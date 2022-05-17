@@ -19,14 +19,15 @@ namespace MultivendorWebViewer.Server.Models
         
         [ForeignKey("CustomerId")]
         public Customer Customer { get; set; }
-
+        [NotMapped]
+        public string ExternalId { get; set; }
         public int? ImageId { get; set; }
 
         [StringLength(50)]
         public string UserName { get; set; }
 
         [StringLength(50)]
-        public string Password { get; set; }
+        public string PassWord { get; set; }
 
 
         [StringLength(50)]
