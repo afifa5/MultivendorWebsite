@@ -38,7 +38,7 @@ namespace MultivendorWebViewer.Controllers
             {
                 var priceViewModel = prices.Select(p => new PriceAvailailityViewModel(p, ApplicationRequestContext));
                 if (prices != null && prices.Any()) {
-                    var userManager = ApplicationRequestContext.UserManager;
+                    var userManager = ApplicationRequestContext.UserDBManager;
                     var userModels = prices.Where(p => p.UserId.HasValue).Select(s => userManager.GetUserByUserId(s.UserId.Value)).ToArray();
                     if (userModels != null && userModels.Any()) {
                         var userViewModel = userModels.Select(p => new UserViewModel(p, ApplicationRequestContext));

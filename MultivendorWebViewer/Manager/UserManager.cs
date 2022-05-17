@@ -178,6 +178,58 @@ namespace MultivendorWebViewer.Manager
                 return await base.FindAsync(userName, password);
             }
         }
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
+        {
+            
+            var routeData = System.Web.Routing.RouteTable.Routes.GetRouteData(System.Web.HttpContext.Current.Request.RequestContext.HttpContext);
+            if (routeData == null) return new ApplicationUserManager(null, new ApplicationUserStore(null)); // ApplicationUserManager.Empty;
+            var applicationRequestContext = ApplicationRequestContext.GetContext(HttpContext.Current);
+
+            if (applicationRequestContext == null) return new ApplicationUserManager(null, new ApplicationUserStore(null)); // ApplicationUserManager.Empty;
+
+            ApplicationUserStore applicationUserStore = new ApplicationUserStore(applicationRequestContext);
+            var manager = Instance.Create<ApplicationRequestContext, ApplicationUserStore, ApplicationUserManager>(applicationRequestContext, applicationUserStore);
+
+            // Configure validation logic for usernames
+            manager.UserValidator = new UserValidator<ApplicationUser>(manager)
+            {
+                AllowOnlyAlphanumericUserNames = false,
+                RequireUniqueEmail = true,
+            };
+
+            // Configure validation logic for passwords
+            manager.PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 6,
+                RequireNonLetterOrDigit = true,
+                RequireDigit = true,
+                RequireLowercase = true,
+                RequireUppercase = true,
+            };
+
+            //// Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
+            //// You can write your own provider and plug in here.
+            //manager.RegisterTwoFactorProvider("PhoneCode", new PhoneNumberTokenProvider<ApplicationUser>
+            //{
+            //    MessageFormat = Strings.Strings.YourSecurityCodeIs
+            //});
+            //manager.RegisterTwoFactorProvider("EmailCode", new EmailTokenProvider<ApplicationUser>
+            //{
+            //    Subject = Strings.Strings.SecurityCode,
+            //    BodyFormat = Strings.Strings.YourSecurityCodeIs
+            //});
+            //manager.EmailService = new EmailService();
+            //manager.SmsService = new SmsService();
+
+            var dataProtectionProvider = options.DataProtectionProvider;
+            if (dataProtectionProvider != null)
+            {
+                manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+            }
+
+            return manager;
+        }
+
 
     }
     public class ApplicationUserStore : IUserStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>, IUserRoleStore<ApplicationUser>, IUserClaimStore<ApplicationUser>

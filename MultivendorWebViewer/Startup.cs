@@ -1,6 +1,5 @@
 ﻿using Microsoft.Owin;
 using Owin;
-using System;
 
 [assembly: OwinStartupAttribute(typeof(MultivendorWebViewer.Startup))]
 namespace MultivendorWebViewer
@@ -11,6 +10,5 @@ namespace MultivendorWebViewer
         {
             ConfigureAuth(app);
         }
-
     }
 }
