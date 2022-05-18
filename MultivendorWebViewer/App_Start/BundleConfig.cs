@@ -41,6 +41,7 @@ namespace MultivendorWebViewer
                       //"~/Content/bootstrap.css",
                       "~/Content/Font-awesome.css",
                       "~/Content/Controls.css",
+                      "~/Content/Login.css",
                       "~/Content/site.css",
                        "~/Content/HelperComponent.css",
                         "~/Content/Search.css",

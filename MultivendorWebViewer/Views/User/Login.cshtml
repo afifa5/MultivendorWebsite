@@ -1,36 +1,48 @@
 ﻿@using MultivendorWebViewer.ViewModels;
 @using MultivendorWebViewer.Common;
 @using MultivendorWebViewer.Helpers;
-@*@model ProductViewModel*@
+@model LoginViewModel
 
 @{
     ViewBag.Title = "Multivendor Web";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
     var routeValues = new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId };
-
+    var backgroundImage = applicationrequestContext.Configuration.GetApplicationImage(applicationrequestContext, applicationrequestContext.Configuration.SiteProfile.LoginBackgroundImage);
     var headerLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, false);
-    var smallHeaderLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, true);
+    //var smallHeaderLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, true);
     var startCatalogueUrl = UrlUtility.Action(applicationrequestContext, "Index", "Category", routeValues);
 
 }
 <div class="log-in-view">
-    <div class="login-view-back-ground">
+    <div class="login-view-back-ground" style="background-image:url(@backgroundImage)">
         <div class="log-in-container">
             <a class="header-logo" href="@startCatalogueUrl">
                 <img class="img logo-image" src="@headerLogoUrl">
-                <img class="img logo-image-small" src="@smallHeaderLogoUrl">
             </a>
             <div class="header">@CustomStrings.SignInMessage</div>
-            <div class="user-name-container">
-                <input autofocus="" class="user-name-input" placeholder="@CustomStrings.UserName" tabindex="1" type="text" value="">
-            </div>
-            <div class="password-container">
-                <input autofocus="" class="password-input" placeholder="@CustomStrings.Password" tabindex="2" type="password">
-            </div>
-            <div class="invalid-user-name-password"></div>
-            <div class="log-in-button-container">
-                <button class="sign-in-button ">@CustomStrings.SignIn</button>
+            @using (Html.BeginForm("Login", "User", FormMethod.Post, HtmlHelper.AnonymousObjectToHtmlAttributes(new { @class = "form-horizontal", role = "form" })))
+            {
+                <div class="user-name-container">
+                    @Html.TextBoxFor(m => m.UserName, new { @placeholder = @CustomStrings.Email, @class = "user-name-input", @tabindex = "1", autofocus = "" })
+
+                    @*<input autofocus="" class="user-name-input" placeholder="@CustomStrings.Email" tabindex="1" type="email" value="">*@
+                </div>
+                <div class="password-container">
+                    @Html.PasswordFor(m => m.Password, new { @placeholder = @CustomStrings.Password, @class = "password-input", @tabindex = "2", autofocus = "" })
+
+                    @*<input autofocus="" class="password-input" placeholder="@CustomStrings.Password" tabindex="2" type="password">*@
+                </div>
+                <div class="log-in-button-container">
+                    <input type="submit" class="sign-in-button " value="@CustomStrings.SignIn">
+                </div>
+                <div class="invalid-user-name-password login-form-items-container">
+                    @Html.ValidationSummary(true, "", new { @class = "error-text" })
+                </div>
+            }
+
+            <div class="register-button-container">
+                <button class="register-button ">@CustomStrings.CreateAccount</button>
             </div>
         </div>
     </div>

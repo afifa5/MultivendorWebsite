@@ -18,6 +18,10 @@ namespace MultivendorWebViewer.Manager
         {
             return UrlUtility.Action(requsetContext, "Image", "Content", new { imageId = 0, fileName = isSmall? SiteProfile.HeaderLogoSmall : SiteProfile.HeaderLogo });
         }
+        public virtual string GetApplicationImage(ApplicationRequestContext requsetContext, string applicationImageName)
+        {
+            return UrlUtility.Action(requsetContext, "Image", "Content", new { imageId = 0, fileName = applicationImageName });
+        }
         public virtual string GetCountryFlagUrlByCulture(string culturename)
         {
             string flagPath = "~/Content/Flag/";

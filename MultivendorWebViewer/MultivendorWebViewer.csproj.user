@@ -34,7 +34,7 @@
           <SQLDebugging>False</SQLDebugging>
           <ExternalProgram>
           </ExternalProgram>
-          <StartExternalURL>http://localhost:5970/Category/Node?nodeId=8</StartExternalURL>
+          <StartExternalURL>http://localhost:5970/Category/Index/1</StartExternalURL>
           <StartCmdLineArguments>
           </StartCmdLineArguments>
           <StartWorkingDirectory>

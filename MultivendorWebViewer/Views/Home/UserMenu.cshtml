@@ -2,6 +2,9 @@
 @using MultivendorWebViewer.Common;
 @using MultivendorWebViewer.Helpers;
 @using MultivendorWebViewer.Components;
+@{ 
+    var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+}
 <ul class="multivendor-web-menu ">
     <li>
         <a class="user-menu-item">
@@ -9,16 +12,24 @@
             <label>@CustomStrings.MyOrder</label>
         </a>
     </li>
-    <li>
-        <a class="user-menu-item">
-            @Html.Icon(Icons.LogIn)
-            <label>@CustomStrings.SignIn</label>
-        </a>
-    </li>
-    <li>
-        <a class="user-menu-item">
-            @Html.Icon(Icons.LogOut)
-            <label>@CustomStrings.SignOut</label>
-        </a>
-    </li>
+    @if (applicationrequestContext.User == null)
+    {
+        <li>
+            <a href="@UrlUtility.Action(applicationrequestContext,"Login","User")" class="user-menu-item">
+                @Html.Icon(Icons.LogIn)
+                <label>@CustomStrings.SignIn</label>
+            </a>
+        </li>
+    }
+    else
+    {
+        <li>
+            <a href="@UrlUtility.Action(applicationrequestContext,"LogOut","User")" class="user-menu-item">
+                @Html.Icon(Icons.LogOut)
+                <label>@CustomStrings.SignOut</label>
+            </a>
+        </li>
+    }
+
+
 </ul>

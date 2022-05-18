@@ -99,6 +99,9 @@
     .header-logo .img.logo-image {
         display: none;
     }
+    .log-in-container .header-logo .img.logo-image {
+        display: flex;
+    }
     .header-logo .img.logo-image-small {
         width: 50px;
         display:block;

@@ -70,16 +70,16 @@ input:focus{
     font-size: 15px;
 }
 /*End menu*/
-button{
+button, input[type=submit], input[type=button] {
     background: #ab0000;
     border: 1px solid;
     border-color: #AB0000;
-     border-radius: 10px;
+    border-radius: 10px;
     transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out;
     color: #fff;
     padding: 5px 10px 5px 10px;
 }
-button:hover,.button:hover{
+button:hover,.button:hover, input[type=submit]:hover,input[type=button]:hover{
     background-color: #fff;
     border-color: #AB0000 ;
     border-width: 1px ;
@@ -92,9 +92,9 @@ button:hover,.button:hover{
     transition-delay: 0s;
     outline: none ;
 }
-button:focus{
-    outline: none;
-}
+    button:focus, input[type=submit]:focus, input[type=button]:focus {
+        outline: none;
+    }
 .multivendor-web-menu li.help-item:before {
     position: absolute;
     margin-top: 2px;
@@ -195,7 +195,7 @@ button:focus{
     padding-left:10px;
 }
 /*end */
-button,input[type=button],.button {
+button, input[type=button], .button, input[type=submit] {
     background: #ab0000;
     border: 1px solid;
     border-color: #AB0000;
@@ -203,7 +203,7 @@ button,input[type=button],.button {
     transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out;
     color: #fff;
     padding: 5px 10px 5px 10px;
-    text-decoration:none;
+    text-decoration: none;
 }
 .footer-container {
     display: flex;

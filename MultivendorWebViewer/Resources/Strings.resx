@@ -159,6 +159,9 @@
   <data name="Country" xml:space="preserve">
     <value>Country</value>
   </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Create account</value>
+  </data>
   <data name="CreditCard" xml:space="preserve">
     <value>Credit card</value>
   </data>
@@ -222,6 +225,9 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Password required</value>
+  </data>
   <data name="Payment" xml:space="preserve">
     <value>Payment</value>
   </data>
@@ -260,6 +266,9 @@
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>Quantity</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember me</value>
   </data>
   <data name="Rocket" xml:space="preserve">
     <value>Rocket</value>
@@ -314,6 +323,9 @@
   </data>
   <data name="UserName" xml:space="preserve">
     <value>User name</value>
+  </data>
+  <data name="UserNameRequired" xml:space="preserve">
+    <value>User name required</value>
   </data>
   <data name="Videos" xml:space="preserve">
     <value>Videos</value>

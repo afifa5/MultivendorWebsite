@@ -159,6 +159,9 @@
   <data name="Country" xml:space="preserve">
     <value>দেশ</value>
   </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>নিবন্ধন</value>
+  </data>
   <data name="CreditCard" xml:space="preserve">
     <value>ক্রেডিট কার্ড</value>
   </data>
@@ -222,6 +225,9 @@
   <data name="Password" xml:space="preserve">
     <value>পাসওয়ার্ড</value>
   </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>পাসওয়ার্ড (বাধ্যতামূলক)</value>
+  </data>
   <data name="Payment" xml:space="preserve">
     <value>অর্থপ্রদান</value>
   </data>
@@ -260,6 +266,9 @@
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>পরিমাণ</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>মনে রাখবেন</value>
   </data>
   <data name="Rocket" xml:space="preserve">
     <value>রকেট</value>
@@ -314,6 +323,9 @@
   </data>
   <data name="UserName" xml:space="preserve">
     <value>ব্যবহারকারীর নাম</value>
+  </data>
+  <data name="UserNameRequired" xml:space="preserve">
+    <value>ব্যবহারকারীর নাম (বাধ্যতামূলক)</value>
   </data>
   <data name="Videos" xml:space="preserve">
     <value>ভিডিও</value>

@@ -117,10 +117,11 @@ namespace MultivendorWebViewer.Manager
 
         public override Task<IList<Claim>> GetClaimsAsync(string userId)
         {
-            var authenticationProvider = ApplicationRequestContext;
-            if (authenticationProvider != null)
+            var loginManager = ApplicationRequestContext != null ? ApplicationRequestContext.UserDBManager : UserDBManager.Default;
+
+            if (loginManager != null)
             {
-                var user = ApplicationRequestContext.UserDBManager.FindUserByName(userId);
+                var user = loginManager.FindUserByName(userId);
                 if (user != null)
                 {
                     IList<Claim> result = new List<Claim>();
@@ -144,10 +145,11 @@ namespace MultivendorWebViewer.Manager
 
         public async override Task<IList<string>> GetRolesAsync(string userId)
         {
-            var authenticationProvider = ApplicationRequestContext;
-            if (authenticationProvider != null)
+            var loginManager = ApplicationRequestContext != null ? ApplicationRequestContext.UserDBManager : UserDBManager.Default;
+
+            if (loginManager != null)
             {
-                var user = ApplicationRequestContext.UserDBManager.FindUserByName(userId);
+                var user = loginManager.FindUserByName(userId);
                 if (user != null)
                 {
                     IList<string> result = new List<string>() { user.UserRole};
@@ -163,10 +165,11 @@ namespace MultivendorWebViewer.Manager
 
         public async override Task<ApplicationUser> FindAsync(string userName, string password)
         {
-            var authenticationProvider = ApplicationRequestContext;
-            if (authenticationProvider != null)
+
+            var loginManager = ApplicationRequestContext!=null ? ApplicationRequestContext.UserDBManager :UserDBManager.Default;
+            if (loginManager != null)
             {
-                var user = ApplicationRequestContext.UserDBManager.Login(new SignInInformation { UserName = userName, PassWord = password  });
+                var user = loginManager.Login(new SignInInformation { UserName = userName, PassWord = password  });
                 if (user != null)
                 {
                     return new ApplicationUser(user);
@@ -264,9 +267,10 @@ namespace MultivendorWebViewer.Manager
 
         public virtual Task<ApplicationUser> FindByNameAsync(string userName)
         {
+            var dbManager = ApplicationRequestContext != null ? ApplicationRequestContext.UserDBManager : UserDBManager.Default;
             return Task.Run(() =>
             {
-                var multivendorUser = ApplicationRequestContext != null ? ApplicationRequestContext.UserDBManager.FindUserByName(userName) : null;
+                var multivendorUser = dbManager.FindUserByName(userName) ;
                 return multivendorUser != null ? new ApplicationUser(multivendorUser) : null;
             });
         }

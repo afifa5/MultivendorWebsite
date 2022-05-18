@@ -9,6 +9,9 @@ namespace MultivendorWebViewer.Common
     {
         public static string FirstName { get { return TextManager.Current.GetText("FirstName"); } }
         public static string LastName { get { return TextManager.Current.GetText("LastName"); } }
+        public static string UserNameRequired { get { return TextManager.Current.GetText("UserNameRequired"); } }
+        public static string PasswordRequired { get { return TextManager.Current.GetText("PasswordRequired"); } }
+        public static string RememberMe { get { return TextManager.Current.GetText("RememberMe"); } }
         public static string CareOf { get { return TextManager.Current.GetText("CareOf"); } }
         public static string Address { get { return TextManager.Current.GetText("Address"); } }
         public static string Add { get { return TextManager.Current.GetText("Add"); } }
@@ -55,6 +58,7 @@ namespace MultivendorWebViewer.Common
         public static string Previous { get { return TextManager.Current.GetText("Previous"); } }
         public static string Password { get { return TextManager.Current.GetText("Password"); } }
         public static string SignIn { get { return TextManager.Current.GetText("SignIn"); } }
+        public static string CreateAccount { get { return TextManager.Current.GetText("CreateAccount"); } }
         public static string SignOut { get { return TextManager.Current.GetText("SignOut"); } }
         public static string InformationNotFound { get { return TextManager.Current.GetText("InformationNotFound"); } }
         public static string SubCatagories { get { return TextManager.Current.GetText("SubCatagories"); } }
