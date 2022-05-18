@@ -126,6 +126,9 @@
   <data name="AddToOrder" xml:space="preserve">
     <value>Add to order</value>
   </data>
+  <data name="Administration" xml:space="preserve">
+    <value>Administrate</value>
+  </data>
   <data name="Agent" xml:space="preserve">
     <value>Agent</value>
   </data>
@@ -200,6 +203,9 @@
   </data>
   <data name="MyOrder" xml:space="preserve">
     <value>My order</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>My profile</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>

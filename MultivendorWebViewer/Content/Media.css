@@ -73,7 +73,10 @@
 
 }
 /*mobile media*/
-@media all and (max-device-width: 600px) {
+@media all and (max-width: 600px) {
+    .node-container {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 170px));
+    }
     .videos-conatiner {
     margin:0 10px;
     }

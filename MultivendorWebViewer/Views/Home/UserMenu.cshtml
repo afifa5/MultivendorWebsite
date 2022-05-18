@@ -4,15 +4,34 @@
 @using MultivendorWebViewer.Components;
 @{ 
     var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+    var user = applicationrequestContext.User;
 }
 <ul class="multivendor-web-menu ">
+
+    @if (user != null && (Convert.ToInt32(user.UserRole) == (int)UserRole.Admin ||  Convert.ToInt32(user.UserRole) == (int)UserRole.Vendor))
+    {
+        <li>
+            <a class="user-menu-item">
+                @Html.Icon(Icons.Cog)
+                <label>@CustomStrings.Administration</label>
+            </a>
+        </li>
+    }
+
     <li>
         <a class="user-menu-item">
             @Html.Icon(Icons.ShoppingList)
             <label>@CustomStrings.MyOrder</label>
         </a>
     </li>
-    @if (applicationrequestContext.User == null)
+
+    <li>
+        <a class="user-menu-item">
+            @Html.Icon(Icons.User)
+            <label>@CustomStrings.MyProfile</label>
+        </a>
+    </li>
+    @if (user == null)
     {
         <li>
             <a href="@UrlUtility.Action(applicationrequestContext,"Login","User")" class="user-menu-item">
@@ -29,6 +48,7 @@
                 <label>@CustomStrings.SignOut</label>
             </a>
         </li>
+
     }
 
 

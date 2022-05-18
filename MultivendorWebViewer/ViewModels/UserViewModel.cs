@@ -35,4 +35,12 @@ namespace MultivendorWebViewer.ViewModels
         protected ImageViewModel GetImage() => ImageId.HasValue? new ImageViewModel(ApplicationRequestContext.ImageManager.GetImagesById(ImageId.Value), ApplicationRequestContext): null;
 
     }
+    public enum UserRole
+    {
+
+        Admin = 14275,
+        Vendor = 65842,
+        Customer = 98529
+
+    }
 }

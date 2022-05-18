@@ -15,6 +15,9 @@ namespace MultivendorWebViewer.Common
         public static string CareOf { get { return TextManager.Current.GetText("CareOf"); } }
         public static string Address { get { return TextManager.Current.GetText("Address"); } }
         public static string Add { get { return TextManager.Current.GetText("Add"); } }
+        public static string MyProfile { get { return TextManager.Current.GetText("MyProfile"); } }
+        public static string Administration { get { return TextManager.Current.GetText("Administration"); } }
+
         public static string AddToOrder { get { return TextManager.Current.GetText("AddToOrder"); } }
         public static string ShippingAddress { get { return TextManager.Current.GetText("ShippingAddress"); } }
         public static string PostCode { get { return TextManager.Current.GetText("PostCode"); } }

@@ -36,13 +36,11 @@
                 <div class="log-in-button-container">
                     <input type="submit" class="sign-in-button " value="@CustomStrings.SignIn">
                 </div>
-                <div class="invalid-user-name-password login-form-items-container">
-                    @Html.ValidationSummary(true, "", new { @class = "error-text" })
-                </div>
+                <div class="invalid-user-name-password login-form-items-container">@Html.ValidationSummary(true, "", new { @class = "error-text" })</div>
             }
 
             <div class="register-button-container">
-                <button class="register-button ">@CustomStrings.CreateAccount</button>
+                <button class="register-button">@CustomStrings.CreateAccount</button>
             </div>
         </div>
     </div>

@@ -126,6 +126,9 @@
   <data name="AddToOrder" xml:space="preserve">
     <value>অর্ডার </value>
   </data>
+  <data name="Administration" xml:space="preserve">
+    <value>প্রশাসনিক কাজ</value>
+  </data>
   <data name="Agent" xml:space="preserve">
     <value>প্রতিনিধি</value>
   </data>
@@ -200,6 +203,9 @@
   </data>
   <data name="MyOrder" xml:space="preserve">
     <value>আমার অর্ডার</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>প্রোফাইল</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>নাম</value>
