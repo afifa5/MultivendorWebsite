@@ -29,5 +29,9 @@ namespace MultivendorWebViewer.Server.Models
         public  Customer Customer { get; set; }
         [ForeignKey("OrderId")]
         public List<OrderLine> OrderLines { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModificationDate { get; set; }
+        [StringLength(50)]
+        public string ModifiedBy { get; set; }
     }
 }
