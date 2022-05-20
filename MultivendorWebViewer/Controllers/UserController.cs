@@ -29,15 +29,26 @@ namespace MultivendorWebViewer.Controllers
             get { return HttpContext.GetOwinContext().Authentication; }
         }
 
-        //private ApplicationSignInManager signInManager;
-        //public ApplicationSignInManager SignInManager
-        //{
-        //    get { return signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>(); }
-        //    private set { signInManager = value; }
-        //}
+        private ApplicationSignInManager signInManager;
+        public ApplicationSignInManager SignInManager
+        {
+            get { return signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>(); }
+            private set { signInManager = value; }
+        }
         [HttpGet]
         public ActionResult Login() {
             
+            return View("Login");
+        }
+        [HttpGet]
+        public ActionResult Unauthenticated()
+        {
+
+            return View("Login");
+        }
+        [HttpGet]
+        public ActionResult Unauthorized()
+        {
             return View("Login");
         }
         [HttpGet]
@@ -173,7 +184,59 @@ namespace MultivendorWebViewer.Controllers
                 throw;
             }
         }
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View("Register");
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                bool isvalid = true;
+                var isEmailAddressValid = EmailValidation.Default.IsEmailVaild(model.UserName);
+                if (!isEmailAddressValid) {
+                    isvalid = false;
+                    ModelState.AddModelError("", "Email address format not valid");
+                }
+                if (string.IsNullOrEmpty(model.Password) || string.IsNullOrEmpty(model.ConfirmPassword) || model.Password != model.ConfirmPassword) {
+                    isvalid = false;
+                    ModelState.AddModelError("", "Invalid password");
 
+                }
+                if (!isvalid) { 
+                    return View(model);
+                }
+                var customerRole = AuthorizePermissions.Customer;
+                model.Email = model.UserName;
+                model.UserRole = customerRole;
+                var usermanager = ApplicationRequestContext.UserManager;
+                User newUser = new User() { UserName= model.UserName};
+                var user = new ApplicationUser(newUser) { UserName = model.Email, Email = model.Email };
+
+                
+                var result = usermanager.RegisterUser(model);
+                if (result != null)
+                {
+                    await SignInAsync(user, true);
+
+                    //string code = await usermanager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "User",
+                    //   new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await usermanager.SendEmailAsync(user.Id,
+                    //   "Confirm your account", "Please confirm your account by clicking <a href=\""
+                    //   + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("Index", "Home");
+                }
+                //AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
     }
 
 }

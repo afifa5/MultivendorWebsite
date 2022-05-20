@@ -136,7 +136,7 @@
     <value>ব্যাংক লেনদেন</value>
   </data>
   <data name="BDT" xml:space="preserve">
-    <value>টা</value>
+    <value>৳</value>
   </data>
   <data name="Bkash" xml:space="preserve">
     <value>বিকাশ</value>
@@ -152,6 +152,9 @@
   </data>
   <data name="ClearOrder" xml:space="preserve">
     <value>অর্ডার মুছুন</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>পাসওয়ার্ড পুনরাবৃত্তি</value>
   </data>
   <data name="ContactInformation" xml:space="preserve">
     <value>যোগাযোগের তথ্য</value>
@@ -272,6 +275,9 @@
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>পরিমাণ</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>নিবন্ধন</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>মনে রাখবেন</value>

@@ -94,48 +94,9 @@
         }*/
     });
 
-    /*******************************************************************************************/
-    /* TODO REMOVE, THIS IS ASSERT LOGIC. THIS IS A BASE CLASS NOT TIED TO ASSERT SPECIFICALLY */
-    /*******************************************************************************************/
-
+   
     $(document).on('click', multivendorWeb.toolbar.selector + ' .menu-icon', function (event) {
-        //var navbarItem = document.getElementsByClassName(multivendorWeb.toolbar.selector.substr(1) + ' main-toolbar')[0].classList.toggle('responsive');
-        //console.log(navbarItem);
-        //var CheckStartPage = $(document).findByClass('catalogue-start-view catalogue-start-mobile-view');
-        //var textSearchReposition = $(document).findByClass('vertical expand not-clickable menu-mobile');
-        //var menuItems = $(document).findByClass('multivendor-toolbar main-toolbar inverse line');
-        //if (navbarItem == true && navbarItem != undefined) {
-        //    if ($(textSearchReposition).hasClass('text-search-reposition')) {
-        //        $(textSearchReposition).removeClass('text-search-reposition');
-        //    }
-        //    if ($(menuItems).hasClass('menu-item-reposition')) {
-        //        $(menuItems).removeClass('menu-item-reposition');
-        //    }
-        //    //if ($(CheckStartPage).hasClass('catalogue-start-view-reposition')) {
-        //    //    $('.main-navigationbar').removeClass('startPage-main-navigationbar');
-        //    //}
-        //    //if ($(CheckStartPage).hasClass('catalogue-start-view-reposition')) {
-        //    //    $(CheckStartPage).removeClass('catalogue-start-view-reposition');
-        //    //}
-           
-        //}
-        //else {
-        //    if (CheckStartPage.length > 0) {
-
-        //        if (!$(textSearchReposition).hasClass('text-search-reposition')) {
-        //            $(textSearchReposition).addClass('text-search-reposition');
-        //        }
-        //        if (!$(menuItems).hasClass('menu-item-reposition')) {
-        //            $(menuItems).addClass('menu-item-reposition');
-        //        }
-        //        //if (!$(CheckStartPage).hasClass('catalogue-start-view-reposition')) {
-        //        //    $(CheckStartPage).addClass('catalogue-start-view-reposition');
-        //        //}
-        //        //if ($(CheckStartPage).hasClass('catalogue-start-view-reposition')) {
-        //        //    $('.main-navigationbar').addClass('startPage-main-navigationbar');
-        //        //}
-        //    }
-        //}
+       
     });
 
 }(window.digitalHalalMarket = window.digitalHalalMarket || {}, window.multivendorWeb = window.multivendorWeb || {}, window.jQuery, document));

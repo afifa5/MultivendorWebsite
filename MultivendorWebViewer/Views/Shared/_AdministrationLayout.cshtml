@@ -1,0 +1,94 @@
+﻿@using MultivendorWebViewer;
+@using MultivendorWebViewer.Common;
+@using MultivendorWebViewer.Helpers;
+@using MultivendorWebViewer.Components;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@{@Html.Raw(@ViewBag.Title ?? "Multivendor Web")} </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/helpers")
+
+
+</head>
+@{
+    var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+    var user = applicationrequestContext.User;
+}
+<body data-order-total-counter="@UrlUtility.Action(applicationrequestContext, "GetTotalQuantity", "Order")"
+      data-quick-search-url="@UrlUtility.Action(applicationrequestContext, "Search", "Search")">
+    <section class="main-layout">
+        <div class="main-toolbar admin-toolbar">
+            <div class="header-toolbar">
+
+                <ul class="multivendor-web-toolbar">
+                    <li class="Container multivendor-web-logo">
+
+                        @{
+                            var headerLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, false);
+                            var smallHeaderLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, true);
+                            var routeValues = new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId };
+                            var startCatalogueUrl = UrlUtility.Action(applicationrequestContext, "Index", "Category", routeValues);
+                            var flagUrl = applicationrequestContext.Configuration.GetCountryFlagUrlByCulture(applicationrequestContext.SelectedCulture);
+                            var contentUrl = @Url.Content(flagUrl);
+                        }
+                        <a class="header-logo" href="@startCatalogueUrl">
+
+                            <img class="img logo-image" src="@headerLogoUrl">
+                            <img class="img logo-image-small" src="@smallHeaderLogoUrl">
+                        </a>
+
+                    </li>
+                    @if (user != null && (user.UserRole == AuthorizePermissions.Administration ))
+                    {
+                        <li class="container ">
+                            <! -- User-->
+                            <div class="item-container">
+                                @Html.Icon(Icons.User, new { @class = "content" })
+                                <label class="icon-label">@CustomStrings.Menu</label>
+                            </div>
+                        </li>
+                    }
+                    @if (user != null && (user.UserRole == AuthorizePermissions.Administration || user.UserRole == AuthorizePermissions.Vendor))
+                    {
+                        <li class="container ">
+                            <! -- User-->
+                            <div class="item-container">
+                                @Html.Icon(Icons.ShoppingCart, new { @class = "content" })
+                                <label class="icon-label">Orders</label>
+                            </div>
+                        </li>
+                    }
+                    @if (user != null && (user.UserRole == AuthorizePermissions.Administration || user.UserRole == AuthorizePermissions.Vendor))
+                    {
+                        <li class="container ">
+                            <! -- User-->
+                            <div class="item-container">
+                                @Html.Icon(Icons.Wrench, new { @class = "content" })
+                                <label class="icon-label">Product inventory</label>
+                            </div>
+                        </li>
+                    }
+
+                </ul>
+
+            </div>
+            <div class="items-toolbar menu-toolbar">
+                <div class="navigation-bar">
+                    @Html.Action("NavigationBar", "NavigationPath")
+                </div>
+
+            </div>
+        </div>
+        <main class="main-body">
+            @RenderBody()
+        </main>
+    </section>
+    @Styles.Render("~/Content/Media")
+</body>
+</html>

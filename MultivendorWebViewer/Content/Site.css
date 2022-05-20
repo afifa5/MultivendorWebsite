@@ -474,4 +474,15 @@ padding:5px;
         cursor: pointer;
         font-size: 18px;
     }
-
+.admin-toolbar.main-toolbar .items-toolbar.menu-toolbar {
+min-height:20px;
+}
+    .admin-toolbar.main-toolbar .items-toolbar.menu-toolbar a {
+       color:#fff;
+    }
+    .admin-toolbar.main-toolbar .items-toolbar.menu-toolbar .multivendor-web-toolbar {
+    justify-content:flex-start;
+    }
+    .admin-toolbar.main-toolbar .items-toolbar.menu-toolbar .multivendor-web-toolbar {
+        padding: 8px 0 8px 0;
+    }

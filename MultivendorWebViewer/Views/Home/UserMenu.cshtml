@@ -8,10 +8,10 @@
 }
 <ul class="multivendor-web-menu ">
 
-    @if (user != null && (Convert.ToInt32(user.UserRole) == (int)UserRole.Admin ||  Convert.ToInt32(user.UserRole) == (int)UserRole.Vendor))
+    @if (user != null && (user.UserRole == AuthorizePermissions.Administration || user.UserRole == AuthorizePermissions.Vendor))
     {
         <li>
-            <a class="user-menu-item">
+            <a href="@UrlUtility.Action(applicationrequestContext,"Index","Admin")" class="user-menu-item">
                 @Html.Icon(Icons.Cog)
                 <label>@CustomStrings.Administration</label>
             </a>
@@ -24,13 +24,16 @@
             <label>@CustomStrings.MyOrder</label>
         </a>
     </li>
+    @if (user != null)
+    {
+        <li>
+            <a class="user-menu-item">
+                @Html.Icon(Icons.User)
+                <label>@CustomStrings.MyProfile</label>
+            </a>
+        </li>
+    }
 
-    <li>
-        <a class="user-menu-item">
-            @Html.Icon(Icons.User)
-            <label>@CustomStrings.MyProfile</label>
-        </a>
-    </li>
     @if (user == null)
     {
         <li>

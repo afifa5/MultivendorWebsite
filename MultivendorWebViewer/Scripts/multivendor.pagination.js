@@ -185,16 +185,7 @@
                         $content.htmlUpdate(data.content);
 
                         if (contentSelector) {
-
-                            //view.children("ul").htmlFromUrl(view.data("url"), loadArgs, function () {
-                            //});
-
-                            //$content.htmlFromUrl(view.data("content-url"), loadArgs, function () {
-
-                            //assert.search.syncHitSizes($content.find("ul"), $content.width());
-
-                            //$content.removeClass("loading");
-                            //});
+                            
                         }
                     }
 

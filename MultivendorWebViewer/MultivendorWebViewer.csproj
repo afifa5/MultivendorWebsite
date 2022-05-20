@@ -210,9 +210,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Common\ApplicationRequestContext.cs" />
+    <Compile Include="Common\AuthorizePermissions.cs" />
     <Compile Include="Common\CacheManager.cs" />
     <Compile Include="Common\CustomStrings.cs" />
     <Compile Include="Common\DataViewOptions.cs" />
+    <Compile Include="Common\EmailValidation.cs" />
     <Compile Include="Common\Formatter.cs" />
     <Compile Include="Common\ICopyable.cs" />
     <Compile Include="Common\IMerge.cs" />
@@ -235,6 +237,7 @@
     <Compile Include="Common\UserSettings.cs" />
     <Compile Include="Common\ValueProvider.cs" />
     <Compile Include="Common\XmlElementWrapper.cs" />
+    <Compile Include="Components\ApplicationAuthorize.cs" />
     <Compile Include="Components\CollectionSet.cs" />
     <Compile Include="Components\CompareOperator.cs" />
     <Compile Include="Components\DataView.cs" />
@@ -255,6 +258,7 @@
     <Compile Include="Components\SingleItemEnumerable.cs" />
     <Compile Include="Components\Sort.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\NavigationPathController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -412,6 +416,9 @@
     <Content Include="Views\Search\SearchResult.cshtml" />
     <Content Include="Views\Shared\_ContactInformation.cshtml" />
     <Content Include="Views\Shared\_NodeProducts.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\Shared\_AdministrationLayout.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

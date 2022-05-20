@@ -136,7 +136,7 @@
     <value>Bank transfer</value>
   </data>
   <data name="BDT" xml:space="preserve">
-    <value>BDT</value>
+    <value>৳</value>
   </data>
   <data name="Bkash" xml:space="preserve">
     <value>Bkash</value>
@@ -152,6 +152,9 @@
   </data>
   <data name="ClearOrder" xml:space="preserve">
     <value>Clear order</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
   </data>
   <data name="ContactInformation" xml:space="preserve">
     <value>Contact Information</value>
@@ -272,6 +275,9 @@
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>Quantity</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me</value>

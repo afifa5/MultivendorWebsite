@@ -1128,7 +1128,10 @@ namespace MultivendorWebViewer
 #endif
             return null;
         }
-
+        public static ApplicationRequestContext GetApplicationRequestContext(this HttpContextBase httpContext)
+        {
+            return ApplicationRequestContext.GetContext(httpContext);
+        }
         public static async Task<byte[]> GetContentAsBufferAsync(this FileResult result)
         {
             var fileStreamResult = result as FileStreamResult;

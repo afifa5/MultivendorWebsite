@@ -17,6 +17,8 @@ using Microsoft.AspNet.Identity;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Microsoft.Owin.Security;
+using System.Data.Entity.Validation;
 
 namespace MultivendorWebViewer.Manager
 {
@@ -42,7 +44,82 @@ namespace MultivendorWebViewer.Manager
 
             return null;
         }
+        public User Register(RegisterViewModel register)
+        {
+            if (register == null) throw new ArgumentNullException("info");
+            if (register == null) throw new ArgumentNullException("info.AuthenticationInformation");
 
+            User user = GetUserByUsername(register.UserName);
+            if (user == null)
+            {
+                var passwordhasher = PasswordLookup.Default;
+                string newhashedpassword = passwordhasher.HashPassword(register.Password);
+                
+                var customer = new Customer();
+                customer.FirstName = register.FirstName;
+                customer.Address = register.Address;
+                customer.CareOf = register.CareOf;
+                customer.City = register.City;
+                customer.Country = register.Country;
+                customer.CustomerIdentity = register.CustomerIdentity;
+                customer.Email = register.Email;
+                customer.LastName = register.LastName;
+                customer.PhoneNumber = register.PhoneNumber;
+                customer.PostCode = register.PostCode;
+
+                var newUser = new User();
+                newUser.UserName = register.UserName;
+                newUser.PassWord = newhashedpassword;
+                newUser.CompanyName = register.CompanyName;
+                newUser.UserRole = register.UserRole;
+                newUser.CreatedDate = DateTime.Now;
+                newUser.IsActive = true;//should be true on email verification
+
+                using (var context = new ServerModelContext(ServerModelDatabaseContextManager.Default.GetConnectionString()))
+                {
+                    //use try catch 
+                    try
+                    {
+                        //Save customer
+                        if (customer != null)
+                        {
+                            Customer newCustomer = context.UpdateGraph<Customer>(customer);
+                            context.SaveChanges();
+                            newUser.CustomerId = newCustomer.Id;
+                            //order.Customer = null;
+                        }
+                        if (newUser != null)
+                        {
+                            User newUserItem = context.UpdateGraph<User>(newUser);
+                            context.SaveChanges();
+                            CacheManager.Default.Remove(string.Concat("AllUser@", "MultivendorWeb"));
+                            CacheManager.Default.Remove(string.Concat("AllCustomer@", "MultivendorWeb"));
+                            return newUserItem;
+                        }
+                    }
+                    catch (DbEntityValidationException e)
+                    {
+                        foreach (var eve in e.EntityValidationErrors)
+                        {
+                            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                            foreach (var ve in eve.ValidationErrors)
+                            {
+                                Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                    ve.PropertyName, ve.ErrorMessage);
+                            }
+                        }
+                        throw;
+                    }
+                   
+                   
+                }
+            }
+            
+          return null;
+
+
+        }
         public User FindUserByName(string username)
         {
             using (var context = new ServerModelContext(ServerModelDatabaseContextManager.Default.GetConnectionString()))
@@ -98,6 +175,24 @@ namespace MultivendorWebViewer.Manager
 
 
     }
+    public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
+    {
+        public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
+            : base(userManager, authenticationManager)
+        {
+        }
+
+        public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
+        {
+            return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager);
+        }
+
+        public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
+        {
+            return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
+        }
+    }
+
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
         public ApplicationUserManager(ApplicationRequestContext requestContext, IUserStore<ApplicationUser> store)
@@ -160,6 +255,24 @@ namespace MultivendorWebViewer.Manager
             else
             {
                 return await base.GetRolesAsync(userId);
+            }
+        }
+        public virtual ApplicationUser RegisterUser(RegisterViewModel registerItem)
+        {
+
+            var loginManager = ApplicationRequestContext != null ? ApplicationRequestContext.UserDBManager : UserDBManager.Default;
+            if (loginManager != null)
+            {
+                var user = loginManager.Register(registerItem);
+                if (user != null)
+                {
+                    return new ApplicationUser(user);
+                }
+                return null;
+            }
+            else
+            {
+                return null;
             }
         }
 

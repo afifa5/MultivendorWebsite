@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using MultivendorWebViewer.Manager;
 using MultivendorWebViewer.ViewModels;
+using MultivendorWebViewer.Common;
 
 namespace MultivendorWebViewer.Controllers
 {
+    //[PermissionAuthorize(AuthorizePermissions.Administration, AuthorizePermissions.Vendor, AlwaysRequire = true)]
     public class CategoryController : BaseController
     {
         // GET: Category

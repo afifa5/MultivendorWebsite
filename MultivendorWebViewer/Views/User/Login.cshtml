@@ -10,7 +10,6 @@
     var routeValues = new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId };
     var backgroundImage = applicationrequestContext.Configuration.GetApplicationImage(applicationrequestContext, applicationrequestContext.Configuration.SiteProfile.LoginBackgroundImage);
     var headerLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, false);
-    //var smallHeaderLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, true);
     var startCatalogueUrl = UrlUtility.Action(applicationrequestContext, "Index", "Category", routeValues);
 
 }
@@ -34,13 +33,13 @@
                     @*<input autofocus="" class="password-input" placeholder="@CustomStrings.Password" tabindex="2" type="password">*@
                 </div>
                 <div class="log-in-button-container">
-                    <input type="submit" class="sign-in-button " value="@CustomStrings.SignIn">
+                    <input type="submit" class="sign-in-button " tabindex="3" value="@CustomStrings.SignIn">
                 </div>
                 <div class="invalid-user-name-password login-form-items-container">@Html.ValidationSummary(true, "", new { @class = "error-text" })</div>
             }
 
             <div class="register-button-container">
-                <button class="register-button">@CustomStrings.CreateAccount</button>
+                <button class="register-button" tabindex="4" onclick="location.href='@UrlUtility.Action(applicationrequestContext,"Register", "User")'">@CustomStrings.CreateAccount</button>
             </div>
         </div>
     </div>

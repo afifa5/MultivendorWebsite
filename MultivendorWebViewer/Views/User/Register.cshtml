@@ -1,0 +1,61 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@using MultivendorWebViewer.Helpers;
+@model RegisterViewModel
+
+@{
+    ViewBag.Title = "Multivendor Web";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+    var routeValues = new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId };
+    var backgroundImage = applicationrequestContext.Configuration.GetApplicationImage(applicationrequestContext, applicationrequestContext.Configuration.SiteProfile.LoginBackgroundImage);
+    var headerLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, false);
+    var startCatalogueUrl = UrlUtility.Action(applicationrequestContext, "Index", "Category", routeValues);
+
+}
+<div class="log-in-view">
+    <div class="login-view-back-ground" style="background-image:url(@backgroundImage)">
+        <div class="log-in-container">
+            @*<a class="header-logo" href="@startCatalogueUrl">
+                <img class="img logo-image" src="@headerLogoUrl">
+            </a>
+            <div class="header">@CustomStrings.SignInMessage</div>*@
+            @using (Html.BeginForm("Register", "User", FormMethod.Post, HtmlHelper.AnonymousObjectToHtmlAttributes(new { @class = "form-horizontal register-form", role = "form" })))
+            {
+
+                    <label>@CustomStrings.FirstName</label>
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-input", @tabindex = "1", autofocus = "" })
+                    <label>@CustomStrings.LastName</label>
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-input", @tabindex = "1", autofocus = "" })
+
+                    <label>@CustomStrings.UserName</label>
+                    @Html.TextBoxFor(m => m.UserName, new { @placeholder = "info.dhm@gmail.com", @class = "form-input", @tabindex = "1", autofocus = "" })
+                    <label>@CustomStrings.Password</label>
+                    @Html.TextBoxFor(m => m.Password, new { @class = "form-input password-input", @tabindex = "1", @Type = "password", autofocus = "" })
+                    <label>@CustomStrings.ConfirmPassword</label>
+                    @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-input password-input", @tabindex = "1", @Type = "password", autofocus = "" })
+
+                    <label>@CustomStrings.Phone</label>
+                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-input", @tabindex = "1", autofocus = "" })
+
+                    <label>@CustomStrings.Address</label>
+                    @Html.TextBoxFor(m => m.Address, new { @class = "form-input", @tabindex = "1", autofocus = "" })
+                    <label>@CustomStrings.CareOf</label>
+
+                    @Html.TextBoxFor(m => m.CareOf, new { @class = "form-input", @tabindex = "1", autofocus = "" })
+                    <label>@CustomStrings.City</label>
+                    @Html.TextBoxFor(m => m.City, new { @class = "form-input", @tabindex = "1", autofocus = "" })
+                    <label>@CustomStrings.Country</label>
+                    @Html.TextBoxFor(m => m.Country, new { @class = "form-input", @tabindex = "1", autofocus = "" })
+                    <div class="button-item-label"></div>
+                    <div class="log-in-button-container">
+                        <input type="submit" class="register-button " value="@CustomStrings.Register">
+                    </div>
+
+
+
+                <div class="invalid-user-name-password login-form-items-container">@Html.ValidationSummary(true, "", new { @class = "error-text" })</div>
+            }
+        </div>
+    </div>
+</div>

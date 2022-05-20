@@ -24,7 +24,8 @@ namespace MultivendorWebViewer.Common
         public static string City { get { return TextManager.Current.GetText("City"); } }
         public static string Country { get { return TextManager.Current.GetText("Country"); } }
         public static string Email { get { return TextManager.Current.GetText("Email"); } }
-        
+        public static string ConfirmPassword { get { return TextManager.Current.GetText("ConfirmPassword"); } }
+
         public static string Phone { get { return TextManager.Current.GetText("Phone"); } }
         public static string PostOffice { get { return TextManager.Current.GetText("PostOffice"); } }
         public static string DHL { get { return TextManager.Current.GetText("DHL"); } }
@@ -60,6 +61,7 @@ namespace MultivendorWebViewer.Common
         public static string Next { get { return TextManager.Current.GetText("Next"); } }
         public static string Previous { get { return TextManager.Current.GetText("Previous"); } }
         public static string Password { get { return TextManager.Current.GetText("Password"); } }
+        public static string Register { get { return TextManager.Current.GetText("Register"); } }
         public static string SignIn { get { return TextManager.Current.GetText("SignIn"); } }
         public static string CreateAccount { get { return TextManager.Current.GetText("CreateAccount"); } }
         public static string SignOut { get { return TextManager.Current.GetText("SignOut"); } }

@@ -343,7 +343,6 @@ namespace MultivendorWebViewer.Configuration
     public class AssetIdentifier : Identifier
     {
         /// <summary>
-        /// Match against the asserts persistent identity - serial number
         /// </summary>
         /// <value>Attribute name persistent-identity</value>
         [XmlAttribute("persistent-identity")]

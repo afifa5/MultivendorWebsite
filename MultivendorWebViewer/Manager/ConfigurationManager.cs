@@ -31,28 +31,27 @@ namespace MultivendorWebViewer.Manager
         }
         private static ProfileSetting GetProfileSettings(string xmlFilename)
         {
-            if (string.IsNullOrEmpty(xmlFilename))
+            return CacheManager.Default.Get<ProfileSetting>(string.Concat("ProfileSetting@", "MultivendorWeb"), CacheLocation.Application, () =>
             {
-                return null;
-            }
-            else
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(ProfileSetting));
-
-                using (FileStream stream = File.Open(xmlFilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                if (string.IsNullOrEmpty(xmlFilename))
                 {
-                    using (StreamReader reader = new StreamReader(stream))
-                    {
-                        return (ProfileSetting)serializer.Deserialize(reader);
-                    }
+                    return null;
                 }
-                //using (Stream reader = new FileStream(xmlFilename, FileMode.Open))
-                //{
-                //    // Call the Deserialize method to restore the object's state.
-                //    return (ProfileSetting)serializer.Deserialize(reader);
-                //}
+                else
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(ProfileSetting));
 
-            }
+                    using (FileStream stream = File.Open(xmlFilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    {
+                        using (StreamReader reader = new StreamReader(stream))
+                        {
+                            return (ProfileSetting)serializer.Deserialize(reader);
+                        }
+                    }
+
+                }
+            });
+          
         }
     }
 }

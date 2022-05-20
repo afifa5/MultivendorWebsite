@@ -19,7 +19,7 @@ namespace MultivendorWebViewer.ViewModels
         public ApplicationRequestContext ApplicationRequestContext { get; set; }
         public int Id => Model.Id;
 
-        public int CustomerId => Model.CustomerId;
+        public int? CustomerId => Model.CustomerId;
         public CustomerViewModel Customer => GetCustomer();
         public ImageViewModel Image => GetImage();
         public int? ImageId => Model.ImageId;
@@ -31,16 +31,16 @@ namespace MultivendorWebViewer.ViewModels
         public bool? IsActive => Model.IsActive;
 
         public string UserRole => Model.UserRole;
-        protected CustomerViewModel GetCustomer() => new CustomerViewModel(ApplicationRequestContext.UserDBManager.GetCustomerById(CustomerId), ApplicationRequestContext);
+        protected CustomerViewModel GetCustomer() => CustomerId.HasValue? new CustomerViewModel(ApplicationRequestContext.UserDBManager.GetCustomerById(CustomerId.Value), ApplicationRequestContext) : null;
         protected ImageViewModel GetImage() => ImageId.HasValue? new ImageViewModel(ApplicationRequestContext.ImageManager.GetImagesById(ImageId.Value), ApplicationRequestContext): null;
 
     }
-    public enum UserRole
-    {
+    //public enum UserRole
+    //{
 
-        Admin = 14275,
-        Vendor = 65842,
-        Customer = 98529
+    //    Admin = 14275,
+    //    Vendor = 65842,
+    //    Customer = 98529
 
-    }
+    //}
 }
