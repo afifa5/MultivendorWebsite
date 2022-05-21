@@ -5,54 +5,75 @@
 @{ 
     var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
     var user = applicationrequestContext.User;
+    
 }
-<ul class="multivendor-web-menu ">
-
-    @if (user != null && (user.UserRole == AuthorizePermissions.Administration || user.UserRole == AuthorizePermissions.Vendor))
-    {
-        <li>
-            <a href="@UrlUtility.Action(applicationrequestContext,"AdminView","Admin")" class="user-menu-item">
-                @Html.Icon(Icons.Cog)
-                <label>@CustomStrings.Administration</label>
-            </a>
-        </li>
-    }
-
-    <li>
-        <a class="user-menu-item">
-            @Html.Icon(Icons.ShoppingList)
-            <label>@CustomStrings.MyOrder</label>
-        </a>
-    </li>
+<div class="user-menu-view">
     @if (user != null)
     {
+        var userViewModel = new UserViewModel(user, applicationrequestContext);
+        <div class="user-information-view">
+            @if (userViewModel.Image != null)
+            {
+            @Html.Image(userViewModel.Image, height: 50, width: 50, htmlAttributes:new { @class= "user-logged-in-image" });
+            }
+            else {
+
+            <img class="user-logged-in-image"  />
+            }
+            <label class="user-email">@userViewModel.UserName</label>
+        </div>
+
+    }
+
+    <ul class="multivendor-web-menu ">
+
+        @if (user != null && (user.UserRole == AuthorizePermissions.Administration || user.UserRole == AuthorizePermissions.Vendor))
+        {
+            <li>
+                <a href="@UrlUtility.Action(applicationrequestContext,"AdminView","Admin")" class="user-menu-item">
+                    @Html.Icon(Icons.Cog)
+                    <label>@CustomStrings.Administration</label>
+                </a>
+            </li>
+        }
+
         <li>
             <a class="user-menu-item">
-                @Html.Icon(Icons.User)
-                <label>@CustomStrings.MyProfile</label>
+                @Html.Icon(Icons.ShoppingList)
+                <label>@CustomStrings.MyOrder</label>
             </a>
         </li>
-    }
+        @if (user != null)
+        {
+            <li>
+                <a class="user-menu-item">
+                    @Html.Icon(Icons.User)
+                    <label>@CustomStrings.MyProfile</label>
+                </a>
+            </li>
+        }
 
-    @if (user == null)
-    {
-        <li>
-            <a href="@UrlUtility.Action(applicationrequestContext,"Login","User")" class="user-menu-item">
-                @Html.Icon(Icons.LogIn)
-                <label>@CustomStrings.SignIn</label>
-            </a>
-        </li>
-    }
-    else
-    {
-        <li>
-            <a href="@UrlUtility.Action(applicationrequestContext,"LogOut","User")" class="user-menu-item">
-                @Html.Icon(Icons.LogOut)
-                <label>@CustomStrings.SignOut</label>
-            </a>
-        </li>
+        @if (user == null)
+        {
+            <li>
+                <a href="@UrlUtility.Action(applicationrequestContext,"Login","User")" class="user-menu-item">
+                    @Html.Icon(Icons.LogIn)
+                    <label>@CustomStrings.SignIn</label>
+                </a>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a href="@UrlUtility.Action(applicationrequestContext,"LogOut","User")" class="user-menu-item">
+                    @Html.Icon(Icons.LogOut)
+                    <label>@CustomStrings.SignOut</label>
+                </a>
+            </li>
 
-    }
+        }
 
 
-</ul>
+    </ul>
+</div>
+

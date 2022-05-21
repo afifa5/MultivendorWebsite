@@ -51,6 +51,10 @@ input:focus{
     list-style-type: none;
     cursor: pointer;
     font-size: 18px;
+
+}
+.multivendor-web-menu li:hover{
+    background-color:#ddd;
 }
 .multivendor-web-menu li.selected:before{
     position: absolute;

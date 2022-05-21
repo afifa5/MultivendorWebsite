@@ -6,7 +6,7 @@
             //container: null,
             //relativeElement: null,
             modal: false,
-            autoClose: true,
+            autoClose: false,
             closeOnClick: false,
             //verticalAlign: null,
             //horizontalAlign: null,

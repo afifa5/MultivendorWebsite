@@ -43,7 +43,9 @@ namespace MultivendorWebViewer.Controllers
                     var userModels = prices.Where(p => p.UserId.HasValue).Select(s => userManager.GetUserByUserId(s.UserId.Value)).ToArray();
                     if (userModels != null && userModels.Any()) {
                         var userViewModel = userModels.Select(p => new UserViewModel(p, ApplicationRequestContext));
-                        return PartialView("_ContactInformation", userViewModel);
+                        return AsyncHtml(partialView: "_ContactInformation", model: userViewModel, insertMethod: HtmlInsertMethod.Html);
+
+                        //return PartialView("_ContactInformation", userViewModel);
 
                     }
                 }

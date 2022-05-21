@@ -489,3 +489,23 @@ min-height:20px;
 .all-user-container {
 margin:10px 0 0 10px;
 }
+.user-logged-in-image {
+height:50px;
+width:50px;
+border-radius:100%;
+background-color:#fff;
+}
+.user-menu-view .user-information-view {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    margin-bottom: 10px;
+    border-bottom: solid 1px #ddd;
+    grid-column-gap: 5px;
+    align-items: center;
+    padding-bottom: 10px;
+}
+.user-menu-view .user-information-view .user-logged-in-image {
+border-radius:0px;
+/*padding:2px;
+border:solid 1px #ddd;*/
+}

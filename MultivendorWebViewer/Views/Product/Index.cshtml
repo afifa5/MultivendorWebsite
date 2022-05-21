@@ -122,7 +122,9 @@
                 }
                 @if (configuration.SiteProfile.DisplayContact)
                 {
-                    @Html.Action("GetContactInformation", "Product", routeValues: new { productId = Model.Id })
+                    @Html.AsyncView(Url.Action("GetContactInformation", "Product", routeValues: new { productId = Model.Id }), insertMethod: HtmlInsertMethod.Html, htmlAttributes: new AttributeBuilder("product-order")@*, loadDelay: 10*@);
+
+                    @*@Html.Action("GetContactInformation", "Product", routeValues: new { productId = Model.Id })*@
 
                 }
 

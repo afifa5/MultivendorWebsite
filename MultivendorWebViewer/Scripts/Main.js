@@ -142,7 +142,7 @@
     /*call to the controller function */
         let languageContainer = $(this);
         var actionUrl = $(this).data("language-item-url");
-        multivendorWeb.popup.show(null, { url: actionUrl, /*urlData: { id: id },*/ relativeElement: languageContainer, top: languageContainer.height(), left: 0, verticalAlign: "top", horizontalAlign: "right" });
+        multivendorWeb.popup.show(null, { url: actionUrl, /*urlData: { id: id },*/ relativeElement: languageContainer, top: languageContainer.height()+5, left: 0, verticalAlign: "top", horizontalAlign: "right" });
 
         //$.ajax({
         //    url: actionUrl,
@@ -163,7 +163,7 @@
     $(document).on("click", ".user-menu", function (e) {
         var userMenuhtml = $(this);
         var url = userMenuhtml.data("user-menu-url")
-        multivendorWeb.popup.show(null, { url: url, /*urlData: { id: id },*/ relativeElement: userMenuhtml, top: userMenuhtml.height(), left: 0, verticalAlign: "top", horizontalAlign: "right" });
+        multivendorWeb.popup.show(null, { url: url, /*urlData: { id: id },*/ relativeElement: userMenuhtml, top: userMenuhtml.height()+5, left: 0, verticalAlign: "top", horizontalAlign: "right" });
 
         //$.ajax({
         //    url: url,
