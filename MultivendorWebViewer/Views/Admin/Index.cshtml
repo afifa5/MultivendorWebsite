@@ -8,5 +8,5 @@
 }
 
 <div class="all-user-container">
-    @Html.DataView(new DataViewOptions { Url = @Url.Action("GetAllUserList", "Admin"@*, new { nodeId = Model.Id }*@) }, htmlAttributes: new { @class = "user-list-data-view" })
+    @Html.DataView(new DataViewOptions { Url = @Url.Action("GetAllUserList", "Admin", new { searchText = "allUser" }) }, htmlAttributes: new { @class = "user-list-data-view" })
 </div>
