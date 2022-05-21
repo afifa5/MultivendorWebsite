@@ -38,18 +38,18 @@ namespace MultivendorWebViewer.Controllers
         [HttpGet]
         public ActionResult Login() {
             
-            return View("Login");
+            return View("Login", new LoginViewModel());
         }
         [HttpGet]
         public ActionResult Unauthenticated()
         {
 
-            return View("Login");
+            return View("Login", new LoginViewModel());
         }
         [HttpGet]
         public ActionResult Unauthorized()
         {
-            return View("Login");
+            return View("Login", new LoginViewModel());
         }
         [HttpGet]
         [AllowAnonymous]
@@ -187,7 +187,7 @@ namespace MultivendorWebViewer.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            return View("Register");
+            return View("Register", new RegisterViewModel());
         }
         [HttpPost]
         [AllowAnonymous]
