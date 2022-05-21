@@ -38,6 +38,16 @@ namespace MultivendorWebViewer
             url: "{controller}/{action}/{id}",
             defaults: new { controller = "Order", action = "Index", id = UrlParameter.Optional }
         );
+     routes.MapRoute(
+        name: "User",
+        url: "{controller}/{action}/{id}",
+        defaults: new { controller = "User", action = "Index", id = UrlParameter.Optional }
+     );
+    routes.MapRoute(
+        name: "Admin",
+        url: "{controller}/{action}/{id}",
+        defaults: new { controller = "Admin", action = "Index", id = UrlParameter.Optional }
+    );
         }
     }
 }

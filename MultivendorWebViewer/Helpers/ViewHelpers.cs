@@ -24,12 +24,9 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
-#if NET452
-using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using System.Web.WebPages;
-#endif
+
 
 namespace MultivendorWebViewer.Helpers
 {
@@ -339,9 +336,9 @@ namespace MultivendorWebViewer.Helpers
                     }
                     else
                     {
-#if NET452
+
                         newViewData = new ViewDataDictionary<T>();
-#endif
+
                     }
                 }
                 else
@@ -352,9 +349,9 @@ namespace MultivendorWebViewer.Helpers
                     }
                     else
                     {
-#if NET452
+
                         newViewData = new ViewDataDictionary<T>();
-#endif
+
                     }
                 }
             }
@@ -382,7 +379,7 @@ namespace MultivendorWebViewer.Helpers
 
         }
 
-#if NET452
+
         public static ExtendedViewContext CreateViewContext(ControllerContext controllerContext, IView view = null, ViewDataDictionary viewData = null, object model = null, TextWriter writer = null)
         {
             var controller = controllerContext.Controller;
@@ -414,14 +411,14 @@ namespace MultivendorWebViewer.Helpers
 
             return new ExtendedViewContext(controllerContext, view, newViewData, controller.TempData, writer ?? controllerContext.HttpContext.Response.Output);
         }
-#endif
 
-#if NET452
+
+
         public static IView GetPartialView(this HtmlHelper htmlHelper, string partialViewName, ViewContext viewContext = null)
         {
             return ViewEngines.Engines.FindPartialView(viewContext ?? ViewHelpers.CreateViewContext(htmlHelper), partialViewName).View;
         }
-#endif
+
         public static void RenderPartialView(this HtmlHelper htmlHelper, IView view, ViewContext viewContext, TextWriter writer = null)
         {
             view.Render(viewContext, writer ?? viewContext.Writer);
@@ -500,7 +497,7 @@ namespace MultivendorWebViewer.Helpers
             }
         }
 
-#if NET452
+
         public static void RenderPartial(ControllerContext controllerContext, string partialViewName, TextWriter writer, ViewDataDictionary viewData = null, object model = null)
         {
             ViewEngineResult result = ViewEngines.Engines.FindPartialView(controllerContext, partialViewName);
@@ -514,12 +511,7 @@ namespace MultivendorWebViewer.Helpers
             result.ViewEngine.ReleaseView(controllerContext, view);
 
         }
-#else
-        public static void RenderPartial(ControllerContext controllerContext, string partialViewName, TextWriter writer, ViewDataDictionary viewData = null, object model = null)
-        {
-            writer.Write("RenderPartial is not implemented in core5");
-        }
-#endif
+
 
         public static string RenderPartial(ControllerContext controllerContext, string partialViewName, ViewDataDictionary viewData = null, object model = null)
         {
@@ -530,66 +522,10 @@ namespace MultivendorWebViewer.Helpers
             }
         }
 
-#if NET5
-        public static string RenderPartial(ActionContext context, string partialViewName, object model = null)
-        {
-            var services = context.HttpContext.RequestServices;
-            var executor = services.GetService<IActionResultExecutor<PartialViewResult>>();
-
-            return "RenderPartial is not implemented in core5";
-            //using (var writer = new StringWriter(CultureInfo.CurrentUICulture))
-            //{
-            //    ViewHelpers.RenderPartial(context., partialViewName, writer, viewData, model);
-            //    return writer.ToString();
-            //}
-        }
-
-        public static ViewEngineResult FindPartialView(ActionContext actionContext, string viewName)
-        {
-            var services = actionContext.HttpContext.RequestServices;
-            var viewEngine = services.GetService<ICompositeViewEngine>();
-            return FindPartialView(actionContext, viewEngine, viewName);
-        }
-
-        public static ViewEngineResult FindPartialView(ActionContext actionContext, IViewEngine viewEngine, string viewName)
-        {
-            if (actionContext == null)
-            {
-                throw new ArgumentNullException(nameof(actionContext));
-            }
-
-            var result = viewEngine.GetView(executingFilePath: null, viewPath: viewName, isMainPage: false);
-            var originalResult = result;
-            if (!result.Success)
-            {
-                result = viewEngine.FindView(actionContext, viewName, isMainPage: false);
-            }
-
-            if (!result.Success)
-            {
-                if (originalResult.SearchedLocations.Any())
-                {
-                    if (result.SearchedLocations.Any())
-                    {
-                        // Return a new ViewEngineResult listing all searched locations.
-                        var locations = new List<string>(originalResult.SearchedLocations);
-                        locations.AddRange(result.SearchedLocations);
-                        result = ViewEngineResult.NotFound(viewName, locations);
-                    }
-                    else
-                    {
-                        // GetView() searched locations but FindView() did not. Use first ViewEngineResult.
-                        result = originalResult;
-                    }
-                }
-            }
-
-            return result;
-        }
-#endif
 
 
-#if NET452
+
+
         public static MvcHtmlString DisplayFor(this HtmlHelper htmlHelper, object model, string templateName = null, bool useCache = true)
         {
             using (var writer = new StringWriter(CultureInfo.CurrentUICulture))
@@ -665,7 +601,6 @@ namespace MultivendorWebViewer.Helpers
             }
             catch (Exception exception)
             {
-                Log.WriteLine(System.Diagnostics.TraceEventType.Error, "Could not get display", exception);
             }
 
             if (view == null)
@@ -682,7 +617,7 @@ namespace MultivendorWebViewer.Helpers
 
             view.Render(newViewContext, writer);
         }
-#endif
+
         //public static bool HasAnyPresentationInformation(IPresentationViewModel presentation, Common.ComponentLayoutMode mode = Common.ComponentLayoutMode.Body, PresentationSettings overrideSettings = null)
         //{
         //    var settings = overrideSettings ?? presentation.Settings;

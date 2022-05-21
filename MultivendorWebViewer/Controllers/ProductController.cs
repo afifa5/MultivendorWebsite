@@ -27,7 +27,8 @@ namespace MultivendorWebViewer.Controllers
             if (prices != null) {
                 var priceViewModel = prices.Select(p => new PriceAvailailityViewModel(p, ApplicationRequestContext));
                 //if(priceViewModel != null)
-                return PartialView("_OrderInformation", priceViewModel.ToList());
+                return AsyncHtml(partialView: "_OrderInformation", model: priceViewModel.ToList(), insertMethod: HtmlInsertMethod.Html);
+                //return PartialView("_OrderInformation", priceViewModel.ToList());
             }
             return new EmptyResult();
         }

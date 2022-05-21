@@ -5,78 +5,53 @@
 @{
     var items = Model.VisibleItems;
 }
-
-@*//print all product*@
-@*<div class="multivendor-data-view">
-        <div class="data-view-tools-container">
-            <ul class="multivendor-toolbar tools">
-                <li class="filter-tool">
-                    <div class="filter-selector-container">
-                        <input placeholder="Filter on all" class="filter-text">
-                        <div class="filter-icon-container">
-                            <span class="icon fa fa-caret-down content fa-2x"></span>
-                        </div>
-                    </div>
-                </li>
-                <li class="sort-tool">
-                    <div class="sort-selector-container">
-                        <input placeholder="Sort by default" class="sort-text">
-                        <div class="sort-icon-container">
-                            <span class="icon fa fa-signal content fa-2x"></span>
-                        </div>
-                    </div>
-                </li>
-                <li class="view-tool " data-name="Table"><span class=" icon fa fa-list-ul content fa-2x"></span></li>
-                <li class="view-tool" data-name="Gallery"><span class="icon fa fa-th-large content fa-2x"></span></li>
-            </ul>
-        </div>*@
-        @*<div class="data-view-content-container">*@
             <div class="node-container product-nodes">
                 @foreach (var item in items)
                 {
-                    <div class="node-view ">
-                        <a class="image-container" href="@item.GetUrl()">
-                            @if (item.Images != null && item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).Count() > 0)
-                            {
+                <div class="node-view ">
+                    <a class="image-container" href="@item.GetUrl()">
+                        @if (item.Images != null && item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).Count() > 0)
+                        {
 
-                                var itemImage = item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).FirstOrDefault();
-                                <img class="presentation-image" src="@itemImage.GetThumbnailUrl()">
-                            }
+                            var itemImage = item.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).FirstOrDefault();
+                            <img class="presentation-image" src="@itemImage.GetThumbnailUrl()">
+                        }
+                    </a>
+                    @if (!string.IsNullOrEmpty(item.FormattedName))
+                    {
+                        <a class="name-container" href="@item.GetUrl()">
+                            <label class="node-name">@item.FormattedName</label>
                         </a>
-                        @if (!string.IsNullOrEmpty(item.FormattedName))
+                    }
+
+                    @if (!string.IsNullOrEmpty(item.FormattedDescription))
+                    {
+                        <a class="description-container" href="@item.GetUrl()">
+                            <span class="node-description">@item.FormattedDescription</span>
+                        </a>
+                    }
+                    @if (item.Specifications != null)
+                    {
+                        var highlightedSpecification = item.Specifications.Where(p => p.SpecificationMode == SpecificationMode.Highlighted);
+                        if (highlightedSpecification != null && highlightedSpecification.Any())
                         {
-                            <a class="name-container" href="@item.GetUrl()">
-                                <label class="node-name">@item.FormattedName</label>
+                            <a class="highlighted-specification specifications" href="@item.GetUrl()">
+                                @foreach (var specification in highlightedSpecification)
+                                {
+
+                                    <div class="sp">
+                                        <label>@specification.SpecificationType.FormattedName</label>
+                                        <span>@specification.FormattedName</span>
+                                    </div>
+
+                                }
                             </a>
                         }
 
-                        @if (!string.IsNullOrEmpty(item.FormattedDescription))
-                        {
-                            <a class="description-container" href="@item.GetUrl()">
-                                <span class="node-description">@item.FormattedDescription</span>
-                            </a>
-                        }
-                        @if (item.Specifications != null)
-                        {
-                            var highlightedSpecification = item.Specifications.Where(p => p.SpecificationMode == SpecificationMode.Highlighted);
-                            if (highlightedSpecification != null && highlightedSpecification.Any())
-                            {
-                                <a class="highlighted-specification specifications" href="@item.GetUrl()">
-                                    @foreach (var specification in highlightedSpecification)
-                                    {
-
-                                        <div class="sp">
-                                            <label>@specification.SpecificationType.FormattedName</label>
-                                            <span>@specification.FormattedName</span>
-                                        </div>
-
-                                    }
-                                </a>
-                            }
-
-                        }
-                        @Html.Action("GetOrderInformation", "Product", routeValues: new { productId = item.Id })
-                    </div>
+                    }
+                    @Html.AsyncView(Url.Action("GetOrderInformation", "Product", routeValues: new { productId = item.Id }), insertMethod: HtmlInsertMethod.Html, htmlAttributes: new AttributeBuilder("node-order")@*,loadDelay:10*@);
+                   @* @Html.Action("GetOrderInformation", "Product", routeValues: new { productId = item.Id })*@
+                </div>
                 }
             </div>
         @*</div>*@

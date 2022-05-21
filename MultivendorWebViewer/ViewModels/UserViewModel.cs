@@ -20,7 +20,8 @@ namespace MultivendorWebViewer.ViewModels
         public int Id => Model.Id;
 
         public int? CustomerId => Model.CustomerId;
-        public CustomerViewModel Customer => GetCustomer();
+        private CustomerViewModel customer;
+        public CustomerViewModel Customer { get { return customer = customer ?? GetCustomer(); }} 
         public ImageViewModel Image => GetImage();
         public int? ImageId => Model.ImageId;
 

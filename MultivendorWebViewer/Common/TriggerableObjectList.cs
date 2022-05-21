@@ -8,135 +8,344 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
+
 namespace MultivendorWebViewer.Configuration
 {
-    //public class TriggerableObjectList<TItem, TIdentifier> : System.Collections.ObjectModel.Collection<Trigger<TItem, TIdentifier>>
-    //    where TItem : class
-    //    where TIdentifier : Identifier
-    //{
-    //    public TriggerableObjectList() { }
+    public class TriggerableObjectList<TItem, TIdentifier> : System.Collections.ObjectModel.Collection<Trigger<TItem, TIdentifier>>
+        where TItem : class
+        where TIdentifier : Identifier
+    {
+        public TriggerableObjectList() { }
 
-    //    public TriggerableObjectList(IEnumerable<Trigger<TItem, TIdentifier>> items)
-    //    {
-    //        AddRange(items);
-    //    }
+        public TriggerableObjectList(IEnumerable<Trigger<TItem, TIdentifier>> items)
+        {
+            AddRange(items);
+        }
 
-    //    public void AddRange(IEnumerable<Trigger<TItem, TIdentifier>> items)
-    //    {
-    //        foreach (var item in items.ToArray())
-    //        {
-    //            Add(item);
-    //        }
-    //    }
+        public void AddRange(IEnumerable<Trigger<TItem, TIdentifier>> items)
+        {
+            foreach (var item in items.ToArray())
+            {
+                Add(item);
+            }
+        }
 
-    //    public virtual void Add(TItem item)
-    //    {
-    //        Add(new Trigger<TItem, TIdentifier> { Item = item });
-    //    }
+        public virtual void Add(TItem item)
+        {
+            Add(new Trigger<TItem, TIdentifier> { Item = item });
+        }
 
-    //    protected override void InsertItem(int index, Trigger<TItem, TIdentifier> item)
-    //    {
-    //        var comparer = new EnumerableEqualityComparer<Identifier>();
-    //        var existingItemIndex = Items.IndexOf(i => comparer.Equals(i.Triggers, item.Triggers) == true);
-    //        if (existingItemIndex == -1)
-    //        {
-    //            base.InsertItem(index, item);
-    //        }
-    //        else
-    //        {
-    //            var existingItemEntry = Items[existingItemIndex];
-    //            var existingItem = existingItemEntry.Item as IInheritable;
-    //            var inheritable = item.Item as IInheritable;
-    //            if (inheritable != null && existingItem != null)
-    //            {
-    //                var copy = (IInheritable)Instance.Create<TItem>(item.Item.GetType());
-    //                copy.MergeWith(existingItem);
-    //                copy.MergeWith(inheritable);
+        protected override void InsertItem(int index, Trigger<TItem, TIdentifier> item)
+        {
+            var comparer = new EnumerableEqualityComparer<Identifier>();
+            var existingItemIndex = Items.IndexOf(i => comparer.Equals(i.Triggers, item.Triggers));
+            if (existingItemIndex == -1)
+            {
+                base.InsertItem(index, item);
+            }
+            else
+            {
+                var existingItemEntry = Items[existingItemIndex];
+                var existingItem = existingItemEntry.Item as IInheritable;
+                var inheritable = item.Item as IInheritable;
+                if (inheritable != null && existingItem != null)
+                {
+                    var copy = (IInheritable)Instance.Create<TItem>(item.Item.GetType());
+                    copy.MergeWith(existingItem);
+                    copy.MergeWith(inheritable);
 
-    //                //if (ProfileSettingsProvider.CurrentDeserialized != null)
-    //                //{
-    //                //    // Alt 1. This updates the original item. Seems like we can't do it like this, will update items in other lists aswell
-    //                //    inheritable.MergeWith(copy);
-    //                //    Items[existingItemIndex] = item;
-    //                //}
-    //                //else
-    //                {
-    //                    // Alt 2. Create a new entry, copy trigger and use the copy as the item. This has shown to lead to inherit problems not yet solved.
-    //                    var itemTrigger = new Trigger<TItem, TIdentifier>();
-    //                    itemTrigger.Triggers = item.Triggers;
-    //                    itemTrigger.Item = (TItem)copy;
-    //                    Items[existingItemIndex] = itemTrigger;
-    //                }
+                    //if (ProfileSettingsProvider.CurrentDeserialized != null)
+                    //{
+                    //    // Alt 1. This updates the original item. Seems like we can't do it like this, will update items in other lists aswell
+                    //    inheritable.MergeWith(copy);
+                    //    Items[existingItemIndex] = item;
+                    //}
+                    //else
+                    {
+                        // Alt 2. Create a new entry, copy trigger and use the copy as the item. This has shown to lead to inherit problems not yet solved.
+                        var itemTrigger = new Trigger<TItem, TIdentifier>();
+                        itemTrigger.Triggers = item.Triggers;
+                        itemTrigger.Item = (TItem)copy;
+                        Items[existingItemIndex] = itemTrigger;
+                    }
 
-    //                //copy.MergeWith(inheritable);
-    //                //copy.MergeWith((IInheritable)item.Item);
-    //                //((IInheritable)item.Item).MergeWith(copy);
+                    //copy.MergeWith(inheritable);
+                    //copy.MergeWith((IInheritable)item.Item);
+                    //((IInheritable)item.Item).MergeWith(copy);
 
-    //                //Items[existingItemIndex] = item;
-
-
-
-    //                //var mergedItem = inheritable.CreatedMerged((IInheritable)existingItem.Item);
-
-
-    //                //var itemTrigger = new Trigger<TItem, TIdentifier>();
-    //                //itemTrigger.Triggers = item.Triggers;
-    //                //itemTrigger.Item = (TItem)mergedItem;
-    //                //Items[existingItemIndex] = itemTrigger;
-
-    //                //inheritable.MergeWith((IInheritable)item.Item);
-    //            }
-    //            else
-    //            {
-    //                var mergeable = item.Item as IMerge<TItem>;
-    //                if (mergeable != null)
-    //                {
-    //                    var mergedItem = (IMerge<TItem>)Instance.Create<TItem>(mergeable.GetType());
-    //                    mergedItem.MergeWith(existingItemEntry.Item);
-    //                    mergedItem.MergeWith(item.Item);
-
-    //                    var itemTrigger = new Trigger<TItem, TIdentifier>();
-    //                    itemTrigger.Triggers = item.Triggers;
-    //                    itemTrigger.Item = (TItem)mergedItem;
-    //                    Items[existingItemIndex] = itemTrigger;
-    //                }
-    //                else
-    //                {
-    //                    Items[existingItemIndex] = item;
-    //                    //existingItem.Item = item.Item;
-    //                }
-    //            }
-    //        }
-    //    }
+                    //Items[existingItemIndex] = item;
 
 
 
-    //    //protected override void InsertItem(int index, Trigger<TItem, TIdentifier> item)
-    //    //{
-    //    //    var mergeableItem = item.Item as IMergeableSettings;
-    //    //    if (mergeableItem != null && mergeableItem.BaseInstance != null)
-    //    //    { 
-    //    //        var mergedItem = mergeableItem.RecreateAsInherited();
-    //    //        item.Item = mergeableItem as TItem;
-    //    //    }
-    //    //    base.InsertItem(index, item);
-    //    //}
+                    //var mergedItem = inheritable.CreatedMerged((IInheritable)existingItem.Item);
 
-    //    public TItem DefaultItem { get; set; }
 
-    //    public TItem GetNamedObject(string name)
-    //    {
-    //        foreach (var item in this)
-    //        {
-    //            var namedObject = item as NamedObject;
-    //            if (namedObject != null && namedObject.Name == name)
-    //            {
-    //                return namedObject.Object as TItem;
-    //            }
-    //        }
-    //        return null;
-    //    }
-    //}
+                    //var itemTrigger = new Trigger<TItem, TIdentifier>();
+                    //itemTrigger.Triggers = item.Triggers;
+                    //itemTrigger.Item = (TItem)mergedItem;
+                    //Items[existingItemIndex] = itemTrigger;
+
+                    //inheritable.MergeWith((IInheritable)item.Item);
+                }
+                else
+                {
+                    var mergeable = item.Item as IMerge<TItem>;
+                    if (mergeable != null)
+                    {
+                        var mergedItem = (IMerge<TItem>)Instance.Create<TItem>(mergeable.GetType());
+                        mergedItem.MergeWith(existingItemEntry.Item);
+                        mergedItem.MergeWith(item.Item);
+
+                        var itemTrigger = new Trigger<TItem, TIdentifier>();
+                        itemTrigger.Triggers = item.Triggers;
+                        itemTrigger.Item = (TItem)mergedItem;
+                        Items[existingItemIndex] = itemTrigger;
+                    }
+                    else
+                    {
+                        Items[existingItemIndex] = item;
+                        //existingItem.Item = item.Item;
+                    }
+                }
+            }
+        }
+
+
+
+        //protected override void InsertItem(int index, Trigger<TItem, TIdentifier> item)
+        //{
+        //    var mergeableItem = item.Item as IMergeableSettings;
+        //    if (mergeableItem != null && mergeableItem.BaseInstance != null)
+        //    { 
+        //        var mergedItem = mergeableItem.RecreateAsInherited();
+        //        item.Item = mergeableItem as TItem;
+        //    }
+        //    base.InsertItem(index, item);
+        //}
+
+        public TItem DefaultItem { get; set; }
+
+        public TItem GetNamedObject(string name)
+        {
+            foreach (var item in this)
+            {
+                var namedObject = item as NamedObject;
+                if (namedObject != null && namedObject.Name == name)
+                {
+                    return namedObject.Object as TItem;
+                }
+            }
+            return null;
+        }
+    }
+
+    public class TriggerableObjectList<TItem> : TriggerableObjectList<TItem, Identifier>
+       where TItem : class
+    {
+        public TriggerableObjectList() { }
+
+        public TriggerableObjectList(IEnumerable<Trigger<TItem, Identifier>> items) : base(items) { }
+
+    }
+    public abstract class TriggerableObjectDictionary<TKey, TItem, TIdentifier> : ICollection<Trigger<TItem, TIdentifier>>
+       where TItem : class
+       where TIdentifier : Identifier
+    {
+        public TriggerableObjectDictionary()
+        {
+            items = new InnerDictionaryCollection(this);
+        }
+
+        public TriggerableObjectDictionary(IEqualityComparer<TKey> comparer)
+        {
+            items = new InnerDictionaryCollection(this, comparer);
+        }
+
+        public IEnumerable<TItem> Items { get { return items.Select(i => i.Item); } }
+
+        private InnerDictionaryCollection items;
+
+        protected abstract TKey GetKeyForItem(Trigger<TItem, TIdentifier> item);
+
+        public Trigger<TItem, TIdentifier> GetByIndex(int index)
+        {
+            return items[index];
+        }
+
+        public virtual Trigger<TItem, TIdentifier> this[TKey key]
+        {
+            get
+            {
+                return items.GetItem(key);
+            }
+            set
+            {
+                Trigger<TItem, TIdentifier> item;
+                if (items.TryGetValue(key, out item) == true)
+                {
+                    var resolvedItem = ResolveConflictingItem(item, value);
+                    if (object.ReferenceEquals(resolvedItem, item) == false)
+                    {
+                        items.Remove(key);
+                        items.Add(resolvedItem);
+                    }
+                }
+                else
+                {
+                    items.Add(value);
+                }
+            }
+        }
+
+        protected virtual Trigger<TItem, TIdentifier> ResolveConflictingItem(Trigger<TItem, TIdentifier> exisitingItem, Trigger<TItem, TIdentifier> newItem)
+        {
+            if (newItem.Triggers == null || newItem.Triggers.Length == 0)
+            {
+                newItem.Triggers = exisitingItem.Triggers;
+            }
+
+            return newItem;
+        }
+
+        public virtual IEnumerable<TItem> GetAllMatchingItems(MatchContext context, object obj)
+        {
+            foreach (var group in this)
+            {
+                if (group.Triggers.AllMatches(context, obj) == true)
+                {
+                    yield return group.Item;
+                }
+            }
+        }
+
+        public virtual IEnumerable<TItem> GetAllMatchingItems(MatchContext context, params object[] obj)
+        {
+            foreach (var group in this)
+            {
+                if (group.Triggers.AllMatches(context, obj) == true)
+                {
+                    yield return group.Item;
+                }
+            }
+        }
+
+        public virtual IEnumerable<TItem> GetAllMatchingItems(params object[] obj)
+        {
+            foreach (var group in this)
+            {
+                if (group.Triggers.AllMatches(obj) == true)
+                {
+                    yield return group.Item;
+                }
+            }
+        }
+
+        public virtual void Add(Trigger<TItem, TIdentifier> item)
+        {
+            try
+            {
+                this[GetKeyForItem(item)] = item;
+            }
+            catch
+            {
+
+            }
+        }
+
+        public void Add(TItem item)
+        {
+            Add(new Trigger<TItem, TIdentifier>() { Item = item });
+        }
+
+        public virtual void Add(TItem item, params TIdentifier[] triggers)
+        {
+            Add(new Trigger<TItem, TIdentifier>() { Item = item, Triggers = triggers });
+        }
+
+        public void Remove(TKey key)
+        {
+            items.Remove(key);
+        }
+
+        public void Clear()
+        {
+            items.Clear();
+        }
+
+        public bool Contains(Trigger<TItem, TIdentifier> item)
+        {
+            return items.Contains(item);
+        }
+
+        public void CopyTo(Trigger<TItem, TIdentifier>[] array, int arrayIndex)
+        {
+            items.CopyTo(array, arrayIndex);
+        }
+
+        public int Count
+        {
+            get { return items.Count; }
+        }
+
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
+
+        public bool Remove(Trigger<TItem, TIdentifier> item)
+        {
+            return items.Remove(item);
+        }
+
+        public IEnumerator<Trigger<TItem, TIdentifier>> GetEnumerator()
+        {
+            return items.GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return items.GetEnumerator();
+        }
+
+        protected class InnerDictionaryCollection : MultivendorWebViewer.Components.DictionaryCollection<TKey, Trigger<TItem, TIdentifier>>
+        {
+            public InnerDictionaryCollection(TriggerableObjectDictionary<TKey, TItem, TIdentifier> dictionary)
+            {
+                this.dictionary = dictionary;
+            }
+
+            public InnerDictionaryCollection(TriggerableObjectDictionary<TKey, TItem, TIdentifier> dictionary, IEqualityComparer<TKey> comparer)
+                : base(comparer)
+            {
+                this.dictionary = dictionary;
+            }
+
+            public InnerDictionaryCollection(TriggerableObjectDictionary<TKey, TItem, TIdentifier> dictionary, IEnumerable<Trigger<TItem, TIdentifier>> items)
+                : base(items)
+            {
+                this.dictionary = dictionary;
+            }
+
+            public InnerDictionaryCollection(TriggerableObjectDictionary<TKey, TItem, TIdentifier> dictionary, IEnumerable<Trigger<TItem, TIdentifier>> items, IEqualityComparer<TKey> comparer)
+                : base(items, comparer)
+            {
+                this.dictionary = dictionary;
+            }
+
+            public InnerDictionaryCollection(TriggerableObjectDictionary<TKey, TItem, TIdentifier> dictionary, IEnumerable<Trigger<TItem, TIdentifier>> items, IEqualityComparer<TKey> comparer, int dictionaryCreationThreshold)
+                : base(items, comparer, dictionaryCreationThreshold)
+            {
+                this.dictionary = dictionary;
+            }
+
+            private TriggerableObjectDictionary<TKey, TItem, TIdentifier> dictionary;
+
+            protected override TKey GetKeyForItem(Trigger<TItem, TIdentifier> item)
+            {
+                return dictionary.GetKeyForItem(item);
+            }
+        }
+    }
 
     public abstract class ObjectDictionary<TKey, TItem> : ICollection<TItem>
         where TItem : class

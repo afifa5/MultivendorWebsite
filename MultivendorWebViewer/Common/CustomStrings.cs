@@ -57,6 +57,8 @@ namespace MultivendorWebViewer.Common
         public static string Menu { get { return TextManager.Current.GetText("Menu"); } }
         public static string StartPage { get { return TextManager.Current.GetText("StartPage"); } }
         public static string UserName { get { return TextManager.Current.GetText("UserName"); } }
+        public static string UserList { get { return TextManager.Current.GetText("UserList"); } }
+        public static string Inventory { get { return TextManager.Current.GetText("Inventory"); } }
         public static string ClearOrder { get { return TextManager.Current.GetText("ClearOrder"); } }
         public static string Next { get { return TextManager.Current.GetText("Next"); } }
         public static string Previous { get { return TextManager.Current.GetText("Previous"); } }

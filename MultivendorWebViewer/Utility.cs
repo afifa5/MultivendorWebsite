@@ -1182,12 +1182,31 @@ namespace MultivendorWebViewer
 #endif
             return dictionary;
         }
-
+        public static int IndexOf<T>(this IEnumerable<T> items, Func<T, bool> predicate)
+        {
+            int index = 0;
+            foreach (var i in items)
+            {
+                if (predicate(i) == true)
+                {
+                    return index;
+                }
+                index++;
+            }
+            return -1;
+        }
         public static void RemoveRange(this NameValueCollection collection, IEnumerable<string> keys)
         {
             foreach (string key in keys)
             {
                 collection.Remove(key);
+            }
+        }
+        public static void RemoveRange<T>(this ICollection<T> collection, IEnumerable<T> items)
+        {
+            foreach (T item in items)
+            {
+                collection.Remove(item);
             }
         }
         public static IDictionary<TKey, TElement> ToDictionaryOptimized<TSource, TKey, TElement>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector, IEqualityComparer<TKey> comparer = null)

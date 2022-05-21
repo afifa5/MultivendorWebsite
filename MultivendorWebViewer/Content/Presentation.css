@@ -143,6 +143,9 @@ padding-top:0px;
 .sub-node .node-view .node-name {
 font-size: 15px;
 }
+.node-order {
+margin-top:auto;
+}
 .add-to-order {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -362,11 +365,11 @@ font-weight:200;
     max-width: 250px;
 }
 .node-container.product-nodes .node-view > *:last-child {
-    margin-top: 0;
-}
-.node-container.product-nodes .node-view > .price {
     margin-top: auto;
 }
+/*.node-container.product-nodes .node-view > .price {
+    margin-top: auto;
+}*/
 .specification-container, .contact-conatiner {
     margin: 20px 0 0 0;
 }

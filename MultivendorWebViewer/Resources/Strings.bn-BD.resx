@@ -198,6 +198,9 @@
   <data name="InformationNotFound" xml:space="preserve">
     <value>তথ্য পাওয়া যায়নি</value>
   </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>ইনভেন্টরি</value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>নামের শেষাংশ</value>
   </data>
@@ -332,6 +335,9 @@
   </data>
   <data name="UnitPrice" xml:space="preserve">
     <value>ইউনিট মূল্য (ভ্যাট সহ)</value>
+  </data>
+  <data name="UserList" xml:space="preserve">
+    <value>ব্যবহারকারীর তালিকা</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>ব্যবহারকারীর নাম</value>

@@ -93,7 +93,8 @@
                     }
 
                 }
-                @Html.Action("GetOrderInformation", "Product", routeValues: new { productId = Model.Id })
+                @Html.AsyncView(Url.Action("GetOrderInformation", "Product", routeValues: new { productId = Model.Id }), insertMethod: HtmlInsertMethod.Html, htmlAttributes: new AttributeBuilder("product-order")@*, loadDelay: 10*@);
+                @*@Html.Action("GetOrderInformation", "Product", routeValues: new { productId = Model.Id })*@
 
 
                 @if (Model.Specifications != null)

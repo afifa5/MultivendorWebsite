@@ -708,7 +708,7 @@
 .select-Item-list li .display-text .main-text {
     font-weight: 700;
 }
-.multivendor-select-input.loading {
+.multivendor-select-input.loading, .async-loading, .loader.loading {
     background-image: url(../../content/images/spinner.gif);
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -2699,5 +2699,12 @@
 .label-collapsed {
     display: none;
 }
-
+.async-loading, .loader.loading {
+    background-image: url(../../content/images/spinner.gif);
+    background-size: 25px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    min-height: 25px;
+    min-width: 25px;
+}
     /* #endregion */

@@ -5,29 +5,161 @@ using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Web;
-#if NET452
+
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Routing;
-#endif
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.IO;
 using MultivendorWebViewer.Common;
 using MultivendorWebViewer.Models;
 using System.Globalization;
-using System.Web.Mvc;
-using System.Web.Routing;
-#if NET5
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Text.Encodings.Web;
-#endif
+using MultivendorWebViewer.Configuration;
+using System.ComponentModel;
 
 namespace MultivendorWebViewer.Helpers
 {
+    public static class HtmlHelpers
+    {
+        public static IDictionary<string, object> ToHtmlAttributes(this HtmlAttributeCollection htmlAttributes, object obj, object otherHtmlAttributes = null)
+        {
+            IDictionary<string, object> dict;
+            if (otherHtmlAttributes != null)
+            {
+                var tmpDict = otherHtmlAttributes as IDictionary<string, object>;
+                if (tmpDict != null)
+                {
+                    dict = new Dictionary<string, object>();
+                    foreach (var kvp in tmpDict)
+                    {
+                        dict.Add(kvp.Key, kvp.Value);
+                    }
+                }
+                else
+                {
+                    dict = HtmlHelper.AnonymousObjectToHtmlAttributes(otherHtmlAttributes);
+                }
+            }
+            else
+            {
+                dict = new Dictionary<string, object>();
+            }
+
+            if (htmlAttributes != null)
+            {
+                htmlAttributes.AddToHtmlAttributes(obj, dict);
+            }
+
+            return dict;
+        }
+
+        public static string GetHtml(this HtmlHelper htmlHelper, object item, IList<ValueProvider> valueProviders = null, Formatter format = null, string htmlTemplate = null, string htmlSeparator = null, FormatterContext formatterContext = null, IFormatProvider formatProvider = null, IEqualityComparer<object> distinctComparer = null)
+
+        {
+            if (formatProvider == null) formatProvider = CultureInfo.CurrentUICulture;
+
+            if (valueProviders.Count > 0)
+            {
+                // Most common
+                if (valueProviders.Count == 1)
+                {
+                    if (htmlTemplate == null)
+                    {
+                        object value = valueProviders[0].GetFormattedValue(item, formatterContext, formatProvider);
+
+                        var values = value is string ? null : value as IEnumerable;
+                        if (values == null)
+                        {
+                            // Most common way (one provider, one value)
+                            return format != null ? (format.GetFormattedValue(value, formatterContext, formatProvider) ?? string.Empty) : value as string ?? Formatter.ToFormattedString(value, formatProvider);
+                        }
+                        else
+                        {
+                            var valuesArray = values.OfType<object>().Where(v => v != null).ToArray();
+                            if (valuesArray.Length == 0) return string.Empty;
+                            // One provider, several values
+                            if (htmlSeparator != null)
+                            {
+                                string joinedValues = string.Join(htmlSeparator, valuesArray);
+                                return format != null ? format.GetFormattedValue(joinedValues, formatterContext, formatProvider) : joinedValues;
+                            }
+                            else
+                            {
+                                return format != null ? format.GetFormattedValue(string.Concat(valuesArray)) : string.Concat(valuesArray);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        object value = valueProviders[0].GetValue(item, formatterContext);
+
+                        using (var writer = new StringWriter(formatProvider))
+                        {
+                            htmlHelper.RenderPartial(htmlTemplate, writer, model: value);
+                            return writer.ToString();
+                        }
+                    }
+                }
+                else
+                {
+                    if (htmlTemplate == null)
+                    {
+                        var combinedValues = valueProviders.SelectMany(vp =>
+                        {
+                            object value = vp.GetFormattedValue(item, formatterContext, formatProvider);
+                            var values = value as IEnumerable<object>;
+                            return values ?? new[] { value };
+                        }).Where(v => v != null);
+
+                        if (distinctComparer != null)
+                        {
+                            combinedValues = combinedValues.Distinct(distinctComparer);
+                        }
+
+                        if (htmlSeparator != null)
+                        {
+                            string joinedValues = string.Join(htmlSeparator, combinedValues);
+                            return format != null ? format.GetFormattedValue(joinedValues, formatterContext, formatProvider) : joinedValues;
+                        }
+                        else
+                        {
+                            return format != null ? format.GetFormattedValue(string.Concat(combinedValues)) : string.Concat(combinedValues);
+                        }
+                    }
+                    else
+                    {
+                        var combinedValues = valueProviders.SelectMany(vp =>
+                        {
+                            object value = vp.GetValue(item, formatterContext);
+                            var values = value as IEnumerable<object>;
+                            return values ?? new[] { value };
+                        });
+
+                        using (var writer = new StringWriter(formatProvider))
+                        {
+                            htmlHelper.RenderPartial(htmlTemplate, writer, model: combinedValues.ToArray());
+                            return writer.ToString();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (htmlTemplate != null)
+                {
+                    using (var writer = new StringWriter(formatProvider))
+                    {
+                        htmlHelper.RenderPartial(htmlTemplate, writer, model: item);
+                        return writer.ToString();
+                    }
+                }
+            }
+
+            return string.Empty;
+        }
+    }
     public static class Helpers
     {
         public static bool IsNullOrEmpty(this MvcHtmlString htmlString)
@@ -903,33 +1035,262 @@ namespace MultivendorWebViewer.Helpers
         }
     }
 
-#if NET5
-    //
-    // Summary:
-    //     Specifies the direction in which to sort a list of items.
-    public enum SortDirection
+    public static class HelpersExtensions
     {
-        //
-        // Summary:
-        //     Sort from smallest to largest —for example, from 1 to 10.
-        Ascending = 0,
-        //
-        // Summary:
-        //     Sort from largest to smallest — for example, from 10 to 1.
-        Descending = 1
+     
+
+
+        public static string GetHtml(this TableCustomColumnSettings columnSettings, object row, HtmlHelper htmlHelper, FormatterContext formatterContext = null, IFormatProvider formatProvider = null)
+
+        {
+            IEqualityComparer<object> distinctComparer = null;
+            if (columnSettings.Distinct == true)
+            {
+                var cultureInfo = formatProvider as CultureInfo;
+                distinctComparer = new EqualityComparer(EqualityComparer<object>.Default, cultureInfo != null ? StringComparer.Create(cultureInfo, false) : StringComparer.CurrentCulture);
+            }
+            return HtmlHelpers.GetHtml(htmlHelper, row, valueProviders: columnSettings.ValueProviders, format: columnSettings.Format, htmlTemplate: columnSettings.Template, htmlSeparator: columnSettings.HtmlSeparator, formatterContext: formatterContext, formatProvider: formatProvider, distinctComparer: distinctComparer);
+        }
+
+        protected class EqualityComparer : IEqualityComparer<object>
+        {
+            public EqualityComparer(IEqualityComparer<object> objectComparer, IEqualityComparer<string> stringComparer)
+            {
+                ObjectComparer = objectComparer;
+                StringComparer = stringComparer;
+            }
+            public IEqualityComparer<object> ObjectComparer { get; private set; }
+
+            public IEqualityComparer<string> StringComparer { get; private set; }
+
+            public new bool Equals(object x, object y)
+            {
+                string sx = x as string;
+                if (sx != null)
+                {
+                    string sy = y as string;
+                    if (sy != null)
+                    {
+                        return StringComparer.Equals(sx, sy);
+                    }
+                }
+
+                return ObjectComparer.Equals(x, y);
+            }
+
+            public int GetHashCode(object obj)
+            {
+                string s = obj as string;
+                return s != null ? StringComparer.GetHashCode(s) : ObjectComparer.GetHashCode(obj);
+            }
+        }
+
+        //public static void ApplyOn(this MenuItemSettings setting, MenuItem menuItem, IApplicationRequestContext requestContext)
+        //{
+        //    if (setting.CheckGroup != null) menuItem.CheckGroup = setting.CheckGroup;
+        //    if (setting.Checked.HasValue) menuItem.Checked = setting.Checked.Value;
+        //    if (setting.CheckType.HasValue) menuItem.CheckType = setting.CheckType.Value;
+        //    if (setting.Disabled.HasValue) menuItem.Disabled = setting.Disabled.Value;
+        //    if (setting.Icon != null) menuItem.Icon = requestContext.SiteContext.GetIcon(setting.Icon);
+        //    if (setting.Ignore.HasValue) menuItem.Ignore = setting.Ignore.Value;
+        //    if (setting.Label != null) menuItem.Label = requestContext.GetApplicationTextTranslation(setting.Label);
+        //    if (setting.Selected.HasValue) menuItem.Selected = setting.Selected.Value;
+        //    //if (setting.SubMenu != null) menuItem.Items != null ? menuItem.Items = menuItem.Items.Concat(setting.SubMenu.Items.ToArray()).ToArray() : setting.SubMenu.Items.ToArray(); // TODO NOT CORRECT
+        //    if (setting.Url != null) menuItem.Url = setting.Url;
+        //    if (setting.UrlTarget != null) menuItem.UrlTarget = setting.UrlTarget;
+        //}
+
+        //public static void ApplyOn(this MenuItemSettings setting, ToolBarItem menuItem, IApplicationRequestContext requestContext)
+        //{
+        //    if (setting.CheckGroup != null) menuItem.CheckGroup = setting.CheckGroup;
+        //    if (setting.Checked.HasValue) menuItem.Checked = setting.Checked.Value;
+        //    if (setting.CheckType.HasValue) menuItem.CheckType = setting.CheckType.Value;
+        //    if (setting.Icon != null) menuItem.Icon = requestContext.SiteContext.GetIcon(setting.Icon);
+        //    if (setting.Ignore.HasValue) menuItem.Ignore = setting.Ignore.Value;
+        //    if (setting.Label != null) menuItem.Label = requestContext.GetApplicationTextTranslation(setting.Label);
+        //    //if (setting.SubMenu != null) menuItem.Items != null ? menuItem.Items = menuItem.Items.Concat(setting.SubMenu.Items.ToArray()).ToArray() : setting.SubMenu.Items.ToArray(); // TODO NOT CORRECT
+        //    if (setting.Url != null) menuItem.Url = setting.Url;
+        //    if (setting.UrlTarget != null) menuItem.UrlTarget = setting.UrlTarget;
+        //}
+
+        //public static IEnumerable<PropertyDescriptor> Apply(this PropertiesSettings settings, IEnumerable<PropertyDescriptor> properties, object obj, ApplicationRequestContext requestContext)
+        //{
+        //    if (settings.DisplaySpecifications == false)
+        //    {
+        //        properties = properties.Where(p => (p.Source is ISpecificationViewModel) == false);
+        //    }
+
+        //    var appliedProperties = settings.Properties.Apply(properties, obj, requestContext).AsArray();
+
+        //    return appliedProperties;
+        //}
+
+        //public static IEnumerable<PropertyDescriptor> ApplyInDisplay(this PropertiesSettingsDictionary dictionary,  displayMode, IEnumerable<PropertyDescriptor> properties, object obj, IApplicationRequestContext requestContext)
+        //{
+        //    if (dictionary.Count == 0)
+        //    {
+        //        if (dictionary.DefaultSettings != null && dictionary.DefaultSettings.Properties.Count > 0)
+        //        {
+        //            return displayMode.HasValue == false || displayMode.Value.HasFlag(dictionary.DefaultSettings.Layout) == true ? dictionary.DefaultSettings.Properties.Apply(properties, obj, requestContext) : Enumerable.Empty<PropertyDescriptor>();
+        //        }
+        //        else
+        //        {
+        //            return displayMode.HasValue == false ? properties : Enumerable.Empty<PropertyDescriptor>();
+        //        }
+        //    }
+
+        //    foreach (var setting in dictionary)
+        //    {
+        //        if (setting.DisplayIn(displayMode, ComponentLayoutMode.Body) == true)
+        //        {
+        //            return setting.Properties.Apply(properties, obj, requestContext);
+        //        }
+        //    }
+
+        //    return Enumerable.Empty<PropertyDescriptor>();
+        //}
+
+
+        public static string GetHtml(this PropertyDescriptorSettings settings, HtmlHelper htmlHelper, object obj, FormatterContext formatterContext = null, IFormatProvider formatProvider = null)
+
+        {
+            return HtmlHelpers.GetHtml(htmlHelper, obj, valueProviders: settings.ValueProviders, format: settings.Format, htmlTemplate: settings.CustomView, htmlSeparator: settings.HtmlSeparator, formatterContext: formatterContext, formatProvider: formatProvider);
+        }
+
+        //public static PropertyDescriptor Create(this PropertyDescriptorSettings settings, object obj, IApplicationRequestContext requestContext)
+        //{
+        //    var propertyDescriptor = new PropertyDescriptor { Id = settings.Id };
+        //    settings.Apply(propertyDescriptor, requestContext);
+        //    //propertyDescriptor.Source = obj;
+        //    propertyDescriptor.Content = new HtmlContent(h => MvcHtmlString.Create(settings.GetHtml(h, obj)));
+        //    return propertyDescriptor;
+        //}
+
+        //public static void Apply<T>(this PropertyDescriptorSettings settings, T propertyDescriptor, IApplicationRequestContext requestContext)
+        //    where T : IPropertyDescriptor
+        //{
+        //    propertyDescriptor.Settings = settings;
+
+        //    if (settings.Layout.HasValue == true)
+        //    {
+        //        propertyDescriptor.Layout = settings.Layout;
+        //    }
+
+        //    if (settings.Label != null)
+        //    {
+        //        propertyDescriptor.Name = requestContext.GetApplicationTextTranslation(settings.Label);
+        //    }
+
+        //    if (settings.Class != null)
+        //    {
+        //        propertyDescriptor.ClassName = propertyDescriptor.ClassName == null ? settings.Class : propertyDescriptor.ClassName + " " + settings.Class;
+        //    }
+
+        //    if (settings.Format != null && propertyDescriptor.Value != null) // TODO this should be lifted inte the property descriptor itself
+        //    {
+        //        propertyDescriptor.Value = settings.Format.GetFormattedValue(propertyDescriptor.Value);
+        //    }
+
+        //    if (settings.DisplayOrder.HasValue == true)
+        //    {
+        //        propertyDescriptor.Order = settings.DisplayOrder;
+        //    }
+        //}
+
+        //public static IEnumerable<T> Apply<T>(this PropertyDescriptorSettingsDictionary directory, IEnumerable<T> properties, object obj, IApplicationRequestContext requestContext)
+        //    where T : class, IPropertyDescriptor
+        //{
+        //    if (directory.Count == 0) return properties ?? Enumerable.Empty<T>();
+
+        //    var propertiesCollection = properties as ICollection<IPropertyDescriptor>;
+        //    var appliedProperties = propertiesCollection != null ? new List<T>(propertiesCollection.Count) : new List<T>();
+        //    bool hasOrder = false;
+
+        //    if (properties != null)
+        //    {
+        //        var wildcardSetting = directory.GetItem("*");
+
+        //        foreach (var p in properties)
+        //        {
+        //            T copy = null;
+        //            if (wildcardSetting != null) // TODO
+        //            {
+        //                copy = (T)p.Copy();
+        //                wildcardSetting.Apply(copy, requestContext);
+        //                if (copy.Order.HasValue == true)
+        //                {
+        //                    hasOrder = true;
+        //                }
+        //            }
+
+        //            if (p.Id != null)
+        //            {
+        //                var settings = directory.GetItem(p.Id);
+
+        //                if (settings != null)
+        //                {
+        //                    if ((settings.Layout.HasValue == false || settings.Layout.Value.HasFlag(ComponentLayoutMode.Hidden) == false) && settings.New == false)
+        //                    {
+        //                        copy = copy ?? (T)p.Copy();
+        //                        settings.Apply(copy, requestContext);
+        //                        if (copy.Order.HasValue == true)
+        //                        {
+        //                            hasOrder = true;
+        //                        }
+        //                    }
+        //                    else if (copy == null)
+        //                    {
+        //                        continue;
+        //                    }
+        //                }
+        //            }
+
+        //            if (copy != null)
+        //            {
+        //                appliedProperties.Add(copy);
+        //            }
+        //            else if (directory.IsAnyHidden == true)
+        //            {
+        //                appliedProperties.Add(p);
+        //            }
+        //        }
+        //    }
+
+        //    foreach (var s in directory)
+        //    {
+        //        if (s.New == true || s.Id == null)
+        //        {
+        //            if (s.HideEmpty == true && s.ValueProviders?.Count > 0)
+        //            {
+        //                var formatterContext = new FormatterContext(requestContext);
+        //                if (s.ValueProviders.Any(vp => string.IsNullOrWhiteSpace(vp.GetFormattedValue(obj, ",", formatterContext)) == false) == false) continue;
+        //            }
+
+        //            var p = (T)s.Create(obj, requestContext);
+        //            appliedProperties.Add(p);
+        //            if (p.Order.HasValue == true)
+        //            {
+        //                hasOrder = true;
+        //            }
+        //        }
+        //    }
+
+        //    if (hasOrder == true)
+        //    {
+        //        appliedProperties.Sort(p => p.Order ?? 0);
+        //    }
+
+        //    return appliedProperties;
+        //}
     }
-#endif
+
 
     public interface IAddToAttributes
     {
         AttributeBuilder AddToAttributes(AttributeBuilder attributeBuilder, object obj = null, IFormatProvider formatProvider = null);
     }
-
-#if NET5
-    public class AttributeBuilder : IHtmlContent, IEnumerable<KeyValuePair<string, object>>
-#else
     public class AttributeBuilder : IHtmlString, IEnumerable<KeyValuePair<string, object>>
-#endif
+
     {
         public class ClassList : List<string>
         {

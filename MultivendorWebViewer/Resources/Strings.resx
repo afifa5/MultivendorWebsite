@@ -198,6 +198,9 @@
   <data name="InformationNotFound" xml:space="preserve">
     <value>Information not found</value>
   </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>Inventory</value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>Last name</value>
   </data>
@@ -332,6 +335,9 @@
   </data>
   <data name="UnitPrice" xml:space="preserve">
     <value>Unit price (incl vat)</value>
+  </data>
+  <data name="UserList" xml:space="preserve">
+    <value>User list</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>User name</value>

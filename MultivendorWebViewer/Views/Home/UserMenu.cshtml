@@ -11,7 +11,7 @@
     @if (user != null && (user.UserRole == AuthorizePermissions.Administration || user.UserRole == AuthorizePermissions.Vendor))
     {
         <li>
-            <a href="@UrlUtility.Action(applicationrequestContext,"Index","Admin")" class="user-menu-item">
+            <a href="@UrlUtility.Action(applicationrequestContext,"AdminView","Admin")" class="user-menu-item">
                 @Html.Icon(Icons.Cog)
                 <label>@CustomStrings.Administration</label>
             </a>

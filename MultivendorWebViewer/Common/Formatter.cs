@@ -22,9 +22,25 @@ namespace MultivendorWebViewer.Configuration
         /// Set to true to format to empty value. Default is false.
         /// </summary>
         /// <value>Attribute name hide</value>
+        /// 
         [XmlAttribute("hide")]
         public bool Hide { get; set; }
-
+        protected string id;
+        [XmlAttribute("id")]
+        public string Id
+        {
+            get { return id; }
+            set
+            {
+                id=value;
+            }
+        }
+        public static Formatter GetNamedInstance(string id)
+        {
+            if (id == null) return null;
+            Formatter baseInstance = new Formatter();
+            return baseInstance;
+        }
         [XmlAttribute("html")]
         public bool HtmlEncode { get; set; }
 
