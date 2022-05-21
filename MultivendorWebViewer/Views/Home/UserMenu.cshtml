@@ -17,8 +17,9 @@
             @Html.Image(userViewModel.Image, height: 50, width: 50, htmlAttributes:new { @class= "user-logged-in-image" });
             }
             else {
+                var backgroundImage = applicationrequestContext.Configuration.GetApplicationImage(applicationrequestContext, applicationrequestContext.Configuration.SiteProfile.DefaultLoggedInAvatar);
 
-            <img class="user-logged-in-image"  />
+            <img class="user-logged-in-image" src="@backgroundImage" />
             }
             <label class="user-email">@userViewModel.UserName</label>
         </div>

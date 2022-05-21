@@ -25,6 +25,8 @@ namespace MultivendorWebViewer.Common
         public string HeaderLogoSmall { get; set; }
         [XmlElement("LoginBackgroundImage")]
         public string LoginBackgroundImage { get; set; }
+        [XmlElement("DefaultLoggedInAvatar")]
+        public string DefaultLoggedInAvatar { get; set; }
 
         [XmlElement("AvailableLanguage")]
         public string AvailableLanguage { get; set; }
