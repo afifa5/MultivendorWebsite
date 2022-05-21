@@ -1,4 +1,4 @@
-﻿(function (digitalHalalMarket, multivendorWeb, $, document) {
+﻿(function (multivendorWeb, $, undefined) {
     multivendorWeb.Order = {
         GetTotalCounter: function () {
             var quantityUrl = $(document.body).data("order-total-counter");
@@ -453,4 +453,4 @@
             multivendorWeb.Order.UpdateCurrentTab(currentHash);
         }, false);
     });
-}(window.digitalHalalMarket = window.digitalHalalMarket || {}, window.multivendorWeb = window.multivendorWeb || {}, window.jQuery, document));
+}(window.multivendorWeb = window.multivendorWeb || {}, jQuery));

@@ -1,4 +1,4 @@
-﻿(function (digitalHalalMarket, multivendorWeb, $, document) {
+﻿(function (multivendorWeb, $, undefined) {
 
     multivendorWeb.table = {
         selector: ".multivendor-table",
@@ -124,4 +124,4 @@
         }
     });
 
-}(window.digitalHalalMarket = window.digitalHalalMarket || {}, window.multivendorWeb = window.multivendorWeb || {}, window.jQuery, document));
+}(window.multivendorWeb = window.multivendorWeb || {}, jQuery));

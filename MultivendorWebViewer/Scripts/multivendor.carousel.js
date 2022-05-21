@@ -1,4 +1,4 @@
-﻿(function (digitalHalalMarket, multivendorWeb, $, document) {
+﻿(function (multivendorWeb, $, undefined) {
 
 
     multivendorWeb.carousel = {
@@ -703,4 +703,4 @@
         return ((totalSeconds * 1000) + ms)
     }
 
-}(window.digitalHalalMarket = window.digitalHalalMarket || {}, window.multivendorWeb = window.multivendorWeb || {}, window.jQuery, document));
+}(window.multivendorWeb = window.multivendorWeb || {}, jQuery));

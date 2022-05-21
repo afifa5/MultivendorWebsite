@@ -1,4 +1,4 @@
-﻿(function (digitalHalalMarket, multivendorWeb, $, document) {
+﻿(function (multivendorWeb, $, undefined) {
 
     multivendorWeb.popup = {
 
@@ -673,4 +673,4 @@
         init(multivendorWeb.popup.getPopups(e.element));
     });
 
-}(window.digitalHalalMarket = window.digitalHalalMarket || {}, window.multivendorWeb = window.multivendorWeb || {}, window.jQuery, document));
+}(window.multivendorWeb = window.multivendorWeb || {}, jQuery));

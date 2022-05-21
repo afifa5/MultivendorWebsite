@@ -1,4 +1,4 @@
-﻿(function (digitalHalalMarket, multivendorWeb, $, document) {
+﻿(function (multivendorWeb, $, undefined) {
 
     window.multivendorWeb = multivendorWeb; // Alias
 
@@ -985,4 +985,4 @@
         }
     }
 
-}(window.digitalHalalMarket = window.digitalHalalMarket || {}, window.multivendorWeb = window.multivendorWeb || {}, window.jQuery, document));
+}(window.multivendorWeb = window.multivendorWeb || {}, jQuery));
