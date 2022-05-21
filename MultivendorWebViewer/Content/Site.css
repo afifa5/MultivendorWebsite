@@ -486,3 +486,6 @@ min-height:20px;
     .admin-toolbar.main-toolbar .items-toolbar.menu-toolbar .multivendor-web-toolbar {
         padding: 8px 0 8px 0;
     }
+.all-user-container {
+margin:10px 0 0 10px;
+}

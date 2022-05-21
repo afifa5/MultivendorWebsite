@@ -228,6 +228,9 @@
   <data name="OrderEmptyMessage" xml:space="preserve">
     <value>No items currently on order cart</value>
   </data>
+  <data name="OrdersList" xml:space="preserve">
+    <value>Orders list</value>
+  </data>
   <data name="OrdersPrice" xml:space="preserve">
     <value>Payable price</value>
   </data>
@@ -336,6 +339,12 @@
   <data name="UnitPrice" xml:space="preserve">
     <value>Unit price (incl vat)</value>
   </data>
+  <data name="UserActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="UserCompany" xml:space="preserve">
+    <value>Company</value>
+  </data>
   <data name="UserList" xml:space="preserve">
     <value>User list</value>
   </data>
@@ -344,6 +353,9 @@
   </data>
   <data name="UserNameRequired" xml:space="preserve">
     <value>User name required</value>
+  </data>
+  <data name="UserRole" xml:space="preserve">
+    <value>User role</value>
   </data>
   <data name="Videos" xml:space="preserve">
     <value>Videos</value>

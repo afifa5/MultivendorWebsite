@@ -10,6 +10,11 @@ namespace MultivendorWebViewer.Common
         public static string FirstName { get { return TextManager.Current.GetText("FirstName"); } }
         public static string LastName { get { return TextManager.Current.GetText("LastName"); } }
         public static string UserNameRequired { get { return TextManager.Current.GetText("UserNameRequired"); } }
+
+        public static string UserRole{ get { return TextManager.Current.GetText("UserRole"); } }
+        public static string UserCompany { get { return TextManager.Current.GetText("UserCompany"); } }
+        public static string UserActive { get { return TextManager.Current.GetText("UserActive"); } }
+        public static string OrdersList { get { return TextManager.Current.GetText("OrdersList"); } }
         public static string PasswordRequired { get { return TextManager.Current.GetText("PasswordRequired"); } }
         public static string RememberMe { get { return TextManager.Current.GetText("RememberMe"); } }
         public static string CareOf { get { return TextManager.Current.GetText("CareOf"); } }

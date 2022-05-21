@@ -49,8 +49,8 @@
                         <li class="container ">
                             <! -- User-->
                             <div class="item-container">
-                                @Html.Icon(Icons.User, new { @class = "content" })
-                                <label class="icon-label">@CustomStrings.Menu</label>
+                                @Html.Icon(Icons.Users, new { @class = "content" })
+                                <label class="icon-label">@CustomStrings.UserList</label>
                             </div>
                         </li>
                     }
@@ -59,8 +59,8 @@
                         <li class="container ">
                             <! -- User-->
                             <div class="item-container">
-                                @Html.Icon(Icons.ShoppingCart, new { @class = "content" })
-                                <label class="icon-label">Orders</label>
+                                @Html.Icon(Icons.ShoppingList, new { @class = "content" })
+                                <label class="icon-label">@CustomStrings.OrdersList</label>
                             </div>
                         </li>
                     }
@@ -70,7 +70,7 @@
                             <! -- User-->
                             <div class="item-container">
                                 @Html.Icon(Icons.Wrench, new { @class = "content" })
-                                <label class="icon-label">Product inventory</label>
+                                <label class="icon-label">@CustomStrings.Inventory</label>
                             </div>
                         </li>
                     }
