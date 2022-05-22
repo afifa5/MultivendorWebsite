@@ -509,3 +509,14 @@ border-radius:0px;
 /*padding:2px;
 border:solid 1px #ddd;*/
 }
+input[type=text], input[type=password] {
+    font-size: 15px;
+    font-weight: 400;
+    padding: 5px 5px 5px 5px;
+    min-width: 1em;
+    -webkit-appearance: none;
+    color: black;
+    border: 1px solid grey;
+    min-width: 340px;
+    max-width: 500px;
+}

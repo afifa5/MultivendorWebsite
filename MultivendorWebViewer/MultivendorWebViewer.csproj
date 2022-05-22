@@ -347,7 +347,7 @@
     <Content Include="Content\Search.css" />
     <Content Include="Content\Presentation.css" />
     <Content Include="Content\HelperComponent.css" />
-    <Content Include="Content\User.css" />
+    <Content Include="Content\Admin.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fa-brands-400.svg" />
     <Content Include="fonts\fa-regular-400.svg" />
@@ -429,6 +429,7 @@
     <Content Include="Views\Shared\_AdministrationLayout.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\_UserTable.cshtml" />
+    <Content Include="Views\User\UpdateProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

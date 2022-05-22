@@ -1,0 +1,51 @@
+﻿.user-information-container {
+display:grid;
+grid-row-gap:10px;
+}
+.information-content {
+    display: grid;
+    grid-row-gap: 10px;
+    grid-template-columns: max-content max-content;
+    grid-column-gap: 10px;
+}
+.information-content label {
+min-width:150px;
+}
+    .information-content input[type=submit] {
+        padding: 5px;
+        font-size: 18px;
+    }
+.update-profile-menu {
+    margin: 0px;
+    padding: 10px 0 10px 0;
+    list-style-type: none;
+}
+    .update-profile-menu li {
+     
+        padding: 5px 0px 5px 0px;
+        display: block;
+        list-style-type: none;
+        cursor: pointer;
+        font-size: 18px;
+    }
+    .update-profile-menu label {
+        cursor: pointer;
+        font-size: 18px;
+    }
+    .update-profile-menu li:hover {
+        background-color: #ddd;
+    }
+.update-profile-menu li a {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: 5px;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+    font-size: 18px;
+}
+.user-information-container .header {
+padding:5px 0;
+/*background-color:#ddd;*/
+}

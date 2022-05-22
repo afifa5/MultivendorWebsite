@@ -12,24 +12,22 @@ namespace MultivendorWebViewer.ViewModels
     {
         public string FirstName { get; set; }
         public string CustomerIdentity { get; set; }
-
         public string LastName { get; set; }
-        [Required(ErrorMessageResourceName = "UserNameRequired", ErrorMessageResourceType = typeof(CustomStrings))]
-        [DataType(DataType.EmailAddress)]
-        [Display(ResourceType = typeof(CustomStrings), Name = "UserName")]
+        //[Required(ErrorMessageResourceName = "UserNameRequired", ErrorMessageResourceType = typeof(CustomStrings))]
+        //[DataType(DataType.EmailAddress)]
+        //[Display(ResourceType = typeof(CustomStrings), Name = "UserName")]
         public string UserName { get; set; }
 
         public string Email { get; set; }
 
-        [Required(ErrorMessageResourceName = "PasswordRequired", ErrorMessageResourceType = typeof(CustomStrings))]
-        [DataType(DataType.Password)]
-        [Display(ResourceType = typeof(CustomStrings), Name = "Password")]
+        //[Required(ErrorMessageResourceName = "PasswordRequired", ErrorMessageResourceType = typeof(CustomStrings))]
+        //[DataType(DataType.Password)]
+        //[Display(ResourceType = typeof(CustomStrings), Name = "Password")]
         public string Password { get; set; }
-        [Required(ErrorMessageResourceName = "PasswordRequired", ErrorMessageResourceType = typeof(CustomStrings))]
-        [DataType(DataType.Password)]
-        [Display(ResourceType = typeof(CustomStrings), Name = "ConfirmPassword")]
+        //[Required(ErrorMessageResourceName = "PasswordRequired", ErrorMessageResourceType = typeof(CustomStrings))]
+        //[DataType(DataType.Password)]
+        //[Display(ResourceType = typeof(CustomStrings), Name = "ConfirmPassword")]
         public string ConfirmPassword { get; set; }
-
         public string PhoneNumber { get; set; }
 
         public string CompanyName { get; set; }
@@ -44,7 +42,13 @@ namespace MultivendorWebViewer.ViewModels
         public string Country { get; set; }
 
         public string UserRole { get; set; }
-        
+        public string ModifiedBy { get; set; }
+
+        public string CreatedBy { get; set; }
+
+        public bool? IsActive { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModificationDate { get; set; }
 
     }
     public class LoginViewModel

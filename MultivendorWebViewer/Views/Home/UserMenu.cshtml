@@ -47,7 +47,7 @@
         @if (user != null)
         {
             <li>
-                <a class="user-menu-item">
+                <a  href="@UrlUtility.Action(applicationrequestContext,"UpdateProfile","User", new { userName = user.UserName })" class="user-menu-item">
                     @Html.Icon(Icons.User)
                     <label>@CustomStrings.MyProfile</label>
                 </a>

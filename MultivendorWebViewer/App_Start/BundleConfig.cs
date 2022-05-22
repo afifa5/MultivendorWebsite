@@ -50,7 +50,8 @@ namespace MultivendorWebViewer
                       "~/Content/site.css",
                        "~/Content/HelperComponent.css",
                         "~/Content/Search.css",
-                         "~/Content/HelperTools.css"
+                         "~/Content/HelperTools.css",
+                          "~/Content/Admin.css"
 
 
                       ));

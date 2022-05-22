@@ -86,18 +86,18 @@
             }
         }
     });
-    $(document).on("mouseleave", ".advance-search-container", function (e) {
+    $(document).on("mouseleave", ".left-pinnable-item-container", function (e) {
         if (!$(this).hasClass("pinned"))
         $(this).removeClass("open")
     });
     $(document).on("click", ".pin-icon-container", function (e) {
-        var searchContainer = $(this).closest(".advance-search-container")
+        var searchContainer = $(this).closest(".left-pinnable-item-container")
         if (!searchContainer.hasClass("pinned"))
             searchContainer.addClass("pinned")
         else
             searchContainer.removeClass("pinned")
     });
-    $(document).on("mouseenter", ".advance-search-container", function (e) {
+    $(document).on("mouseenter", ".left-pinnable-item-container", function (e) {
         $(this).addClass("open")
     });
     

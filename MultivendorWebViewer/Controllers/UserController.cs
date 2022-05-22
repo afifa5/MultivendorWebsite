@@ -184,6 +184,17 @@ namespace MultivendorWebViewer.Controllers
                 throw;
             }
         }
+        [PermissionAuthorize(AuthorizePermissions.Administration, AuthorizePermissions.Vendor, AuthorizePermissions.Customer, AlwaysRequire = true)]
+        [HttpGet]
+        public ActionResult UpdateProfile(string userName)
+        {
+            var registerViewModel = new RegisterViewModel();
+            var user = ApplicationRequestContext.UserDBManager.GetUserByUsername(userName);
+            if (user != null) {
+                registerViewModel = ApplicationRequestContext.UserDBManager.GetRegisterViewModel(user);
+            }
+            return View("UpdateProfile", registerViewModel);
+        }
         [HttpGet]
         public ActionResult Register()
         {
@@ -195,20 +206,48 @@ namespace MultivendorWebViewer.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 bool isvalid = true;
                 var isEmailAddressValid = EmailValidation.Default.IsEmailVaild(model.UserName);
+                //check if any user logged in
+                var currentUser = ApplicationRequestContext.User;
+                if (currentUser != null)
+                {
+                    isvalid = false;
+                    ModelState.AddModelError("", "Logged in user can not register.Please sign out first.");
+                }
+ 
                 if (!isEmailAddressValid) {
                     isvalid = false;
                     ModelState.AddModelError("", "Email address format not valid");
                 }
-                if (string.IsNullOrEmpty(model.Password) || string.IsNullOrEmpty(model.ConfirmPassword) || model.Password != model.ConfirmPassword) {
+                else if (string.IsNullOrEmpty(model.Password) || string.IsNullOrEmpty(model.ConfirmPassword) || model.Password != model.ConfirmPassword) {
                     isvalid = false;
                     ModelState.AddModelError("", "Invalid password");
+
+                }
+                else if (string.IsNullOrEmpty(model.FirstName))
+                {
+                    isvalid = false;
+                    ModelState.AddModelError("", "Invalid first name");
+
+                }
+                else if (string.IsNullOrEmpty(model.LastName))
+                {
+                    isvalid = false;
+                    ModelState.AddModelError("", "Invalid last name");
+
+                }
+                else if (string.IsNullOrEmpty(model.PhoneNumber))
+                {
+                    isvalid = false;
+                    ModelState.AddModelError("", "Invalid phone");
 
                 }
                 if (!isvalid) { 
                     return View(model);
                 }
+
                 var customerRole = AuthorizePermissions.Customer;
                 model.Email = model.UserName;
                 model.UserRole = customerRole;

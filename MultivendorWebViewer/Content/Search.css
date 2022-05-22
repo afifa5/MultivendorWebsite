@@ -1,11 +1,11 @@
-﻿.left.advance-search-container.pinned {
+﻿.left.left-pinnable-item-container.pinned {
     position: relative;
 }
-.advance-search-container.pinned .icon {
+.left-pinnable-item-container.pinned .icon {
     transform: rotate(0);
     transition: transform 0.2s;
 }
-.advance-search-container:not(.pinned) .icon {
+.left-pinnable-item-container:not(.pinned) .pin-icon-container .icon {
     position: absolute;
     margin: 0;
     top: 0;
@@ -16,21 +16,21 @@
     transform: rotate(90deg);
     color: inherit;
 }
-.advance-search-information {
+.pin-item-information {
     display: grid;
     grid-row-gap: 5px;
 }
 
-    .advance-search-information .search-item {
+    .pin-item-information .search-item {
         display: grid;
         grid-row-gap: 5px;
     }
 
-.left.advance-search-container:not(.open) {
+.left.left-pinnable-item-container:not(.open) {
     opacity: 0;
 }
 
-.advance-search-header {
+.pin-container-header {
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
@@ -38,15 +38,15 @@
     margin-top: 10px;
 }
 
-    .advance-search-header .icon {
+    .pin-container-header .icon {
         font-size: 20px;
     }
 
-    .advance-search-header h3 {
+    .pin-container-header h3 {
         margin: 0px;
     }
 
-.left.advance-search-container input {
+.left.left-pinnable-item-container input {
     font-size: 15px;
     font-weight: 400;
     padding: 5px 5px 5px 5px;
@@ -58,14 +58,14 @@
     max-width: 500px;*/
 }
 
-.left.advance-search-container {
+.left.left-pinnable-item-container {
     position: absolute;
     width: 270px;
     min-width: 250px;
     top: 0;
     left: 0;
     height: 100%;
-    background-color: #f0f0f0;
+    /*background-color: #f0f0f0;*/
     padding: 0;
     z-index: 9999;
     overflow-y: auto;

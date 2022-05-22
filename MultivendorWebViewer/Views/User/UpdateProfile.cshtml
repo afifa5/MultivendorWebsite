@@ -1,0 +1,104 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@using MultivendorWebViewer.Helpers;
+@using MultivendorWebViewer.Components;
+@model RegisterViewModel
+
+@{
+    ViewBag.Title = "Multivendor Web";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+    var user = applicationrequestContext.User;
+    //var routeValues = new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId };
+    //var backgroundImage = applicationrequestContext.Configuration.GetApplicationImage(applicationrequestContext, applicationrequestContext.Configuration.SiteProfile.LoginBackgroundImage);
+    //var headerLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, false);
+    //var startCatalogueUrl = UrlUtility.Action(applicationrequestContext, "Index", "Category", routeValues);
+
+}
+<div class="presentation">
+    <div class="navigation-bar">
+        @Html.Action("NavigationBar", "NavigationPath")
+    </div>
+    @*Show header*@
+    <div class="presentation-header">
+        <div class="presentation-information-container">
+            <label class="presentation-name">@CustomStrings.MyProfile</label>
+
+        </div>
+    </div>
+    <div class="main-body-contents">
+        @*open pinned class add to show the advance search always*@
+        <aside class="left left-pinnable-item-container open pinned ">
+            <div class="pin-container-header">
+                <h3 class="pin-label" data-for="~">Update profile</h3>
+                <div class="pin-icon-container">
+                    <span class="icon fa fa-map-pin"></span>
+
+                </div>
+            </div>
+            <div class="pin-item-information">
+                <ul class="update-profile-menu">
+                    <li>
+                        <a href="@UrlUtility.Action(applicationrequestContext,"UpdateProfile","User", new { userName = user.UserName })">
+                            @Html.Icon(Icons.Info)
+                            <label>Update information</label>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a >
+                            @Html.Icon(Icons.Password)
+                            <label>Change password</label>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </aside>
+        <div class="presentation-body left-pane">
+            @using (Html.BeginForm("Register", "User", FormMethod.Post, HtmlHelper.AnonymousObjectToHtmlAttributes(new { @class = "form-horizontal update-profile-form", role = "form" })))
+            {
+                <div class="user-information-container">
+                    <div class="header">
+                        <h3>User Information</h3>
+                    </div>
+                    <div class="information-content">
+                        <label>@CustomStrings.FirstName</label>
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-input", @tabindex = "1", autofocus = "" })
+                        <label>@CustomStrings.LastName</label>
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-input", @tabindex = "1", autofocus = "" })
+                        <label>@CustomStrings.UserCompany</label>
+                        @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-input", @tabindex = "1", autofocus = "" })
+                        
+                    </div>
+                </div>
+                <div class="user-information-container">
+                    <div class="header">
+                        <h3>Contact Information</h3>
+                    </div>
+                    <div class="information-content">
+                        <label>@CustomStrings.CareOf</label>
+
+                        @Html.TextBoxFor(m => m.CareOf, new { @class = "form-input", @tabindex = "1", autofocus = "" })
+                        <label>@CustomStrings.Phone</label>
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-input", @tabindex = "1", autofocus = "" })
+                        <label>@CustomStrings.PostCode</label>
+                        @Html.TextBoxFor(m => m.PostCode, new { @class = "form-input", @tabindex = "1", autofocus = "" })
+
+                        <label>@CustomStrings.Address</label>
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-input", @tabindex = "1", autofocus = "" })
+
+                        <label>@CustomStrings.City</label>
+                        @Html.TextBoxFor(m => m.City, new { @class = "form-input", @tabindex = "1", autofocus = "" })
+                        <label>@CustomStrings.Country</label>
+                        @Html.TextBoxFor(m => m.Country, new { @class = "form-input", @tabindex = "1", autofocus = "" })
+                        <label></label>
+                        <input type="submit" class="register-button " value="Update">
+                    </div>
+                </div>
+                <div class="invalid-user-name-password login-form-items-container">@Html.ValidationSummary(true, "", new { @class = "error-text" })</div>
+            }
+        </div>
+    </div>
+</div>
+

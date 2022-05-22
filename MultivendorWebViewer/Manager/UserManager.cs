@@ -72,6 +72,7 @@ namespace MultivendorWebViewer.Manager
                 newUser.PassWord = newhashedpassword;
                 newUser.CompanyName = register.CompanyName;
                 newUser.UserRole = register.UserRole;
+                newUser.CreatedBy = register.UserName;
                 newUser.CreatedDate = DateTime.Now;
                 newUser.IsActive = true;//should be true on email verification
 
@@ -172,6 +173,35 @@ namespace MultivendorWebViewer.Manager
             });
         }
 
+        public RegisterViewModel GetRegisterViewModel(User user) {
+            var registerViewModel = new RegisterViewModel();
+            if (user != null) {
+                registerViewModel.UserName = user.UserName;
+                registerViewModel.ModifiedBy = user.ModifiedBy;
+                registerViewModel.CreatedBy = user.CreatedBy;
+                registerViewModel.CompanyName = user.CompanyName;
+                registerViewModel.IsActive = user.IsActive;
+                registerViewModel.UserRole = user.UserRole;
+                registerViewModel.CreatedDate = user.CreatedDate;
+                registerViewModel.ModificationDate = user.ModificationDate;
+                if (user.CustomerId.HasValue) {
+                    var customer = GetCustomerById(user.CustomerId.Value);
+                    if (customer != null) {
+                        registerViewModel.FirstName = customer.FirstName;
+                        registerViewModel.CustomerIdentity = customer.CustomerIdentity;
+                        registerViewModel.LastName = customer.LastName;
+                        registerViewModel.Email = customer.Email;
+                        registerViewModel.PhoneNumber = customer.PhoneNumber;
+                        registerViewModel.Address = customer.Address;
+                        registerViewModel.PostCode = customer.PostCode;
+                        registerViewModel.City = customer.City;
+                        registerViewModel.CareOf = customer.CareOf;
+                        registerViewModel.Country = customer.Country;
+                    }
+                }
+            }
+            return registerViewModel;
+        }
 
 
     }
