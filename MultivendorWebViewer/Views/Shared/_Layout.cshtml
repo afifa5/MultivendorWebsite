@@ -23,6 +23,7 @@
     var user = applicationrequestContext.User;
 }
 <body data-order-total-counter="@UrlUtility.Action(applicationrequestContext, "GetTotalQuantity", "Order")"
+      data-session-timeout-url='@UrlUtility.Action(applicationrequestContext, "SessionTimeout", "Security")'
       data-quick-search-url="@UrlUtility.Action(applicationrequestContext, "Search", "Search")">
     <section class="main-layout">
         <div class="main-toolbar">
@@ -90,7 +91,7 @@
                                 {
 
                                     @Html.Icon(Icons.User, new { @class = "content" })
-                                    <label class="icon-label user-label ">@(userViewModel.Customer == null? userViewModel.UserName : userViewModel.Customer.FirstName)</label>
+                                    <label class="icon-label user-label ">@(userViewModel.Customer == null ? userViewModel.UserName : userViewModel.Customer.FirstName)</label>
                                 }
                                 else
                                 {
@@ -137,8 +138,13 @@
 
             </footer>*@
     </section>
-
+    @{
+        @Html.Hidden("SessionTimeOutVal", Session.Timeout);
+        var x = Session["CurrentActiveUser"] == null ? "" : Session["CurrentActiveUser"];
+        @Html.Hidden("CurrentActiveUser", x);
+    }
     @Styles.Render("~/Content/Media")
+    @Scripts.Render("~/bundles/sessionimeout")
     @*@Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)*@

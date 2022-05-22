@@ -520,3 +520,38 @@ input[type=text], input[type=password] {
     min-width: 340px;
     max-width: 500px;
 }
+.session-timeout .header-text {
+display:grid;
+grid-template-columns:auto 1fr;
+grid-column-gap:10px;
+align-items:center;
+font-size:25px;
+}
+    .session-timeout .header-text > * {
+    font-size:25px;
+    }
+.session-timeout {
+display:grid;
+grid-row-gap:10px;
+}
+.ok-button {
+    float: right;
+    padding: 5px 5px 5px 5px;
+    font-size: 18px;
+    max-width: 260px;
+    float: right;
+    padding: 5px 5px 5px 5px;
+    font-size: 18px;
+    max-width: 260px;
+    background: #ab0000;
+    border: 1px solid;
+    border-color: #AB0000;
+    border-radius: 10px;
+    transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out;
+    color: #fff;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+    text-decoration: none;
+    min-width: 100px;
+    text-align: center;
+}

@@ -195,6 +195,9 @@
   <data name="HomeDelivery" xml:space="preserve">
     <value>Home delivery</value>
   </data>
+  <data name="InactiveSessionExpire" xml:space="preserve">
+    <value>You have been logged out due to inactivity. Please sign in again.</value>
+  </data>
   <data name="InformationNotFound" xml:space="preserve">
     <value>Information not found</value>
   </data>
@@ -293,6 +296,9 @@
   </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="SessionExpired" xml:space="preserve">
+    <value>Session expired</value>
   </data>
   <data name="ShippingAddress" xml:space="preserve">
     <value>Shipping address</value>

@@ -1,0 +1,25 @@
+﻿@using MultivendorWebViewer.Models;
+@using MultivendorWebViewer.Helpers;
+@using MultivendorWebViewer;
+@using MultivendorWebViewer.Common;
+@model string[]
+@{
+
+    var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+}
+<div class="session-timeout pop-up-body-container">
+    <div class="header-container">
+        <h3 class="header-text">
+            @Html.Icon(applicationrequestContext.GetIcon(@Model.ToArray()[0]), new { @class = "session-icon" })<span> @Model.ToArray()[1]</span>
+        </h3>
+    </div>
+    <div class="message-description">
+        @Model.ToArray()[2]
+    </div>
+    <div>
+        <a class="ok-button right action-submit-button" href="@Url.Action("LogOut", "User")">Ok</a>
+    </div>
+</div>
+
+
+

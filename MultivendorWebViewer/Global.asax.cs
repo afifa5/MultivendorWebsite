@@ -17,5 +17,16 @@ namespace MultivendorWebViewer
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+        protected void Session_End(Object sender, EventArgs e)
+        {
+            try
+            {
+                Session.Remove("CurrentActiveUser");
+            }
+            catch (Exception exception)
+            {
+            }
+        }
+
     }
 }

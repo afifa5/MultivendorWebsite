@@ -195,6 +195,9 @@
   <data name="HomeDelivery" xml:space="preserve">
     <value>হোম ডেলিভারি</value>
   </data>
+  <data name="InactiveSessionExpire" xml:space="preserve">
+    <value>নিষ্ক্রিয়তার কারণে আপনি লগ আউট হয়েছেন। আবার সাইন ইন করুন.</value>
+  </data>
   <data name="InformationNotFound" xml:space="preserve">
     <value>তথ্য পাওয়া যায়নি</value>
   </data>
@@ -293,6 +296,9 @@
   </data>
   <data name="Search" xml:space="preserve">
     <value>অনুসন্ধান </value>
+  </data>
+  <data name="SessionExpired" xml:space="preserve">
+    <value>সময় মেয়াদ শেষ</value>
   </data>
   <data name="ShippingAddress" xml:space="preserve">
     <value>প্রেরণের ঠিকানা</value>

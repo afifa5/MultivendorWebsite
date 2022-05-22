@@ -10,6 +10,10 @@ namespace MultivendorWebViewer
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/sessionimeout").Include(
+                      "~/Scripts/inactiveuser.sessiontimeout.js",
+                      "~/Scripts/layout.session.js"
+                       ));
             bundles.Add(new ScriptBundle("~/bundles/helpers").Include(
                        "~/Scripts/DHM.pop-up.js",
                         "~/Scripts/multivendor.helpers.js",
@@ -19,6 +23,8 @@ namespace MultivendorWebViewer
                           "~/Scripts/multivendor.pagination.js",
                            "~/Scripts/multivendor.popup.js",
                             "~/Scripts/multivendor.table.js",
+                             
+                              
                              "~/Scripts/multivendor.toolbar.js"
                        ));
             bundles.Add(new ScriptBundle("~/bundles/main").Include(

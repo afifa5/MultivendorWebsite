@@ -140,7 +140,7 @@ namespace MultivendorWebViewer.Controllers
                     if (user != null)
                     {
                         await SignInAsync(user, model.RememberMe);
-
+                        Session["CurrentActiveUser"] = "Active";
                         if (string.IsNullOrEmpty(returnUrl) == false)
                         {
                             return Redirect(returnUrl);
