@@ -64,7 +64,7 @@
 
                         <a class="order-cart-container item-container" href="@UrlUtility.Action(applicationrequestContext, "Index", "Order")">
                             @Html.Icon(Icons.ShoppingCart, new { @class = "content" })
-                            @*<label class="icon-label">@CustomStrings.Order</label>*@
+                            <label class="icon-label">@CustomStrings.Order</label>
                             <div class="overlay">
                                 <span class="total-qty"></span>
                             </div>
@@ -79,6 +79,8 @@
                             @if (user == null)
                             {
                                 @Html.Icon(Icons.User, new { @class = "content" })
+                                <label class="icon-label user-label ">@CustomStrings.Menu</label>
+
 
                             }
                             else
@@ -88,13 +90,13 @@
                                 {
 
                                     @Html.Icon(Icons.User, new { @class = "content" })
+                                    <label class="icon-label user-label ">@(userViewModel.Customer == null? userViewModel.UserName : userViewModel.Customer.FirstName)</label>
                                 }
                                 else
                                 {
                                     @Html.Image(userViewModel.Image, height: 50, width: 50, htmlAttributes: new { @class = "user-logged-in-image" });
                                 }
                             }
-                            @*<label class="icon-label user-label ">@(user== null?CustomStrings.Menu: user.UserName)</label>*@
                         </div>
                     </li>
                 </ul>
