@@ -161,12 +161,14 @@
         .multivendor-dataview > .pagination-tools > li.single {
             display: none;
         }
-
-    .multivendor-dataview > .tools-container {
-        display: flex;
-        padding: 0 0 10px 0;
-        /*padding: 5px 0 5px 0;*/     
-    }
+        .multivendor-dataview > .pagination-tools li[data-check-group="page"] + li[data-check-group="size"] {
+            margin-left: 200px;
+        }
+        .multivendor-dataview > .tools-container {
+            display: flex;
+            padding: 0 0 10px 0;
+            /*padding: 5px 0 5px 0;*/
+        }
 
     .multivendor-dataview > .tools-container:empty {
         display: none;

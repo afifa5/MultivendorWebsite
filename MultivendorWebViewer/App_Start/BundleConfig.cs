@@ -23,8 +23,7 @@ namespace MultivendorWebViewer
                           "~/Scripts/multivendor.pagination.js",
                            "~/Scripts/multivendor.popup.js",
                             "~/Scripts/multivendor.table.js",
-                             
-                              
+                             "~/Scripts/multivendor.list.js",
                              "~/Scripts/multivendor.toolbar.js"
                        ));
             bundles.Add(new ScriptBundle("~/bundles/main").Include(

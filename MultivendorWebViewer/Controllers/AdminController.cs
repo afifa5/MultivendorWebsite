@@ -52,14 +52,32 @@ namespace MultivendorWebViewer.Controllers
 
 
             var options = request.State.CreateOptions();
-            //options.PageSizes = new PaginationPageSize[] { 25, 50, 100 };
-            //options.DefaultPageSize = 100;
-            //options.DefaultSortSelector = "Name";
+            options.PageSizes = new PaginationPageSize[] { 50,100 };
+            options.DefaultPageSize = 50;
+            options.DefaultSortSelector = "UserName";
+            //options.DefaultFilterSelection = new DataViewFilterSelection() { Properties = new List<DataViewFilterSelectionProperty>() { new DataViewFilterSelectionProperty() { Id = "UserName", Property= "UserName" } } };
             options.Tools = tools;
-            options.DisplayFilter = false;
+            options.DisplayFilter = true;
             options.DownloadToolAvailable = false;
             options.DisplayItemCountDescription = true;
-           
+            options.SortSelectors = new DataViewSelectorCollection<DataViewSortSelector>
+                          {
+                              new DataViewSortSelector { Id = "UserName", Label = CustomStrings.UserName, Sort = new Sort("UserName") },
+                              //new DataViewSortSelector { Id = "UserRole", Label = CustomStrings.UserRole, Sort = new Sort("UserRole") },
+                              new DataViewSortSelector { Id = "Customer.FirstName", Label = CustomStrings.FirstName, Sort = new Sort("Customer.FirstName") },
+                              new DataViewSortSelector { Id = "Customer.PhoneNumber", Label = CustomStrings.Phone, Sort = new Sort("Customer.PhoneNumber") },
+                              new DataViewSortSelector { Id = "CompanyName", Label = CustomStrings.UserCompany, Sort = new Sort("CompanyName") },
+                            };
+
+            options.FilterSelectors = new DataViewSelectorCollection<DataViewFilterSelector>
+                          {
+                              new DataViewFilterSelector { Id = "UserName", Label = CustomStrings.UserName, Property = "UserName" },
+                              //new DataViewFilterSelector { Id = "UserRole", Label = CustomStrings.UserRole, Property = "UserRole" },
+                              new DataViewFilterSelector { Id = "Customer.FirstName", Label = CustomStrings.FirstName, Property = "Customer.FirstName" },
+                              new DataViewFilterSelector { Id = "Customer.PhoneNumber", Label = CustomStrings.Phone, Property = "Customer.PhoneNumber" },
+                              new DataViewFilterSelector { Id = "CompanyName", Label = CustomStrings.UserCompany, Property = "CompanyName" },
+
+                          };
             var result = new DataViewResult(request, ApplicationRequestContext)
             {
 

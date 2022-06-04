@@ -84,10 +84,10 @@ namespace MultivendorWebViewer.Controllers
             var options = request.State.CreateOptions();
             //options.PageSizes = new PaginationPageSize[] { 25, 50, 100 };
             //options.DefaultPageSize = 25;
-            options.DefaultSortSelector = "Name";
+            options.DefaultSortSelector = "FormattedName";
             options.Tools = tools;
             options.DisplayFilter = true;
-            options.DownloadToolAvailable = true;
+            //options.DownloadToolAvailable = true;
             options.DisplayItemCountDescription = true;
             options.SortSelectors = new DataViewSelectorCollection<DataViewSortSelector>
                           {
@@ -109,16 +109,17 @@ namespace MultivendorWebViewer.Controllers
                 {
                     var dataViewModel = new DataViewString<ProductViewModel>(ApplicationRequestContext, allProducts,state:state);
                     return new DataViewContentResult("_NodeProducts", dataViewModel);
-                },
-                ReportColumnsProvider = cr => new[]
-               {
-                    new TableReportColumn { Id = "FormattedName", Header = CustomStrings.Name, PropertyName = "FormattedName" },
-                    new TableReportColumn { Id = "FormattedDescription", Header = CustomStrings.Description, PropertyName = "FormattedDescription" },
-                                    },
-                ReportFileNameProvider = () =>
-                {
-                    return "allProducts.csv";
                 }
+               // ,
+               // ReportColumnsProvider = cr => new[]
+               //{
+               //     new TableReportColumn { Id = "FormattedName", Header = CustomStrings.Name, PropertyName = "FormattedName" },
+               //     new TableReportColumn { Id = "FormattedDescription", Header = CustomStrings.Description, PropertyName = "FormattedDescription" },
+               //},
+               // ReportFileNameProvider = () =>
+               // {
+               //     return "allProducts.csv";
+               // }
             };
             return result;
         }

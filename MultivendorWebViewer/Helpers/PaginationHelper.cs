@@ -304,16 +304,16 @@ namespace MultivendorWebViewer.Helpers
                         }
                         if (checkedFilterProperties != null && checkedFilterProperties.Count() == availableFilterSelectors.Count())
                         {
-                            placeHolder = string.Format("Filter on selector all");
+                            placeHolder = string.Format("{0} {1}",CustomStrings.FilterOnSelector,CustomStrings.All.ToLower());
                         }
                         else if (checkedFilterProperties != null && checkedFilterProperties.Count() < availableFilterSelectors.Count())
                         {
                             var selectedSelectors = string.Join(", ", availableFilterSelectors.Where(f => checkedFilterProperties.Contains(f.Id) == true).Select(f => requestContext.GetApplicationTextTranslation(f.Label)));
-                            placeHolder = string.Format("Filter on selector", selectedSelectors);
+                            placeHolder = string.Format("{0} {1}", CustomStrings.FilterOnSelector, selectedSelectors);
                         }
                         else {
 
-                            placeHolder = string.Format("Filter on selector", "nothing");
+                            placeHolder = string.Format("{0} {1}", CustomStrings.FilterOnSelector, CustomStrings.Nothing);
                         }
 
                         filterInputTag.MergeAttribute("placeholder", placeHolder);
@@ -503,7 +503,7 @@ namespace MultivendorWebViewer.Helpers
                     }
 
                     var ascDecText = string.Empty /*sortSelectorItem != null && (int)sortSelectorItem.Direction == 0 ? ", ASC" : ", DEC"*/;
-                    var selectedText = sortSelectorItem != null ? string.Format("Sort by" +" {0}{1}", requestContext.GetApplicationTextTranslation(sortSelectorItem.Label), ascDecText) : requestContext.GetApplicationTextTranslation("Sort");
+                    var selectedText = sortSelectorItem != null ? string.Format(CustomStrings.SortBy +" {0}{1}", requestContext.GetApplicationTextTranslation(sortSelectorItem.Label), ascDecText) : requestContext.GetApplicationTextTranslation("Sort");
                     //icon.GetHtml(htmlAttributes, classNames, size)
 
                     var sortsToolBarItemIcon = requestContext.GetIcon(Icons.Sorting);

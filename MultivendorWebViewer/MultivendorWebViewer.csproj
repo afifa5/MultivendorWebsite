@@ -394,6 +394,7 @@
     <Content Include="Scripts\multivendor.popup.js" />
     <Content Include="Scripts\multivendor.table.js" />
     <Content Include="Scripts\multivendor.core.js" />
+    <Content Include="Scripts\multivendor.list.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

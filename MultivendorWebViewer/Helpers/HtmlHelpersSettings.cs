@@ -349,8 +349,8 @@ namespace MultivendorWebViewer.Helpers
     [Flags]
     public enum LabelDisplayMode { None = 0x0, Label = 0x1, Placeholder = 0x2 };
 
-    [Flags]
-    public enum PaginationPageSelectorTypes { None = 0x0, Previous = 0x1, Next = 0x2, First = 0x4, Last = 0x8, Index = 0x10, All = Previous | Next | First | Last | Index, NotSet = ~All }
+    //[Flags]
+    //public enum PaginationPageSelectorTypes { None = 0x0, Previous = 0x1, Next = 0x2, First = 0x4, Last = 0x8, Index = 0x10, All = Previous | Next | First | Last | Index, NotSet = ~All }
 
     public class ElementSelector
     {
