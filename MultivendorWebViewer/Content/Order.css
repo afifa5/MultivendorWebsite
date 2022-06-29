@@ -70,9 +70,10 @@
     border-style: solid;
     border-color: #ddd;
 }
-.order-body h4{
-    margin: 0px;
-}
+
+    .order-body h4 {
+        margin: 0px;
+    }
 .order-item .name{
     padding: 5px 0 5px 0;
 

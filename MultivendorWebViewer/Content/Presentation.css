@@ -494,3 +494,19 @@ font-size:15px;
 .view-contact-information.visible:after {
     content: attr(data-visible-text);
 }
+.price-incl-vat {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 5px;
+    font-size: 18px;
+}
+
+.price-incl-vat > span:not(.temporary-price) {
+    font-size: 20px;
+    color: #f85606;
+}
+
+.price-incl-vat > span.temporary-price {
+    color: #9e9e9e;
+    text-decoration: line-through;
+}

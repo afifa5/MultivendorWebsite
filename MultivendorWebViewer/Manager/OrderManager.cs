@@ -61,14 +61,29 @@ namespace MultivendorWebViewer.Manager
                     //order.Customer = null;
                 }
                 order.OrderReference = orderReference;
+                order.CreatedDate = DateTime.Now;
                 //Save orderLines
                 var orderLines = order.OrderLines;
+                
                 //order.OrderLines = null;
                 Order newOrder = context.UpdateGraph<Order>(order);
                 context.SaveChanges();
                 foreach (var lines in orderLines) {
                     lines.OrderId = newOrder.Id;
+                    lines.ShippingStatus = OrderStatus.New;
                     //lines.Order = null;
+                    var prices = applicationRequestContext.ProductManager.GetpriceByproductId(lines.ProductId).FirstOrDefault();
+                    if (prices != null)
+                    {
+                        
+                        lines.UserId = prices.UserId;
+                        decimal? totalAmount = 0;
+                        if (prices.UnitPrice.HasValue) totalAmount += prices.UnitPrice.Value;
+                        if (prices.TaxAmount.HasValue) totalAmount += prices.TaxAmount.Value;
+                        lines.PriceInclTax = totalAmount.Value;
+                        lines.Discount = prices.Discount.HasValue ? prices.Discount.Value :0;
+                        lines.SubTotal = lines.Quantity * (totalAmount.Value - prices.Discount.Value);
+                    }
                     OrderLine newLine = context.UpdateGraph<OrderLine>(lines);
                     context.SaveChanges();
                 }

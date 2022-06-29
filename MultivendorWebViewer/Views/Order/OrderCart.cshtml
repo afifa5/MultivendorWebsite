@@ -62,10 +62,22 @@
                 @if (item.PriceAvailability != null)
                 {
                     var price = item.PriceAvailability;
-                    <div class="unit-price-container">
-                        <div class="price-incl-vat">
-                            <span>@price.FormattedPriceInclVat</span>
-                        </div>
+                    string className = string.Empty;
+
+                        <div class="unit-price-container">
+                            <div class="price-incl-vat">
+                                @if (!price.Discount.HasValue)
+                                {
+                                    <span >@price.FormattedPriceInclVat</span>
+                                }
+                                else
+                                {
+                                    className = "temporary-price";
+                                    <span >@price.FormattedUnitPriceAfterDiscount</span>
+                                    <span class="@className">@price.FormattedPriceInclVat</span>
+                                }
+
+                            </div>
                     </div>
                 }
                 <div class="multivendor-quantity">

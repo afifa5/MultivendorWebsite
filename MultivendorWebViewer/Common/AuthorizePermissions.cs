@@ -13,4 +13,16 @@ namespace MultivendorWebViewer.Common
 
 
     }
+    public static class OrderStatus
+    {
+
+        public const string New = "New";
+
+        public const string Shipped = "Shipped";
+
+        public const string Delivered = "Delivered";
+        public const string Returned = "Returned";
+
+
+    }
 }

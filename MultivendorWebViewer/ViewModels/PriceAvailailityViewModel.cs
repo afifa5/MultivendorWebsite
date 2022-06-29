@@ -21,8 +21,12 @@ namespace MultivendorWebViewer.ViewModels
         public ApplicationRequestContext ApplicationRequestContext { get; set; }
         public decimal? Quantity { get { return Model.Quantity; } }
         public decimal? PriceInclVat { get { return GetPriceIncludingTax(); } }
-
+        public decimal? UnitPriceAfterDiscount { get { return GetUnitTotalPrice(); } }
+        public decimal? Subtotal { get { return GetUnitSubtotalPrice(); } }
         public string FormattedPriceInclVat { get { return GetPriceText(PriceInclVat); } }
+        public string FormattedUnitPriceAfterDiscount { get { return GetPriceText(UnitPriceAfterDiscount); } }
+        public string FormattedSubTotal { get { return GetPriceText(Subtotal); } }
+
         public string FormattedDiscount { get { return GetPriceText(Discount); } }
         public string ExpectedShippingDate { get { return Model.ExpectedShippingDate; } }
         public decimal? Discount { get {return Model.Discount; } }
@@ -41,7 +45,23 @@ namespace MultivendorWebViewer.ViewModels
             if(Model.TaxAmount.HasValue) totalAmount += Model.TaxAmount.Value;
             return totalAmount > 0 ? totalAmount : null;
         }
-
+        private decimal? GetUnitTotalPrice()
+        {
+            decimal? totalAmount = 0;
+            if (Model.UnitPrice.HasValue) totalAmount += Model.UnitPrice.Value;
+            if (Model.TaxAmount.HasValue) totalAmount += Model.TaxAmount.Value;
+            if(Model.Discount.HasValue) totalAmount-= Model.Discount.Value;
+            return totalAmount > 0 ? totalAmount : null;
+        }
+        private decimal? GetUnitSubtotalPrice()
+        {
+            decimal? totalAmount = 0;
+            if (Model.UnitPrice.HasValue) totalAmount += Model.UnitPrice.Value;
+            if (Model.TaxAmount.HasValue) totalAmount += Model.TaxAmount.Value;
+            if (Model.Discount.HasValue) totalAmount -= Model.Discount.Value;
+            if(Model.Quantity > 0) totalAmount*=Model.Quantity;
+            return totalAmount > 0 ? totalAmount : null;
+        }
 
     }
 }

@@ -9,20 +9,32 @@
 {
     if (!string.IsNullOrEmpty(item.FormattedPriceInclVat))
     {
-        <div class="price">
-            <div class="price-incl-vat">
-                <label>@CustomStrings.PriceIclVat</label>
-                <span>@item.FormattedPriceInclVat</span>
-            </div>
-            @if (!string.IsNullOrEmpty(item.FormattedDiscount))
-            {
-                <div class="discount">
-                    <label>@CustomStrings.Discount</label>
-                    <span>@item.FormattedDiscount</span>
-                </div>
-            }
-
+    <div class="price">
+    @*<div class="price-incl-vat">
+            <label>@CustomStrings.PriceIclVat</label>
+            <span>@item.FormattedPriceInclVat</span>
         </div>
+        @if (!string.IsNullOrEmpty(item.FormattedDiscount))
+        {
+            <div class="discount">
+                <label>@CustomStrings.Discount</label>
+                <span>@item.FormattedDiscount</span>
+            </div>
+        }*@
+    <div class="price-incl-vat">
+        @if (!@item.Discount.HasValue)
+        {
+        <span>@item.FormattedPriceInclVat</span>
+        }
+        else
+        {
+            
+        <span>@item.FormattedUnitPriceAfterDiscount</span>
+         <span class="temporary-price">@item.FormattedPriceInclVat</span>
+        }
+
+    </div>
+</div>
     }
 
     <div class="add-to-order" data-product-id="@item.ProductId" data-add-to-order-url="@UrlUtility.Action(applicationrequestContext, "OrderItem", "Order")">
