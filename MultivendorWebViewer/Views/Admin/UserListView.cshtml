@@ -1,0 +1,12 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@using MultivendorWebViewer.Helpers;
+
+@{
+    ViewBag.Title = "Multivendor Web";
+    Layout = "~/Views/Shared/_AdministrationLayout.cshtml";
+}
+
+<div class="all-user-container">
+    @Html.DataView(new DataViewOptions { Url = @Url.Action("GetAllUserList", "Admin", new { searchText = "allUser" }) }, htmlAttributes: new { @class = "user-list-data-view" })
+</div>

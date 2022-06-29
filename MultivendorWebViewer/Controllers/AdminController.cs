@@ -21,6 +21,14 @@ namespace MultivendorWebViewer.Controllers
         {
           return View("Index");
         }
+
+        [PermissionAuthorize(AuthorizePermissions.Administration, AlwaysRequire = true)]
+        [HttpGet]
+        public ActionResult UserList()
+        {
+            return View("UserListView");
+        }
+
         //[HttpPost]
         //public ActionResult AdminView()
         //{

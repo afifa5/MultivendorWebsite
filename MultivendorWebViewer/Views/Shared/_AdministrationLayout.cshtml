@@ -49,10 +49,10 @@
                     {
                         <li class="container ">
                             <! -- User-->
-                            <div class="item-container">
+                            <a class="item-container" href="@UrlUtility.Action(applicationrequestContext, "UserList", "Admin")">
                                 @Html.Icon(Icons.Users, new { @class = "content" })
                                 <label class="icon-label">@CustomStrings.UserList</label>
-                            </div>
+                            </a>
                         </li>
                     }
                     @if (user != null && (user.UserRole == AuthorizePermissions.Administration || user.UserRole == AuthorizePermissions.Vendor))
