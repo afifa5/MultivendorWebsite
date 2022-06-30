@@ -6,7 +6,7 @@
 @{
     ViewBag.Title = "Multivendor Web";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+    var applicationrequestContext = ApplicationRequestContext;
     var configuration = applicationrequestContext.Configuration;
 }
 

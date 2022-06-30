@@ -4,7 +4,7 @@
 @model OrderViewModel
 
 @{
-    var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+    var applicationrequestContext = ApplicationRequestContext;
     var totalPrice = Model.OrderLines.Sum(p => p.PriceAvailability == null ? 0 :( p.PriceAvailability.PriceInclVat.HasValue? p.PriceAvailability.PriceInclVat.Value:0) * p.Quantity);
     var totalDiscount = Model.OrderLines.Sum(p => p.PriceAvailability == null ? 0 :(p.PriceAvailability.Discount.HasValue? p.PriceAvailability.Discount.Value:0) * p.Quantity);
 

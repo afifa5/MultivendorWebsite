@@ -3,7 +3,7 @@
 @using System.Globalization;
 @model List<CultureInfo>
 @{
-    var applicationRequestContext = ApplicationRequestContext.GetContext(Context);
+    var applicationRequestContext = ApplicationRequestContext;
     var selectedLanguage = applicationRequestContext.SelectedCulture;
 }
 <ul class="multivendor-web-menu available-language-menu" data-set-language-url="@UrlUtility.Action(applicationRequestContext, "SetLanguage", "Home")">

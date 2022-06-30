@@ -8,7 +8,7 @@
     ViewBag.Title = "Orders";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+    var applicationrequestContext = ApplicationRequestContext;
     var order = applicationrequestContext.OrderManager.GetCurrentOrder(applicationrequestContext);
     var orderProcess = applicationrequestContext.Configuration.SiteProfile.OrderProcess;
 }

@@ -209,12 +209,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Common\ApplicationRequestContext.cs" />
+    <Compile Include="ApplicationRequestContext.cs" />
     <Compile Include="Common\AuthorizePermissions.cs" />
     <Compile Include="Common\CacheManager.cs" />
     <Compile Include="Common\CustomStrings.cs" />
     <Compile Include="Common\DataViewOptions.cs" />
     <Compile Include="Common\EmailValidation.cs" />
+    <Compile Include="Common\ExtendedWebViewPage.cs" />
     <Compile Include="Common\Formatter.cs" />
     <Compile Include="Common\ICopyable.cs" />
     <Compile Include="Common\IMerge.cs" />
@@ -304,6 +305,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Membership\CustomAuthenticationAttribute.cs" />
+    <Compile Include="Membership\PrincipalManager.cs" />
+    <Compile Include="Membership\PrincipalManagerSerializeModel.cs" />
     <Compile Include="ServerModelContext.cs" />
     <Compile Include="MultivendorModelContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

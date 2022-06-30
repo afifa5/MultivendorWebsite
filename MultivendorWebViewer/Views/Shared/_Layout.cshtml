@@ -1,8 +1,11 @@
-﻿@using MultivendorWebViewer;
+﻿@using Microsoft.AspNet.Identity;
 @using MultivendorWebViewer.Common;
 @using MultivendorWebViewer.Helpers;
+@using MultivendorWebViewer.Membership;
+
 @using MultivendorWebViewer.ViewModels;
 @using MultivendorWebViewer.Components;
+@using System.Web.Mvc;
 
 <!DOCTYPE html>
 <html>
@@ -19,7 +22,7 @@
     @Scripts.Render("~/bundles/order")
 </head>
 @{
-    var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+    var applicationrequestContext = ApplicationRequestContext;
     var user = applicationrequestContext.User;
 }
 <body data-order-total-counter="@UrlUtility.Action(applicationrequestContext, "GetTotalQuantity", "Order")"

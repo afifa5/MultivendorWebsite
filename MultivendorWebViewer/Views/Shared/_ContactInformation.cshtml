@@ -4,7 +4,7 @@
 @using MultivendorWebViewer.Helpers;
 @model IEnumerable<UserViewModel>
 @{
-    var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+    var applicationrequestContext = ApplicationRequestContext;
 }
 @if (Model != null && Model.Any())
 {

@@ -3,7 +3,7 @@
 @using System.Globalization;
 @model List<PriceAvailailityViewModel>
 @{ 
-    var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+    var applicationrequestContext = ApplicationRequestContext;
 }
 @foreach (var item in Model)
 {

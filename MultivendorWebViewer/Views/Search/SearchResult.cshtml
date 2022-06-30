@@ -2,7 +2,7 @@
 @using MultivendorWebViewer.Common;
 @model SearchHitViewModel
     @{ 
-        var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+        var applicationrequestContext = ApplicationRequestContext;
         var searchUrl = UrlUtility.Action(applicationrequestContext, "Search", "Search", new { term = Model.SearchTerm});
     }
 <div class="search-result">

@@ -6,7 +6,7 @@
 @{
     ViewBag.Title = "Multivendor Web";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var applicationrequestContext = ApplicationRequestContext.GetContext(Context);
+    var applicationrequestContext = ApplicationRequestContext;
     var routeValues = new { id = applicationrequestContext.Configuration.SiteProfile.StartCatalogueId };
     var backgroundImage = applicationrequestContext.Configuration.GetApplicationImage(applicationrequestContext, applicationrequestContext.Configuration.SiteProfile.LoginBackgroundImage);
     var headerLogoUrl = applicationrequestContext.Configuration.GetHeaderLogoUrl(applicationrequestContext, false);

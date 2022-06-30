@@ -4,7 +4,7 @@
 @model OrderViewModel
 
 @{
-    var customer = Model != null && Model.Customer != null ? Model.Customer : new CustomerViewModel(new Customer(), ApplicationRequestContext.GetContext(Context));
+    var customer = Model != null && Model.Customer != null ? Model.Customer : new CustomerViewModel(new Customer(), ApplicationRequestContext);
 
 }
 @if (Model != null && Model.OrderLines != null && Model.OrderLines.Any())
