@@ -225,14 +225,12 @@ namespace MultivendorWebViewer.Manager
 
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
-        public ApplicationUserManager(ApplicationRequestContext requestContext, IUserStore<ApplicationUser> store)
+        public ApplicationUserManager( IUserStore<ApplicationUser> store)
             : base(store)
         {
-            ApplicationRequestContext = requestContext;
         }
 
-        public static ApplicationUserManager Empty = new ApplicationUserManager(null, new ApplicationUserStore(null));
-        public ApplicationRequestContext ApplicationRequestContext { get; set; }
+        public static ApplicationUserManager Empty = new ApplicationUserManager(new ApplicationUserStore());
 
         // Solution from: http://stackoverflow.com/questions/21918000/mvc5-vs2012-identity-createidentityasync-value-cannot-be-null
         public override Task<IdentityResult> AddClaimAsync(string userId, Claim claim)
@@ -242,7 +240,7 @@ namespace MultivendorWebViewer.Manager
 
         public override Task<IList<Claim>> GetClaimsAsync(string userId)
         {
-            var loginManager = ApplicationRequestContext != null ? ApplicationRequestContext.UserDBManager : UserDBManager.Default;
+            var loginManager =  UserDBManager.Default;
 
             if (loginManager != null)
             {
@@ -270,7 +268,7 @@ namespace MultivendorWebViewer.Manager
 
         public async override Task<IList<string>> GetRolesAsync(string userId)
         {
-            var loginManager = ApplicationRequestContext != null ? ApplicationRequestContext.UserDBManager : UserDBManager.Default;
+            var loginManager =  UserDBManager.Default;
 
             if (loginManager != null)
             {
@@ -290,7 +288,7 @@ namespace MultivendorWebViewer.Manager
         public virtual ApplicationUser RegisterUser(RegisterViewModel registerItem)
         {
 
-            var loginManager = ApplicationRequestContext != null ? ApplicationRequestContext.UserDBManager : UserDBManager.Default;
+            var loginManager =  UserDBManager.Default;
             if (loginManager != null)
             {
                 var user = loginManager.Register(registerItem);
@@ -309,7 +307,7 @@ namespace MultivendorWebViewer.Manager
         public async override Task<ApplicationUser> FindAsync(string userName, string password)
         {
 
-            var loginManager = ApplicationRequestContext!=null ? ApplicationRequestContext.UserDBManager :UserDBManager.Default;
+            var loginManager = UserDBManager.Default;
             if (loginManager != null)
             {
                 var user = loginManager.Login(new SignInInformation { UserName = userName, PassWord = password  });
@@ -328,13 +326,9 @@ namespace MultivendorWebViewer.Manager
         {
             
             var routeData = System.Web.Routing.RouteTable.Routes.GetRouteData(System.Web.HttpContext.Current.Request.RequestContext.HttpContext);
-            if (routeData == null) return new ApplicationUserManager(null, new ApplicationUserStore(null)); // ApplicationUserManager.Empty;
-            var applicationRequestContext = ApplicationRequestContext.GetContext(HttpContext.Current);
-
-            if (applicationRequestContext == null) return new ApplicationUserManager(null, new ApplicationUserStore(null)); // ApplicationUserManager.Empty;
-
-            ApplicationUserStore applicationUserStore = new ApplicationUserStore(applicationRequestContext);
-            var manager = Instance.Create<ApplicationRequestContext, ApplicationUserStore, ApplicationUserManager>(applicationRequestContext, applicationUserStore);
+            if (routeData == null) return new ApplicationUserManager( new ApplicationUserStore()); // ApplicationUserManager.Empty;
+            ApplicationUserStore applicationUserStore = new ApplicationUserStore();
+            var manager = Instance.Create< ApplicationUserStore, ApplicationUserManager>(applicationUserStore);
 
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
@@ -380,15 +374,6 @@ namespace MultivendorWebViewer.Manager
     }
     public class ApplicationUserStore : IUserStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>, IUserRoleStore<ApplicationUser>, IUserClaimStore<ApplicationUser>
     {
-        public ApplicationUserStore(ApplicationRequestContext requestContext)
-        {
-            ApplicationRequestContext = requestContext;
-
-        }
-
-        public ApplicationRequestContext ApplicationRequestContext { get; set; }
-
-       
         public virtual Task CreateAsync(ApplicationUser user)
         {
             throw new System.NotSupportedException();
@@ -403,14 +388,14 @@ namespace MultivendorWebViewer.Manager
         {
             return Task.Run(() =>
             {
-                var multivendorUser = ApplicationRequestContext != null ? ApplicationRequestContext.UserDBManager.FindUserByName(userId) : null;
+                var multivendorUser = UserDBManager.Default.FindUserByName(userId) ;
                 return multivendorUser != null ? new ApplicationUser(multivendorUser) : null;
             });
         }
 
         public virtual Task<ApplicationUser> FindByNameAsync(string userName)
         {
-            var dbManager = ApplicationRequestContext != null ? ApplicationRequestContext.UserDBManager : UserDBManager.Default;
+            var dbManager =  UserDBManager.Default;
             return Task.Run(() =>
             {
                 var multivendorUser = dbManager.FindUserByName(userName) ;

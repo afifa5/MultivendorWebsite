@@ -34,16 +34,22 @@ namespace MultivendorWebViewer
             {
                 CookieSecure = CookieSecureOption.SameAsRequest,
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                //LoginPath = new PathString("/Account/Login"),
-                //ReturnUrlParameter = "returnUrl",
-                Provider = new CookieAuthenticationProvider
+                
+            //LoginPath = new PathString("/Account/Login"),
+            //ReturnUrlParameter = "returnUrl",
+            Provider = new CookieAuthenticationProvider
                 {
                     OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>
                     (
                         validateInterval: TimeSpan.FromMinutes(240),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager)
                     ),
-                }
+                    OnResponseSignIn = context =>
+                    {
+                        context.Properties.AllowRefresh = true;
+                        context.Properties.ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(2400);
+                    }
+            }
             });
 
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ApplicationCookie);
