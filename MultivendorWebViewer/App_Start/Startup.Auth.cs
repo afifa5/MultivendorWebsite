@@ -47,7 +47,7 @@ namespace MultivendorWebViewer
                     OnResponseSignIn = context =>
                     {
                         context.Properties.AllowRefresh = true;
-                        context.Properties.ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(2400);
+                        context.Properties.ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(300);
                     }
             }
             });
