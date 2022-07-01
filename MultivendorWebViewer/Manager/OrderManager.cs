@@ -82,7 +82,7 @@ namespace MultivendorWebViewer.Manager
                         if (prices.TaxAmount.HasValue) totalAmount += prices.TaxAmount.Value;
                         lines.PriceInclTax = totalAmount.Value;
                         lines.Discount = prices.Discount.HasValue ? prices.Discount.Value :0;
-                        lines.SubTotal = lines.Quantity * (totalAmount.Value - prices.Discount.Value);
+                        lines.SubTotal = lines.Quantity * (totalAmount.Value - (prices.Discount.HasValue ? prices.Discount.Value: 0));
                     }
                     OrderLine newLine = context.UpdateGraph<OrderLine>(lines);
                     context.SaveChanges();
