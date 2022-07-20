@@ -3,6 +3,7 @@ using MultivendorWebViewer.Models;
 using MultivendorWebViewer.Server.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -27,7 +28,9 @@ namespace MultivendorWebViewer.ViewModels
         public ApplicationRequestContext ApplicationRequestContext { get; set; }
         public List<OrderLineViewModel>  OrderLines { get { return GetOrderLines(); } }
         public CustomerViewModel Customer { get { return GetOrderCustomer(); } }
-
+        public string CreatedDate => Model.CreatedDate != null ? Model.CreatedDate.Value.ToString("yyyy-MM-dd", new CultureInfo(ApplicationRequestContext.SelectedCulture)) : string.Empty;
+        public string ModificationDate => Model.ModificationDate != null ? Model.ModificationDate.Value.ToString("yyyy-MM-dd", new CultureInfo(ApplicationRequestContext.SelectedCulture)) : string.Empty;
+        public string ModifiedBy => Model.ModifiedBy;
         public string SelectedDeliveryOption { get; set; }
         private List<OrderLineViewModel> GetOrderLines()
         {

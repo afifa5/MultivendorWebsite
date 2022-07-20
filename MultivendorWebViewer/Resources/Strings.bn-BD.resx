@@ -171,6 +171,9 @@
   <data name="CreateAccount" xml:space="preserve">
     <value>নিবন্ধন</value>
   </data>
+  <data name="CreatedDate" xml:space="preserve">
+    <value>তৈরীর তারিখ</value>
+  </data>
   <data name="CreditCard" xml:space="preserve">
     <value>ক্রেডিট কার্ড</value>
   </data>
@@ -215,6 +218,12 @@
   </data>
   <data name="Menu" xml:space="preserve">
     <value>তালিকা</value>
+  </data>
+  <data name="ModifiedBy" xml:space="preserve">
+    <value>পরিবর্তনকারী ব্যক্তি</value>
+  </data>
+  <data name="ModifiedDate" xml:space="preserve">
+    <value>পরিবর্তনের তারিখ</value>
   </data>
   <data name="MyOrder" xml:space="preserve">
     <value>আমার অর্ডার</value>
@@ -293,6 +302,9 @@
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>পরিমাণ</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>রেফারেন্স</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>নিবন্ধন</value>

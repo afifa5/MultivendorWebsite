@@ -16,6 +16,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/helpers")
     @Scripts.Render("~/bundles/user")
+    @Scripts.Render("~/bundles/order")
 
 </head>
 @{
@@ -61,10 +62,10 @@
                     {
                         <li class="container ">
                             <! -- User-->
-                            <div class="item-container">
+                            <a class="item-container" href="@UrlUtility.Action(applicationrequestContext, "OrderList", "Admin")">
                                 @Html.Icon(Icons.ShoppingList, new { @class = "content" })
                                 <label class="icon-label">@CustomStrings.OrdersList</label>
-                            </div>
+                            </a>
                         </li>
                     }
                     @if (user != null && (user.UserRole == AuthorizePermissions.Administration || user.UserRole == AuthorizePermissions.Vendor))

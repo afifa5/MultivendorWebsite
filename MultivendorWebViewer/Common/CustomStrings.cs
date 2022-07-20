@@ -46,6 +46,10 @@ namespace MultivendorWebViewer.Common
         public static string PaymentMethod { get { return TextManager.Current.GetText("PaymentMethod"); } }
         public static string BankTransfer { get { return TextManager.Current.GetText("BankTransfer"); } }
         public static string CreditCard { get { return TextManager.Current.GetText("CreditCard"); } }
+
+        public static string CreatedDate { get { return TextManager.Current.GetText("CreatedDate"); } }
+        public static string ModifiedDate { get { return TextManager.Current.GetText("ModifiedDate"); } }
+        public static string ModifiedBy { get { return TextManager.Current.GetText("ModifiedBy"); } }
         public static string Bkash { get { return TextManager.Current.GetText("Bkash"); } }
         public static string PaymentReferenceMessage { get { return TextManager.Current.GetText("PaymentReferenceMessage"); } }
         public static string Agent { get { return TextManager.Current.GetText("Agent"); } }
@@ -59,6 +63,7 @@ namespace MultivendorWebViewer.Common
         public static string MyOrder { get { return TextManager.Current.GetText("MyOrder"); } }
         public static string DownloadInvoice { get { return TextManager.Current.GetText("DownloadInvoice"); } }
         public static string Order { get { return TextManager.Current.GetText("Order"); } }
+        public static string Reference { get { return TextManager.Current.GetText("Reference"); } }
         public static string OrderEmptyMessage { get { return TextManager.Current.GetText("OrderEmptyMessage"); } }
         public static string ProductDetail { get { return TextManager.Current.GetText("ProductDetail"); } }
         public static string Quantity { get { return TextManager.Current.GetText("Quantity"); } }

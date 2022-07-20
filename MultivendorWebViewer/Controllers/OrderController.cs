@@ -163,6 +163,7 @@ namespace MultivendorWebViewer.Controllers
             return Json(new { status = true });
         }
 
+
     }
 
 }

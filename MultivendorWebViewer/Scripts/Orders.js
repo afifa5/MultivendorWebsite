@@ -256,6 +256,17 @@
         }
 
     });
+    $(document).on("click", ".user-order-row", function (e) {
+        var url = $(this).data("url")
+        multivendorWeb.popup.show(null, { url: url, autoClose: false, modal: true, customClass:"order-detail-popup", verticalAlign: "center", horizontalAlign: "center"}, function (html) {
+            var $popup = $(html);
+            $popup.on("click", ".close-button", function () {
+                multivendorWeb.popup.close($popup);
+
+            });
+        });
+
+    });
     $(document).on("click", ".place-order", function (e) {
         var orderCart = $(document).find(".order-cart-body-container");
         let actionUrl = orderCart.data("place-order-url");

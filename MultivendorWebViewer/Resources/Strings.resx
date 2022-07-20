@@ -145,7 +145,7 @@
     <value>Bkash</value>
   </data>
   <data name="CareOf" xml:space="preserve">
-    <value>Care of (optional)</value>
+    <value>Care of</value>
   </data>
   <data name="CashOnDelivery" xml:space="preserve">
     <value>Cash on delivery</value>
@@ -170,6 +170,9 @@
   </data>
   <data name="CreateAccount" xml:space="preserve">
     <value>Create account</value>
+  </data>
+  <data name="CreatedDate" xml:space="preserve">
+    <value>Created date</value>
   </data>
   <data name="CreditCard" xml:space="preserve">
     <value>Credit card</value>
@@ -215,6 +218,12 @@
   </data>
   <data name="Menu" xml:space="preserve">
     <value>Menu</value>
+  </data>
+  <data name="ModifiedBy" xml:space="preserve">
+    <value>Modified by</value>
+  </data>
+  <data name="ModifiedDate" xml:space="preserve">
+    <value>Modified date</value>
   </data>
   <data name="MyOrder" xml:space="preserve">
     <value>My order</value>
@@ -293,6 +302,9 @@
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>Quantity</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>Reference</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>

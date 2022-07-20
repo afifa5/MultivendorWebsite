@@ -555,3 +555,7 @@ grid-row-gap:10px;
     min-width: 100px;
     text-align: center;
 }
+.close-button {
+ cursor:pointer;
+ padding:0 10px;
+}

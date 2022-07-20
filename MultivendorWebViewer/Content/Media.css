@@ -80,7 +80,7 @@
         display: grid;
         height: 100%;
         width: 100%;
-        grid-template-rows: auto 1fr;
+        grid-template-rows: auto auto 1fr;
     }
 .order-cart-view .main-body-contents {
     display: flex;

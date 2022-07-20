@@ -21,6 +21,50 @@ namespace MultivendorWebViewer.Manager
         private static object autoOrderNumberLock = new object();
         private static int? autoOrderNumberPropertyId = null;
         AutoOrderNumberSettings AutoOrderNumberSetting { get; set; } = new AutoOrderNumberSettings();
+        public IEnumerable<Order> GetUserOrders(int userId)
+        {
+           
+                using (var context = new ServerModelContext(ServerModelDatabaseContextManager.Default.GetConnectionString()))
+                {
+                    var allOrderLine = context.OrderLines.Where(p=> p.UserId == userId).Select(i=> i.OrderId).Distinct().ToArray();
+                if (allOrderLine != null && allOrderLine.Any()) {
+                    var allOrders = context.Orders.Where(i => allOrderLine.Contains(i.Id));
+                    return allOrders.ToArray();
+                }
+                    return new Order[0];
+                }
+           
+        }
+        public Order GetOrderByReference(string orderReference)
+        {
+
+            using (var context = new ServerModelContext(ServerModelDatabaseContextManager.Default.GetConnectionString()))
+            {
+                var allOrder = context.Orders.Where(p=> p.OrderReference == orderReference).Include(i=> i.Customer).Include(j=> j.OrderLines);
+                return allOrder.FirstOrDefault();
+            }
+
+        }
+        public IEnumerable<Order> GetAllOrders()
+        {
+           
+                using (var context = new ServerModelContext(ServerModelDatabaseContextManager.Default.GetConnectionString()))
+                {
+                    var allOrder = context.Orders;
+                    return allOrder.ToArray();
+                }
+           
+        }
+        public IEnumerable<Order> GetCustomerOrders(int id)
+        {
+
+            using (var context = new ServerModelContext(ServerModelDatabaseContextManager.Default.GetConnectionString()))
+            {
+                var allOrder = context.Orders.Where(p=> p.CustomerId == id);
+                return allOrder.ToArray();
+            }
+
+        }
         public virtual Order GetCurrentOrder(ApplicationRequestContext applicationRequestContext)
         {
  

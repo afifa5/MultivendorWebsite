@@ -439,6 +439,9 @@
     <Content Include="Views\User\UpdateProfile.cshtml" />
     <Content Include="Views\Security\_SessionTimeout.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\OrderListView.cshtml" />
+    <Content Include="Views\Admin\_OrdersTable.cshtml" />
+    <Content Include="Views\Admin\OrderDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

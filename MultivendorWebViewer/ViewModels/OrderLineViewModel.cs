@@ -19,6 +19,10 @@ namespace MultivendorWebViewer.ViewModels
         //All Atributes
         public ApplicationRequestContext ApplicationRequestContext { get; set; }
         public decimal Quantity { get { return Model.Quantity; } }
+        public int? UserId => Model.UserId;
+        public decimal PriceInclTax => Model.PriceInclTax;
+        public decimal Discount => Model.Discount;
+        public decimal SubTotal => Model.SubTotal;
         public ProductViewModel Product { get { return GetProductViewModel(); } }
         public PriceAvailailityViewModel PriceAvailability { get { return GetPriceAvailability(); } }
         private ProductViewModel GetProductViewModel() {
