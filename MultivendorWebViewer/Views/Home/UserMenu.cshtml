@@ -37,10 +37,10 @@
             </a>
         </li>
     }
-    @if (user != null )
+    @if (user != null)
     {
         <li>
-            <a class="user-menu-item" href="@UrlUtility.Action(applicationrequestContext,"OrderList","Admin", new { customerId = "Customer" })">
+            <a class="user-menu-item" href="@UrlUtility.Action(applicationrequestContext,"OrderList","Order")">
                 @Html.Icon(Icons.ShoppingList)
                 <label>@CustomStrings.MyOrder</label>
             </a>

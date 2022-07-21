@@ -26,7 +26,7 @@
     @if (Model.OrderLines != null && Model.OrderLines.Any())
     {
         var orderLines = Model.OrderLines;
-        if (ApplicationRequestContext.User.UserRole == AuthorizePermissions.Vendor) {
+        if (ApplicationRequestContext.User!= null && ApplicationRequestContext.User.UserRole == AuthorizePermissions.Vendor && Model.CustomerId != ApplicationRequestContext.User.CustomerId) {
             orderLines = orderLines.Where(p => p.UserId.HasValue && p.UserId.Value == ApplicationRequestContext.User.Id).ToList();
         }
         var columns = new List<TableColumn<OrderLineViewModel>>();

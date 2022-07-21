@@ -52,7 +52,7 @@
     SelectionMode = TableSelectionMode.None,
     RowFormatter = (row, rowTag) =>
     {
-        rowTag.MergeAttribute("data-url", @UrlUtility.Action(ApplicationRequestContext, "OrderItemView", "Admin", new { orderReference = row.OrderReference.ToString() }));
+        rowTag.MergeAttribute("data-url", @UrlUtility.Action(ApplicationRequestContext, "OrderItemView", "Order", new { orderReference = row.OrderReference.ToString() }));
         rowTag.AddCssClass("user-order-row");
     },
 }, htmlAttributes: new

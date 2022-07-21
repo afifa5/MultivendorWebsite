@@ -12,7 +12,7 @@ using MultivendorWebViewer.Components;
 
 namespace MultivendorWebViewer.Controllers
 {
-    [PermissionAuthorize(AuthorizePermissions.Administration, AuthorizePermissions.Vendor, AuthorizePermissions.Customer, AlwaysRequire = true)]
+    [PermissionAuthorize(AuthorizePermissions.Administration, AuthorizePermissions.Vendor, AlwaysRequire = true)]
     public class AdminController : BaseController
     {
         // GET: Category
@@ -104,6 +104,8 @@ namespace MultivendorWebViewer.Controllers
         [HttpGet]
         public ActionResult OrderList()
         {
+            //ViewBag.DataListUrl = UrlUtility.Action(ApplicationRequestContext, "GetOrderList", "Admin");
+
             return View("OrderListView");
         }
         [HttpGet]
@@ -126,13 +128,13 @@ namespace MultivendorWebViewer.Controllers
                     orderList = allOrder.Select(p => new OrderViewModel(p, ApplicationRequestContext) { SelectedDeliveryOption = p.DeliveryMethodName }).OrderByDescending(p => p.OrderReference).ToList();
                 }
             }
-            else {
-                var allOrder = ApplicationRequestContext.OrderManager.GetCustomerOrders(ApplicationRequestContext.User.Id);
-                if (allOrder != null && allOrder.Any())
-                {
-                    orderList = allOrder.Select(p => new OrderViewModel(p, ApplicationRequestContext) { SelectedDeliveryOption = p.DeliveryMethodName }).OrderByDescending(p => p.OrderReference).ToList();
-                }
-            }
+            //else {
+            //    var allOrder = ApplicationRequestContext.OrderManager.GetCustomerOrders(ApplicationRequestContext.User.Id);
+            //    if (allOrder != null && allOrder.Any())
+            //    {
+            //        orderList = allOrder.Select(p => new OrderViewModel(p, ApplicationRequestContext) { SelectedDeliveryOption = p.DeliveryMethodName }).OrderByDescending(p => p.OrderReference).ToList();
+            //    }
+            //}
             var tools = new List<ToolBarItem>();
 
 
@@ -185,18 +187,7 @@ namespace MultivendorWebViewer.Controllers
             };
             return result;
         }
-        [HttpGet]
-        public ActionResult OrderItemView(string orderReference)
-        {
-            var order = ApplicationRequestContext.OrderManager.GetOrderByReference(orderReference);
-            if (order != null && order.OrderLines != null && order.OrderLines.Any())
-            {
-                var orderViewModel = new OrderViewModel(order, ApplicationRequestContext);
-                return PartialView("OrderDetail", orderViewModel);
-            }
-            return PartialView("OrderDetail", new OrderViewModel(null, ApplicationRequestContext));
 
-        }
 
     }
 }

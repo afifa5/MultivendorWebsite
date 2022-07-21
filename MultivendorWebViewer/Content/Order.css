@@ -483,8 +483,9 @@ grid-column-gap:5px;
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 10px;
     }
-        .place-order-success-container .button-containers button {
-        font-size:20px;
+        .place-order-success-container .button-containers button, .place-order-success-container .button-containers .button {
+            font-size: 20px;
+            text-align:center;
         }
         .place-order-success-container .order-lines-summary .product-name {
             font-size: 15px;

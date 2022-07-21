@@ -5,6 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MultivendorWebViewer.Common;
+using MultivendorWebViewer.Components;
+using MultivendorWebViewer.Configuration;
+using MultivendorWebViewer.Helpers;
 using MultivendorWebViewer.Models;
 using MultivendorWebViewer.Server.Models;
 using MultivendorWebViewer.ViewModels;
@@ -48,6 +51,18 @@ namespace MultivendorWebViewer.Controllers
             if (order != null && order.OrderLines != null && order.OrderLines.Any())
             {
                 order.DeliveryMethodName = selectedDeliveryMethod;
+                if (order.Customer != null) {
+                    if (!string.IsNullOrEmpty(information.FirstName)) order.Customer.FirstName = information.FirstName;
+                    if (!string.IsNullOrEmpty(information.LastName)) order.Customer.LastName = information.LastName;
+                    if (!string.IsNullOrEmpty(information.Email)) order.Customer.Email = information.Email;
+                    if (!string.IsNullOrEmpty(information.PhoneNumber)) order.Customer.PhoneNumber = information.PhoneNumber;
+                    if (!string.IsNullOrEmpty(information.Address)) order.Customer.Address = information.Address;
+                    if (!string.IsNullOrEmpty(information.PostCode)) order.Customer.PostCode = information.PostCode;
+                    if (!string.IsNullOrEmpty(information.City)) order.Customer.City = information.City;
+                    if (!string.IsNullOrEmpty(information.CareOf)) order.Customer.CareOf = information.CareOf;
+                    if (!string.IsNullOrEmpty(information.Country)) order.Customer.Country = information.Country;
+                }
+                else
                 order.Customer = information;
             }
             ApplicationRequestContext.OrderManager.SetCurrentOrder(ApplicationRequestContext, order);
@@ -91,6 +106,10 @@ namespace MultivendorWebViewer.Controllers
         public ActionResult OrderCustomerView()
         {
             var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
+            if (order.Customer == null && ApplicationRequestContext.User != null && ApplicationRequestContext.User.CustomerId.HasValue) {
+                order.Customer = ApplicationRequestContext.UserDBManager.GetCustomerById(ApplicationRequestContext.User.CustomerId.Value);
+                ApplicationRequestContext.OrderManager.SetCurrentOrder(ApplicationRequestContext, order);
+            }
             if (order != null && order.OrderLines!=null && order.OrderLines.Any())
             {
                 var orderViewModel = new OrderViewModel(order, ApplicationRequestContext);
@@ -162,7 +181,100 @@ namespace MultivendorWebViewer.Controllers
              ApplicationRequestContext.OrderManager.SetCurrentOrder(ApplicationRequestContext,null);
             return Json(new { status = true });
         }
+       
+        [HttpGet]
+        public ActionResult OrderList(string orderReference = null)
+        {
+            ViewBag.DataListUrl = UrlUtility.Action(ApplicationRequestContext, "GetOrderList", "Order", new { orderReference = orderReference });
+            return View("~/Views/Admin/OrderListView.cshtml");
+        }
+        [HttpGet]
+        public ActionResult GetOrderList(DataViewRequest request, string orderReference = null)
+        {
+            var orderList = new List<OrderViewModel>();
+              if (!string.IsNullOrEmpty(orderReference)) {
+            var order =ApplicationRequestContext.OrderManager.GetOrderByReference(orderReference);
+                var orderViewModel = new OrderViewModel(order, ApplicationRequestContext) { SelectedDeliveryOption = order.DeliveryMethodName };
+                orderList.Add(orderViewModel);
+            }
+            else if (ApplicationRequestContext.User != null) {
+                var allOrder = ApplicationRequestContext.OrderManager.GetCustomerOrders(ApplicationRequestContext.User.Id);
+                if (allOrder != null && allOrder.Any())
+                {
+                    orderList = allOrder.Select(p => new OrderViewModel(p, ApplicationRequestContext) { SelectedDeliveryOption = p.DeliveryMethodName }).OrderByDescending(p => p.OrderReference).ToList();
+                }
+            }
+           
+             
 
+            var tools = new List<ToolBarItem>();
+
+
+
+            //tools.Insert(0, new ToolBarItem
+            //{
+            //    Label = "New address",
+            //    Icon = ApplicationRequestContext.GetIcon(Icons.Plus),
+            //    Id = "CreateCompanyAddress",
+            //    ClassNames = "create-new-company-address",
+            //    TextAlignment = ToolBarAlignment.Left,
+            //    Location = DataViewOptions.ToolLocations.AfterSortSelectors,
+            //});
+
+
+            var options = request.State.CreateOptions();
+            options.PageSizes = new PaginationPageSize[] { 50, 100 };
+            options.DefaultPageSize = 50;
+            //options.DefaultSortSelector = "OrderReference";
+            //options.DefaultFilterSelection = new DataViewFilterSelection() { Properties = new List<DataViewFilterSelectionProperty>() { new DataViewFilterSelectionProperty() { Id = "UserName", Property= "UserName" } } };
+            options.Tools = tools;
+            options.DisplayFilter = true;
+            options.DownloadToolAvailable = false;
+            options.DisplayItemCountDescription = true;
+            options.SortSelectors = new DataViewSelectorCollection<DataViewSortSelector>
+                          {
+                              new DataViewSortSelector { Id = "OrderReference", Label = CustomStrings.Reference, Sort = new Sort("OrderReference") },
+                              new DataViewSortSelector { Id = "CreatedDate", Label = CustomStrings.CreatedDate, Sort = new Sort("CreatedDate") },
+                              new DataViewSortSelector { Id = "ModificationDate", Label = CustomStrings.ModifiedDate, Sort = new Sort("ModificationDate") },
+                              new DataViewSortSelector { Id = "ModifiedBy", Label = CustomStrings.ModifiedBy, Sort = new Sort("ModifiedBy") },
+                            };
+
+            options.FilterSelectors = new DataViewSelectorCollection<DataViewFilterSelector>
+                          {
+                              new DataViewFilterSelector { Id = "OrderReference", Label = CustomStrings.Reference, Property = "OrderReference" },
+                              new DataViewFilterSelector { Id = "CreatedDate", Label = CustomStrings.CreatedDate, Property = "CreatedDate" },
+                              new DataViewFilterSelector { Id = "ModificationDate", Label = CustomStrings.ModifiedDate, Property = "ModificationDate" },
+                              new DataViewFilterSelector { Id = "ModifiedBy", Label = CustomStrings.ModifiedBy, Property = "ModifiedBy" },
+
+                          };
+            //ViewBag.CustomerRequest = "true";
+
+            var result = new DataViewResult(request, ApplicationRequestContext)
+            {
+
+                DataViewOptions = options,
+                Content = state =>
+                {
+                    var dataViewModel = new DataViewString<OrderViewModel>(ApplicationRequestContext, orderList, state: state);
+                    return new DataViewContentResult("~/Views/Admin/_OrdersTable.cshtml", dataViewModel);
+                }
+            };
+            return result;
+        }
+
+
+        [HttpGet]
+        public ActionResult OrderItemView(string orderReference)
+        {
+            var order = ApplicationRequestContext.OrderManager.GetOrderByReference(orderReference);
+            if (order != null && order.OrderLines != null && order.OrderLines.Any())
+            {
+                var orderViewModel = new OrderViewModel(order, ApplicationRequestContext);
+                return PartialView("~/Views/Admin/OrderDetail.cshtml", orderViewModel);
+            }
+            return PartialView("~/Views/Admin/OrderDetail.cshtml", new OrderViewModel(null, ApplicationRequestContext));
+
+        }
 
     }
 

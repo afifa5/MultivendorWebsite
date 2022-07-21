@@ -31,6 +31,7 @@ namespace MultivendorWebViewer.ViewModels
         public string CreatedDate => Model.CreatedDate != null ? Model.CreatedDate.Value.ToString("yyyy-MM-dd", new CultureInfo(ApplicationRequestContext.SelectedCulture)) : string.Empty;
         public string ModificationDate => Model.ModificationDate != null ? Model.ModificationDate.Value.ToString("yyyy-MM-dd", new CultureInfo(ApplicationRequestContext.SelectedCulture)) : string.Empty;
         public string ModifiedBy => Model.ModifiedBy;
+        public int CustomerId => Model.CustomerId;
         public string SelectedDeliveryOption { get; set; }
         private List<OrderLineViewModel> GetOrderLines()
         {
