@@ -47,11 +47,11 @@ namespace MultivendorWebViewer.Controllers
         [HttpPost]
         public ActionResult SaveAddress(string selectedDeliveryMethod, Customer information)
         {
-            var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
+           var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
             if (order != null && order.OrderLines != null && order.OrderLines.Any())
             {
                 order.DeliveryMethodName = selectedDeliveryMethod;
-                if (order.Customer != null) {
+                if (order.Customer != null && order.Customer.Id > 0) {
                     if (!string.IsNullOrEmpty(information.FirstName)) order.Customer.FirstName = information.FirstName;
                     if (!string.IsNullOrEmpty(information.LastName)) order.Customer.LastName = information.LastName;
                     if (!string.IsNullOrEmpty(information.Email)) order.Customer.Email = information.Email;
@@ -106,7 +106,7 @@ namespace MultivendorWebViewer.Controllers
         public ActionResult OrderCustomerView()
         {
             var order = ApplicationRequestContext.OrderManager.GetCurrentOrder(ApplicationRequestContext);
-            if (order.Customer == null && ApplicationRequestContext.User != null && ApplicationRequestContext.User.CustomerId.HasValue) {
+            if ((order.Customer == null || order.Customer.Id<=0) && ApplicationRequestContext.User != null && ApplicationRequestContext.User.CustomerId.HasValue) {
                 order.Customer = ApplicationRequestContext.UserDBManager.GetCustomerById(ApplicationRequestContext.User.CustomerId.Value);
                 ApplicationRequestContext.OrderManager.SetCurrentOrder(ApplicationRequestContext, order);
             }
