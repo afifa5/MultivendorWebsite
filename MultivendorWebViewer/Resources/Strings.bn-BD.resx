@@ -177,6 +177,9 @@
   <data name="CreditCard" xml:space="preserve">
     <value>ক্রেডিট কার্ড</value>
   </data>
+  <data name="Delivered" xml:space="preserve">
+    <value>বিতরণ করা হয়েছে</value>
+  </data>
   <data name="DeliveryMethod" xml:space="preserve">
     <value>ডেলিভারি পদ্ধতি</value>
   </data>
@@ -246,6 +249,9 @@
   <data name="Order" xml:space="preserve">
     <value>ফরমাশ</value>
   </data>
+  <data name="Ordered" xml:space="preserve">
+    <value>অর্ডার করা হয়েছে</value>
+  </data>
   <data name="OrderEmptyMessage" xml:space="preserve">
     <value>অর্ডার কার্টে বর্তমানে কোন আইটেম নেই</value>
   </data>
@@ -254,6 +260,9 @@
   </data>
   <data name="OrdersPrice" xml:space="preserve">
     <value>প্রদেয় মূল্য</value>
+  </data>
+  <data name="OrderStatus" xml:space="preserve">
+    <value>অর্ডারের অবস্থা</value>
   </data>
   <data name="OutOfStock" xml:space="preserve">
     <value>স্টক শেষ</value>
@@ -312,6 +321,9 @@
   <data name="RememberMe" xml:space="preserve">
     <value>মনে রাখবেন</value>
   </data>
+  <data name="Returned" xml:space="preserve">
+    <value>ফিরিয়ে দেওয়া হয়েছে</value>
+  </data>
   <data name="Rocket" xml:space="preserve">
     <value>রকেট</value>
   </data>
@@ -320,6 +332,12 @@
   </data>
   <data name="SessionExpired" xml:space="preserve">
     <value>সময় মেয়াদ শেষ</value>
+  </data>
+  <data name="Settled" xml:space="preserve">
+    <value>নিষ্পত্তি হয়েছে</value>
+  </data>
+  <data name="Shipped" xml:space="preserve">
+    <value>পাঠানো হয়েছে</value>
   </data>
   <data name="ShippingAddress" xml:space="preserve">
     <value>প্রেরণের ঠিকানা</value>

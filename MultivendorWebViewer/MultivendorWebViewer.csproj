@@ -17,7 +17,7 @@
     <AssemblyName>MultivendorWebViewer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44388</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
@@ -273,6 +273,8 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DatabaseContext.cs" />
+    <Compile Include="DbMigrations\Configuration.cs" />
+    <Compile Include="DbMigrations\ServerDatabaseMigrator.cs" />
     <Compile Include="Helpers\AjaxHelpers.cs" />
     <Compile Include="Helpers\AsyncViewHelper.cs" />
     <Compile Include="Helpers\CarouselHelper.cs" />
@@ -442,6 +444,7 @@
     <Content Include="Views\Admin\OrderListView.cshtml" />
     <Content Include="Views\Admin\_OrdersTable.cshtml" />
     <Content Include="Views\Admin\OrderDetail.cshtml" />
+    <Content Include="Views\Admin\_DatabaseMigrationView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -492,7 +495,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59145</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/MultivendorWebViewer</IISUrl>
+          <IISUrl>http://localhost:59145/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

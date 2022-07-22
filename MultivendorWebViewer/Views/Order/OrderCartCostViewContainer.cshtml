@@ -9,10 +9,10 @@
     var totalDiscount = Model.OrderLines.Sum(p => p.PriceAvailability == null ? 0 :(p.PriceAvailability.Discount.HasValue? p.PriceAvailability.Discount.Value:0) * p.Quantity);
 
     var priceAvailability = new PriceAvailailityViewModel(new PriceAvailability(), applicationrequestContext);
-    var formattedTotal = priceAvailability.GetPriceText(totalPrice);
-    var formattedDiscount = priceAvailability.GetPriceText(totalDiscount);
+    var formattedTotal = ApplicationRequestContext.GetPriceText(totalPrice);
+    var formattedDiscount = ApplicationRequestContext.GetPriceText(totalDiscount);
     var amountToPay = totalPrice - totalDiscount;
-    var formattedAmountToPay = priceAvailability.GetPriceText(amountToPay);
+    var formattedAmountToPay = ApplicationRequestContext.GetPriceText(amountToPay);
     var orderProcess = applicationrequestContext.Configuration.SiteProfile.OrderProcess;
 }
 @if (Model != null && Model.OrderLines.Any())

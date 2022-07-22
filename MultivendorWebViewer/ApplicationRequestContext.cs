@@ -15,6 +15,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Host.SystemWeb;
 using MultivendorWebViewer.Common;
+using System.Globalization;
 
 namespace MultivendorWebViewer
 {
@@ -180,6 +181,15 @@ namespace MultivendorWebViewer
         public void RemoveObject(object key)
         {
             RequestItemHelper.RemoveItem(HttpContext, key);
+        }
+        public string GetPriceText(decimal? price)
+        {
+            if (price.HasValue && price.Value > 0)
+            {
+                var priceText = price.Value.ToString("n", CultureInfo.GetCultureInfo(SelectedCulture));
+                return string.Format("{0} {1}", priceText, TextManager.Current.GetText(Configuration != null ? Configuration.SiteProfile.PriceCurrency : "BDT"));
+            }
+            return string.Empty;
         }
     }
 }

@@ -23,8 +23,28 @@ namespace MultivendorWebViewer.ViewModels
         public decimal PriceInclTax => Model.PriceInclTax;
         public decimal Discount => Model.Discount;
         public decimal SubTotal => Model.SubTotal;
+        public string Status => Model.ShippingStatus;
+
+        public string FormattedStatus => GetFormattedStatus();
         public ProductViewModel Product { get { return GetProductViewModel(); } }
         public PriceAvailailityViewModel PriceAvailability { get { return GetPriceAvailability(); } }
+        private string GetFormattedStatus() {
+            if (!string.IsNullOrEmpty(Status)) {
+                switch (Status) {
+                    case "0":
+                       return CustomStrings.Ordered;
+                    case "1":
+                        return CustomStrings.Shipped;
+                    case "2":
+                        return CustomStrings.Delivered;
+                    case "3":
+                        return CustomStrings.Returned;
+                    case "4":
+                        return CustomStrings.Settled;
+                }
+            }
+            return null;
+        }
         private ProductViewModel GetProductViewModel() {
             var productId = Model.ProductId;
             var product = ApplicationRequestContext.ProductManager.GetProductById(productId);

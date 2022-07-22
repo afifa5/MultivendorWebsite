@@ -24,7 +24,7 @@ namespace MultivendorWebViewer.Manager
         public IEnumerable<Order> GetUserOrders(int userId)
         {
            
-                using (var context = new ServerModelContext(ServerModelDatabaseContextManager.Default.GetConnectionString()))
+                using (var context = new ServerModelContext(ServerModelDatabaseContextManager.Default.GetConnectionString())/* new ServerModelContext(ServerModelDatabaseContextManager.Default.GetConnectionString())*/)
                 {
                     var allOrderLine = context.OrderLines.Where(p=> p.UserId == userId).Select(i=> i.OrderId).Distinct().ToArray();
                 if (allOrderLine != null && allOrderLine.Any()) {
@@ -114,7 +114,7 @@ namespace MultivendorWebViewer.Manager
                 context.SaveChanges();
                 foreach (var lines in orderLines) {
                     lines.OrderId = newOrder.Id;
-                    lines.ShippingStatus = OrderStatus.New;
+                    lines.ShippingStatus = OrderStatus.Ordered;
                     //lines.Order = null;
                     var prices = applicationRequestContext.ProductManager.GetpriceByproductId(lines.ProductId).FirstOrDefault();
                     if (prices != null)
@@ -125,6 +125,7 @@ namespace MultivendorWebViewer.Manager
                         if (prices.UnitPrice.HasValue) totalAmount += prices.UnitPrice.Value;
                         if (prices.TaxAmount.HasValue) totalAmount += prices.TaxAmount.Value;
                         lines.PriceInclTax = totalAmount.Value;
+                        //save unit discount
                         lines.Discount = prices.Discount.HasValue ? prices.Discount.Value :0;
                         lines.SubTotal = lines.Quantity * (totalAmount.Value - (prices.Discount.HasValue ? prices.Discount.Value: 0));
                     }

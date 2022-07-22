@@ -70,6 +70,7 @@ namespace MultivendorWebViewer.Common
         public static string Search { get { return TextManager.Current.GetText("Search"); } }
         public static string Menu { get { return TextManager.Current.GetText("Menu"); } }
         public static string StartPage { get { return TextManager.Current.GetText("StartPage"); } }
+        public static string OrderStatus { get { return TextManager.Current.GetText("OrderStatus"); } }
         public static string UserName { get { return TextManager.Current.GetText("UserName"); } }
         public static string UserList { get { return TextManager.Current.GetText("UserList"); } }
         public static string Inventory { get { return TextManager.Current.GetText("Inventory"); } }
@@ -105,9 +106,11 @@ namespace MultivendorWebViewer.Common
         public static string ViewAll { get { return TextManager.Current.GetText("ViewAll"); } }
         public static string Videos { get { return TextManager.Current.GetText("Videos"); } }
         public static string UnitPrice { get { return TextManager.Current.GetText("UnitPrice"); } }
-        public static string PriceIclVat { get { return TextManager.Current.GetText("PriceIclVat"); }
-
-
-        }
+        public static string Ordered { get { return TextManager.Current.GetText("Ordered"); } }
+        public static string Shipped { get { return TextManager.Current.GetText("Shipped"); } }
+        public static string Delivered { get { return TextManager.Current.GetText("Delivered"); } }
+        public static string Returned { get { return TextManager.Current.GetText("Returned"); } }
+        public static string Settled { get { return TextManager.Current.GetText("Settled"); } }
+        public static string PriceIclVat { get { return TextManager.Current.GetText("PriceIclVat"); }}
     }
 }

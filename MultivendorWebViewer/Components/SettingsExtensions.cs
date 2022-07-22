@@ -47,7 +47,6 @@ namespace MultivendorWebViewer.Configuration
             return AllMatches(identifiers, null, objects);
         }
 
-        //public static IEnumerable<Signifikant.Assert.Web.Viewer.Helpers.PropertyDescriptor> Apply(this IEnumerable<Signifikant.Assert.Web.Viewer.Helpers.PropertyDescriptor> items)
         /// <summary>
         /// Gets if all indentifiers have one or more match
         /// </summary>

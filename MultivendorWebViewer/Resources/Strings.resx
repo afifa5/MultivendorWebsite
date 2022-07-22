@@ -177,6 +177,9 @@
   <data name="CreditCard" xml:space="preserve">
     <value>Credit card</value>
   </data>
+  <data name="Delivered" xml:space="preserve">
+    <value>Delivered</value>
+  </data>
   <data name="DeliveryMethod" xml:space="preserve">
     <value>Delivery method</value>
   </data>
@@ -246,6 +249,9 @@
   <data name="Order" xml:space="preserve">
     <value>Order</value>
   </data>
+  <data name="Ordered" xml:space="preserve">
+    <value>Ordered</value>
+  </data>
   <data name="OrderEmptyMessage" xml:space="preserve">
     <value>No items currently on order cart</value>
   </data>
@@ -254,6 +260,9 @@
   </data>
   <data name="OrdersPrice" xml:space="preserve">
     <value>Payable price</value>
+  </data>
+  <data name="OrderStatus" xml:space="preserve">
+    <value>Order status</value>
   </data>
   <data name="OutOfStock" xml:space="preserve">
     <value>Out of stock</value>
@@ -312,6 +321,9 @@
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me</value>
   </data>
+  <data name="Returned" xml:space="preserve">
+    <value>Returned</value>
+  </data>
   <data name="Rocket" xml:space="preserve">
     <value>Rocket</value>
   </data>
@@ -320,6 +332,12 @@
   </data>
   <data name="SessionExpired" xml:space="preserve">
     <value>Session expired</value>
+  </data>
+  <data name="Settled" xml:space="preserve">
+    <value>Settled</value>
+  </data>
+  <data name="Shipped" xml:space="preserve">
+    <value>Shipped</value>
   </data>
   <data name="ShippingAddress" xml:space="preserve">
     <value>Shipping address</value>

@@ -80,12 +80,16 @@ grid-gap:10px;
 }
 .order-detail .header {
 margin-top:10px;
+background-color:#ddd;
 }
-.order-detail label {
-    letter-spacing: 0em;
-    font-weight: 300;
-    color: #999;
-}
+    .order-detail .header > h3 {
+    padding: 3px;
+    }
+    .order-detail label {
+        letter-spacing: 0em;
+        font-weight: 300;
+        color: #999;
+    }
 .order-detail-popup.multivendor-popup {
 min-height:80%;
 min-width:80%;
@@ -113,3 +117,22 @@ max-height:100%;
     .order-information-container h4 {
         color: #000;
     }
+.order-line-table-table .price {
+text-align:right;
+}
+.order-table-item {
+width:max-content;
+}
+.order-table-item .order-summary {
+  margin-top:10px;
+  display:grid;
+  grid-template-columns : 1fr auto;
+  grid-column-gap:10px;
+  border-top: solid 1px #ddd;
+  align-items:center;
+  padding: 5px 0;
+}
+.order-table-item .order-summary > * {
+    float: right;
+    text-align: right;
+}

@@ -9,79 +9,79 @@ using System.Diagnostics;
 
 namespace MultivendorWebViewer.Common
 {
-    public class ContextManager : SingletonBase<ContextManager>
-    {
-        private static bool databaseExistenceChecked = false;
+    //public class ContextManager : SingletonBase<ContextManager>
+    //{
+    //    private static bool databaseExistenceChecked = false;
 
-        public ContextManager()
-        {
-            DbConfiguration.SetConfiguration(MultivendorDbConfiguration.Create());
-        }
+    //    public ContextManager()
+    //    {
+    //        DbConfiguration.SetConfiguration(MultivendorDbConfiguration.Create());
+    //    }
 
-        public string GetConnectionString(string instance = null, string databaseName = null)
-        {
-            ServerConfiguration serverConfiguration = ServerConfigurationProvider.Default.Configuration;
-            if (serverConfiguration.SiteDatabase == null || serverConfiguration.SiteDatabase.Enabled == false) return null;
+    //    public string GetConnectionString(string instance = null, string databaseName = null)
+    //    {
+    //        ServerConfiguration serverConfiguration = ServerConfigurationProvider.Default.Configuration;
+    //        if (serverConfiguration.SiteDatabase == null || serverConfiguration.SiteDatabase.Enabled == false) return null;
 
-            SiteDatabase SiteDatabase = serverConfiguration.SiteDatabase;
-            instance = instance ?? SiteDatabase.DataBaseServer;
-            databaseName = databaseName ?? SiteDatabase.DataBaseName;
+    //        SiteDatabase SiteDatabase = serverConfiguration.SiteDatabase;
+    //        instance = instance ?? SiteDatabase.DataBaseServer;
+    //        databaseName = databaseName ?? SiteDatabase.DataBaseName;
 
-            if (string.IsNullOrEmpty(instance) == true) throw new ArgumentNullException("DataBaseServer");
-            if (string.IsNullOrEmpty(databaseName) == true) throw new ArgumentNullException("DatabaseName");
+    //        if (string.IsNullOrEmpty(instance) == true) throw new ArgumentNullException("DataBaseServer");
+    //        if (string.IsNullOrEmpty(databaseName) == true) throw new ArgumentNullException("DatabaseName");
 
-            string connectionString = String.Format("Data Source={0};Initial Catalog={1};MultipleActiveResultSets=True;Connection Timeout={2};", instance, databaseName, serverConfiguration.AttachDatabaseTimeout);
+    //        string connectionString = String.Format("Data Source={0};Initial Catalog={1};MultipleActiveResultSets=True;Connection Timeout={2};", instance, databaseName, serverConfiguration.AttachDatabaseTimeout);
 
-            if (SiteDatabase.UseSqlServerUser)
-                connectionString += String.Format("User Id='{0}'; Password='{1}';Persist Security Info=True;", SiteDatabase.SqlServerUser, SiteDatabase.SqlServerPassword);
-            else
-                connectionString += "Integrated Security=true;";
+    //        if (SiteDatabase.UseSqlServerUser)
+    //            connectionString += String.Format("User Id='{0}'; Password='{1}';Persist Security Info=True;", SiteDatabase.SqlServerUser, SiteDatabase.SqlServerPassword);
+    //        else
+    //            connectionString += "Integrated Security=true;";
 
-            return connectionString;
-        }
+    //        return connectionString;
+    //    }
 
-        public virtual DbConnection GetConnection(string instance = null, string databaseName = null)
-        {
-            // Get sqlserver connect string
-            string serverConnectString = GetConnectionString(instance, databaseName);
-            if (serverConnectString == null) return null;
+    //    public virtual DbConnection GetConnection(string instance = null, string databaseName = null)
+    //    {
+    //        // Get sqlserver connect string
+    //        string serverConnectString = GetConnectionString(instance, databaseName);
+    //        if (serverConnectString == null) return null;
 
-            IDbConnectionFactory factory = new SqlConnectionFactory();
-            DbConnection connection = factory.CreateConnection(serverConnectString);
+    //        IDbConnectionFactory factory = new SqlConnectionFactory();
+    //        DbConnection connection = factory.CreateConnection(serverConnectString);
 
-            if (databaseExistenceChecked == true)
-            {
-                databaseExistenceChecked = false; // bool is atomic. Worst case we can multiple calls to below code
-                if (Database.Exists(connection) == false)
-                {
-                    // Create non-existing database
-                    MultivendorModelContext context = MultivendorModelContext.Create(connection);
-                    context.Database.Initialize(true);
+    //        if (databaseExistenceChecked == true)
+    //        {
+    //            databaseExistenceChecked = false; // bool is atomic. Worst case we can multiple calls to below code
+    //            if (Database.Exists(connection) == false)
+    //            {
+    //                // Create non-existing database
+    //                MultivendorModelContext context = MultivendorModelContext.Create(connection);
+    //                context.Database.Initialize(true);
 
-                    if (Database.Exists(connection) == false)
-                    {
-                        throw new Exception("Database not found for: " + serverConnectString);
-                    }
-                }
-            }
+    //                if (Database.Exists(connection) == false)
+    //                {
+    //                    throw new Exception("Database not found for: " + serverConnectString);
+    //                }
+    //            }
+    //        }
 
-            return connection;
-        }
+    //        return connection;
+    //    }
 
-        public virtual MultivendorModelContext Context(string instance = null, string databaseName = null)
-        {
-            try
-            {
-                DbConnection connection = GetConnection(instance, databaseName);
-                MultivendorModelContext context = MultivendorModelContext.Create(connection);
-                return context;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-    }
+    //    public virtual MultivendorModelContext Context(string instance = null, string databaseName = null)
+    //    {
+    //        try
+    //        {
+    //            DbConnection connection = GetConnection(instance, databaseName);
+    //            MultivendorModelContext context = MultivendorModelContext.Create(connection);
+    //            return context;
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            throw;
+    //        }
+    //    }
+    //}
 
     public class SiteModelDatabaseContextManager : SingletonBase<SiteModelDatabaseContextManager>
     {
@@ -159,79 +159,79 @@ namespace MultivendorWebViewer.Common
         }
     }
 
-    public class ServerContextManager : SingletonBase<ContextManager>
-    {
-        private static bool databaseExistenceChecked = false;
+    //public class ServerContextManager : SingletonBase<ServerContextManager>
+    //{
+    //    private static bool databaseExistenceChecked = false;
 
-        public ServerContextManager()
-        {
-            DbConfiguration.SetConfiguration(MultivendorDbConfiguration.Create());
-        }
+    //    public ServerContextManager()
+    //    {
+    //        DbConfiguration.SetConfiguration(MultivendorDbConfiguration.Create());
+    //    }
 
-        public string GetConnectionString(string instance = null, string databaseName = null)
-        {
-            ServerConfiguration serverConfiguration = ServerConfigurationProvider.Default.Configuration;
-            if (serverConfiguration.ServerDatabase == null || serverConfiguration.ServerDatabase.Enabled == false) return null;
+    //    public string GetConnectionString(string instance = null, string databaseName = null)
+    //    {
+    //        ServerConfiguration serverConfiguration = ServerConfigurationProvider.Default.Configuration;
+    //        if (serverConfiguration.ServerDatabase == null || serverConfiguration.ServerDatabase.Enabled == false) return null;
 
-            ServerDatabase serverDatabase = serverConfiguration.ServerDatabase;
-            instance = instance ?? serverDatabase.DataBaseServer;
-            databaseName = databaseName ?? serverDatabase.DataBaseName;
+    //        ServerDatabase serverDatabase = serverConfiguration.ServerDatabase;
+    //        instance = instance ?? serverDatabase.DataBaseServer;
+    //        databaseName = databaseName ?? serverDatabase.DataBaseName;
 
-            if (string.IsNullOrEmpty(instance) == true) throw new ArgumentNullException("DataBaseServer");
-            if (string.IsNullOrEmpty(databaseName) == true) throw new ArgumentNullException("DatabaseName");
+    //        if (string.IsNullOrEmpty(instance) == true) throw new ArgumentNullException("DataBaseServer");
+    //        if (string.IsNullOrEmpty(databaseName) == true) throw new ArgumentNullException("DatabaseName");
 
-            string connectionString = String.Format("Data Source={0};Initial Catalog={1};MultipleActiveResultSets=True;Connection Timeout={2};", instance, databaseName, serverConfiguration.AttachDatabaseTimeout);
+    //        string connectionString = String.Format("Data Source={0};Initial Catalog={1};MultipleActiveResultSets=True;Connection Timeout={2};", instance, databaseName, serverConfiguration.AttachDatabaseTimeout);
 
-            if (serverDatabase.UseSqlServerUser)
-                connectionString += String.Format("User Id='{0}'; Password='{1}';Persist Security Info=True;", serverDatabase.SqlServerUser, serverDatabase.SqlServerPassword);
-            else
-                connectionString += "Integrated Security=true;";
+    //        if (serverDatabase.UseSqlServerUser)
+    //            connectionString += String.Format("User Id='{0}'; Password='{1}';Persist Security Info=True;", serverDatabase.SqlServerUser, serverDatabase.SqlServerPassword);
+    //        else
+    //            connectionString += "Integrated Security=true;";
 
-            return connectionString;
-        }
+    //        return connectionString;
+    //    }
 
-        public virtual DbConnection GetConnection(string instance = null, string databaseName = null)
-        {
-            // Get sqlserver connect string
-            string serverConnectString = GetConnectionString(instance, databaseName);
-            if (serverConnectString == null) return null;
+    //    public virtual DbConnection GetConnection(string instance = null, string databaseName = null)
+    //    {
+    //        // Get sqlserver connect string
+    //        string serverConnectString = GetConnectionString(instance, databaseName);
+    //        if (serverConnectString == null) return null;
 
-            IDbConnectionFactory factory = new SqlConnectionFactory();
-            DbConnection connection = factory.CreateConnection(serverConnectString);
+    //        IDbConnectionFactory factory = new SqlConnectionFactory();
+    //        DbConnection connection = factory.CreateConnection(serverConnectString);
 
-            if (databaseExistenceChecked == true)
-            {
-                databaseExistenceChecked = false; // bool is atomic. Worst case we can multiple calls to below code
-                if (Database.Exists(connection) == false)
-                {
-                    // Create non-existing database
-                    ServerModelContext context = ServerModelContext.Create(connection);
-                    context.Database.Initialize(true);
+    //        if (databaseExistenceChecked == true)
+    //        {
+    //            databaseExistenceChecked = false; // bool is atomic. Worst case we can multiple calls to below code
+    //            if (Database.Exists(connection) == false)
+    //            {
+    //                // Create non-existing database
+    //                ServerModelContext context = ServerModelContext.Create(connection);
+    //                context.Database.Initialize(true);
 
-                    if (Database.Exists(connection) == false)
-                    {
-                        throw new Exception("Database not found for: " + serverConnectString);
-                    }
-                }
-            }
+    //                if (Database.Exists(connection) == false)
+    //                {
+    //                    throw new Exception("Database not found for: " + serverConnectString);
+    //                }
+    //            }
+    //        }
 
-            return connection;
-        }
+    //        return connection;
+    //    }
 
-        public virtual ServerModelContext Context(string instance = null, string databaseName = null)
-        {
-            try
-            {
-                DbConnection connection = GetConnection(instance, databaseName);
-                ServerModelContext context = ServerModelContext.Create(connection);
-                return context;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-    }
+    //    public virtual ServerModelContext Context(string instance = null, string databaseName = null)
+    //    {
+    //        try
+    //        {
+    //            DbConnection connection = GetConnection(instance, databaseName);
+    //            ServerModelContext context = ServerModelContext.Create(connection);
+    //            return context;
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            throw;
+    //        }
+    //    }
+    //}
 
     public class ServerModelDatabaseContextManager : SingletonBase<ServerModelDatabaseContextManager>
     {

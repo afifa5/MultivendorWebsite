@@ -23,22 +23,22 @@ namespace MultivendorWebViewer.ViewModels
         public decimal? PriceInclVat { get { return GetPriceIncludingTax(); } }
         public decimal? UnitPriceAfterDiscount { get { return GetUnitTotalPrice(); } }
         public decimal? Subtotal { get { return GetUnitSubtotalPrice(); } }
-        public string FormattedPriceInclVat { get { return GetPriceText(PriceInclVat); } }
-        public string FormattedUnitPriceAfterDiscount { get { return GetPriceText(UnitPriceAfterDiscount); } }
-        public string FormattedSubTotal { get { return GetPriceText(Subtotal); } }
+        public string FormattedPriceInclVat { get { return ApplicationRequestContext.GetPriceText(PriceInclVat); } }
+        public string FormattedUnitPriceAfterDiscount { get { return ApplicationRequestContext.GetPriceText(UnitPriceAfterDiscount); } }
+        public string FormattedSubTotal { get { return ApplicationRequestContext.GetPriceText(Subtotal); } }
 
-        public string FormattedDiscount { get { return GetPriceText(Discount); } }
+        public string FormattedDiscount { get { return ApplicationRequestContext.GetPriceText(Discount); } }
         public string ExpectedShippingDate { get { return Model.ExpectedShippingDate; } }
         public decimal? Discount { get {return Model.Discount; } }
         public int ProductId { get { return Model.ProductId; } }
         public int? UserId => Model.UserId;
-        public string GetPriceText(decimal? price) {
-            if (price.HasValue && price.Value > 0) {
-                var priceText = price.Value.ToString("n", CultureInfo.GetCultureInfo(ApplicationRequestContext.SelectedCulture));
-                return string.Format("{0} {1}", priceText, TextManager.Current.GetText(ApplicationRequestContext.Configuration != null ? ApplicationRequestContext.Configuration.SiteProfile.PriceCurrency : "BDT"));
-            }
-            return string.Empty;
-        }
+        //public string GetPriceText(decimal? price) {
+        //    if (price.HasValue && price.Value > 0) {
+        //        var priceText = price.Value.ToString("n", CultureInfo.GetCultureInfo(ApplicationRequestContext.SelectedCulture));
+        //        return string.Format("{0} {1}", priceText, TextManager.Current.GetText(ApplicationRequestContext.Configuration != null ? ApplicationRequestContext.Configuration.SiteProfile.PriceCurrency : "BDT"));
+        //    }
+        //    return string.Empty;
+        //}
         private decimal? GetPriceIncludingTax() {
             decimal? totalAmount = 0;
             if (Model.UnitPrice.HasValue) totalAmount += Model.UnitPrice.Value;

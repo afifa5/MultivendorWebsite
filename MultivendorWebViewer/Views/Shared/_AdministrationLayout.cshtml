@@ -48,6 +48,16 @@
                         </a>
 
                     </li>
+                    @*@if (user != null && (user.UserRole == AuthorizePermissions.Administration))
+                    {
+                        <li class="container ">
+                            <! -- User-->
+                            <a class="item-container" href="@UrlUtility.Action(applicationrequestContext, "DatabaseMigrationView", "Admin")">
+                                @Html.Icon(Icons.Database, new { @class = "content" })
+                                <label class="icon-label">Database Migration</label>
+                            </a>
+                        </li>
+                    }*@
                     @if (user != null && (user.UserRole == AuthorizePermissions.Administration))
                     {
                         <li class="container ">

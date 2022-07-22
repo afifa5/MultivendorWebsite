@@ -22,7 +22,6 @@
         <div class="item-information"><label>@CustomStrings.ModifiedDate</label><span>@Model.ModificationDate</span></div>
 
     }
-    <div class="item-information"><label>Order status</label><span></span></div>
     @if (Model.OrderLines != null && Model.OrderLines.Any())
     {
         var orderLines = Model.OrderLines;
@@ -69,26 +68,36 @@
                 </div>
             }
         });
-        columns.Add(new TableColumn<OrderLineViewModel>("Quantity")
-        {
-            Caption = CustomStrings.Quantity,
-            ValueFunction = r => r.Quantity.ToString(),
-        });
-        columns.Add(new TableColumn<OrderLineViewModel>("PriceInclTax")
-        {
-            Caption = CustomStrings.UnitPrice,
-            ValueFunction = r => r.PriceInclTax.ToString(),
-        });
-        columns.Add(new TableColumn<OrderLineViewModel>("Discount")
-        {
-            Caption = CustomStrings.TotalDiscount,
-            ValueFunction = r => (r.Discount* r.Quantity).ToString(),
-        });
-        columns.Add(new TableColumn<OrderLineViewModel>("SubTotal")
-        {
-            Caption = CustomStrings.TotalPriceInclVat,
-            ValueFunction = r => r.SubTotal.ToString(),
-        });
+                columns.Add(new TableColumn<OrderLineViewModel>("Status")
+                {
+                    Caption = CustomStrings.OrderStatus,
+                    ValueFunction = r => r.FormattedStatus,
+                });
+                columns.Add(new TableColumn<OrderLineViewModel>("Quantity")
+                {
+                    Caption = CustomStrings.Quantity,
+                    ValueFunction = r => r.Quantity.ToString(),
+                });
+                columns.Add(new TableColumn<OrderLineViewModel>("PriceInclTax")
+                {
+                    Caption = CustomStrings.UnitPrice,
+                    ClassName ="mobile-hide",
+                    CellClassName = "price mobile-hide",
+                    ValueFunction = r => ApplicationRequestContext.GetPriceText(r.PriceInclTax),
+                });
+                columns.Add(new TableColumn<OrderLineViewModel>("Discount")
+                {
+                    Caption = CustomStrings.TotalDiscount,
+                    ClassName = "mobile-hide",
+                    CellClassName = "price mobile-hide",
+                    ValueFunction = r => (r.Discount * r.Quantity) > 0? ApplicationRequestContext.GetPriceText(r.Discount * r.Quantity): string.Empty,
+                });
+                columns.Add(new TableColumn<OrderLineViewModel>("SubTotal")
+                {
+                    Caption = CustomStrings.TotalPriceInclVat,
+                    CellClassName = "price",
+                    ValueFunction = r => r.SubTotal > 0 ?ApplicationRequestContext.GetPriceText(r.SubTotal): string.Empty,
+                });
         <div class="order-information">
             <div class="header">
                 <h3>@CustomStrings.OrdersList</h3>
@@ -107,6 +116,10 @@
                     {
                     @class = "order-line-table-table"
                     })
+                <div class="order-summary">
+                    <h4>@CustomStrings.TotalPriceInclVat</h4>
+                    <span class="total-cost">@ApplicationRequestContext.GetPriceText(orderLines.Sum(p=> p.SubTotal))</span>
+                </div>
             </div>
         </div>
     }

@@ -32,7 +32,7 @@ namespace MultivendorWebViewer.Server.Models
 
         [Column(TypeName = "numeric")]
         public decimal PriceInclTax { get; set; }
-
+        //Unit discount
         [Column(TypeName = "numeric")]
         public decimal Discount { get; set; }
 
