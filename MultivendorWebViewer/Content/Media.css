@@ -177,8 +177,11 @@
         .data-view-tools-container .multivendor-toolbar .view-tool {
         width:fit-content;
         }*/
+    .node-container.product-nodes .specifications .sp {
+        grid-template-columns:1fr;
+    }
     .data-view-tools-container .multivendor-toolbar .view-tool {
-    display:none;
+        display: none;
     }
     .footer-container > * {
         margin: 5px 0 5px 0;
