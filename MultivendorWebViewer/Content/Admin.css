@@ -120,10 +120,10 @@ max-height:100%;
 .order-line-table-table .price {
 text-align:right;
 }
-.order-table-item {
+.admin-order-table-item {
 width:max-content;
 }
-.order-table-item .order-summary {
+.admin-order-table-item .order-summary {
   margin-top:10px;
   display:grid;
   grid-template-columns : 1fr auto;
@@ -132,19 +132,19 @@ width:max-content;
   align-items:center;
   padding: 5px 0;
 }
-.order-table-item .order-summary > * {
+.admin-order-table-item .order-summary > * {
     float: right;
     text-align: right;
 }
-.main-body-contents {
+.admin-layout.main-body-contents {
     display: grid;
     grid-template-columns: [start left] minmax(max-content, 1fr) [body header footer] minmax(auto, 1500px) [right hfend] minmax(max-content, 1fr) [end];
     position: relative;
 }
-    .main-body-contents > * {
-        grid-row: body / span 1;
-        grid-column: body / span 1;
-        position: relative;
-        padding-top: 30px;
-        margin: 0 10px 0 10px;
-    }
+.admin-layout.main-body-contents > * {
+    grid-row: body / span 1;
+    grid-column: body / span 1;
+    position: relative;
+    padding-top: 30px;
+    margin: 0 10px 0 10px;
+}
