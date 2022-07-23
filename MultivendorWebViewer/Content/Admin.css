@@ -136,3 +136,15 @@ width:max-content;
     float: right;
     text-align: right;
 }
+.main-body-contents {
+    display: grid;
+    grid-template-columns: [start left] minmax(max-content, 1fr) [body header footer] minmax(auto, 1500px) [right hfend] minmax(max-content, 1fr) [end];
+    position: relative;
+}
+    .main-body-contents > * {
+        grid-row: body / span 1;
+        grid-column: body / span 1;
+        position: relative;
+        padding-top: 30px;
+        margin: 0 10px 0 10px;
+    }

@@ -2,16 +2,26 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Common;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
+using MultivendorWebViewer.DbMigrations;
 using MultivendorWebViewer.Models;
 
 namespace MultivendorWebViewer
 {
     public partial class MultivendorModelContext : DbContext
     {
+
+        public MultivendorModelContext()
+        {
+            SetupContext();
+            Database.SetInitializer<MultivendorModelContext>(new SiteDBInitializer());
+        }
         public MultivendorModelContext(string connectionstring)
             : base(connectionstring/*"name=MultivendorModelContext"*/)
         {
+            SetupContext();
+            Database.SetInitializer<MultivendorModelContext>(new SiteDBInitializer());
             //this.Configuration.LazyLoadingEnabled =false;
         }
         public static MultivendorModelContext Create()
@@ -19,9 +29,44 @@ namespace MultivendorWebViewer
             return Instance.Create<MultivendorModelContext>();
         }
 
+
+        public MultivendorModelContext(DbConnection existingConnection)
+            : base(existingConnection, false)
+        {
+            SetupContext();
+            Database.SetInitializer<MultivendorModelContext>(new SiteDBInitializer());
+        }
+
+        public MultivendorModelContext(DbConnection existingConnection, DbCompiledModel model)
+            : base(existingConnection, model, false)
+        {
+            Database.SetInitializer<MultivendorModelContext>(new SiteDBInitializer());
+        }
+
+
+
         public static MultivendorModelContext Create(DbConnection existingConnection)
         {
             return Instance.Create<DbConnection, MultivendorModelContext>(existingConnection);
+        }
+
+        public static MultivendorModelContext Create(DbConnection existingConnection, DbCompiledModel model)
+        {
+            return Instance.Create<DbConnection, DbCompiledModel, MultivendorModelContext>(existingConnection, model);
+        }
+        public virtual void SetupContext()
+        {
+            Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
+
+            // DANGEROUS! 
+#if DEBUG
+            Configuration.AutoDetectChangesEnabled = true;
+            Configuration.ValidateOnSaveEnabled = true;
+#else
+            Configuration.AutoDetectChangesEnabled = false;
+            Configuration.ValidateOnSaveEnabled = false;
+#endif
         }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CategoryImage> CategoryImages { get; set; }

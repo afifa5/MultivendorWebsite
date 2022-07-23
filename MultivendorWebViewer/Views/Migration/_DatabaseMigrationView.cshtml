@@ -1,0 +1,57 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@using MultivendorWebViewer.Helpers;
+@using MultivendorWebViewer.Components;
+@using MultivendorWebViewer.DbMigrations;
+
+@model ServerDatabaseMigrationDetail
+@{
+    ViewBag.Title = "Multivendor Web";
+    Layout = "~/Views/Shared/_MigrationLayout.cshtml";
+}
+@*//New design*@
+<div class="database-migrations-view">
+    <div class="migrations-information">
+        <label>Database compatible</label>
+        <span>@Model.CurrentServerDatabaseCompatibleWithCurrentModel</span>
+    </div>
+    <div class="migration-container">
+        <div class="header">
+            <h3>Applied migration list</h3>
+        </div>
+        <div class="migration-list">
+            @foreach (var item in Model.AppliedMigrationNames)
+            {
+                <div class="item">
+                    <span>
+                        @item
+                    </span>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="migration-container">
+        <div class="header">
+            <h3>@string.Format("{0} {1}", "Pending migrations", @Model.PendingMigraitonNames.Count())</h3>
+        </div>
+        <div class="migration-list">
+            @foreach (var item in Model.PendingMigraitonNames)
+            {
+                <div class="item">
+                    <span>
+                        @item
+                    </span>
+                </div>
+            }
+        </div>
+    </div>
+    @if (Model.PendingMigraitonNames.Count() > 0)
+    {
+        if (Model.EnableMigarationForDatabase == true)
+        {
+            <button onclick="location.href='@UrlUtility.Action(ApplicationRequestContext,"OrderList","Order")';" class="my-orders button">Update</button>
+
+        }
+
+    }
+</div>

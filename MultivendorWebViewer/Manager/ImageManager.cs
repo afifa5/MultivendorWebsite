@@ -19,7 +19,7 @@ namespace MultivendorWebViewer.Manager
         public List<Video> GetIVideosByIds(int[] ids)
         {
 
-            using (var context = new MultivendorModelContext(SiteModelDatabaseContextManager.Default.GetConnectionString()))
+            using (var context = SiteModelDatabaseContextManager.Default.Context())
             {
                 var videos = context.Videos.Where(i => ids.Contains(i.Id));
                 return videos.ToList();
@@ -28,7 +28,7 @@ namespace MultivendorWebViewer.Manager
         public Video GetVideoById(int id)
         {
 
-            using (var context = new MultivendorModelContext(SiteModelDatabaseContextManager.Default.GetConnectionString()))
+            using (var context = SiteModelDatabaseContextManager.Default.Context())
             {
                 var video = context.Videos.Where(i => id == i.Id).FirstOrDefault();
                 return video;
@@ -37,7 +37,7 @@ namespace MultivendorWebViewer.Manager
         public List<Image> GetImagesByIds(int[] ids)
         {
 
-            using (var context = new MultivendorModelContext(SiteModelDatabaseContextManager.Default.GetConnectionString()))
+            using (var context = SiteModelDatabaseContextManager.Default.Context())
             {
                 var images = context.Images.Where(i => ids.Contains(i.Id));
                 return images.ToList();
@@ -46,7 +46,7 @@ namespace MultivendorWebViewer.Manager
         public Image GetImagesById(int id)
         {
 
-            using (var context = new MultivendorModelContext(SiteModelDatabaseContextManager.Default.GetConnectionString()))
+            using (var context = SiteModelDatabaseContextManager.Default.Context())
             {
                 var images = context.Images.Where(i => id==i.Id).FirstOrDefault();
                 return images;

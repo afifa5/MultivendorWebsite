@@ -272,9 +272,12 @@
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\MigrationController.cs" />
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="DbMigrations\Configuration.cs" />
     <Compile Include="DbMigrations\ServerDatabaseMigrator.cs" />
+    <Compile Include="DbMigrations\SiteDBInitializer.cs" />
+    <Compile Include="DbMigrations\ServerDBInitializer.cs" />
     <Compile Include="Helpers\AjaxHelpers.cs" />
     <Compile Include="Helpers\AsyncViewHelper.cs" />
     <Compile Include="Helpers\CarouselHelper.cs" />
@@ -347,6 +350,7 @@
     <Content Include="Content\Flag\ur.svg" />
     <Content Include="Content\Font-awesome.css" />
     <Content Include="Content\images\spinner.gif" />
+    <Content Include="Content\Migration.css" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\Media.css" />
     <Content Include="Content\Order.css" />
@@ -444,7 +448,9 @@
     <Content Include="Views\Admin\OrderListView.cshtml" />
     <Content Include="Views\Admin\_OrdersTable.cshtml" />
     <Content Include="Views\Admin\OrderDetail.cshtml" />
-    <Content Include="Views\Admin\_DatabaseMigrationView.cshtml" />
+    <Content Include="Views\Migration\_DatabaseMigrationView.cshtml" />
+    <Content Include="Views\Migration\Index.cshtml" />
+    <Content Include="Views\Shared\_MigrationLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

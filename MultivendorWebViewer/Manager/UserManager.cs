@@ -76,7 +76,7 @@ namespace MultivendorWebViewer.Manager
                 newUser.CreatedDate = DateTime.Now;
                 newUser.IsActive = true;//should be true on email verification
 
-                using (var context = new ServerModelContext(ServerModelDatabaseContextManager.Default.GetConnectionString()))
+                using (var context = ServerModelDatabaseContextManager.Default.Context())
                 {
                     //use try catch 
                     try
@@ -123,7 +123,7 @@ namespace MultivendorWebViewer.Manager
         }
         public User FindUserByName(string username)
         {
-            using (var context = new ServerModelContext(ServerModelDatabaseContextManager.Default.GetConnectionString()))
+            using (var context = ServerModelDatabaseContextManager.Default.Context())
             {
                 var user = context.Users.Where(p=>p.UserName == username && p.IsActive == true).Include(p=>p.Customer).FirstOrDefault();
                 return user;
@@ -137,7 +137,7 @@ namespace MultivendorWebViewer.Manager
         }
         public User GetUserByUserId(int id)
         {
-            using (var context = new ServerModelContext(ServerModelDatabaseContextManager.Default.GetConnectionString()))
+            using (var context = ServerModelDatabaseContextManager.Default.Context())
             {
                 var user = context.Users.Where(p => p.Id == id).FirstOrDefault();
                 return user;
@@ -154,7 +154,7 @@ namespace MultivendorWebViewer.Manager
         {
             return CacheManager.Default.Get<ILookup<string, User>>(string.Concat("AllUser@", "MultivendorWeb"), CacheLocation.Application, () =>
             {
-                using (var context = new ServerModelContext(ServerModelDatabaseContextManager.Default.GetConnectionString()))
+                using (var context = ServerModelDatabaseContextManager.Default.Context())
                 {
                     var allUsers = context.Users.ToLookup(t => t.UserName);
                     return allUsers;
@@ -165,7 +165,7 @@ namespace MultivendorWebViewer.Manager
         {
             return CacheManager.Default.Get<ILookup<int, Customer>>(string.Concat("AllCustomer@", "MultivendorWeb"), CacheLocation.Application, () =>
             {
-                using (var context = new ServerModelContext(ServerModelDatabaseContextManager.Default.GetConnectionString()))
+                using (var context = ServerModelDatabaseContextManager.Default.Context())
                 {
                     var allCustomers = context.Customers.ToLookup(t => t.Id);
                     return allCustomers;

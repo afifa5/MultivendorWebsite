@@ -87,37 +87,38 @@ namespace MultivendorWebViewer
                 return GetObject<User>("User", () =>
                 {
                     User multivendorUser = null;
-
-                    if (HttpContext != null && HttpContext.User != null && HttpContext.User.Identity != null && HttpContext.User.Identity.AuthenticationType == "Federation")
+                    try
                     {
-                        multivendorUser = HttpContext.User != null ? MultivendorUserCreator.Create(HttpContext.User.Identity) : null;
-                    }
-
-                    if (multivendorUser == null)
-                    {
-                        string id = HttpContext.User.Identity.GetUserId();
-                        if (String.IsNullOrEmpty(id) == false)
+                        if (HttpContext != null && HttpContext.User != null && HttpContext.User.Identity != null && HttpContext.User.Identity.AuthenticationType == "Federation")
                         {
-                           ApplicationUser applicationUser = UserManager.FindByIdAsync(id).Result;
-                            if (applicationUser != null) multivendorUser = applicationUser.MultivendorUser;
+                            multivendorUser = HttpContext.User != null ? MultivendorUserCreator.Create(HttpContext.User.Identity) : null;
+                        }
+
+                        if (multivendorUser == null)
+                        {
+                            string id = HttpContext.User.Identity.GetUserId();
+                            if (String.IsNullOrEmpty(id) == false)
+                            {
+                                ApplicationUser applicationUser = UserManager.FindByIdAsync(id).Result;
+                                if (applicationUser != null) multivendorUser = applicationUser.MultivendorUser;
+                            }
+                        }
+
+                        if (multivendorUser == null)
+                        {
+                            string name = HttpContext.User.Identity.GetUserName();
+                            if (String.IsNullOrEmpty(name) == false)
+                            {
+                                ApplicationUser applicationUser = UserManager.FindByNameAsync(name).Result;
+                                if (applicationUser != null) multivendorUser = applicationUser.MultivendorUser;
+                            }
                         }
                     }
-
-                    if (multivendorUser == null)
-                    {
-                        string name = HttpContext.User.Identity.GetUserName();
-                        if (String.IsNullOrEmpty(name) == false)
-                        {
-                           ApplicationUser applicationUser = UserManager.FindByNameAsync(name).Result;
-                            if (applicationUser != null) multivendorUser = applicationUser.MultivendorUser;
-                        }
+                    catch (Exception e) { 
+                    
                     }
-
-                    //if (multivendorUser == null && SessionData != null && SessionData.User != null)
-                    //{
-                    //    // Used i.e. in Offline deploy scenario
-                    //    multivendorUser = SessionData.User;
-                    //}
+                   
+                   
                     return multivendorUser;
                 });
             }

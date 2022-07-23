@@ -67,6 +67,8 @@ namespace MultivendorWebViewer
                     "~/Content/Order.css"));
             bundles.Add(new StyleBundle("~/Content/Media").Include(
                 "~/Content/Media.css"));
+            bundles.Add(new StyleBundle("~/Content/Migration").Include(
+               "~/Content/Migration.css"));
         }
    
         

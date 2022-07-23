@@ -15,8 +15,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/helpers")
-    @Scripts.Render("~/bundles/user")
-    @Scripts.Render("~/bundles/order")
+    
 
 </head>
 @{
@@ -48,46 +47,15 @@
                         </a>
 
                     </li>
-                    @*@if (user != null && (user.UserRole == AuthorizePermissions.Administration))
-                    {
-                        <li class="container ">
-                            <! -- User-->
-                            <a class="item-container" href="@UrlUtility.Action(applicationrequestContext, "DatabaseMigrationView", "Admin")">
-                                @Html.Icon(Icons.Database, new { @class = "content" })
-                                <label class="icon-label">Database Migration</label>
-                            </a>
-                        </li>
-                    }*@
-                    @if (user != null && (user.UserRole == AuthorizePermissions.Administration))
-                    {
-                        <li class="container ">
-                            <! -- User-->
-                            <a class="item-container" href="@UrlUtility.Action(applicationrequestContext, "UserList", "Admin")">
-                                @Html.Icon(Icons.Users, new { @class = "content" })
-                                <label class="icon-label">@CustomStrings.UserList</label>
-                            </a>
-                        </li>
-                    }
-                    @if (user != null && (user.UserRole == AuthorizePermissions.Administration || user.UserRole == AuthorizePermissions.Vendor))
-                    {
-                        <li class="container ">
-                            <! -- User-->
-                            <a class="item-container" href="@UrlUtility.Action(applicationrequestContext, "OrderList", "Admin")">
-                                @Html.Icon(Icons.ShoppingList, new { @class = "content" })
-                                <label class="icon-label">@CustomStrings.OrdersList</label>
-                            </a>
-                        </li>
-                    }
-                    @if (user != null && (user.UserRole == AuthorizePermissions.Administration || user.UserRole == AuthorizePermissions.Vendor))
-                    {
-                        <li class="container ">
-                            <! -- User-->
-                            <div class="item-container">
-                                @Html.Icon(Icons.Wrench, new { @class = "content" })
-                                <label class="icon-label">@CustomStrings.Inventory</label>
-                            </div>
-                        </li>
-                    }
+
+                    <li class="container ">
+                        <! -- User-->
+                        <a class="item-container" href="@UrlUtility.Action(applicationrequestContext, "DatabaseMigrationView", "Migration")">
+                            @Html.Icon(Icons.Database, new { @class = "content" })
+                            <label class="icon-label">Database Migration</label>
+                        </a>
+                    </li>
+
 
                 </ul>
 
@@ -102,7 +70,7 @@
         <main class="main-body">
             <div class="main-body-contents">
                 @RenderBody()
-                </div>
+            </div>
         </main>
     </section>
     @{
@@ -113,5 +81,6 @@
     }
     @Scripts.Render("~/bundles/sessionimeout")
     @Styles.Render("~/Content/Media")
+    @Styles.Render("~/Content/Migration")
 </body>
 </html>

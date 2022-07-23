@@ -25,7 +25,7 @@ namespace MultivendorWebViewer
             if (ServerConfigurationProvider.Default.Configuration.ServerDatabase != null && ServerConfigurationProvider.Default.Configuration.ServerDatabase.Enabled == true)
             {
 
-                app.CreatePerOwinContext(() => new ServerModelContext(ServerModelDatabaseContextManager.Default.GetConnectionString()));
+                app.CreatePerOwinContext(() => ServerModelDatabaseContextManager.Default.Context());
                 app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
             }

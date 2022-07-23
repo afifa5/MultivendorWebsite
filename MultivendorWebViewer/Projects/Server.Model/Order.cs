@@ -24,6 +24,7 @@ namespace MultivendorWebViewer.Server.Models
         
         [Column(TypeName = "numeric")]
         public decimal DeliveryCost { get; set; }
+        public string OrderStatus { get; set; }
 
         [ForeignKey("CustomerId")]
         public  Customer Customer { get; set; }

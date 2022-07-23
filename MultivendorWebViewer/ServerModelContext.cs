@@ -4,6 +4,7 @@ using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using MultivendorWebViewer.DbMigrations;
 using MultivendorWebViewer.Server.Models;
 
 namespace MultivendorWebViewer
@@ -13,12 +14,13 @@ namespace MultivendorWebViewer
         public ServerModelContext()
         {
             SetupContext();
-            //Database.SetInitializer<ServerModelContext>(new ServerDBInitializer());
+            Database.SetInitializer<ServerModelContext>(new ServerDBInitializer());
         }
         public ServerModelContext(string connectionstring)
             : base(connectionstring/*"name=MultivendorModelContext"*/)
         {
             SetupContext();
+            Database.SetInitializer<ServerModelContext>(new ServerDBInitializer());
             //this.Configuration.LazyLoadingEnabled =false;
         }
         public static ServerModelContext Create()
@@ -31,13 +33,13 @@ namespace MultivendorWebViewer
             : base(existingConnection, false)
         {
             SetupContext();
-            //Database.SetInitializer<ServerModelContext>(new ServerDBInitializer());
+            Database.SetInitializer<ServerModelContext>(new ServerDBInitializer());
         }
 
         public ServerModelContext(DbConnection existingConnection, DbCompiledModel model)
             : base(existingConnection, model, false)
         {
-            //Database.SetInitializer<ServerModelContext>(new ServerDBInitializer());
+            Database.SetInitializer<ServerModelContext>(new ServerDBInitializer());
         }
 
 

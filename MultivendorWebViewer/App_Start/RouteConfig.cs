@@ -48,11 +48,11 @@ namespace MultivendorWebViewer
         url: "{controller}/{action}/{id}",
         defaults: new { controller = "Admin", action = "Index", id = UrlParameter.Optional }
     );
-    //routes.MapRoute(
-    //name: "WebAdmin",
-    //url: "{controller}/{action}/{id}",
-    //defaults: new { controller = "WebAdmin", action = "Index", id = UrlParameter.Optional }
-    //);
+            routes.MapRoute(
+            name: "Migration",
+            url: "{controller}/{action}/{id}",
+            defaults: new { controller = "Migration", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }
