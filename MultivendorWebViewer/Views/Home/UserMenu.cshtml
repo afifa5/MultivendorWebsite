@@ -37,6 +37,15 @@
             </a>
         </li>
     }
+    @if (user != null && (user.UserRole == AuthorizePermissions.Administration || user.UserRole == AuthorizePermissions.Vendor))
+    {
+        <li>
+            <a href="@UrlUtility.Action(applicationrequestContext,"InventoryView","Inventory")" class="user-menu-item">
+                @Html.Icon(Icons.Wrench)
+                <label>@CustomStrings.Inventory</label>
+            </a>
+        </li>
+    }
     @if (user != null)
     {
         <li>

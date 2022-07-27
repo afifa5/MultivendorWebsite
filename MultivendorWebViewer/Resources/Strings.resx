@@ -150,6 +150,9 @@
   <data name="CashOnDelivery" xml:space="preserve">
     <value>Cash on delivery</value>
   </data>
+  <data name="Catlaogue" xml:space="preserve">
+    <value>Catalogue</value>
+  </data>
   <data name="City" xml:space="preserve">
     <value>City</value>
   </data>

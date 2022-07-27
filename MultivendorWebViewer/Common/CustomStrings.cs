@@ -92,6 +92,7 @@ namespace MultivendorWebViewer.Common
         public static string OrdersPrice { get { return TextManager.Current.GetText("OrdersPrice"); } }
         public static string TotalDiscount { get { return TextManager.Current.GetText("TotalDiscount"); } }
         public static string Products { get { return TextManager.Current.GetText("Products"); } }
+        public static string Catalogue { get { return TextManager.Current.GetText("Catalogue"); } }
         public static string Name { get { return TextManager.Current.GetText("Name"); } }
         public static string Description { get { return TextManager.Current.GetText("Description"); } }
         public static string ShippingAndBilling { get { return TextManager.Current.GetText("ShippingAndBilling"); } }

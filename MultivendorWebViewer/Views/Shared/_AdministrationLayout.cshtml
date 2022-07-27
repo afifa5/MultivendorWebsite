@@ -78,16 +78,7 @@
                             </a>
                         </li>
                     }
-                    @if (user != null && (user.UserRole == AuthorizePermissions.Administration || user.UserRole == AuthorizePermissions.Vendor))
-                    {
-                        <li class="container ">
-                            <! -- User-->
-                            <div class="item-container">
-                                @Html.Icon(Icons.Wrench, new { @class = "content" })
-                                <label class="icon-label">@CustomStrings.Inventory</label>
-                            </div>
-                        </li>
-                    }
+
 
                 </ul>
 
@@ -99,10 +90,10 @@
 
             </div>
         </div>
-        <main class="main-body">
-            <div class="admin-layout main-body-contents">
+        <main class="main-body admin-body">
+           
                 @RenderBody()
-                </div>
+              
         </main>
     </section>
     @{

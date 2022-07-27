@@ -262,6 +262,7 @@
     <Compile Include="Components\SingleItemEnumerable.cs" />
     <Compile Include="Components\Sort.cs" />
     <Compile Include="Components\Trigger.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -451,6 +452,13 @@
     <Content Include="Views\Migration\_DatabaseMigrationView.cshtml" />
     <Content Include="Views\Migration\Index.cshtml" />
     <Content Include="Views\Shared\_MigrationLayout.cshtml" />
+    <Content Include="Views\Inventory\_OrdersTable.cshtml" />
+    <Content Include="Views\Inventory\_UserTable.cshtml" />
+    <Content Include="Views\Inventory\Index.cshtml" />
+    <Content Include="Views\Inventory\OrderDetail.cshtml" />
+    <Content Include="Views\Inventory\OrderListView.cshtml" />
+    <Content Include="Views\Inventory\CatalogueListView.cshtml" />
+    <Content Include="Views\Shared\_InventoryLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

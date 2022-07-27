@@ -7,7 +7,13 @@
     ViewBag.Title = "Multivendor Web";
     Layout = "~/Views/Shared/_AdministrationLayout.cshtml";
 }
-
-<div class="all-user-container">
-    @Html.DataView(new DataViewOptions { Url =string.IsNullOrEmpty(dataUrl)? @Url.Action("GetOrderList", "Admin") : dataUrl }, htmlAttributes: new { @class = "user-list-data-view" })
+<div class="page-header">
+    <div class="name-container">
+        <label class="name">@CustomStrings.OrdersList</label>
+    </div>
 </div>
+<div class="admin-layout main-body-contents">
+    <div class="all-user-container">
+        @Html.DataView(new DataViewOptions { Url = string.IsNullOrEmpty(dataUrl) ? @Url.Action("GetOrderList", "Admin") : dataUrl }, htmlAttributes: new { @class = "multivendor-list-data-view" })
+    </div>
+    </div>

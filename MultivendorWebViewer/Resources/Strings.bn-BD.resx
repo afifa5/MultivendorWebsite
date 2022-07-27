@@ -150,6 +150,9 @@
   <data name="CashOnDelivery" xml:space="preserve">
     <value>প্রদানোত্তর পরিশোধ</value>
   </data>
+  <data name="Catalogue" xml:space="preserve">
+    <value>ক্যাটালগ</value>
+  </data>
   <data name="City" xml:space="preserve">
     <value>শহর</value>
   </data>

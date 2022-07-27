@@ -148,3 +148,25 @@ width:max-content;
     padding-top: 30px;
     margin: 0 10px 0 10px;
 }
+.admin-body .page-header {
+    padding: 0;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center
+}
+.admin-body .page-header .name {
+    font-size: 64px;
+    color: #000;
+    text-transform: uppercase;
+    font-family: gibsonbold;
+    text-shadow: 0px 0px 0.2em #ccc;
+    line-height: 0.9;
+    font-weight: 200;
+    position: relative;
+}
+    .admin-body .page-header .name-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+    }

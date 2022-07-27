@@ -3,7 +3,7 @@
     }
 
     $(function () {
-        var $view = $(document).findByClass("user-list-data-view");
+        var $view = $(document).findByClass("multivendor-list-data-view");
         if ($view.length > 0) {
             multivendorWeb.dataview.initViews($view);
         }
