@@ -1,0 +1,71 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@using MultivendorWebViewer.Helpers;
+@using MultivendorWebViewer.Components;
+@model DataViewString<UserViewModel>
+@{
+}
+
+@{
+    var userItems = Model.VisibleItems;
+    var columns = new List<TableColumn<UserViewModel>>();
+
+    columns.Add(new TableColumn<UserViewModel>("UserName")
+    {
+        Caption = CustomStrings.UserName,
+        ValueFunction = r => r.UserName
+    });
+    columns.Add(new TableColumn<UserViewModel>("FirstName")
+    {
+        Caption =CustomStrings.FirstName,
+        ValueFunction = r =>r.Customer!=null? r.Customer.FirstName: string.Empty,
+        //ClassName = "company-user-first-name",
+        //CellClassName = "company-user-first-name",
+    });
+    columns.Add(new TableColumn<UserViewModel>("LastName")
+    {
+        Caption = CustomStrings.LastName,
+        ValueFunction = r => r.Customer != null ? r.Customer.LastName : string.Empty,
+
+    });
+    columns.Add(new TableColumn<UserViewModel>("PhoneNumber")
+    {
+        Caption = CustomStrings.Phone,
+        ValueFunction = r => r.Customer != null ? r.Customer.PhoneNumber : string.Empty,
+
+    });
+
+    columns.Add(new TableColumn<UserViewModel>("Company")
+    {
+        Caption = CustomStrings.UserCompany,
+        ValueFunction = r =>  r.CompanyName,
+
+    });
+    columns.Add(new TableColumn<UserViewModel>("UserRole")
+    {
+        Caption = CustomStrings.UserRole,
+        ValueFunction = r => r.UserRole == AuthorizePermissions.Administration? "Admin":(r.UserRole== AuthorizePermissions.Vendor?"Vendor":"Customer"),
+
+    });
+    columns.Add(new TableColumn<UserViewModel>("Active")
+    {
+        Caption = CustomStrings.UserActive,
+        ValueFunction = r => r.IsActive== true ?"Yes":"No",
+
+    });
+}
+
+@Html.Table(userItems, columns, definition: new TableDefinition<UserViewModel>
+{
+    Hottrack = true,
+    AutoHideEmptyColumns = true,
+    SelectionMode = TableSelectionMode.None,
+    RowFormatter = (row, rowTag) =>
+    {
+        rowTag.MergeAttribute("data-user-id", row.Id.ToString());
+    },
+}, htmlAttributes: new
+{
+    @class = "user-table"
+});
+

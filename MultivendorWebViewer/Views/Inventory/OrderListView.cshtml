@@ -1,0 +1,19 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@using MultivendorWebViewer.Helpers;
+
+@{
+    var dataUrl = ViewBag.DataListUrl as string;
+    ViewBag.Title = "Multivendor Web";
+    Layout = "~/Views/Shared/_AdministrationLayout.cshtml";
+}
+<div class="page-header">
+    <div class="name-container">
+        <label class="name">@CustomStrings.OrdersList</label>
+    </div>
+</div>
+<div class="admin-layout main-body-contents">
+    <div class="all-user-container">
+        @Html.DataView(new DataViewOptions { Url = string.IsNullOrEmpty(dataUrl) ? @Url.Action("GetOrderList", "Admin") : dataUrl }, htmlAttributes: new { @class = "multivendor-list-data-view" })
+    </div>
+    </div>

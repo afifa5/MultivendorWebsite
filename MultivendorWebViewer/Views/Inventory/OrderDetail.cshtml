@@ -1,0 +1,199 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@using MultivendorWebViewer.Models;
+@using MultivendorWebViewer.Components;
+@model OrderViewModel
+<div class="order-detail-container">
+    <div class="header-container">
+        <h3>@CustomStrings.Order</h3>
+        <div class="close-button">@Html.Icon(Icons.Close)</div>
+    </div>
+    @if (Model != null)
+    {
+<div class="order-detail">
+    <div class="item-information"><label>@CustomStrings.Reference</label><span>@Model.OrderReference</span></div>
+    @if (!string.IsNullOrEmpty(Model.CreatedDate))
+    {
+        <div class="item-information"><label>@CustomStrings.CreatedDate</label><span>@Model.CreatedDate</span></div>
+
+    }
+    @if (!string.IsNullOrEmpty(Model.ModificationDate))
+    {
+        <div class="item-information"><label>@CustomStrings.ModifiedDate</label><span>@Model.ModificationDate</span></div>
+
+    }
+    @if (Model.OrderLines != null && Model.OrderLines.Any())
+    {
+        var orderLines = Model.OrderLines;
+        if (ApplicationRequestContext.User!= null && ApplicationRequestContext.User.UserRole == AuthorizePermissions.Vendor && Model.CustomerId != ApplicationRequestContext.User.CustomerId) {
+            orderLines = orderLines.Where(p => p.UserId.HasValue && p.UserId.Value == ApplicationRequestContext.User.Id).ToList();
+        }
+        var columns = new List<TableColumn<OrderLineViewModel>>();
+
+        columns.Add(new TableColumn<OrderLineViewModel>("Products")
+        {
+            Caption = CustomStrings.Products,
+            CellTemplate = @:@{
+                      var highlightedSpecification = item.Product.Specifications.Where(p => p.SpecificationMode == SpecificationMode.Highlighted);
+
+                  <div class="details-container order-item">
+                    <a class="order-information-container" href="@item.Product.GetUrl()">
+                        <div class="image-container">
+                            @if (item.Product.Images != null && item.Product.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).Count() > 0)
+                            {
+                                //Show Images
+                                var itemImage = item.Product.Images.Where(p => p.ImageMode == ImageMode.Thumbnail).FirstOrDefault();
+                                <img class="order-image" src="@itemImage.GetThumbnailUrl()">
+                            }
+                        </div>
+                        <div class="information">
+                            <div class="name"><h4>@item.Product.FormattedName</h4></div>
+                            @if (highlightedSpecification.Any())
+                            {
+                                <div class="specifications">
+                                    @foreach (var specification in highlightedSpecification)
+                                    {
+                                        <div class="sp">
+                                            <label>@specification.SpecificationType.FormattedName</label>
+                                            <span>@specification.FormattedName</span>
+                                        </div>
+                                    }
+
+                                </div>
+                            }
+                        </div>
+                    </a>
+
+
+                </div>
+            }
+        });
+                columns.Add(new TableColumn<OrderLineViewModel>("Status")
+                {
+                    Caption = CustomStrings.OrderStatus,
+                    ValueFunction = r => r.FormattedStatus,
+                });
+                columns.Add(new TableColumn<OrderLineViewModel>("Quantity")
+                {
+                    Caption = CustomStrings.Quantity,
+                    ValueFunction = r => r.Quantity.ToString(),
+                });
+                columns.Add(new TableColumn<OrderLineViewModel>("PriceInclTax")
+                {
+                    Caption = CustomStrings.UnitPrice,
+                    ClassName ="mobile-hide",
+                    CellClassName = "price mobile-hide",
+                    ValueFunction = r => ApplicationRequestContext.GetPriceText(r.PriceInclTax),
+                });
+                columns.Add(new TableColumn<OrderLineViewModel>("Discount")
+                {
+                    Caption = CustomStrings.TotalDiscount,
+                    ClassName = "mobile-hide",
+                    CellClassName = "price mobile-hide",
+                    ValueFunction = r => (r.Discount * r.Quantity) > 0? ApplicationRequestContext.GetPriceText(r.Discount * r.Quantity): string.Empty,
+                });
+                columns.Add(new TableColumn<OrderLineViewModel>("SubTotal")
+                {
+                    Caption = CustomStrings.TotalPriceInclVat,
+                    CellClassName = "price",
+                    ValueFunction = r => r.SubTotal > 0 ?ApplicationRequestContext.GetPriceText(r.SubTotal): string.Empty,
+                });
+        <div class="order-information">
+            <div class="header">
+                <h3>@CustomStrings.OrdersList</h3>
+            </div>
+            <div class="admin-order-table-item">
+                @Html.Table(orderLines, columns, definition: new TableDefinition<OrderLineViewModel>
+                    {
+                    Hottrack = true,
+                    AutoHideEmptyColumns = true,
+                    SelectionMode = TableSelectionMode.None,
+                    RowFormatter = (row, rowTag) =>
+                    {
+                        rowTag.AddCssClass("order-line-row");
+                    },
+                    }, htmlAttributes: new
+                    {
+                    @class = "order-line-table-table"
+                    })
+                <div class="order-summary">
+                    <h4>@CustomStrings.TotalPriceInclVat</h4>
+                    <span class="total-cost">@ApplicationRequestContext.GetPriceText(orderLines.Sum(p=> p.SubTotal))</span>
+                </div>
+            </div>
+        </div>
+    }
+    @if (Model.Customer != null)
+    {
+        var customer = Model.Customer;
+        <div class="order-information">
+            <div class="header">
+                <h3>@CustomStrings.ShippingAddress</h3>
+            </div>
+            <div class="order-detail-information">
+                @if (!string.IsNullOrEmpty(customer.FirstName))
+                {
+                    <label>@CustomStrings.FirstName</label>
+                    <span>@customer.FirstName</span>
+                }
+
+                @if (!string.IsNullOrEmpty(customer.LastName))
+                {
+                    <label>@CustomStrings.LastName</label>
+                    <span>@customer.LastName</span>
+                }
+
+                @if (!string.IsNullOrEmpty(customer.CareOf))
+                {
+                    <label>@CustomStrings.CareOf</label>
+                    <span>@customer.CareOf</span>
+                }
+
+                @if (!string.IsNullOrEmpty(customer.Email))
+                {
+                    <label>@CustomStrings.Email</label>
+                    <span>@customer.Email</span>
+                }
+
+                @if (!string.IsNullOrEmpty(customer.PhoneNumber))
+                {
+                    <label>@CustomStrings.Phone</label>
+                    <span>@customer.PhoneNumber</span>
+                }
+
+                @if (!string.IsNullOrEmpty(customer.Address))
+                {
+                    <label>@CustomStrings.Address</label>
+                    <span>@customer.Address</span>
+                }
+
+                @if (!string.IsNullOrEmpty(customer.PostCode))
+                {
+                    <label>@CustomStrings.PostCode</label>
+                    <span>@customer.PostCode</span>
+                }
+
+                @if (!string.IsNullOrEmpty(customer.City))
+                {
+                    <label>@CustomStrings.City</label>
+                    <span>@customer.City</span>
+
+                }
+                @if (!string.IsNullOrEmpty(customer.Country))
+                {
+                    <label>@CustomStrings.Country</label>
+                    <span>@customer.Country</span>
+                }
+
+            </div>
+        </div>
+    }
+
+
+</div>
+    }
+    else { 
+    <label>Detail not available</label>
+    }
+</div>
+

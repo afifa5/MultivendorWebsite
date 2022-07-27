@@ -1,0 +1,62 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@using MultivendorWebViewer.Helpers;
+@using MultivendorWebViewer.Components;
+@using System.Globalization;
+@model DataViewString<OrderViewModel>
+@{
+    var applicationRequestContext = ApplicationRequestContext;
+}
+
+@{
+    var OrderItems = Model.VisibleItems;
+    var columns = new List<TableColumn<OrderViewModel>>();
+
+    columns.Add(new TableColumn<OrderViewModel>("OrderReference")
+    {
+        Caption = CustomStrings.Reference,
+        ValueFunction = r => r.OrderReference
+    });
+    columns.Add(new TableColumn<OrderViewModel>("CreatedDate")
+    {
+        Caption =CustomStrings.CreatedDate,
+        ValueFunction = r =>r.CreatedDate,
+        //ClassName = "company-user-first-name",
+        //CellClassName = "company-user-first-name",
+    });
+    columns.Add(new TableColumn<OrderViewModel>("ModificationDate")
+    {
+        Caption = CustomStrings.ModifiedDate,
+        ValueFunction = r => r.ModificationDate,
+
+    });
+    columns.Add(new TableColumn<OrderViewModel>("ModifiedBy")
+    {
+        Caption = CustomStrings.ModifiedBy,
+        ValueFunction = r => r.ModifiedBy,
+
+    });
+    columns.Add(new TableColumn<OrderViewModel>("ModifiedBy")
+    {
+        Caption = CustomStrings.DeliveryMethod,
+        ValueFunction = r => r.SelectedDeliveryOption,
+
+    });
+
+}
+
+@Html.Table(OrderItems, columns, definition: new TableDefinition<OrderViewModel>
+{
+    Hottrack = true,
+    AutoHideEmptyColumns = true,
+    SelectionMode = TableSelectionMode.None,
+    RowFormatter = (row, rowTag) =>
+    {
+        rowTag.MergeAttribute("data-url", @UrlUtility.Action(ApplicationRequestContext, "OrderItemView", "Order", new { orderReference = row.OrderReference.ToString() }));
+        rowTag.AddCssClass("user-order-row");
+    },
+}, htmlAttributes: new
+{
+    @class = "order-table"
+});
+

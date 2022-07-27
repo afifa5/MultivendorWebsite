@@ -1,0 +1,18 @@
+﻿@using MultivendorWebViewer.ViewModels;
+@using MultivendorWebViewer.Common;
+@using MultivendorWebViewer.Helpers;
+
+@{
+    ViewBag.Title = "Multivendor Web";
+    Layout = "~/Views/Shared/_InventoryLayout.cshtml";
+}
+<div class="page-header">
+    <div class="name-container">
+        <label class="name">@CustomStrings.Catalogue</label>
+    </div>
+</div>
+<div class="admin-layout main-body-contents">
+    <div class="all-user-container">
+        @Html.DataView(new DataViewOptions { Url = @Url.Action("GetCategoryList", "Inventory") }, htmlAttributes: new { @class = "multivendor-list-data-view" })
+    </div>
+</div>
